@@ -66,8 +66,8 @@
                                     </span>
                                 </span>
                             </td>
-                            <td>{{ nombreModalidad(registro.idModalidad!) }}</td>
-                            <td>{{ nombreRadio(registro.idRadio!) }}</td>
+                            <td>{{ registro.idModalidad! }} - {{ nombreModalidad(registro.idModalidad!) }}</td>
+                            <td>{{ registro.idRadio! }} {{ nombreRadio(registro.idRadio!) }}</td>
                         </tr>
                         <tr class="fs-14px" [formGroup]="formulario" *ngIf="formularioVisible">
                             <td class="align-middle">
@@ -87,8 +87,8 @@
                             <td>
                                 <select formControlName="idModalidad" style="max-width: 300px;" class="form-select">
                                     <option disabled value="">Selecciona una modalidad</option>
-                                    <option *ngFor="let modalidad of modalidades" [value]="modalidad.id">{{ modalidad.nombre
-                                        }}</option>
+                                    <option *ngFor="let modalidad of modalidades" [value]="modalidad.id">
+                                        {{ modalidad.id }} - {{ modalidad.nombre }}</option>
                                 </select>
                                 <app-validacion [control]="this.formulario.controls['idModalidad']"
                                     [validacion]="'required'" [texto]="'Selecciona una modalidad.'" />
@@ -97,7 +97,9 @@
                                 <select formControlName="idRadio" style="max-width: 300px; width: 300px;"
                                     class="form-select">
                                     <option disabled value="">Selecciona un radio de acción u operación</option>
-                                    <option *ngFor="let radio of radios" [value]="radio.id">{{ radio.nombre }}</option>
+                                    <option *ngFor="let radio of radios" [value]="radio.id">
+                                        {{ radio.id }} - {{ radio.nombre }}
+                                    </option>
                                 </select>
                                 <app-validacion [control]="this.formulario.controls['idRadio']" [validacion]="'required'"
                                     [texto]="'Selecciona un radio.'" />
