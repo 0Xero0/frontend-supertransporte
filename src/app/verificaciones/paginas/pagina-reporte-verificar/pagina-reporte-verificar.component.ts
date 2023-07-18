@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServicioVerificaciones } from '../../servicios/verificaciones.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, forkJoin } from 'rxjs';
 import { Encuesta } from 'src/app/encuestas/modelos/Encuesta';
 import { EncuestaComponent } from 'src/app/encuestas/componentes/encuesta/encuesta.component';
+import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
+import { DialogosVerificaciones } from '../../Dialogos';
 
 @Component({
   selector: 'app-pagina-reporte-verificar',
@@ -11,6 +13,7 @@ import { EncuestaComponent } from 'src/app/encuestas/componentes/encuesta/encues
   styleUrls: ['./pagina-reporte-verificar.component.css']
 })
 export class PaginaReporteVerificarComponent implements OnInit {
+  @ViewChild('popup') popup!: PopupComponent
   @ViewChild('componenteEncuesta') componenteEncuesta!: EncuestaComponent
   encuesta?: Encuesta
   idVigilado?: string
@@ -20,7 +23,7 @@ export class PaginaReporteVerificarComponent implements OnInit {
   razonSocial?: string
   estadoActual?: string
   clasificacionResolucion?: string
-  constructor(private servicioVerificaciones: ServicioVerificaciones, private activatedRoute: ActivatedRoute) {}
+  constructor(private servicioVerificaciones: ServicioVerificaciones, private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     combineLatest({
@@ -50,5 +53,20 @@ export class PaginaReporteVerificarComponent implements OnInit {
 
   guardarVerificaciones(){
     this.componenteEncuesta.guardarVerificaciones()
+  }
+
+  enviarVerificaciones(){
+    this.servicioVerificaciones.enviarVerificaciones(this.idEncuesta!, this.idReporte!, this.idVigilado!).subscribe({
+      next: (respuesta)=>{
+        this.popup.abrirPopupExitoso(DialogosVerificaciones.VERIFICACION_ENVIADA)
+        this.router.navigateByUrl('/administrar/verificar-reportes')
+      },
+      error: (e)=>{
+        this.popup.abrirPopupFallido(
+          DialogosVerificaciones.VERIFICACION_ENVIADA_ERROR_TITULO, 
+          DialogosVerificaciones.VERIFICACION_ENVIADA_ERROR_DESCRIPCION
+        )
+      }
+    })
   }
 }

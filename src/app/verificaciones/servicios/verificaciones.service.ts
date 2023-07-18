@@ -32,6 +32,11 @@ export class ServicioVerificaciones extends Autenticable{
     )
   }
 
+  enviarVerificaciones(idEncuesta: number, idReporte: number, idVigilado: string){
+    const endpoint = `/api/v1/respuestas/finalizar-verificacion`
+    return this.clienteHttp.post<{mensaje: string}>(`${this.host}${endpoint}`, {idEncuesta, idReporte, idVigilado}, { headers: this.obtenerCabeceraAutorizacion() })
+  }
+
   obtenerReportes(pagina: number, limite: number, filtros: any){
     const endpoint = `/api/v1/reportes/asignados?pagina=${pagina}&limite=${limite}`
     return this.clienteHttp.get<{asignadas: ResumenReporteAsignados[], paginacion: Paginacion}>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })

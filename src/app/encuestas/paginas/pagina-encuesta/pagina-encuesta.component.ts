@@ -148,7 +148,7 @@ export class PaginaEncuestaComponent implements OnInit {
     this.servicioEncuesta.obtenerEncuesta(this.idVigilado!, this.idEncuesta!, this.idReporte!).subscribe({
       next: ( encuesta )=>{
         this.encuesta = encuesta
-        this.soloLectura = encuesta.tipoAccion === 1 ? true : false
+        this.soloLectura = encuesta.tipoAccion === 1  ? true : false
       }
     })
   }

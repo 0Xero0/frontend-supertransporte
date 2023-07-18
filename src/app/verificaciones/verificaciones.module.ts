@@ -6,6 +6,7 @@ import { EncuestasModule } from '../encuestas/encuestas.module';
 import { PaginaReporteVerificarComponent } from './paginas/pagina-reporte-verificar/pagina-reporte-verificar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PipesModule } from '../pipes/pipes.module';
+import { AlertasModule } from '../alertas/alertas.module';
 
 
 
@@ -19,7 +20,8 @@ import { PipesModule } from '../pipes/pipes.module';
     VerificacionesRoutingModule,
     EncuestasModule,
     PipesModule,
-    NgbModule
+    NgbModule,
+    AlertasModule
   ],
   exports: [
     PaginaReportesVerificarComponent

@@ -24,11 +24,21 @@
                 <button ngbDropdownItem (click)="this.exportarPDF()">PDF</button>
             </div>
         </div> -->
-        <button 
+        
+        <button
+        *ngIf="(encuesta && encuesta.tipoAccion != 1) || encuestaCuantitativa"
         type="button" 
         class="boton primario delineado" 
         (click)="enviarEncuesta()"
         [disabled]="hayCambios">Enviar a ST</button>
+
+        <button
+        *ngIf="(encuesta && encuesta.tipoAccion == 1)"
+        type="button" 
+        class="boton primario delineado" 
+        (click)="enviarEncuesta()"
+        [disabled]="hayCambios">Terminar verificación</button>
+
         <button 
         type="button" 
         class="boton primario relleno" 

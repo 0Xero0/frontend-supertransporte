@@ -1,11 +1,25 @@
 <div class="p-5">
     <div class="contenedor-formulario mx-auto">
-        <h3 class="fw-semibold texto-azul-004884 mb-3">Problemas de acceso</h3>
+        <h3 class="fw-semibold texto-azul-004884 mb-3">Pedir soporte</h3>
         <hr>
         <div class="d-flex align-items-center justify-content-center mb-3">
             <button class="boton primario relleno" (click)="crearSoporte()">Guardar</button>
         </div>
         <form [formGroup]="formulario">
+            <div class="row mb-3">
+                <div class="col-2">
+                    <span>Motivo</span>
+                    <span class="validacion"> *</span>
+                </div>
+                <div class="col-10">
+                    <fieldset>
+                        <select class="form-select">
+                            <option value="1">1 - Motivo 1</option> 
+                            <option value="2">2 - Motivo 2</option> 
+                        </select>
+                    </fieldset>
+                </div>
+            </div>
             <div class="row mb-3">
                 <div class="col">
                     <div class="row">

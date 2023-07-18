@@ -30,7 +30,7 @@
         </div>
     </form>
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <button type="button" class="boton primario relleno">Enviar a ST</button>
+        <button type="button" class="boton primario relleno" (click)="enviarVerificaciones()">Terminar verificación</button>
         <button type="button" class="boton primario relleno" (click)="guardarVerificaciones()">Guardar</button>
         <button class="boton primario delineado" [routerLink]="['/administrar', 'verificar-reportes']">Volver</button>
     </div>
@@ -45,3 +45,4 @@
         [idEncuesta]="idEncuesta"
         [camposDeVerificacion]="true"/>
 </div>
+<app-popup #popup />
