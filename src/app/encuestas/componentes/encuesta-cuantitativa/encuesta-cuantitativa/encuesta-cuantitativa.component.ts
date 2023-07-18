@@ -25,96 +25,99 @@ export class EncuestaCuantitativaComponent implements OnInit {
   evidencias: RespuestaEvidencia[] = [];
   meses: Mes[] = []
   idMes?: number
-  
-  constructor(private servicio: ServicioEncuestas){
+
+  constructor(private servicio: ServicioEncuestas) {
     this.hanHabidoCambios = new EventEmitter<boolean>()
     this.cambioDeMes = new EventEmitter<number>()
   }
 
   ngOnInit(): void {
     this.obtenerMeses()
-    this.setIdMes(this.idMesInicial, false) 
-    this.encuesta.formularios.forEach( tab => {
-      tab.subIndicador.forEach( subindicador =>{
-        subindicador.preguntas.forEach( pregunta =>{
-          this.estadoRespuestas.push( this.obtenerRespuesta(pregunta) )
+    this.setIdMes(this.idMesInicial, false)
+    this.encuesta.formularios.forEach(tab => {
+      tab.subIndicador.forEach(subindicador => {
+        subindicador.preguntas.forEach(pregunta => {
+          this.estadoRespuestas.push(this.obtenerRespuesta(pregunta))
         })
       })
     })
   }
 
   //Acciones
-  guardar(){
-    this.servicio.guardarRespuestasIndicadores(2, this.respuestas, this.evidencias).subscribe({
-      next: ()=>{
-        this.popup.abrirPopupExitoso(DialogosEncuestas.GUARDAR_ENCUESTA_EXITO)
-      },
-      error: ()=>{
-        this.popup.abrirPopupFallido(
-          DialogosEncuestas.GUARDAR_ENCUESTA_ERROR_TITULO, 
-          DialogosEncuestas.GUARDAR_ENCUESTA_ERROR_DESCRIPCION
-        )
-      }
-    })
+  guardar() {
+    this.servicio.guardarRespuestasIndicadores(
+      Number(this.encuesta.idReporte),
+      this.respuestas,
+      this.evidencias).subscribe({
+        next: () => {
+          this.popup.abrirPopupExitoso(DialogosEncuestas.GUARDAR_ENCUESTA_EXITO)
+        },
+        error: () => {
+          this.popup.abrirPopupFallido(
+            DialogosEncuestas.GUARDAR_ENCUESTA_ERROR_TITULO,
+            DialogosEncuestas.GUARDAR_ENCUESTA_ERROR_DESCRIPCION
+          )
+        }
+      })
   }
 
-  enviar(){
+  enviar() {
     this.popup.abrirPopupExitoso(DialogosEncuestas.ENVIAR_ENCUESTA_EXITO)
   }
 
   //Manejadores de eventos
-  manejarCambioDeMes(idMes: number){
+  manejarCambioDeMes(idMes: number) {
     const idMesActual = this.idMes
     this.setIdMes(idMes)
   }
 
-  manejarNuevaEvidencia(respuesta: RespuestaEvidencia){
+  manejarNuevaEvidencia(respuesta: RespuestaEvidencia) {
     this.agregarEvidencia(respuesta)
     this.setHayCambios(true)
   }
 
-  manejarNuevaRespuesta(respuesta: Respuesta){
+  manejarNuevaRespuesta(respuesta: Respuesta) {
     this.agregarRespuesta(respuesta)
     this.setHayCambios(true)
   }
 
-  private agregarRespuesta(respuesta: Respuesta){
-    if(this.existeRespuesta(respuesta)){
+  private agregarRespuesta(respuesta: Respuesta) {
+    if (this.existeRespuesta(respuesta)) {
       this.eliminarRespuesta(respuesta)
     }
     this.respuestas.push(respuesta)
   }
 
-  private agregarEvidencia(respuesta: RespuestaEvidencia){
-    if(this.existeEvidencia(respuesta)){
+  private agregarEvidencia(respuesta: RespuestaEvidencia) {
+    if (this.existeEvidencia(respuesta)) {
       this.eliminarEvidencia(respuesta)
     }
     this.evidencias.push(respuesta)
   }
 
-  private existeRespuesta(respuesta: Respuesta):boolean{
-    const idPreguntasRespondidas = this.respuestas.map( preguntaRespondida => preguntaRespondida.preguntaId )
-    return idPreguntasRespondidas.includes( respuesta.preguntaId ) ? true : false
+  private existeRespuesta(respuesta: Respuesta): boolean {
+    const idPreguntasRespondidas = this.respuestas.map(preguntaRespondida => preguntaRespondida.preguntaId)
+    return idPreguntasRespondidas.includes(respuesta.preguntaId) ? true : false
   }
 
-  private existeEvidencia(respuesta: RespuestaEvidencia):boolean{
-    const idEvidenciasRespondidas = this.evidencias.map( evidenciasRespondidas => evidenciasRespondidas.evidenciaId )
-    return idEvidenciasRespondidas.includes( respuesta.evidenciaId )
+  private existeEvidencia(respuesta: RespuestaEvidencia): boolean {
+    const idEvidenciasRespondidas = this.evidencias.map(evidenciasRespondidas => evidenciasRespondidas.evidenciaId)
+    return idEvidenciasRespondidas.includes(respuesta.evidenciaId)
   }
 
-  private eliminarRespuesta(respuesta: Respuesta): void{
-    this.respuestas = this.respuestas.filter( preguntaRespondida => { 
+  private eliminarRespuesta(respuesta: Respuesta): void {
+    this.respuestas = this.respuestas.filter(preguntaRespondida => {
       return preguntaRespondida.preguntaId !== respuesta.preguntaId ? true : false
     })
   }
 
-  private eliminarEvidencia(respuesta: RespuestaEvidencia){
-    this.evidencias = this.evidencias.filter( evidenciaRespondida => {
+  private eliminarEvidencia(respuesta: RespuestaEvidencia) {
+    this.evidencias = this.evidencias.filter(evidenciaRespondida => {
       return evidenciaRespondida.evidenciaId !== respuesta.evidenciaId ? true : false
     })
   }
 
-  private obtenerRespuesta(pregunta: Pregunta): Respuesta{
+  private obtenerRespuesta(pregunta: Pregunta): Respuesta {
     return {
       preguntaId: pregunta.idPregunta,
       valor: pregunta.respuesta ?? "",
@@ -126,25 +129,25 @@ export class EncuestaCuantitativaComponent implements OnInit {
   }
   //Obtener informacion
 
-  obtenerMeses(){
+  obtenerMeses() {
     this.servicio.obtenerMeses().subscribe({
-      next: (respuesta)=>{
+      next: (respuesta) => {
         this.meses = respuesta.meses
       },
-      error: (e)=>{
+      error: (e) => {
         this.popup.abrirPopupFallido(DialogosEncuestas.ERROR_GENERICO_TITULO, DialogosEncuestas.ERROR_GENERICO_DESCRIPCION)
       }
     })
   }
 
   //Setters
-  setHayCambios(tocada: boolean){
+  setHayCambios(tocada: boolean) {
     this.hayCambios = tocada
     this.hanHabidoCambios.emit(tocada)
   }
 
-  setIdMes(idMes: number, emitirEvento: boolean = true){
+  setIdMes(idMes: number, emitirEvento: boolean = true) {
     this.idMes = idMes
-    if(emitirEvento) this.cambioDeMes.emit(idMes);
+    if (emitirEvento) this.cambioDeMes.emit(idMes);
   }
 }
