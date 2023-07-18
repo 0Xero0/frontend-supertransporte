@@ -11,6 +11,7 @@ import { EncuestaCuantitativa, Formulario } from '../modelos/EncuestaCuantitativ
 import { Observable } from 'rxjs';
 import { Mes } from '../modelos/Mes';
 import { RespuestaEvidencia } from '../modelos/RespuestaEvidencia';
+import { FiltrosReportes } from '../modelos/FiltrosReportes';
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +31,14 @@ export class ServicioEncuestas extends Autenticable {
     return this.http.get<{ meses: Mes[] }>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }
 
-  obtenerEncuestas(pagina: number, limite: number, idUsuario: string, idEncuesta: number)
+  obtenerEncuestas(pagina: number, limite: number, idUsuario: string, idEncuesta: number, filtros?: FiltrosReportes)
   :Observable<{ reportadas: ResumenReporte[], paginacion: Paginacion }>{
+    let endpoint = `/api/v1/encuestas/listar?pagina=${pagina}&limite=${limite}&idVigilado=${idUsuario}&idEncuesta=${idEncuesta}`
+    if(filtros){
+      if(filtros.termino) endpoint+= `&termino=${filtros.termino}`;
+    }
     return this.http.get<{ reportadas: ResumenReporte[], paginacion: Paginacion }>(
-      `${this.host}/api/v1/encuestas/listar?pagina=${pagina}&limite=${limite}&idVigilado=${idUsuario}&idEncuesta=${idEncuesta}`,
+      `${this.host}${endpoint}`,
       { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion()}` } }
     )
   }

@@ -9,6 +9,7 @@ import { CategorizacionService } from 'src/app/categorizacion/servicios/categori
 import { Paginador } from 'src/app/administrador/modelos/compartido/Paginador';
 import { Observable } from 'rxjs';
 import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
+import { FiltrosReportes } from '../../modelos/FiltrosReportes';
 
 @Component({
   selector: 'app-listado-encuestas',
@@ -16,7 +17,7 @@ import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
   styleUrls: ['./listado-encuestas.component.css']
 })
 export class ListadoEncuestasComponent implements OnInit {
-  paginador: Paginador<number>
+  paginador: Paginador<FiltrosReportes>
   usuarioCategorizado: boolean = true
   encuestaCategorizable: boolean = true
   usuario: Usuario | null
@@ -24,6 +25,7 @@ export class ListadoEncuestasComponent implements OnInit {
   reportes: ResumenReporte[] = []
   vigilado?: string
   idEncuesta?: number
+  termino: string = ""
 
   constructor(
     private servicioEncuestas: ServicioEncuestas,
@@ -32,7 +34,7 @@ export class ListadoEncuestasComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
-    this.paginador = new Paginador<number>(this.obtenerEncuestas)
+    this.paginador = new Paginador<FiltrosReportes>(this.obtenerEncuestas)
     this.usuario = this.servicioLocalStorage.obtenerUsuario()
     this.rol = this.servicioLocalStorage.obtenerRol()
   }
@@ -54,15 +56,19 @@ export class ListadoEncuestasComponent implements OnInit {
     })
   }
 
-  obtenerEncuestas = (pagina: number, limite: number)=> {
+  obtenerEncuestas = (pagina: number, limite: number, filtros?: FiltrosReportes)=> {
     return new Observable<Paginacion>(subscriptor => {
-      this.servicioEncuestas.obtenerEncuestas(pagina, limite, this.usuario!.usuario, this.idEncuesta!).subscribe({
+      this.servicioEncuestas.obtenerEncuestas(pagina, limite, this.usuario!.usuario, this.idEncuesta!, filtros).subscribe({
         next: ( respuesta )=>{
           this.reportes = respuesta.reportadas
           subscriptor.next(respuesta.paginacion)
         }
       })
     })
+  }
+
+  actualizarFiltros(){
+    this.paginador.filtrar({ termino: this.termino })
   }
 
 }
