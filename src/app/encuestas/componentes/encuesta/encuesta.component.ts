@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, 
 import { Encuesta } from '../../modelos/Encuesta';
 import { ClasificacionEncuestaComponent } from '../clasificacion-encuesta/clasificacion-encuesta.component';
 import { Respuesta } from '../../modelos/Respuesta';
-import { EncuestasService } from '../../servicios/encuestas.service';
+import { ServicioEncuestas } from '../../servicios/encuestas.service';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -32,7 +32,7 @@ export class EncuestaComponent implements OnInit {
   hayCambios: boolean = false
   
   constructor(
-    private servicioEncuestas: EncuestasService,
+    private servicioEncuestas: ServicioEncuestas,
     private servicioVerificacion: ServicioVerificaciones,
     private router: Router
   ) {

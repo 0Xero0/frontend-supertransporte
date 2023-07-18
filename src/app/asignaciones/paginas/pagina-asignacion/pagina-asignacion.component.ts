@@ -5,7 +5,7 @@ import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-stor
 import { Usuario } from 'src/app/autenticacion/modelos/IniciarSesionRespuesta';
 import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
 import { ResumenReporte } from 'src/app/encuestas/modelos/ResumenReporte';
-import { EncuestasService } from 'src/app/encuestas/servicios/encuestas.service';
+import { ServicioEncuestas } from 'src/app/encuestas/servicios/encuestas.service';
 import { ErrorAutorizacion } from 'src/app/errores/ErrorAutorizacion';
 import { ServicioReportes } from '../../servicios/reportes.service';
 import { Verificador } from '../../modelos/Verificador';

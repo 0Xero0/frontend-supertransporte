@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
 import { Usuario } from 'src/app/autenticacion/modelos/IniciarSesionRespuesta';
 import { Rol } from 'src/app/autenticacion/modelos/Rol';
-import { EncuestasService } from '../../servicios/encuestas.service';
+import { ServicioEncuestas } from '../../servicios/encuestas.service';
 import { ResumenReporte } from '../../modelos/ResumenReporte';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategorizacionService } from 'src/app/categorizacion/servicios/categorizacion.service';
@@ -26,7 +26,7 @@ export class ListadoEncuestasComponent implements OnInit {
   idEncuesta?: number
 
   constructor(
-    private servicioEncuestas: EncuestasService,
+    private servicioEncuestas: ServicioEncuestas,
     private servicioCategorizacion: CategorizacionService,
     private servicioLocalStorage: ServicioLocalStorage, 
     private activatedRoute: ActivatedRoute,

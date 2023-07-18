@@ -3,7 +3,7 @@ import { Pregunta } from '../../modelos/Encuesta';
 import { Respuesta } from '../../modelos/Respuesta';
 import { ArchivosEncuestasService } from '../../servicios/archivos-encuestas.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { EncuestasService } from '../../servicios/encuestas.service';
+import { ServicioEncuestas } from '../../servicios/encuestas.service';
 import { Motivo } from '../../modelos/Motivo';
 import { RespuestaVerificacion } from '../../modelos/RespuestaVerificacion';
 import { ServicioVerificaciones } from 'src/app/verificaciones/servicios/verificaciones.service';
@@ -51,7 +51,7 @@ export class PreguntaEncuestaComponent implements OnInit {
   
   constructor(
     private servicioArchivos: ArchivosEncuestasService,
-    private servicioEncuesta: EncuestasService,
+    private servicioEncuesta: ServicioEncuestas,
     private servicioVerificaciones: ServicioVerificaciones,
   ) { 
     this.valorModificado = new EventEmitter<Respuesta>();

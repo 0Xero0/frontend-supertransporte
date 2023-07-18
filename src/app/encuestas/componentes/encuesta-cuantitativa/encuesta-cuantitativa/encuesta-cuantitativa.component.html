@@ -1,19 +1,29 @@
-<ul ngbNav #nav="ngbNav" class="nav-tabs w-100">
-    <li ngbNavItem *ngFor="let formulario of formularios">
+<div class="d-flex mb-4">
+    <fieldset>
+        <label class="fs-14px fw-semibold">
+            Meses
+        </label>
+        <select class="form-select" [ngModel]="idMes" (ngModelChange)="manejarCambioDeMes($event)">
+            <option [value]="mes.idMes" *ngFor="let mes of meses">{{ mes.idMes }} - {{ mes.nombreMes }}</option>
+        </select>
+    </fieldset>
+</div>
+
+<ul ngbNav #nav="ngbNav" class="nav-tabs w-100" [destroyOnHide]="false">
+    <li ngbNavItem *ngFor="let formulario of formularios" [ngbNavItem]="formulario.nombre">
         <button ngbNavLink>{{ formulario.nombre }}</button>
         <ng-template ngbNavContent>
-            <app-tab-encuesta-cuantitativa
-            [subindicadores]="formulario.subIndicador"
-            [estadoRespuestas]="estadoRespuestas" 
-            (nuevaRespuesta)="manejarNuevaRespuesta($event)"/>
+            <app-tab-encuesta-cuantitativa 
+                [subindicadores]="formulario.subIndicador"
+                [estadoRespuestas]="estadoRespuestas" 
+                (nuevaRespuesta)="manejarNuevaRespuesta($event)" />
         </ng-template>
     </li>
 </ul>
+
 <div [ngbNavOutlet]="nav" class="w-100"></div>
+
 <div class="d-flex justify-content-end mt-4">
-    <button 
-    class="boton primario relleno" 
-    [disabled]="!hayCambios"
-    (click)="guardar()">Guardar</button>
+    <button class="boton primario relleno" [disabled]="!hayCambios" (click)="guardar()">Guardar</button>
 </div>
 <app-popup #popup />

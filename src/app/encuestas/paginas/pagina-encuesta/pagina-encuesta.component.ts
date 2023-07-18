@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EncuestasService } from '../../servicios/encuestas.service';
+import { ServicioEncuestas } from '../../servicios/encuestas.service';
 import { Encuesta } from '../../modelos/Encuesta';
 import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,6 +10,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { saveAs } from 'file-saver';
 import { Formulario } from '../../modelos/Formulario';
 import { EncuestaCuantitativaComponent } from '../../componentes/encuesta-cuantitativa/encuesta-cuantitativa/encuesta-cuantitativa.component';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-pagina-encuesta',
@@ -31,7 +32,7 @@ export class PaginaEncuestaComponent implements OnInit {
   hayCambios: boolean = false
 
   constructor(
-    private servicioEncuesta: EncuestasService, 
+    private servicioEncuesta: ServicioEncuestas, 
     private servicioLocalStorage: ServicioLocalStorage,
     private router: Router,
     private activeRoute: ActivatedRoute
@@ -48,19 +49,9 @@ export class PaginaEncuestaComponent implements OnInit {
       next: (parametros)=>{
         this.idEncuesta = parametros['idEncuestaDiligenciada']
         if(this.idEncuesta == 2){
-          this.servicioEncuesta.obtenerEncuestaCuantitativa().subscribe({
-            next: (respuesta)=>{
-              this.encuestaCuantitativa = respuesta.formularios
-              this.soloLectura = false
-            }
-          })
+          this.obtenerEncuestaCuantitativa( this.obtenerIdMesActual() )
         }else{
-          this.servicioEncuesta.obtenerEncuesta(this.idVigilado!, this.idEncuesta!, this.idReporte!).subscribe({
-            next: ( encuesta )=>{
-              this.encuesta = encuesta
-              this.soloLectura = encuesta.tipoAccion === 1 ? true : false
-            }
-          })
+          this.obtenerEncuesta()
         }
       }
     }) 
@@ -70,6 +61,8 @@ export class PaginaEncuestaComponent implements OnInit {
   ngOnInit(): void {
     /* this.encuesta = this.servicioEncuesta.obtenerEncuesta() */
   }
+
+  //Acciones
 
   exportarPDF(){
     this.componenteEncuesta.exportarPDF()
@@ -136,6 +129,31 @@ export class PaginaEncuestaComponent implements OnInit {
       }
     })
   }
+
+  //Obtener información
+  obtenerEncuestaCuantitativa(idMes: number){
+    this.servicioEncuesta.obtenerEncuestaCuantitativa(this.idReporte!, this.idVigilado!, idMes).subscribe({
+      next: (respuesta)=>{
+        this.encuestaCuantitativa = respuesta.formularios
+        this.soloLectura = false
+      }
+    })
+  }
+
+  obtenerIdMesActual(): number{
+    return DateTime.now().month
+  }
+
+  obtenerEncuesta(){
+    this.servicioEncuesta.obtenerEncuesta(this.idVigilado!, this.idEncuesta!, this.idReporte!).subscribe({
+      next: ( encuesta )=>{
+        this.encuesta = encuesta
+        this.soloLectura = encuesta.tipoAccion === 1 ? true : false
+      }
+    })
+  }
+
+  //Setters
 
   setHayCambios(hayCambios: boolean){
     this.hayCambios = hayCambios
