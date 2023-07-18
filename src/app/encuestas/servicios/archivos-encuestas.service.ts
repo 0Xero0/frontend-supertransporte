@@ -9,7 +9,7 @@ import { saveAs } from 'file-saver';
 @Injectable({
   providedIn: 'root'
 })
-export class ArchivosEncuestasService extends Autenticable {
+export class ServicioArchivosEncuestas extends Autenticable {
 
   private readonly host = environment.urlBackendArchivos;
   private readonly token = environment.tokenBackendArchivos;
@@ -18,13 +18,13 @@ export class ArchivosEncuestasService extends Autenticable {
     super()
   }
 
-  guardarArchivoTemporal(archivo: File, idPregunta: number, idVigilado: string){
+  guardarArchivoTemporal(archivo: File, idVigilado: string, idPregunta: number, evidencia: boolean = false){
     const endpoint = '/api/v1/archivos'
     const formData = new FormData()
     formData.append('archivo', archivo)
     formData.append('idPregunta', idPregunta.toString())
     formData.append('idVigilado', idVigilado.toString())
-    formData.append('rutaRaiz', 'pesv')
+    formData.append('rutaRaiz', !evidencia ? 'pesv' : 'evidencias')
     formData.append('temporal', 'true')
     return this.http.post<ArchivoTemporal>(
         `${this.host}${endpoint}`, 

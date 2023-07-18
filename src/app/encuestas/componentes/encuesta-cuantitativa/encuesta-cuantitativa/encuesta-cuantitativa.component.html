@@ -10,13 +10,16 @@
 </div>
 
 <ul ngbNav #nav="ngbNav" class="nav-tabs w-100" [destroyOnHide]="false">
-    <li ngbNavItem *ngFor="let formulario of formularios" [ngbNavItem]="formulario.nombre">
+    <li ngbNavItem *ngFor="let formulario of encuesta.formularios" [ngbNavItem]="formulario.nombre">
         <button ngbNavLink>{{ formulario.nombre }}</button>
         <ng-template ngbNavContent>
-            <app-tab-encuesta-cuantitativa 
+            <app-tab-encuesta-cuantitativa
+                [idVigilado]="encuesta.idVigilado"
                 [subindicadores]="formulario.subIndicador"
+                [evidencias]="formulario.evidencias"
                 [estadoRespuestas]="estadoRespuestas" 
-                (nuevaRespuesta)="manejarNuevaRespuesta($event)" />
+                (nuevaRespuesta)="manejarNuevaRespuesta($event)" 
+                (nuevaEvidencia)="manejarNuevaEvidencia($event)"/>
         </ng-template>
     </li>
 </ul>

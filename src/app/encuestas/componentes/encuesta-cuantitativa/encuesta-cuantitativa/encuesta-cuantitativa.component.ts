@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { DateTime } from 'luxon';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { DialogosEncuestas } from 'src/app/encuestas/dialogos-encuestas';
-import { Formulario, Pregunta } from 'src/app/encuestas/modelos/Formulario';
+import { EncuestaCuantitativa, Formulario, Pregunta } from 'src/app/encuestas/modelos/EncuestaCuantitativa';
 import { Mes } from 'src/app/encuestas/modelos/Mes';
 import { Respuesta } from 'src/app/encuestas/modelos/Respuesta';
+import { RespuestaEvidencia } from 'src/app/encuestas/modelos/RespuestaEvidencia';
 import { ServicioEncuestas } from 'src/app/encuestas/servicios/encuestas.service';
 
 @Component({
@@ -14,13 +15,14 @@ import { ServicioEncuestas } from 'src/app/encuestas/servicios/encuestas.service
 })
 export class EncuestaCuantitativaComponent implements OnInit {
   @ViewChild('popup') popup!: PopupComponent
-  @Input('formularios') formularios!: Formulario[]
+  @Input('encuesta') encuesta!: EncuestaCuantitativa
   @Input('idMesInicial') idMesInicial!: number
-  @Output('tocada') hanHabidoCambios: EventEmitter<boolean>
+  @Output('hanHabidoCambios') hanHabidoCambios: EventEmitter<boolean>
   @Output('cambioDeMes') cambioDeMes: EventEmitter<number> //Emite el id del mes
   estadoRespuestas: Respuesta[] = [];
   hayCambios: boolean = false;
   respuestas: Respuesta[] = [];
+  evidencias: RespuestaEvidencia[] = [];
   meses: Mes[] = []
   idMes?: number
   
@@ -32,7 +34,7 @@ export class EncuestaCuantitativaComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerMeses()
     this.setIdMes(this.idMesInicial, false) 
-    this.formularios.forEach( tab => {
+    this.encuesta.formularios.forEach( tab => {
       tab.subIndicador.forEach( subindicador =>{
         subindicador.preguntas.forEach( pregunta =>{
           this.estadoRespuestas.push( this.obtenerRespuesta(pregunta) )
@@ -43,7 +45,7 @@ export class EncuestaCuantitativaComponent implements OnInit {
 
   //Acciones
   guardar(){
-    this.servicio.guardarRespuestasIndicadores(2, this.respuestas).subscribe({
+    this.servicio.guardarRespuestasIndicadores(2, this.respuestas, this.evidencias).subscribe({
       next: ()=>{
         this.popup.abrirPopupExitoso(DialogosEncuestas.GUARDAR_ENCUESTA_EXITO)
       },
@@ -66,6 +68,11 @@ export class EncuestaCuantitativaComponent implements OnInit {
     this.setIdMes(idMes)
   }
 
+  manejarNuevaEvidencia(respuesta: RespuestaEvidencia){
+    this.agregarEvidencia(respuesta)
+    this.setHayCambios(true)
+  }
+
   manejarNuevaRespuesta(respuesta: Respuesta){
     this.agregarRespuesta(respuesta)
     this.setHayCambios(true)
@@ -78,14 +85,32 @@ export class EncuestaCuantitativaComponent implements OnInit {
     this.respuestas.push(respuesta)
   }
 
+  private agregarEvidencia(respuesta: RespuestaEvidencia){
+    if(this.existeEvidencia(respuesta)){
+      this.eliminarEvidencia(respuesta)
+    }
+    this.evidencias.push(respuesta)
+  }
+
   private existeRespuesta(respuesta: Respuesta):boolean{
     const idPreguntasRespondidas = this.respuestas.map( preguntaRespondida => preguntaRespondida.preguntaId )
     return idPreguntasRespondidas.includes( respuesta.preguntaId ) ? true : false
   }
 
+  private existeEvidencia(respuesta: RespuestaEvidencia):boolean{
+    const idEvidenciasRespondidas = this.evidencias.map( evidenciasRespondidas => evidenciasRespondidas.evidenciaId )
+    return idEvidenciasRespondidas.includes( respuesta.evidenciaId )
+  }
+
   private eliminarRespuesta(respuesta: Respuesta): void{
     this.respuestas = this.respuestas.filter( preguntaRespondida => { 
       return preguntaRespondida.preguntaId !== respuesta.preguntaId ? true : false
+    })
+  }
+
+  private eliminarEvidencia(respuesta: RespuestaEvidencia){
+    this.evidencias = this.evidencias.filter( evidenciaRespondida => {
+      return evidenciaRespondida.evidenciaId !== respuesta.evidenciaId ? true : false
     })
   }
 

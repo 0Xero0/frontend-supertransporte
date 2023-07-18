@@ -8,7 +8,7 @@ import { EncuestaComponent } from '../../componentes/encuesta/encuesta.component
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { saveAs } from 'file-saver';
-import { Formulario } from '../../modelos/Formulario';
+import { EncuestaCuantitativa, Formulario } from '../../modelos/EncuestaCuantitativa';
 import { EncuestaCuantitativaComponent } from '../../componentes/encuesta-cuantitativa/encuesta-cuantitativa/encuesta-cuantitativa.component';
 import { DateTime } from 'luxon';
 
@@ -23,7 +23,7 @@ export class PaginaEncuestaComponent implements OnInit {
   @ViewChild('componenteEncuestaCuantitativa') componenteEncuestaCuantitativa!: EncuestaCuantitativaComponent
   usuario?: Usuario | null
   encuesta?: Encuesta
-  encuestaCuantitativa?: Formulario[] 
+  encuestaCuantitativa?: EncuestaCuantitativa 
   idVigilado?: string
   idReporte?: number
   idUsuario: string
@@ -133,8 +133,8 @@ export class PaginaEncuestaComponent implements OnInit {
   //Obtener información
   obtenerEncuestaCuantitativa(idMes: number){
     this.servicioEncuesta.obtenerEncuestaCuantitativa(this.idReporte!, this.idVigilado!, idMes).subscribe({
-      next: (respuesta)=>{
-        this.encuestaCuantitativa = respuesta.formularios
+      next: (encuesta)=>{
+        this.encuestaCuantitativa = encuesta
         this.soloLectura = false
       }
     })

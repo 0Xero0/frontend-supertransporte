@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SubIndicador } from 'src/app/encuestas/modelos/Formulario';
+import { SubIndicador } from 'src/app/encuestas/modelos/EncuestaCuantitativa';
 import { Respuesta } from 'src/app/encuestas/modelos/Respuesta';
 
 @Component({

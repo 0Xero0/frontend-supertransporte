@@ -7,9 +7,10 @@ import { Autenticable } from 'src/app/administrador/servicios/compartido/Autenti
 import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
 import { RespuestaEnviar } from '../modelos/RespuestaEnviar';
 import { Motivo } from '../modelos/Motivo';
-import { Formulario } from '../modelos/Formulario';
+import { EncuestaCuantitativa, Formulario } from '../modelos/EncuestaCuantitativa';
 import { Observable } from 'rxjs';
 import { Mes } from '../modelos/Mes';
+import { RespuestaEvidencia } from '../modelos/RespuestaEvidencia';
 
 @Injectable({
   providedIn: 'root'
@@ -46,9 +47,9 @@ export class ServicioEncuestas extends Autenticable {
   }
 
   obtenerEncuestaCuantitativa(idReporte: number, idVigilado: string, idMes: number)
-  :Observable<{formularios: Formulario[]}>{
+  :Observable<EncuestaCuantitativa>{
     const endpoint = `/api/v1/inidicador/formularios?idReporte=${idReporte}&idVigilado=${idVigilado}&idMes=${idMes}`
-    return this.http.get<{formularios: Formulario[]}>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
+    return this.http.get<EncuestaCuantitativa>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }
 
   guardarRespuesta(idReporte: number, peticion: { respuestas: RespuestaEnviar[] })
@@ -62,9 +63,9 @@ export class ServicioEncuestas extends Autenticable {
       })
   }
 
-  guardarRespuestasIndicadores(idReporte: number, respuestas: RespuestaEnviar[]){
+  guardarRespuestasIndicadores(idReporte: number, respuestas: RespuestaEnviar[], evidencias: RespuestaEvidencia[]){
     const endpoint = `/api/v1/inidicador/respuestas`
-    return this.http.post(`${this.host}${endpoint}`, { reporteId: idReporte, respuestas }, {
+    return this.http.post(`${this.host}${endpoint}`, { reporteId: idReporte, respuestas, evidencias }, {
       headers: this.obtenerCabeceraAutorizacion()
     })
   }

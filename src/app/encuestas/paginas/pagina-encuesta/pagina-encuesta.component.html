@@ -52,10 +52,10 @@
         <app-encuesta-cuantitativa
         #componenteEncuestaCuantitativa
         *ngIf="idEncuesta == 2 && encuestaCuantitativa" 
-        [formularios]="encuestaCuantitativa"
+        [encuesta]="encuestaCuantitativa"
         [idMesInicial]="obtenerIdMesActual()"
         (cambioDeMes)="obtenerEncuestaCuantitativa($event)"
-        (tocada)="setHayCambios($event)"
+        (hanHabidoCambios)="setHayCambios($event)"
         />
     </div>
 </div>

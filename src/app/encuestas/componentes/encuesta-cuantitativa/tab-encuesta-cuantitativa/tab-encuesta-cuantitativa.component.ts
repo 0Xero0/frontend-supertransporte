@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { SubIndicador } from 'src/app/encuestas/modelos/Formulario';
+import { Evidencia, SubIndicador } from 'src/app/encuestas/modelos/EncuestaCuantitativa';
 import { Respuesta } from 'src/app/encuestas/modelos/Respuesta';
+import { RespuestaEvidencia } from 'src/app/encuestas/modelos/RespuestaEvidencia';
 
 @Component({
   selector: 'app-tab-encuesta-cuantitativa',
@@ -8,18 +9,26 @@ import { Respuesta } from 'src/app/encuestas/modelos/Respuesta';
   styleUrls: ['./tab-encuesta-cuantitativa.component.css']
 })
 export class TabEncuestaCuantitativaComponent implements OnInit{
+  @Input('idVigilado') idVigilado!: string
   @Input('subindicadores') subindicadores: SubIndicador[] = []
+  @Input('evidencias') evidencias: Evidencia[] = []
   @Input('estadoRespuestas') estadoRespuestas: Respuesta[] = []
   @Output('nuevaRespuesta') nuevaRespuesta: EventEmitter<Respuesta>
+  @Output('nuevaEvidencia') nuevaEvidencia: EventEmitter<RespuestaEvidencia>
   respuestas: Respuesta[] = [];
 
   constructor(){
     this.nuevaRespuesta = new EventEmitter<Respuesta>();
+    this.nuevaEvidencia = new EventEmitter<RespuestaEvidencia>();
   }
 
   ngOnInit(): void {}
 
   manejarNuevaRespuesta(respuesta: Respuesta){
     this.nuevaRespuesta.emit(respuesta)
+  }
+
+  manejarNuevaEvidencia(respuesta: RespuestaEvidencia){
+    this.nuevaEvidencia.emit(respuesta)
   }
 }

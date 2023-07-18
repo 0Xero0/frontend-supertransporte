@@ -1,15 +1,42 @@
-<ul class="subindicadores">
-    <li class="cabeceras-subindicador">
-        <div class="row">
-            <div class="col-1">Variable del indicador</div>
-            <div class="col-2">Datos solicitados</div>
-            <div class="col-9">Valores</div>
-        </div>
-    </li>
-    <li class="subindicador" *ngFor="let subindicador of subindicadores">
-        <app-subindicador-encuesta-cuantitativa 
-            [subindicador]="subindicador" 
-            [estadoRespuestas]="estadoRespuestas"
-            (nuevaRespuesta)="manejarNuevaRespuesta($event)"/>
-    </li>
-</ul>
+<div class="contenedor-subindicadores mb-4">
+    <ul class="subindicadores">
+        <li class="cabeceras-subindicador">
+            <div class="row">
+                <div class="col-1">Variable del indicador</div>
+                <div class="col-2">Datos solicitados</div>
+                <div class="col-9">Valores</div>
+            </div>
+        </li>
+        <li class="subindicador" *ngFor="let subindicador of subindicadores">
+            <app-subindicador-encuesta-cuantitativa 
+                [subindicador]="subindicador" 
+                [estadoRespuestas]="estadoRespuestas"
+                (nuevaRespuesta)="manejarNuevaRespuesta($event)"/>
+        </li>
+    </ul>
+</div>
+<div class="contenedor-evidencias">
+    <ul class="evidencias">
+        <li class="cabeceras-evidencia">
+            <div class="row">
+                <div class="col-3">Descripción de las evidencias</div>
+                <div class="col-2">Tipo de evidencia</div>
+                <div class="col-7">Evidencia</div>
+            </div>
+        </li>
+        <li class="evidencia" *ngFor="let evidencia of evidencias">
+            <div class="row">
+                <div class="col-3">{{ evidencia.nombre }}</div>
+                <div class="col-2">{{ evidencia.validaciones.tipoDato }}</div>
+                <div class="col-7 row">
+                    <div class="col-4">
+                        <app-evidencia-encuesta-cuantitativa
+                        [idVigilado]="idVigilado" 
+                        [evidencia]="evidencia" 
+                        (nuevaEvidencia)="manejarNuevaEvidencia($event)"/>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

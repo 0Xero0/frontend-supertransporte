@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Pregunta } from '../../modelos/Encuesta';
 import { Respuesta } from '../../modelos/Respuesta';
-import { ArchivosEncuestasService } from '../../servicios/archivos-encuestas.service';
+import { ServicioArchivosEncuestas } from '../../servicios/archivos-encuestas.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ServicioEncuestas } from '../../servicios/encuestas.service';
 import { Motivo } from '../../modelos/Motivo';
@@ -50,7 +50,7 @@ export class PreguntaEncuestaComponent implements OnInit {
   clasesRespuestas = {}
   
   constructor(
-    private servicioArchivos: ArchivosEncuestasService,
+    private servicioArchivos: ServicioArchivosEncuestas,
     private servicioEncuesta: ServicioEncuestas,
     private servicioVerificaciones: ServicioVerificaciones,
   ) { 
@@ -152,7 +152,7 @@ export class PreguntaEncuestaComponent implements OnInit {
     if(!this.documento){
       return;
     }
-    this.servicioArchivos.guardarArchivoTemporal(this.documento, this.pregunta.idPregunta, this.idVigilado).subscribe({
+    this.servicioArchivos.guardarArchivoTemporal(this.documento, this.idVigilado, this.pregunta.idPregunta).subscribe({
       next: (archivo)=>{
         this.nombreDocumento = archivo.nombreAlmacenado
         this.nombreOriginalDocumento = archivo.nombreOriginalArchivo

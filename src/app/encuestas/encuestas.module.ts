@@ -15,6 +15,7 @@ import { EncuestaCuantitativaComponent } from './componentes/encuesta-cuantitati
 import { TabEncuestaCuantitativaComponent } from './componentes/encuesta-cuantitativa/tab-encuesta-cuantitativa/tab-encuesta-cuantitativa.component';
 import { PreguntaEncuestaCuantitativaComponent } from './componentes/encuesta-cuantitativa/pregunta-encuesta-cuantitativa/pregunta-encuesta-cuantitativa.component';
 import { SubindicadorEncuestaCuantitativaComponent } from './componentes/encuesta-cuantitativa/subindicador-encuesta-cuantitativa/subindicador-encuesta-cuantitativa.component';
+import { EvidenciaEncuestaCuantitativaComponent } from './componentes/encuesta-cuantitativa/evidencia-encuesta-cuantitativa/evidencia-encuesta-cuantitativa.component';
 
 
 
@@ -28,7 +29,8 @@ import { SubindicadorEncuestaCuantitativaComponent } from './componentes/encuest
     EncuestaCuantitativaComponent,
     TabEncuestaCuantitativaComponent,
     PreguntaEncuestaCuantitativaComponent,
-    SubindicadorEncuestaCuantitativaComponent
+    SubindicadorEncuestaCuantitativaComponent,
+    EvidenciaEncuestaCuantitativaComponent
   ],
   imports: [
     CommonModule,

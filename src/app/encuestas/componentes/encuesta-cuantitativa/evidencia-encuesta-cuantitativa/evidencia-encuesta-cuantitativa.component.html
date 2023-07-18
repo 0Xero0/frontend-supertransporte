@@ -1,0 +1,19 @@
+<ng-container *ngIf="evidencia && respuesta">
+    <fieldset *ngIf="evidencia.tipoEvidencia === 'FILE'">
+        <label class="fs-12px validacion">Solo archivos {{ evidencia.validaciones.tipoDato }}</label>
+        <app-input-archivo
+        [ngModel]="archivo"
+        (ngModelChange)="manejarCambioEvidenciaArchivo($event)"
+        [nombre]="evidencia.idEvidencia.toString()" />
+        <span class="fs-12px" *ngIf="evidencia.respuesta != ''">{{ evidencia.respuesta }}</span>
+        <span class="fs-12px" *ngIf="evidencia.respuesta == ''">Sin evidencia adjunta.</span>
+    </fieldset>
+    
+    <fieldset *ngIf="evidencia.tipoEvidencia === 'NUMBER'">
+        <input type="number" class="form-control"
+        [ngModel]="valor"
+        (ngModelChange)="manejarCambioEvidenciaNumerica($event)"
+        [value]="evidencia.respuesta">
+    </fieldset>
+</ng-container>
+
