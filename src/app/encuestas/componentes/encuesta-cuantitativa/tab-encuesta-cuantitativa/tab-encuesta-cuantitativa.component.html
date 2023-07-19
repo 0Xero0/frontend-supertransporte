@@ -32,7 +32,8 @@
                     <div class="col-4">
                         <app-evidencia-encuesta-cuantitativa
                         [idVigilado]="idVigilado" 
-                        [evidencia]="evidencia" 
+                        [evidencia]="evidencia"
+                        (evidenciaExcedeTamano)="manejarEvidenciaExcedeTamano($event)"
                         (nuevaEvidencia)="manejarNuevaEvidencia($event)"/>
                     </div>
                 </div>

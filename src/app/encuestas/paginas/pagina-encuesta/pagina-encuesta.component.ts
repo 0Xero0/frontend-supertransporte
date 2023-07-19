@@ -149,6 +149,9 @@ export class PaginaEncuestaComponent implements OnInit {
       next: ( encuesta )=>{
         this.encuesta = encuesta
         this.soloLectura = encuesta.tipoAccion === 1  ? true : false
+        if(encuesta.estadoActual.toLocaleLowerCase() == 'Finalizado'.toLocaleLowerCase()){
+          this.soloLectura = true
+        }
       }
     })
   }

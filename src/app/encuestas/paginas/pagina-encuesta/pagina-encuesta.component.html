@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <!-- <div ngbDropdown>
+        <div ngbDropdown *ngIf="idEncuesta != 2">
             <button 
             ngbDropdownToggle 
             type="button" 
@@ -23,27 +23,19 @@
                 <button ngbDropdownItem (click)="this.exportarExcel()">Excel</button>
                 <button ngbDropdownItem (click)="this.exportarPDF()">PDF</button>
             </div>
-        </div> -->
+        </div>
         
         <button
-        *ngIf="(encuesta && encuesta.tipoAccion != 1) || encuestaCuantitativa"
         type="button" 
         class="boton primario delineado" 
         (click)="enviarEncuesta()"
-        [disabled]="hayCambios">Enviar a ST</button>
-
-        <button
-        *ngIf="(encuesta && encuesta.tipoAccion == 1)"
-        type="button" 
-        class="boton primario delineado" 
-        (click)="enviarEncuesta()"
-        [disabled]="hayCambios">Terminar verificación</button>
+        [disabled]="hayCambios || soloLectura">Enviar a ST</button>
 
         <button 
         type="button" 
         class="boton primario relleno" 
         (click)="guardarEncuesta()"
-        [disabled]="!hayCambios">Guardar</button>
+        [disabled]="!hayCambios || soloLectura">Guardar</button>
         <button type="button" class="boton primario delineado" [routerLink]="['/administrar', 'encuestas', idEncuesta]">Volver</button>
     </div>
     <div class="d-flex w-100">

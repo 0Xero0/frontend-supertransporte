@@ -15,14 +15,20 @@ export class TabEncuestaCuantitativaComponent implements OnInit{
   @Input('estadoRespuestas') estadoRespuestas: Respuesta[] = []
   @Output('nuevaRespuesta') nuevaRespuesta: EventEmitter<Respuesta>
   @Output('nuevaEvidencia') nuevaEvidencia: EventEmitter<RespuestaEvidencia>
+  @Output('evidenciaExcedeTamano') evidenciaExcedeTamano: EventEmitter<number>
   respuestas: Respuesta[] = [];
 
   constructor(){
     this.nuevaRespuesta = new EventEmitter<Respuesta>();
     this.nuevaEvidencia = new EventEmitter<RespuestaEvidencia>();
+    this.evidenciaExcedeTamano = new EventEmitter<number>();
   }
 
   ngOnInit(): void {}
+
+  manejarEvidenciaExcedeTamano(tamano: number){
+    this.evidenciaExcedeTamano.emit(tamano)
+  }
 
   manejarNuevaRespuesta(respuesta: Respuesta){
     this.nuevaRespuesta.emit(respuesta)

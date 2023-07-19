@@ -66,6 +66,10 @@ export class EncuestaCuantitativaComponent implements OnInit {
   }
 
   //Manejadores de eventos
+  manejarEvidenciaExcedeTamano(tamano: number){
+    this.popup.abrirPopupFallido('Limite de tamaño excedido.', `El archivo debe pesar como máximo ${tamano} megabytes.`)
+  }
+
   manejarCambioDeMes(idMes: number) {
     const idMesActual = this.idMes
     this.setIdMes(idMes)

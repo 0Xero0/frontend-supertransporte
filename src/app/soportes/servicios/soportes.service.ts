@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { FiltrosSoportes } from '../FiltrosSoportes';
 import { Paginable } from 'src/app/administrador/modelos/compartido/Paginable';
 import { Soporte } from '../modelos/Soporte';
+import { MotivoSoporte } from '../modelos/MotivoSoporte';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,11 @@ export class SoportesService extends Autenticable {
     super()
   }
 
+  obtenerMotivos(){
+    const endpoint = '/api/v1/soportes/motivos'
+    return this.http.get<MotivoSoporte[]>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
+  }
+
   responderSoporte(idSoporte:number, respuesta: string, adjuntable?: File){
     const endpoint = `/api/v1/soportes/responder/${idSoporte}`
     const formData = new FormData()
@@ -25,10 +31,11 @@ export class SoportesService extends Autenticable {
     return this.http.post<Soporte>(`${this.host}${endpoint}`, formData, { headers: this.obtenerCabeceraAutorizacion() })
   }
 
-  crearSoporte(descripcion: string, adjuntable?: File) {
+  crearSoporte(descripcion: string, motivo: number, adjuntable?: File) {
     const endpoint = `/api/v1/soportes`
     const formData = new FormData()
     formData.append('descripcion', descripcion)
+    formData.append('motivo', motivo.toString())
     adjuntable ? formData.append('adjunto', adjuntable) : undefined
     return this.http.post<Soporte>(`${this.host}${endpoint}`, formData, { headers: this.obtenerCabeceraAutorizacion() })
   }

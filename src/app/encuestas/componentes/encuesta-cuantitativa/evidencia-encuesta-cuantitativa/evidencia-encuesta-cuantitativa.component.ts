@@ -12,12 +12,14 @@ export class EvidenciaEncuestaCuantitativaComponent implements OnInit{
   @Input('evidencia') evidencia!: Evidencia
   @Input('idVigilado') idVigilado!: string
   @Output('nuevaEvidencia') nuevaEvidencia: EventEmitter<RespuestaEvidencia>
+  @Output('evidenciaExcedeTamano') evidenciaExcedeTamano: EventEmitter<number>
   respuesta?: RespuestaEvidencia
   archivo: File | null = null
   valor: string = ""
 
   constructor(private servicioArchivos: ServicioArchivosEncuestas){
     this.nuevaEvidencia = new EventEmitter<RespuestaEvidencia>()
+    this.evidenciaExcedeTamano = new EventEmitter<number>()
   }
 
   ngOnInit(): void {
@@ -36,6 +38,10 @@ export class EvidenciaEncuestaCuantitativaComponent implements OnInit{
         }
       })
     }
+  }
+
+  manejarExcedeTamano(){
+    this.evidenciaExcedeTamano.emit(5)
   }
 
   manejarCambioEvidenciaNumerica(valor: string){

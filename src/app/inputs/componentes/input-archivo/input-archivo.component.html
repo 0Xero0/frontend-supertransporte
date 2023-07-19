@@ -8,9 +8,10 @@
     <div class="boton-adjuntar d-flex align-items-center justify-content-center">Adjuntar</div>
     <input 
     #input 
+    type="file" 
     [accept]="unirAcepta()" 
     [id]="nombre" 
-    type="file" 
-    (change)="onChangeFiles($event)" 
-    [disabled]="disabled">
+    [disabled]="disabled"
+    (change)="onChangeFiles($event)">
+     
 </label>

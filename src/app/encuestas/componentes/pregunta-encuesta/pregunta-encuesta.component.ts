@@ -17,7 +17,8 @@ import { Maestra } from 'src/app/verificaciones/modelos/Maestra';
 export class PreguntaEncuestaComponent implements OnInit {
   @Output('valorModificado') valorModificado: EventEmitter<Respuesta>
   @Output('nuevaVerificacion') nuevaVerificacion: EventEmitter<RespuestaVerificacion>
-  @Output('haHabidoErrorArchivo') haHabidoErrorArchivo: EventEmitter<HttpErrorResponse> 
+  @Output('haHabidoErrorArchivo') haHabidoErrorArchivo: EventEmitter<HttpErrorResponse>
+  @Output('archivoExcedeTamano') archivoExcedeTamano: EventEmitter<number>
 
   @Input('pregunta') pregunta!: Pregunta
   @Input('idVigilado') idVigilado!: string
@@ -56,7 +57,8 @@ export class PreguntaEncuestaComponent implements OnInit {
   ) { 
     this.valorModificado = new EventEmitter<Respuesta>();
     this.nuevaVerificacion = new EventEmitter<RespuestaVerificacion>();
-    this.haHabidoErrorArchivo = new EventEmitter<HttpErrorResponse>() 
+    this.haHabidoErrorArchivo = new EventEmitter<HttpErrorResponse>()
+    this.archivoExcedeTamano = new EventEmitter<number>();
   }
 
   ngOnInit(): void {
@@ -64,7 +66,7 @@ export class PreguntaEncuestaComponent implements OnInit {
     this.obtenerOpcionesCorrespondencia()
     this.obtenerOpcionesCumplimiento()
 
-    if(this.pregunta.respuesta && this.valoresNegativos.includes(this.pregunta.respuesta)){
+    if(this.pregunta.respuesta && this.valoresNegativos.includes(this.pregunta.respuesta) && !this.soloLectura){
       this.setMotivoDeshabilitado(false)
       this.setMotivo(this.pregunta.observacion, false)
     }else{
@@ -116,6 +118,10 @@ export class PreguntaEncuestaComponent implements OnInit {
       this.rutaDocumento = undefined
       this.emitirValorModificado()
     }
+  }
+
+  manejarExcedeTamano(){
+    this.archivoExcedeTamano.emit(this.pregunta.tamanio)
   }
 
   alCambiarRespuesta(respuesta: string){
@@ -209,7 +215,11 @@ export class PreguntaEncuestaComponent implements OnInit {
   }
 
   setMotivoDeshabilitado(motivoDeshabilitado: boolean){
-    this.motivoDeshabilitado = motivoDeshabilitado
+    if(this.soloLectura){
+      this.motivoDeshabilitado = true
+    }else{
+      this.motivoDeshabilitado = motivoDeshabilitado
+    }
     if(motivoDeshabilitado && this.observacion != ""){
       this.observacion = ""
     }

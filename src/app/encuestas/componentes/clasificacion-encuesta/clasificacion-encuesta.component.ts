@@ -14,7 +14,8 @@ import { RespuestaVerificacion } from '../../modelos/RespuestaVerificacion';
 export class ClasificacionEncuestaComponent implements OnInit {
   @ViewChildren('pregunta') preguntas!: QueryList<PreguntaEncuestaComponent>
   @Output('preguntasRespondidas') seHanRespondidoPreguntas: EventEmitter<Respuesta[]>
-  @Output('haHabidoErrorArchivo') haHabidoErrorArchivo: EventEmitter<HttpErrorResponse> 
+  @Output('haHabidoErrorArchivo') haHabidoErrorArchivo: EventEmitter<HttpErrorResponse>
+  @Output('archivoExcedeTamano') archivoExcedeTamano: EventEmitter<number>
   @Input('idVigilado') idVigilado!: string
   @Input('clasificacion') clasificacion!: Clasificacion
   @Input('soloLectura') soloLectura: boolean = true
@@ -27,7 +28,8 @@ export class ClasificacionEncuestaComponent implements OnInit {
 
   constructor() { 
     this.seHanRespondidoPreguntas = new EventEmitter<Respuesta[]>();
-    this.haHabidoErrorArchivo = new EventEmitter<HttpErrorResponse>() 
+    this.haHabidoErrorArchivo = new EventEmitter<HttpErrorResponse>();
+    this.archivoExcedeTamano = new EventEmitter<number>();
   }
 
   ngOnInit(): void {
@@ -45,6 +47,10 @@ export class ClasificacionEncuestaComponent implements OnInit {
   //Manejadores de eventos
   manejarErrorCargaArchivo(error: HttpErrorResponse){
     this.haHabidoErrorArchivo.emit(error)
+  }
+
+  manejarArchivoExcedeTamano(tamano: number){
+    this.archivoExcedeTamano.emit(tamano)
   }
 
   manejarNuevaVerificacion(verificacion: RespuestaVerificacion){

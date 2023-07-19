@@ -52,6 +52,8 @@
                 <app-input-archivo
                 [disabled]="archivoDeshabilitado"
                 (change)="alCambiarArchivo()"
+                [tamanoMaximoMb]="pregunta.tamanio"
+                (excedeTamano)="manejarExcedeTamano()"
                 [nombre]="pregunta.idPregunta.toString()" 
                 [acepta]="['application/pdf']"
                 [(ngModel)]="documento"/>

@@ -13,10 +13,14 @@
                 </div>
                 <div class="col-10">
                     <fieldset>
-                        <select class="form-select">
-                            <option value="1">1 - Motivo 1</option> 
-                            <option value="2">2 - Motivo 2</option> 
+                        <select formControlName="motivo" class="form-select">
+                            <option value="" selected>Selecciona un motivo</option>
+                            <option *ngFor="let motivo of motivos" [value]="motivo.id">{{ motivo.id }} - {{ motivo.descripcion }}</option> 
                         </select>
+                        <app-validacion  
+                        [control]="this.formulario.controls['motivo']" 
+                        [texto]="'Selecciona un motivo.'" 
+                        [validacion]="'required'"/>
                     </fieldset>
                 </div>
             </div>

@@ -57,6 +57,7 @@
         [camposDeVerificacion]="camposDeVerificacion"
         (valorModificado)="agregarPreguntaRespondida($event)"
         (nuevaVerificacion)="manejarNuevaVerificacion($event)"
-        (haHabidoErrorArchivo)="manejarErrorCargaArchivo($event)"/>
+        (haHabidoErrorArchivo)="manejarErrorCargaArchivo($event)"
+        (archivoExcedeTamano)="manejarArchivoExcedeTamano($event)"/>
     </div>
 </div>

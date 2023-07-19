@@ -67,6 +67,10 @@ export class EncuestaComponent implements OnInit {
     this.popup.abrirPopupFallido('Error al cargar el archivo', 'Intentalo más tarde.')
   }
 
+  manejarArchivoExcedeTamano(tamano: number){
+    this.popup.abrirPopupFallido('Limite de tamaño excedido.', `El archivo debe pesar como máximo ${tamano} megabytes.`)
+  }
+
   //Acciones
   guardarRespuestas(){
     this.servicioEncuestas.guardarRespuesta(this.idReporte, { respuestas: this.obtenerRespuestas() }).subscribe({

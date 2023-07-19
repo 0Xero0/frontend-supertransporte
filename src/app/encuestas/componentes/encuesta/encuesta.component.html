@@ -9,7 +9,8 @@
             [observacion]="encuesta.observacion" 
             [camposDeVerificacion]="camposDeVerificacion"
             [justificable]="justificable"
-            (preguntasRespondidas)="alResponderPreguntas($event)"/>
+            (preguntasRespondidas)="alResponderPreguntas($event)"
+            (archivoExcedeTamano)="manejarArchivoExcedeTamano($event)"/>
         </li>
     </ul>
     <div class="d-flex mt-4" *ngIf="!soloLectura">

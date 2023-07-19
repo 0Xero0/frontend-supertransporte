@@ -36,6 +36,7 @@ export interface Pregunta {
     adjuntable:             boolean;
     adjuntableObligatorio:  boolean;
     validaciones:           Validacion[];
+    tamanio: number
 }
 
 export interface Validacion {

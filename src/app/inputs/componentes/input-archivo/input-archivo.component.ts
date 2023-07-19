@@ -15,11 +15,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class InputArchivoComponent implements OnInit, ControlValueAccessor {
   @ViewChild('input') input!: ElementRef<HTMLInputElement>
+  @Output('excedeTamano') excedeTamano: EventEmitter<void>
   @Input('nombre') nombre!: string
   @Input('acepta') acepta: string[] = []
+  @Input('tamanoMaximoMb') tamanoMaximoMb?: number
   archivo?: File | null;
   disabled: boolean = false
-  constructor() { 
+
+  constructor() {
+    this.excedeTamano = new EventEmitter<void>();
   }
 
   onChangeFiles = (evento: Event) => {
@@ -28,7 +32,11 @@ export class InputArchivoComponent implements OnInit, ControlValueAccessor {
     }
     const input = evento.target as HTMLInputElement
     if (input.files) {
-      console.log(input.files)
+      const file = input.files.item(0)
+      if(file && this.tamanoValido(file)){
+        this.excedeTamano.emit()
+        return;
+      }
       this.archivo = input.files.item(0)
       this.onChange(this.archivo)
     }
@@ -72,6 +80,14 @@ export class InputArchivoComponent implements OnInit, ControlValueAccessor {
   manejarRemoverArchivo(event: Event){
     event.preventDefault();
     this.removeFile()
+  }
+
+  private tamanoValido(archivo: File): boolean{
+    if(this.tamanoMaximoMb){
+      return this.tamanoMaximoMb * 1000000 <= archivo.size ? true : false 
+    }else{
+      return true
+    }
   }
 
 }

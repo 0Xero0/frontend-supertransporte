@@ -17,7 +17,8 @@
                 [idVigilado]="encuesta.idVigilado"
                 [subindicadores]="formulario.subIndicador"
                 [evidencias]="formulario.evidencias"
-                [estadoRespuestas]="estadoRespuestas" 
+                [estadoRespuestas]="estadoRespuestas"
+                (evidenciaExcedeTamano)="manejarEvidenciaExcedeTamano($event)"
                 (nuevaRespuesta)="manejarNuevaRespuesta($event)" 
                 (nuevaEvidencia)="manejarNuevaEvidencia($event)"/>
         </ng-template>
