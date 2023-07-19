@@ -41,7 +41,7 @@ export class EvidenciaEncuestaCuantitativaComponent implements OnInit{
   }
 
   manejarExcedeTamano(){
-    this.evidenciaExcedeTamano.emit(5)
+    this.evidenciaExcedeTamano.emit(this.evidencia.tamanio)
   }
 
   manejarCambioEvidenciaNumerica(valor: string){

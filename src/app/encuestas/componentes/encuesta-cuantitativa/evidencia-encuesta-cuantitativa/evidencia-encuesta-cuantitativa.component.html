@@ -3,7 +3,7 @@
         <label class="fs-12px validacion">Solo archivos {{ evidencia.validaciones.tipoDato }}</label>
         <app-input-archivo
         [ngModel]="archivo"
-        [tamanoMaximoMb]="5"
+        [tamanoMaximoMb]="evidencia.tamanio"
         (excedeTamano)="manejarExcedeTamano()"
         (ngModelChange)="manejarCambioEvidenciaArchivo($event)"
         [nombre]="evidencia.idEvidencia.toString()" />

@@ -27,6 +27,7 @@ export interface Evidencia {
     documento: string
     nombreOriginal: string
     ruta: string
+    tamanio: number
 }
 
 export interface Validacion {
