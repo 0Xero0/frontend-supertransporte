@@ -33,7 +33,7 @@ export class PaginaCrearUsuarioComponent implements OnInit{
       apellido: new FormControl(undefined),
       identificacion: new FormControl(undefined, [ Validators.required ]),
       fechaNacimiento: new FormControl(undefined, [ Validators.required ]),
-      correo: new FormControl(undefined, [ Validators.required ]),
+      correo: new FormControl(undefined, [ Validators.required, Validators.email ]),
       telefono: new FormControl(undefined),
       rol: new FormControl("", [ Validators.required ]),
     })

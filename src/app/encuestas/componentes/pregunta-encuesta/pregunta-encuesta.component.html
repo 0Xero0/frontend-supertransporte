@@ -79,7 +79,7 @@
             [ngModel]="evidenciaCorresponde" 
             (ngModelChange)="alCambiarEvidenciaCorresponde($event)" 
             class="form-select"
-            [disabled]="!camposDeVerificacion">
+            [disabled]="!camposDeVerificacion || pregunta.respuesta == ''">
                 <option [value]="0">Selecciona una opción</option>
                 <option [value]="opcion.id" *ngFor="let opcion of opcionesCorrespondencia">{{ opcion.nombre }}</option>
             </select>
@@ -88,7 +88,7 @@
             <label class="fs-12px fw-semibold">Observación</label>
             <div class="d-flex justify-content-start">
                 <textarea
-                [disabled]="observacionEvidenciaCorrespondeDeshabilitado"
+                [disabled]="!camposDeVerificacion || observacionEvidenciaCorrespondeDeshabilitado || pregunta.respuesta == ''"
                 [ngModel]="observacionNoCorresponde"
                 (ngModelChange)="alCambiarObservacionEvidenciaNoCorresponde($event)"
                 placeholder="Escribe aquí tus observaciones"
@@ -104,7 +104,7 @@
             [ngModel]="documentoCumple" 
             (ngModelChange)="alCambiarDocumentoCumple($event)"  
             class="form-select"
-            [disabled]="!camposDeVerificacion">
+            [disabled]="!camposDeVerificacion || pregunta.respuesta == ''">
                 <option [value]="0">Selecciona una opción</option>
                 <option [value]="opcion.id" *ngFor="let opcion of opcionesCumplimiento">{{ opcion.nombre }}</option>
             </select>
@@ -113,7 +113,7 @@
             <label class="fs-12px fw-semibold">Observación</label>
             <div class="d-flex justify-content-start">
                 <textarea
-                [disabled]="observacionDocumentoCumpleDeshabilitado"
+                [disabled]="!camposDeVerificacion || observacionDocumentoCumpleDeshabilitado || pregunta.respuesta == ''"
                 [ngModel]="observacionNoCumple"
                 (ngModelChange)="alCambiarObservacionDocumentoNoCumple($event)"
                 placeholder="Escribe aquí tus observaciones"

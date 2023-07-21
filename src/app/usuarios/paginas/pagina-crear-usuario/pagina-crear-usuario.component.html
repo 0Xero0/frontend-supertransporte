@@ -54,6 +54,11 @@
                     [texto]="'El correo es requerido.'"
                     [control]="this.formulario.controls['correo']"
                     />
+                    <app-validacion
+                    [validacion]="'email'"
+                    [texto]="'No es un correo válido.'"
+                    [control]="this.formulario.controls['correo']"
+                    />
                 </fieldset>
             </div>
             <div class="col-sm-12 col-md-6">

@@ -19,6 +19,7 @@ export class PaginaReporteVerificarComponent implements OnInit {
   idVigilado?: string
   idEncuesta?: number
   idReporte?: number
+  hayCambios: boolean = false
   nit?: string
   razonSocial?: string
   estadoActual?: string
@@ -53,6 +54,10 @@ export class PaginaReporteVerificarComponent implements OnInit {
 
   guardarVerificaciones(){
     this.componenteEncuesta.guardarVerificaciones()
+  }
+
+  manejarHayCambios(hayCambios: boolean){
+    this.hayCambios = hayCambios
   }
 
   enviarVerificaciones(){

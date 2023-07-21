@@ -30,8 +30,16 @@
         </div>
     </form>
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <button type="button" class="boton primario relleno" (click)="enviarVerificaciones()">Terminar verificación</button>
-        <button type="button" class="boton primario relleno" (click)="guardarVerificaciones()">Guardar</button>
+        <button
+        [disabled]="hayCambios"
+        type="button" 
+        class="boton primario relleno" 
+        (click)="enviarVerificaciones()">Terminar verificación</button>
+        <button
+        [disabled]="!hayCambios"
+        type="button" 
+        class="boton primario relleno" 
+        (click)="guardarVerificaciones()">Guardar</button>
         <button class="boton primario delineado" [routerLink]="['/administrar', 'verificar-reportes']">Volver</button>
     </div>
     <app-encuesta
@@ -43,6 +51,7 @@
         [idReporte]="idReporte"
         [encuesta]="encuesta"
         [idEncuesta]="idEncuesta"
-        [camposDeVerificacion]="true"/>
+        [camposDeVerificacion]="true"
+        (hanHabidoCambios)="manejarHayCambios($event)"/>
 </div>
 <app-popup #popup />
