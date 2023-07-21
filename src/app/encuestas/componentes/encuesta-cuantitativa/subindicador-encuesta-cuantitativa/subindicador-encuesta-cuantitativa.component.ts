@@ -20,14 +20,6 @@ export class SubindicadorEncuestaCuantitativaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  obtenerEstadoRespuestaPorId(idPregunta: number): Respuesta{
-    const respuesta = this.estadoRespuestas.find( respuesta => respuesta.preguntaId === idPregunta )
-    if(!respuesta){
-      throw Error(`No se encontró la respuesta con idPregunta: ${idPregunta}`)
-    }
-    return respuesta
-  }
-
   manejarCambioRespuesta(respuesta: Respuesta){
     this.nuevaRespuesta.emit(respuesta)
   }

@@ -9,7 +9,6 @@ import { Respuesta } from 'src/app/encuestas/modelos/Respuesta';
 })
 export class PreguntaEncuestaCuantitativaComponent implements OnInit {
   @Input('pregunta') pregunta!: Pregunta
-  @Input('respuesta') respuesta!: Respuesta
   @Output('cambio') cambio: EventEmitter<Respuesta>
   valor: string = "";
 
@@ -18,7 +17,7 @@ export class PreguntaEncuestaCuantitativaComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.setValor(this.respuesta.valor, false)
+    this.setValor(this.pregunta.respuesta, false)
   }
 
   manejarCambio(valor: string){
