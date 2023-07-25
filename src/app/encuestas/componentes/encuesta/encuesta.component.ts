@@ -81,7 +81,7 @@ export class EncuestaComponent implements OnInit {
     this.servicioEncuestas.guardarRespuesta(this.idReporte, { respuestas: this.obtenerRespuestas() }).subscribe({
       next: ( respuesta ) =>{
         this.popup.abrirPopupExitoso(respuesta.mensaje)
-        this.router.navigate(['/administrar','encuestas', this.idEncuesta])
+        this.setHayCambios(false)
       },
       error: (error: HttpErrorResponse) =>{
         this.popup.abrirPopupFallido('Error', error.error.message)
@@ -94,6 +94,7 @@ export class EncuestaComponent implements OnInit {
     this.servicioVerificacion.guardarVerificaciones(this.idReporte, this.obtenerVerificaciones()).subscribe({
       next: ( respuesta: any ) =>{
         this.popup.abrirPopupExitoso('Se han guardado las verificaciones')
+        this.setHayCambios(false)
       },
       error: (error: HttpErrorResponse) =>{
         this.popup.abrirPopupFallido('Error', error.error.message)

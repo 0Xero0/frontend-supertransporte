@@ -17,7 +17,7 @@
         </li>
     </ul>
     <div class="d-flex mt-4" *ngIf="!soloLectura">
-        <button class="boton primario relleno ms-auto" (click)="guardarRespuestas()">Guardar</button>
+        <button [disabled]="!hayCambios" class="boton primario relleno ms-auto" (click)="guardarRespuestas()">Guardar</button>
     </div>
 </div>
 <app-popup #popup />
