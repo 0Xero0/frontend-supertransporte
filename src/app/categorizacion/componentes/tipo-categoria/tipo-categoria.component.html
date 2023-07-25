@@ -12,7 +12,8 @@
             <div class="mb-3" *ngFor="let categoria of tipoCategoria.categoriaClasificacion ; let i = index">
                 <app-categoria 
                 #categoria (cambioTotal)="manejarCambioTotalCategoria()" 
-                [categoria]="categoria" />
+                [categoria]="categoria" 
+                [tipoCategoria]="tipoCategoria"/>
             </div>
         </div>
     </div>

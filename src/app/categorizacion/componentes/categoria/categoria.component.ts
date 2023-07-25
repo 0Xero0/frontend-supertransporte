@@ -11,7 +11,7 @@ import {
   SimpleChanges, 
   ViewChildren 
 } from '@angular/core';
-import { CategoriaClasificacion, Dato } from '../../modelos/Categorizacion';
+import { CategoriaClasificacion, Dato, TipoCategoria } from '../../modelos/Categorizacion';
 import { SelectorCantidadComponent } from '../selector-cantidad/selector-cantidad.component';
 import { ServicioClasificaciones } from '../../servicios/clasificaciones.service';
 
@@ -24,6 +24,7 @@ export class CategoriaComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChildren('selector') selectores!: QueryList<SelectorCantidadComponent>
   @Output('cambioTotal') cambioTotal: EventEmitter<number>
   @Input('categoria') categoria!: CategoriaClasificacion
+  @Input('tipoCategoria') tipoCategoria!: TipoCategoria
   total: number = 0
   descriptiva: boolean = false
   inconsistencia: boolean = false
