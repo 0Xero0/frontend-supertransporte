@@ -35,12 +35,12 @@
                     <span class="fs-14px">Documento</span>
                 </div>
             </div>
-            <div class="col-2 encabezado">
+            <div class="col-2 encabezado" *ngIf="camposDeVerificacionVisibles">
                 <div class="d-flex justify-content-start">
                     <span class="fs-14px">¿La evidencia corresponde a lo solicitado?</span>
                 </div>
             </div>
-            <div class="col-2 encabezado">
+            <div class="col-2 encabezado" *ngIf="camposDeVerificacionVisibles">
                 <div class="d-flex justify-content-start">
                     <span class="fs-14px">¿El documento cumple con la información o estructura solicitada?</span>
                 </div>
@@ -51,10 +51,11 @@
         #pregunta
         *ngFor="let pregunta of clasificacion.preguntas" 
         [soloLectura]="soloLectura"
+        [camposDeVerificacion]="camposDeVerificacion"
+        [camposDeVerificacionVisibles]="camposDeVerificacionVisibles"
         [pregunta]="pregunta"
         [idVigilado]="idVigilado"
         [justificable]="justificable"
-        [camposDeVerificacion]="camposDeVerificacion"
         (valorModificado)="agregarPreguntaRespondida($event)"
         (nuevaVerificacion)="manejarNuevaVerificacion($event)"
         (haHabidoErrorArchivo)="manejarErrorCargaArchivo($event)"

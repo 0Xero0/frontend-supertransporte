@@ -5,11 +5,14 @@
             #clasificacion 
             [clasificacion]="clasificacion"
             [soloLectura]="soloLectura"
+            [camposDeVerificacion]="camposDeVerificacion"
+            [camposDeVerificacionVisibles]="camposDeVerificacionVisibles"    
             [idVigilado]="idVigilado"
             [observacion]="encuesta.observacion" 
             [camposDeVerificacion]="camposDeVerificacion"
             [justificable]="justificable"
             (preguntasRespondidas)="alResponderPreguntas($event)"
+            (verificacionesRespondidas)="alResponderVerificaciones($event)"
             (archivoExcedeTamano)="manejarArchivoExcedeTamano($event)"/>
         </li>
     </ul>

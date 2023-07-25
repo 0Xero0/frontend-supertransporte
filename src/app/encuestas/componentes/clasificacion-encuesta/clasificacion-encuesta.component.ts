@@ -14,12 +14,14 @@ import { RespuestaVerificacion } from '../../modelos/RespuestaVerificacion';
 export class ClasificacionEncuestaComponent implements OnInit {
   @ViewChildren('pregunta') preguntas!: QueryList<PreguntaEncuestaComponent>
   @Output('preguntasRespondidas') seHanRespondidoPreguntas: EventEmitter<Respuesta[]>
+  @Output('verificacionesRespondidas') seHanRespondidoVerificaciones: EventEmitter<RespuestaVerificacion>
   @Output('haHabidoErrorArchivo') haHabidoErrorArchivo: EventEmitter<HttpErrorResponse>
   @Output('archivoExcedeTamano') archivoExcedeTamano: EventEmitter<number>
   @Input('idVigilado') idVigilado!: string
   @Input('clasificacion') clasificacion!: Clasificacion
   @Input('soloLectura') soloLectura: boolean = true
   @Input('camposDeVerificacion') camposDeVerificacion: boolean = false
+  @Input('camposDeVerificacionVisibles') camposDeVerificacionVisibles: boolean = false
   @Input('observacion') observacion: boolean  = false
   @Input('justificable') justificable: boolean = false
   desplegado: boolean = true
@@ -28,6 +30,7 @@ export class ClasificacionEncuestaComponent implements OnInit {
 
   constructor() { 
     this.seHanRespondidoPreguntas = new EventEmitter<Respuesta[]>();
+    this.seHanRespondidoVerificaciones = new EventEmitter<RespuestaVerificacion>();
     this.haHabidoErrorArchivo = new EventEmitter<HttpErrorResponse>();
     this.archivoExcedeTamano = new EventEmitter<number>();
   }
@@ -55,10 +58,7 @@ export class ClasificacionEncuestaComponent implements OnInit {
 
   manejarNuevaVerificacion(verificacion: RespuestaVerificacion){
     this.agregarVerificacionRespondida(verificacion)
-  }
-
-  emitirRespuestas(){
-    this.seHanRespondidoPreguntas.emit(this.preguntasRespondidas)
+    this.seHanRespondidoVerificaciones.emit(verificacion)
   }
 
   //Acciones

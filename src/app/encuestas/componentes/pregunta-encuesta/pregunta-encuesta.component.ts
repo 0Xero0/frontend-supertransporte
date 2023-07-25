@@ -24,6 +24,7 @@ export class PreguntaEncuestaComponent implements OnInit {
   @Input('idVigilado') idVigilado!: string
   @Input('soloLectura') soloLectura: boolean = true
   @Input('camposDeVerificacion') camposDeVerificacion: boolean = false
+  @Input('camposDeVerificacionVisibles') camposDeVerificacionVisibles: boolean = false
   @Input('justificable') justificable: boolean = false
 
   observacionEvidenciaCorrespondeDeshabilitado: boolean = false
@@ -101,11 +102,11 @@ export class PreguntaEncuestaComponent implements OnInit {
   }
 
   obtenerOpcionesCorrespondencia(){
-    this.opcionesCorrespondencia = this.servicioVerificaciones.obtenerOpcionesCorrespondencia()
+    this.opcionesCumplimiento = this.servicioVerificaciones.obtenerOpcionesCumplimiento()
   }
 
   obtenerOpcionesCumplimiento(){
-    this.opcionesCumplimiento = this.servicioVerificaciones.obtenerOpcionesCumplimiento()
+    this.opcionesCorrespondencia = this.servicioVerificaciones.obtenerOpcionesCorrespondencia()
   }
 
   //Manejadores de eventos
@@ -129,8 +130,8 @@ export class PreguntaEncuestaComponent implements OnInit {
     this.emitirValorModificado()
   }
 
-  alCambiarObservacion(){ //Motivo
-    this.emitirValorModificado()
+  alCambiarObservacion(motivo: string){ //Motivo
+    this.setMotivo(motivo)
   }
 
   alCambiarEvidenciaCorresponde(corresponde: number){

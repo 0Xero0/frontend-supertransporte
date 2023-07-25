@@ -23,6 +23,7 @@ export class EncuestaComponent implements OnInit {
   @Input('soloLectura') soloLectura: boolean = true
   @Input('justificable') justificable: boolean = false
   @Input('camposDeVerificacion') camposDeVerificacion: boolean = false
+  @Input('camposDeVerificacionVisibles') camposDeVerificacionVisibles: boolean = true
   @Output('hanHabidoCambios') hanHabidoCambios: EventEmitter<boolean>
   @ViewChildren('clasificacion') clasificaciones!: QueryList<ClasificacionEncuestaComponent>
   @ViewChild('popup') popup!: PopupComponent
@@ -60,6 +61,10 @@ export class EncuestaComponent implements OnInit {
   
   //Manejadores de eventos
   alResponderPreguntas(respuestas: any){
+    this.setHayCambios(true)
+  }
+
+  alResponderVerificaciones(verificacion: any){
     this.setHayCambios(true)
   }
 

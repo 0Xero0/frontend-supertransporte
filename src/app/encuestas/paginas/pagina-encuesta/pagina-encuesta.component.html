@@ -43,7 +43,9 @@
         #componenteEncuesta
         class="w-100"
         *ngIf="encuesta && idReporte && idEncuesta && idVigilado && idEncuesta != 2" 
-        [soloLectura]="soloLectura" 
+        [soloLectura]="soloLectura"
+        [camposDeVerificacion]="camposDeVerificacion"
+        [camposDeVerificacionVisibles]="camposDeVerificacionVisibles"
         [idVigilado]="idVigilado"
         [idReporte]="idReporte"
         [encuesta]="encuesta"

@@ -20,7 +20,7 @@
                         <span 
                         class="material-symbols-outlined cursor-pointer texto-gris" 
                         [routerLink]="['/administrar', 'verificar-reportes', reporte.idReporte]"
-                        [queryParams]="{ idEncuesta: 1, idReporte: reporte.idReporte, idVigilado: reporte.nit }">
+                        [queryParams]="{ idEncuesta: reporte.idEncuesta, idReporte: reporte.idReporte, idVigilado: reporte.nit }">
                         visibility
                         </span>
                     </td>

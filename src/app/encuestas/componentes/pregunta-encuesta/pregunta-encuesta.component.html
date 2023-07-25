@@ -32,7 +32,7 @@
             <label class="fs-12px fw-semibold">Motivo</label>
             <select
             [disabled]="motivoDeshabilitado"
-            (ngModelChange)="alCambiarObservacion()"
+            (ngModelChange)="alCambiarObservacion($event)"
             class="form-select" 
             [ngModel]="observacion">
                 <option value="">Selecciona una opción</option>
@@ -73,7 +73,7 @@
         </div>
     </div>
     <!-- Campos verificador -->
-    <div class="col-2 columna d-flex flex-column border-top">
+    <div class="col-2 columna d-flex flex-column border-top" *ngIf="camposDeVerificacionVisibles">
         <div class="d-flex justify-content-start">
             <select 
             [ngModel]="evidenciaCorresponde" 
@@ -98,7 +98,7 @@
             </div>
         </div>
     </div>
-    <div class="col-2 columna d-flex flex-column border-top">
+    <div class="col-2 columna d-flex flex-column border-top" *ngIf="camposDeVerificacionVisibles">
         <div class="d-flex justify-content-start">
             <select
             [ngModel]="documentoCumple" 

@@ -28,7 +28,9 @@ export class PaginaEncuestaComponent implements OnInit {
   idReporte?: number
   idUsuario: string
   idEncuesta?: number
-  soloLectura: boolean = true
+  soloLectura: boolean = false
+  camposDeVerificacion: boolean = false
+  camposDeVerificacionVisibles: boolean = true
   hayCambios: boolean = false
 
   constructor(
@@ -148,16 +150,14 @@ export class PaginaEncuestaComponent implements OnInit {
     this.servicioEncuesta.obtenerEncuesta(this.idVigilado!, this.idEncuesta!, this.idReporte!).subscribe({
       next: ( encuesta )=>{
         this.encuesta = encuesta
-        this.soloLectura = encuesta.tipoAccion === 1  ? true : false
-        if(encuesta.estadoActual.toLocaleLowerCase() == 'Finalizado'.toLocaleLowerCase()){
-          this.soloLectura = true
-        }
+        this.soloLectura = !encuesta.encuestaEditable
+        this.camposDeVerificacion = encuesta.verificacionEditable
+        this.camposDeVerificacionVisibles = encuesta.verificacionVisible
       }
     })
   }
 
   //Setters
-
   setHayCambios(hayCambios: boolean){
     this.hayCambios = hayCambios
   }

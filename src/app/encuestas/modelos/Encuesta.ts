@@ -1,6 +1,9 @@
 export interface Encuesta {
     tipoAccion:      number;
     observacion:     boolean;
+    encuestaEditable: boolean
+    verificacionVisible: boolean
+    verificacionEditable: boolean
     clasificaion:   string;
     descripcionClasificacion: string;
     nombreEncuesta: string;
