@@ -61,7 +61,6 @@ export class PaginaEncuestaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /* this.encuesta = this.servicioEncuesta.obtenerEncuesta() */
   }
 
   //Acciones

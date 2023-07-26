@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { RespuestaInvalida } from '../../modelos/RespuestaInvalida';
 import { RespuestaVerificacion } from '../../modelos/RespuestaVerificacion';
 import { ServicioVerificaciones } from 'src/app/verificaciones/servicios/verificaciones.service';
+import { Maestra } from 'src/app/verificaciones/modelos/Maestra';
+import { DialogosEncuestas } from '../../dialogos-encuestas';
 
 @Component({
   selector: 'app-encuesta',
@@ -31,16 +33,19 @@ export class EncuestaComponent implements OnInit {
   respuestas: Respuesta[] = []
   verificaciones: RespuestaVerificacion[] = []
   hayCambios: boolean = false
+  opcionesCumplimiento: Maestra[] = []
+  opcionesCorrespondencia: Maestra[] = []
   
   constructor(
     private servicioEncuestas: ServicioEncuestas,
     private servicioVerificacion: ServicioVerificaciones,
-    private router: Router
-  ) {
+  ){
     this.hanHabidoCambios = new EventEmitter<boolean>();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.obtenerOpcionesCumplimientoYCorrespondencia()
+  }
 
   //Obtener recursos
   obtenerRespuestas(): Respuesta[]{
@@ -57,6 +62,31 @@ export class EncuestaComponent implements OnInit {
       this.verificaciones = [ ...this.verificaciones, ...clasificacion.obtenerVerificaciones()]
     })
     return this.verificaciones
+  }
+
+  obtenerOpcionesCumplimientoYCorrespondencia(){
+    this.servicioVerificacion.obtenerOpcionesCumplimiento().subscribe({
+      next: (opciones)=>{
+        this.opcionesCumplimiento = opciones
+      },
+      error: ()=>{
+        this.popup.abrirPopupFallido(
+          DialogosEncuestas.ERROR_OPCIONES_CUMPLIMIENTO_TITULO, 
+          DialogosEncuestas.ERROR_OPCIONES_CUMPLIMIENTO_DESCRIPCION
+        )
+      }
+    })
+    this.servicioVerificacion.obtenerOpcionesCorrespondencia().subscribe({
+      next: (opciones)=>{
+        this.opcionesCorrespondencia = opciones
+      },
+      error: ()=>{
+        this.popup.abrirPopupFallido(
+          DialogosEncuestas.ERROR_OPCIONES_CORRESPONDENCIA_TITULO,
+          DialogosEncuestas.ERROR_OPCIONES_CORRESPONDENCIA_DESCRIPCION
+        )
+      }
+    })
   }
   
   //Manejadores de eventos

@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { RespuestaInvalida } from '../../modelos/RespuestaInvalida';
 import { PreguntaEncuestaComponent } from '../pregunta-encuesta/pregunta-encuesta.component';
 import { RespuestaVerificacion } from '../../modelos/RespuestaVerificacion';
+import { Maestra } from 'src/app/verificaciones/modelos/Maestra';
 
 @Component({
   selector: 'app-clasificacion-encuesta',
@@ -17,6 +18,7 @@ export class ClasificacionEncuestaComponent implements OnInit {
   @Output('verificacionesRespondidas') seHanRespondidoVerificaciones: EventEmitter<RespuestaVerificacion>
   @Output('haHabidoErrorArchivo') haHabidoErrorArchivo: EventEmitter<HttpErrorResponse>
   @Output('archivoExcedeTamano') archivoExcedeTamano: EventEmitter<number>
+
   @Input('idVigilado') idVigilado!: string
   @Input('clasificacion') clasificacion!: Clasificacion
   @Input('soloLectura') soloLectura: boolean = true
@@ -24,6 +26,8 @@ export class ClasificacionEncuestaComponent implements OnInit {
   @Input('camposDeVerificacionVisibles') camposDeVerificacionVisibles: boolean = false
   @Input('observacion') observacion: boolean  = false
   @Input('justificable') justificable: boolean = false
+  @Input('opcionesCumplimiento') opcionesCumplimiento: Maestra[] = []
+  @Input('opcionesCorrespondencia') opcionesCorrespondencia: Maestra[] = []
   desplegado: boolean = true
   preguntasRespondidas: Respuesta[] = []
   verificacionesRespondidas: RespuestaVerificacion[] = []

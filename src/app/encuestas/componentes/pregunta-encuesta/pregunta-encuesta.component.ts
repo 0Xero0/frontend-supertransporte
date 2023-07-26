@@ -26,6 +26,8 @@ export class PreguntaEncuestaComponent implements OnInit {
   @Input('camposDeVerificacion') camposDeVerificacion: boolean = false
   @Input('camposDeVerificacionVisibles') camposDeVerificacionVisibles: boolean = false
   @Input('justificable') justificable: boolean = false
+  @Input('opcionesCumplimiento') opcionesCumplimiento: Maestra[] = []
+  @Input('opcionesCorrespondencia') opcionesCorrespondencia: Maestra[] = []
 
   observacionEvidenciaCorrespondeDeshabilitado: boolean = false
   observacionDocumentoCumpleDeshabilitado:      boolean = false
@@ -34,8 +36,6 @@ export class PreguntaEncuestaComponent implements OnInit {
   invalida:                          boolean = false
 
   motivos         : Motivo[] = []
-  opcionesCorrespondencia: Maestra[] = []
-  opcionesCumplimiento: Maestra[] = []
   valoresNegativos: string[] = ["N", "NO", "NO APLICA"]
 
   observacion:              string = ""
@@ -64,8 +64,6 @@ export class PreguntaEncuestaComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerMotivos()
-    this.obtenerOpcionesCorrespondencia()
-    this.obtenerOpcionesCumplimiento()
 
     if(this.pregunta.respuesta && this.valoresNegativos.includes(this.pregunta.respuesta) && !this.soloLectura){
       this.setMotivoDeshabilitado(false)
@@ -99,14 +97,6 @@ export class PreguntaEncuestaComponent implements OnInit {
   //Obtener recursos
   obtenerMotivos(){
     this.motivos = this.servicioEncuesta.obtenerMotivos()
-  }
-
-  obtenerOpcionesCorrespondencia(){
-    this.opcionesCumplimiento = this.servicioVerificaciones.obtenerOpcionesCumplimiento()
-  }
-
-  obtenerOpcionesCumplimiento(){
-    this.opcionesCorrespondencia = this.servicioVerificaciones.obtenerOpcionesCorrespondencia()
   }
 
   //Manejadores de eventos

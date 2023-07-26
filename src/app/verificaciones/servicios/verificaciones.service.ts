@@ -7,6 +7,7 @@ import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
 import { Encuesta } from 'src/app/encuestas/modelos/Encuesta';
 import { Maestra } from '../modelos/Maestra';
 import { RespuestaVerificacion } from 'src/app/encuestas/modelos/RespuestaVerificacion';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,6 @@ export class ServicioVerificaciones extends Autenticable{
 
   constructor(private clienteHttp: HttpClient) { 
     super() 
-    this.buscarOpcionesCumplimiento()
-    this.buscarOpcionesCorrespondencia()
   }
 
   guardarVerificaciones(idReporte: number, verificaciones: RespuestaVerificacion[]){
@@ -47,32 +46,14 @@ export class ServicioVerificaciones extends Autenticable{
     return this.clienteHttp.get<Encuesta>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }
 
-  obtenerOpcionesCumplimiento(): Maestra[]{
-    return this.opcionesCumplimiento
-  }
-
-  obtenerOpcionesCorrespondencia(): Maestra[]{
-    return this.opcionesCorrespondencia
-  }
-
-  private buscarOpcionesCumplimiento(){
+  obtenerOpcionesCumplimiento(): Observable<Maestra[]>{
     const endpoint = '/api/v1/validador/lista-cumple'
     return this.clienteHttp.get<Maestra[]>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
-    .subscribe({
-      next: (opciones)=>{
-        this.opcionesCumplimiento = opciones
-      }
-    })
   }
 
-  private buscarOpcionesCorrespondencia(){
+  obtenerOpcionesCorrespondencia(): Observable<Maestra[]>{
     const endpoint = '/api/v1/validador/lista-corresponde'
     return this.clienteHttp.get<Maestra[]>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
-    .subscribe({
-      next: (opciones)=>{
-        this.opcionesCorrespondencia = opciones
-      }
-    })
   }
 
 }
