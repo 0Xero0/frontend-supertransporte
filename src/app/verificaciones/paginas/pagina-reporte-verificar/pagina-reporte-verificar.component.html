@@ -45,7 +45,9 @@
     <app-encuesta
         *ngIf="encuesta && idReporte && idEncuesta && idVigilado" 
         #componenteEncuesta 
-        [soloLectura]="true" 
+        [soloLectura]="soloLectura"
+        [camposDeVerificacion]="camposDeVerificacion"
+        [camposDeVerificacionVisibles]="camposDeVerificacionVisibles" 
         class="w-100" 
         [idVigilado]="idVigilado"
         [idReporte]="idReporte"

@@ -19,6 +19,9 @@ export class PaginaReporteVerificarComponent implements OnInit {
   idVigilado?: string
   idEncuesta?: number
   idReporte?: number
+  camposDeVerificacion: boolean = true
+  camposDeVerificacionVisibles: boolean = true
+  soloLectura: boolean = true
   hayCambios: boolean = false
   nit?: string
   razonSocial?: string
@@ -46,6 +49,9 @@ export class PaginaReporteVerificarComponent implements OnInit {
             this.idEncuesta = Number(parametros.queryParams['idEncuesta'])
             this.idReporte = Number(parametros.params['idReporte'])
             this.idVigilado = parametros.queryParams['idVigilado']
+            this.soloLectura = !encuesta.encuestaEditable
+            this.camposDeVerificacion = encuesta.verificacionEditable
+            this.camposDeVerificacionVisibles = encuesta.verificacionVisible
           }
         })
       }
