@@ -86,7 +86,7 @@ export class ServicioEncuestas extends Autenticable {
   }
 
   enviarRespuestaIndicadores(idEncuesta: number, idReporte: number, idVigilado: string, idMes: number){
-    const enpoint = `/api/v1/inidicador/enviar'`
+    const enpoint = `/api/v1/inidicador/enviar`
     return this.http.post<{ mensaje: string }>(
       `${this.host}${enpoint}`,
       { idEncuesta, idReporte, idVigilado, idMes },
