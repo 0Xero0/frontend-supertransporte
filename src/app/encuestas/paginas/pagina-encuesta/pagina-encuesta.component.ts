@@ -24,6 +24,7 @@ export class PaginaEncuestaComponent implements OnInit {
   usuario?: Usuario | null
   encuesta?: Encuesta
   encuestaCuantitativa?: EncuestaCuantitativa 
+  vigencia?: string
   idVigilado?: string
   idReporte?: number
   idUsuario: string
@@ -137,6 +138,7 @@ export class PaginaEncuestaComponent implements OnInit {
       next: (encuesta)=>{
         this.encuestaCuantitativa = encuesta
         this.soloLectura = false
+        this.vigencia = encuesta.vigencia
       }
     })
   }

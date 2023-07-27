@@ -60,4 +60,8 @@ export class EvidenciaEncuestaCuantitativaComponent implements OnInit{
     }
   }
 
+  descargarEvidencia(){
+    this.servicioArchivos.descargarArchivo(this.evidencia.documento, this.evidencia.ruta, this.evidencia.nombreOriginal)
+  }
+
 }

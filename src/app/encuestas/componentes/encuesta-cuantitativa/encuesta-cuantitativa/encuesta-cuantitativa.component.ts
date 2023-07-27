@@ -62,7 +62,14 @@ export class EncuestaCuantitativaComponent implements OnInit {
   }
 
   enviar() {
-    this.popup.abrirPopupExitoso(DialogosEncuestas.ENVIAR_ENCUESTA_EXITO)
+    this.servicio.enviarRespuestaIndicadores(this.encuesta.idEncuesta, Number(this.encuesta.idReporte), this.encuesta.idVigilado, this.idMes!).subscribe({
+      next: ()=>{
+        this.popup.abrirPopupExitoso(DialogosEncuestas.ENVIAR_ENCUESTA_EXITO)
+      },
+      error: ()=>{
+        this.popup.abrirPopupFallido('No se han respondido todas las preguntas.', 'Hay preguntas obligatorias sin responder.')
+      }
+    })
   }
 
   //Manejadores de eventos

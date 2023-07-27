@@ -6,13 +6,23 @@
         [tamanoMaximoMb]="evidencia.tamanio"
         (excedeTamano)="manejarExcedeTamano()"
         (ngModelChange)="manejarCambioEvidenciaArchivo($event)"
-        [nombre]="evidencia.idEvidencia.toString()" />
-        <span class="fs-12px" *ngIf="evidencia.respuesta != ''">{{ evidencia.respuesta }}</span>
-        <span class="fs-12px" *ngIf="evidencia.respuesta == ''">Sin evidencia adjunta.</span>
+        [nombre]="evidencia.idEvidencia.toString()"
+        [acepta]="[evidencia.validaciones.extension]" />
+        <span (click)="descargarEvidencia()" class="hipervinculo fs-12px cursor-pointer" *ngIf="evidencia.nombreOriginal != ''">
+            {{ evidencia.nombreOriginal }}
+        </span>
+        <span class="fs-12px" *ngIf="evidencia.nombreOriginal == ''">Sin evidencia adjunta.</span>
     </fieldset>
     
     <fieldset *ngIf="evidencia.tipoEvidencia === 'NUMBER'">
         <input type="number" class="form-control"
+        [ngModel]="valor"
+        (ngModelChange)="manejarCambioEvidenciaNumerica($event)"
+        [value]="evidencia.respuesta">
+    </fieldset>
+
+    <fieldset *ngIf="evidencia.tipoEvidencia === 'STRING'">
+        <input type="text" class="form-control"
         [ngModel]="valor"
         (ngModelChange)="manejarCambioEvidenciaNumerica($event)"
         [value]="evidencia.respuesta">

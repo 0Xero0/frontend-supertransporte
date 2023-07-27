@@ -1,8 +1,6 @@
 <div class="d-flex mb-4">
-    <fieldset>
-        <label class="fs-14px fw-semibold">
-            Meses
-        </label>
+    <fieldset class="d-flex flex-gap-10">        
+        <div class="d-flex align-items-center fs-14px fw-semibold">Mes</div>
         <select class="form-select" [ngModel]="idMes" (ngModelChange)="manejarCambioDeMes($event)">
             <option [value]="mes.idMes" *ngFor="let mes of meses">{{ mes.idMes }} - {{ mes.nombreMes }}</option>
         </select>

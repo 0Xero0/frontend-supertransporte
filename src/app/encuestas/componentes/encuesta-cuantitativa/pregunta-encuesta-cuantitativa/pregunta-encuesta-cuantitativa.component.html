@@ -1,8 +1,15 @@
-<fieldset class="">
-    <label class="fs-12px fw-semibold">{{ pregunta.pregunta }}</label>
-    <input 
-    type="number" 
-    class="form-control" 
-    [ngModel]="valor" 
-    (ngModelChange)="manejarCambio($event)">
+<fieldset class="d-flex flex-gap-10">
+    <div class="d-flex align-items-center fs-12px fw-semibold">
+        <div>
+            <span class="validacion" *ngIf="pregunta.obligatoria">* </span> 
+            <span>{{ pregunta.pregunta }}</span>
+        </div>
+    </div>
+    <div class="col">
+        <input 
+        type="number" 
+        class="form-control" 
+        [ngModel]="valor" 
+        (ngModelChange)="manejarCambio($event)">
+    </div>
 </fieldset>

@@ -33,6 +33,7 @@ export interface Evidencia {
 export interface Validacion {
     tipoDato: string
     cantDecimal: number
+    extension: string
 }
 
 export interface Pregunta {

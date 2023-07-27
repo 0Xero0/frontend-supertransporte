@@ -11,6 +11,10 @@
             <span class="fs-14px fw-semibold texto-azul-004884">A quien se le realiza la encuesta: </span>
             <span>{{ idVigilado }}</span>
         </div>
+        <div class="d-block " *ngIf="vigencia">
+            <span class="fs-14px fw-semibold texto-azul-004884">Año de vigencia: </span>
+            <span>{{ vigencia }}</span>
+        </div>
     </div>
     <div class="d-flex justify-content-between align-items-center" *ngIf="!soloLectura">
         <div ngbDropdown *ngIf="idEncuesta != 2">
