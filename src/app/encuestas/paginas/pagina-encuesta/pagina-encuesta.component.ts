@@ -77,22 +77,12 @@ export class PaginaEncuestaComponent implements OnInit {
     }
     this.servicioEncuesta.exportarExcel(this.idReporte).subscribe({
       next: (response)=>{
-        console.log(response)
         saveAs(response, 'datos.xlsx')
       },
       error: ()=>{
         this.popup.abrirPopupFallido('Ocurrio un error inesperado.', 'Intentalo más tarde.')
       }
     })
-  }
-
-  private extractFilenameFromContentDisposition(contentDisposition: string): string {
-    const regex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-    const matches = regex.exec(contentDisposition);
-    if (matches != null && matches[1]) {
-      return matches[1].replace(/['"]/g, '');
-    }
-    return '';
   }
 
   guardarEncuesta(){

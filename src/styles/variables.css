@@ -15,6 +15,7 @@
 
     --bg-color-peligro: #ffe6e6;
     --bg-color-exitoso: #eff6ef;
+    --bg-color-advertencia: rgb(255, 255, 228);
 }
 
 /* .card{

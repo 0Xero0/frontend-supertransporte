@@ -34,6 +34,7 @@ export class PreguntaEncuestaComponent implements OnInit {
   motivoDeshabilitado:               boolean = false
   archivoDeshabilitado:              boolean = false
   invalida:                          boolean = false
+  advertencia:                       boolean = false
 
   motivos         : Motivo[] = []
   valoresNegativos: string[] = ["N", "NO", "NO APLICA"]
@@ -230,8 +231,8 @@ export class PreguntaEncuestaComponent implements OnInit {
     }else{
       this.setObservacionDocumentoCumpleDeshabilitado(true)
     }
-    const invalida = this.documentoCumple == 2 && this.evidenciaCorresponde == 2 ? true : false
-    this.setInvalida(invalida)
+    const advertencia = this.documentoCumple == 2 && this.evidenciaCorresponde == 2 ? true : false
+    this.setAdvertencia(advertencia)
     if(dispararEvento) this.emitirVerificacion();
   }
 
@@ -247,8 +248,8 @@ export class PreguntaEncuestaComponent implements OnInit {
     }else{
       this.setObservacionEvidenciaCorrespondeDeshabilitado(true)
     }
-    const invalida = this.documentoCumple == 2 && this.evidenciaCorresponde == 2 ? true : false
-    this.setInvalida(invalida)
+    const advertencia = this.documentoCumple == 2 && this.evidenciaCorresponde == 2 ? true : false
+    this.setAdvertencia(advertencia)
     if(dispararEvento) this.emitirVerificacion();
   }
 
@@ -273,6 +274,10 @@ export class PreguntaEncuestaComponent implements OnInit {
 
   setInvalida(invalida: boolean){
     this.invalida = invalida
+  }
+
+  setAdvertencia(advertencia: boolean){
+    this.advertencia = advertencia
   }
 
   setMotivo(motivo: string, emitir: boolean = true){

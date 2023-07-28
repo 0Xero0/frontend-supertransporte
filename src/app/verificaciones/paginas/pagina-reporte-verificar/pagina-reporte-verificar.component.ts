@@ -6,6 +6,8 @@ import { Encuesta } from 'src/app/encuestas/modelos/Encuesta';
 import { EncuestaComponent } from 'src/app/encuestas/componentes/encuesta/encuesta.component';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { DialogosVerificaciones } from '../../Dialogos';
+import { HttpErrorResponse } from '@angular/common/http';
+import { RespuestaInvalida } from 'src/app/encuestas/modelos/RespuestaInvalida';
 
 @Component({
   selector: 'app-pagina-reporte-verificar',
@@ -72,11 +74,26 @@ export class PaginaReporteVerificarComponent implements OnInit {
         this.popup.abrirPopupExitoso(DialogosVerificaciones.VERIFICACION_ENVIADA)
         this.router.navigateByUrl('/administrar/verificar-reportes')
       },
-      error: (e)=>{
-        this.popup.abrirPopupFallido(
-          DialogosVerificaciones.VERIFICACION_ENVIADA_ERROR_TITULO, 
-          DialogosVerificaciones.VERIFICACION_ENVIADA_ERROR_DESCRIPCION
-        )
+      error: (e: HttpErrorResponse)=>{
+        if(e.status === 400){
+          this.popup.abrirPopupFallido(
+            DialogosVerificaciones.FALTAN_VERIFICACIONES_TITULO, 
+            DialogosVerificaciones.FALTAN_VERIFICACIONES_DESCRIPCION 
+          )
+          this.componenteEncuesta.resaltarRespuestasInvalidas( e.error.faltantes.map( (faltante: number) =>{  
+            let respuestaFaltante: RespuestaInvalida = {
+              preguntaId: faltante,
+              archivoObligatorio: false
+            }
+            return respuestaFaltante
+          }))
+        }else{
+          this.popup.abrirPopupFallido(
+            DialogosVerificaciones.VERIFICACION_ENVIADA_ERROR_TITULO, 
+            DialogosVerificaciones.VERIFICACION_ENVIADA_ERROR_DESCRIPCION
+          )
+        }
+        
       }
     })
   }

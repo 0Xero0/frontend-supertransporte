@@ -22,3 +22,6 @@
 .pregunta-valida{
     background-color: var(--bg-color-exitoso);
 }
+.advertencia{
+    background-color: var(--bg-color-advertencia);
+}
