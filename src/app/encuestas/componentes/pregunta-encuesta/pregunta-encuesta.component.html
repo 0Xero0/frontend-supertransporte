@@ -36,7 +36,7 @@
             class="form-select" 
             [ngModel]="observacion">
                 <option value="">Selecciona una opción</option>
-                <option [value]="motivo.id" *ngFor="let motivo of motivos">{{ motivo.descripcion }}</option>
+                <option [value]="motivo.id" *ngFor="let motivo of motivos">{{ motivo.id }} - {{ motivo.descripcion }}</option>
             </select>
         </div>
     </div>
@@ -57,6 +57,7 @@
                 [nombre]="pregunta.idPregunta.toString()" 
                 [acepta]="['application/pdf']"
                 [(ngModel)]="documento"/>
+                <span class="fs-12px fw-semibold">Máximo {{ pregunta.tamanio }} Mb</span>
             </div>
             <div class="w-100 fs-12px cursor-pointer" (click)="descargarArchivo(pregunta.documento, pregunta.ruta, pregunta.nombreOriginal)">
                 <img src="assets/img/iconos/icono_pdf.gif">
@@ -81,7 +82,7 @@
             class="form-select"
             [disabled]="!camposDeVerificacion || pregunta.respuesta == ''">
                 <option [value]="0">Selecciona una opción</option>
-                <option [value]="opcion.id" *ngFor="let opcion of opcionesCorrespondencia">{{ opcion.nombre }}</option>
+                <option [value]="opcion.id" *ngFor="let opcion of opcionesCorrespondencia">{{opcion.id}} - {{ opcion.nombre }}</option>
             </select>
         </div>
         <div> 
@@ -106,7 +107,7 @@
             class="form-select"
             [disabled]="!camposDeVerificacion || pregunta.respuesta == ''">
                 <option [value]="0">Selecciona una opción</option>
-                <option [value]="opcion.id" *ngFor="let opcion of opcionesCumplimiento">{{ opcion.nombre }}</option>
+                <option [value]="opcion.id" *ngFor="let opcion of opcionesCumplimiento">{{opcion.id}} - {{ opcion.nombre }}</option>
             </select>
         </div>
         <div> <!-- observacion documento cumple -->

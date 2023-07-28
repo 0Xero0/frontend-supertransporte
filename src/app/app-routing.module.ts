@@ -14,6 +14,7 @@ import { PaginaResponderSoporteComponent } from './soportes/paginas/pagina-respo
 import { PaginaCategorizacion } from './categorizacion/paginas/pagina-categorizacion/pagina-categorizacion.component';
 import { SoporteAccesoComponent } from './autenticacion/componentes/soporte-acceso/soporte-acceso.component';
 import { PaginaAsignacionTamanoOrganizacionComponent } from './categorizacion/paginas/pagina-asignacion-tamano-organizacion/pagina-asignacion-tamano-organizacion.component';
+import { PaginaFormularioAspiranteProveedorTecnologicoComponent } from './formularios/paginas/pagina-formulario-aspirante-proveedor-tecnologico/pagina-formulario-aspirante-proveedor-tecnologico.component';
 
 
 
@@ -80,6 +81,10 @@ const routes: Routes = [
   {
     path: 'soporte',
     component: SoporteAccesoComponent
+  },
+  {
+    path: 'aspirante-proveedor-tecnologico',
+    component: PaginaFormularioAspiranteProveedorTecnologicoComponent
   },
   {
     path: '**',

@@ -11,6 +11,7 @@ import { AlertasModule } from './alertas/alertas.module';
 import { InputsModule } from './inputs/inputs.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AsignacionesModule } from './asignaciones/asignaciones.module';
+import { FormulariosModule } from './formularios/formularios.module';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { AsignacionesModule } from './asignaciones/asignaciones.module';
     AdministradorModule,
     AutenticacionModule,
     AsignacionesModule,
+    FormulariosModule,
     AlertasModule,
     InputsModule,
     SweetAlert2Module.forRoot(),
