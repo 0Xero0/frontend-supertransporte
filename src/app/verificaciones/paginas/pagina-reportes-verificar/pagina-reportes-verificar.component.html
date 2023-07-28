@@ -1,16 +1,16 @@
 <div class="p-md-3 p-lg-5">
     <h3 class="texto-primario fw-semibold mb-4">Lista de reportes</h3>
     <div class="table-responsive">
-        <table class="table fs-14px">
+        <table class="table table-bordered tabla-primaria fs-14px">
             <thead>
                 <tr class="fw-semibold">
-                    <th class="encabezado-tabla p-3">Validar</th>
-                    <th class="encabezado-tabla p-3">Id</th>
-                    <th class="encabezado-tabla p-3">NIT</th>
-                    <th class="encabezado-tabla p-3">Razón social</th>
-                    <th class="encabezado-tabla p-3">Asignado por</th>
-                    <th class="encabezado-tabla p-3">Fecha de asignación</th>
-                    <th class="encabezado-tabla p-3">Estado de validación</th>
+                    <th class="">Validar</th>
+                    <th class="">Id</th>
+                    <th class="">NIT</th>
+                    <th class="">Razón social</th>
+                    <th class="">Asignado por</th>
+                    <th class="">Fecha de asignación</th>
+                    <th class="">Estado de validación</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +42,11 @@
         [pageSize]="this.paginador.limite"
         [page]="this.paginador.pagina"
         (pageChange)="this.paginador.cambiarPagina($event)" 
-        [maxSize]="5"/>
+        [maxSize]="5">
+            <ng-template ngbPaginationFirst>Prim.</ng-template>
+            <ng-template ngbPaginationLast>Ult.</ng-template>
+            <ng-template ngbPaginationPrevious>Ant.</ng-template>
+            <ng-template ngbPaginationNext>Sig.</ng-template>
+        </ngb-pagination>
     </div>
 </div>

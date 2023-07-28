@@ -151,7 +151,12 @@
         [page]="this.paginador.pagina"
         [maxSize]="5"
         (pageChange)="this.paginador.cambiarPagina($event)"
-        />
+        >
+            <ng-template ngbPaginationFirst>Prim.</ng-template>
+            <ng-template ngbPaginationLast>Ult.</ng-template>
+            <ng-template ngbPaginationPrevious>Ant.</ng-template>
+            <ng-template ngbPaginationNext>Sig.</ng-template>
+        </ngb-pagination>
     </div>
 </div>
 <app-modal-actualizar-usuario #modalActualizarUsuario />

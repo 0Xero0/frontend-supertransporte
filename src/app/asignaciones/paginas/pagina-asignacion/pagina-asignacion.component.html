@@ -71,7 +71,12 @@
             [page]="paginadorReportes.pagina"
             [pageSize]="paginadorReportes.limite"
             (pageChange)="paginadorReportes.cambiarPagina($event)"
-            [maxSize]="5" />
+            [maxSize]="5">
+                <ng-template ngbPaginationFirst>Prim.</ng-template>
+                <ng-template ngbPaginationLast>Ult.</ng-template>
+                <ng-template ngbPaginationPrevious>Ant.</ng-template>
+                <ng-template ngbPaginationNext>Sig.</ng-template>
+            </ngb-pagination>
         </div>
     </div>
 
@@ -174,7 +179,12 @@
             [page]="paginadorReportesAsignados.pagina"
             [pageSize]="paginadorReportesAsignados.limite"
             (pageChange)="paginadorReportesAsignados.cambiarPagina($event)"
-            [maxSize]="5" />
+            [maxSize]="5">
+                <ng-template ngbPaginationFirst>Prim.</ng-template>
+                <ng-template ngbPaginationLast>Ult.</ng-template>
+                <ng-template ngbPaginationPrevious>Ant.</ng-template>
+                <ng-template ngbPaginationNext>Sig.</ng-template>
+            </ngb-pagination>
         </div>
     </div>
 </div>

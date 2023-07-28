@@ -1,8 +1,8 @@
-.encabezado-tabla{
-    width: 150px;
-    background-color: #E6EFFD;
-    color: #004884;
-    padding: 12px 15px;
-    text-align: center;
-    vertical-align: middle;
+.contenedor-descripcion{
+    max-height: 63px;
+    min-width: 300px;
+    overflow-y: hidden;
+}
+.td-razon-social{
+    white-space: nowrap;
 }
