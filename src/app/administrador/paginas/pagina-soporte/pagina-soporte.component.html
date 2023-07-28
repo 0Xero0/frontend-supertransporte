@@ -47,7 +47,9 @@
                             <span>Evidencia <span class="validacion">*</span></span>
                         </div>
                         <div class="col-4">
-                            <app-input-archivo formControlName="adjunto" />
+                            <app-input-archivo 
+                            [nombre]="'evidencia'" 
+                            formControlName="adjunto" />
                         </div>
                     </div>
                 </div>

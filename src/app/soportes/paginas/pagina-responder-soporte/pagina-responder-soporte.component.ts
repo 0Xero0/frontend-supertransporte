@@ -34,10 +34,10 @@ export class PaginaResponderSoporteComponent implements OnInit{
         let soporte = this.servicioSoporte.obtenerDeLocalSotrage()
         if(soporte && soporte.id === idSoporte){
           this.soporte = soporte
+          this.rellenarSoporte(this.soporte.respuesta)
         }else{
           //sacar soporte del backend
         }
-        this.respondido = this.soporte!.idEstado !== 1 ? true : false
         this.formulario.controls['respuesta'].updateValueAndValidity()
       }
     })
@@ -61,11 +61,30 @@ export class PaginaResponderSoporteComponent implements OnInit{
     })
   }
 
+  rellenarSoporte(respuesta?: string){
+    if(this.soporte!.idEstado !== 1){
+      this.respondido = true
+    }
+    if(this.respondido){
+      this.formulario.get('respuesta')!.setValue(respuesta)
+      this.formulario.get('respuesta')!.disable()
+      this.formulario.get('adjunto')!.disable()
+    }
+  }
+
   descargarArchivo(){
     if(!this.soporte || !this.soporte.documento){
       this.popup.abrirPopupFallido('Error al descargar el archivo.', 'Este soporte no tiene archivo adjunto.')
       return;
     }
     this.servicioSoporte.descargarArchivo(this.soporte.documento, this.soporte.id.toString())
+  }
+
+  descargarArchivoRespuesta(){
+    if(!this.soporte || !this.soporte.documentoRespuesta){
+      this.popup.abrirPopupFallido('Error al descargar el archivo.', 'Este soporte no tiene archivo adjunto.')
+      return;
+    }
+    this.servicioSoporte.descargarArchivoRespuesta(this.soporte.documentoRespuesta, this.soporte.id.toString())
   }
 }

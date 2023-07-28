@@ -18,6 +18,7 @@ export class PaginaSoportesComponent implements OnInit {
   paginador: Paginador<FiltrosSoportes> 
   soportes: Soporte[] = []
   problemasAcceso?: boolean
+  estados = this.servicioSoportes.ESTADOS
 
   constructor(private servicioSoportes: SoportesService, private router: Router, private activatedRoute: ActivatedRoute){
     this.formulario = this.construirFormulario()
@@ -29,23 +30,15 @@ export class PaginaSoportesComponent implements OnInit {
       next: (query)=>{
         this.problemasAcceso = query['acceso'] === 'true' ? true : false 
         this.paginador.inicializar(undefined, undefined, {
-          problemaAcceso: this.problemasAcceso
+          problemaAcceso: this.problemasAcceso,
+          fechaCreacion: 'asc',
+          estado: 1
         })
       }
     })
   }
 
-  obtenerSoportes = (pagina: number, limite: number, filtros?: FiltrosSoportes) => {
-    return new Observable<Paginacion>((subscriptor)=>{
-      this.servicioSoportes.obtenerSoportes(pagina, limite, filtros ?? {}).subscribe({
-        next: ( resultado )=>{
-          this.soportes = resultado.datos
-          subscriptor.next(resultado.paginacion)
-        }
-      })
-    })
-  }
-
+  //Acciones
   irAResponderSoporte(soporte: Soporte){
     this.servicioSoportes.guardarEnLocalStorage(soporte)
     this.router.navigate(['/administrar', 'responder-soporte', soporte.id])
@@ -62,7 +55,30 @@ export class PaginaSoportesComponent implements OnInit {
     this.paginador.inicializar(undefined, undefined, {
       estado: this.formulario.get('estado')!.value,
       termino: this.formulario.get('termino')!.value,
-      problemaAcceso: this.problemasAcceso
+      problemaAcceso: this.problemasAcceso,
+      fechaCreacion: 'asc'
     })
   }
+
+  //Obtener recursos
+  obtenerSoportes = (pagina: number, limite: number, filtros?: FiltrosSoportes) => {
+    return new Observable<Paginacion>((subscriptor)=>{
+      this.servicioSoportes.obtenerSoportes(pagina, limite, filtros ?? {}).subscribe({
+        next: ( resultado )=>{
+          this.soportes = resultado.datos
+          subscriptor.next(resultado.paginacion)
+        }
+      })
+    })
+  }
+
+  //Mapeadores
+  obtenerDescripcionEstado(id: string | number): string{
+    id = typeof id === 'string' ? Number(id) : id;
+    const estado = this.estados.find( estado => estado.id == id)
+    return estado ? estado.descripcion : ' - '
+  }
+ 
+
+
 }

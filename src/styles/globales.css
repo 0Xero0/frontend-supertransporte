@@ -279,6 +279,17 @@ body{
   border-top: 2px solid ;
 }
 
+.tabla-primaria th, .tabla-primaria td{
+  padding: 12px 17px;
+}
+.tabla-primaria th{
+  background-color: #E6EFFD !important;
+  color: #004884;
+  vertical-align: middle;
+}
+.tabla-primaria td{
+}
+
 .encabezado-tabla{
   background-color: #E6EFFD !important;
   color: #004884;

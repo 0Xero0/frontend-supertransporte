@@ -77,5 +77,16 @@ input[type="file"]{
     font-size: 14px;
 }
 .disabled{
+    cursor: initial;
     background-color: #e9ecef;
+}
+.disabled .boton-adjuntar{
+    background-color: #e9ecef;
+    color: #878787;
+    border-color: #C4C4C4;
+}
+.disabled .boton-adjuntar:hover{
+    background-color: #e9ecef;
+    color: #878787;
+    border-color: #C4C4C4;
 }

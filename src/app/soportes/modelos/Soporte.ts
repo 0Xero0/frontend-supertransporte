@@ -15,5 +15,5 @@ export interface Soporte {
     idEstado:                        number;
     fechaCreacion:                   string;
     fechaRespuesta:                  string;
-    respuesta?: string | null;
+    respuesta?: string;
 }

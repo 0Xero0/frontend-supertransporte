@@ -11,6 +11,20 @@ import { MotivoSoporte } from '../modelos/MotivoSoporte';
   providedIn: 'root'
 })
 export class SoportesService extends Autenticable {
+  public readonly ESTADOS = [
+    {
+      id: 1,
+      descripcion: 'ABIERTO'
+    },
+    {
+      id: 2,
+      descripcion: 'EN PROCESO'
+    },
+    {
+      id: 3,
+      descripcion: 'CERRADO'
+    }
+  ]
   private readonly host = environment.urlBackend
   private readonly llaveLocalStorage = 'soporte'
 
@@ -63,6 +77,14 @@ export class SoportesService extends Autenticable {
   descargarArchivo(nombreArchivo: string, idSoporte: string){
     const extension = nombreArchivo.split('.')[1]
     const endpoint = `/api/v1/soportes/archivo/${idSoporte}.${extension}`
+    const a = document.createElement('a')
+    a.href = `${this.host}${endpoint}`
+    a.click()
+  }
+
+  descargarArchivoRespuesta(nombreArchivo: string, idSoporte: string){
+    const extension = nombreArchivo.split('.')[1]
+    const endpoint = `/api/v1/soportes/archivo_respuesta/${idSoporte}.${extension}`
     const a = document.createElement('a')
     a.href = `${this.host}${endpoint}`
     a.click()

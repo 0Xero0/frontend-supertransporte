@@ -20,7 +20,7 @@ export class PaginaSoporteComponent {
     this.formulario = new FormGroup({
       motivo: new FormControl<number | string>("", [ Validators.required ]),
       descripcion: new FormControl<string | undefined>( undefined, [ Validators.required ] ),
-      adjunto: new FormControl<File | undefined>( undefined )
+      adjunto: new FormControl<File | null>( null )
     })
   }
 

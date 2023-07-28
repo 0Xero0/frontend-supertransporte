@@ -11,9 +11,7 @@
                 <fieldset>
                     <label>Estado</label>
                     <select formControlName="estado" class="form-select" value="3">
-                        <option value="1">1 - ABIERTO</option>
-                        <option value="2">2 - EN PROCESO</option>
-                        <option value="3">3 - CERRADO</option>
+                        <option [value]="estado.id" *ngFor="let estado of estados">{{ estado.id }} - {{ estado.descripcion }}</option>
                     </select>
                 </fieldset>
                 <fieldset>
@@ -24,21 +22,21 @@
             </div>
         </form>
     </div>
-    <div class="d-flex">
-        <div class="table-responsive">
-            <table class="table">
+    <div class="d-flex mb-3">
+        <div class="table-responsive custom-scroll tabla-soportes">
+            <table class="table table-bordered tabla-primaria">
                 <thead>
                     <tr class="fs-14px">
-                        <th class="encabezado-tabla"></th>
-                        <th class="encabezado-tabla">Radicado</th>
-                        <th class="encabezado-tabla">Fecha de creación</th>
-                        <th class="encabezado-tabla">NIT</th>
-                        <th class="encabezado-tabla">Razón social</th>
-                        <th class="encabezado-tabla">Email</th>
-                        <th class="encabezado-tabla">Teléfono</th>
-                        <th class="encabezado-tabla">Estado</th>
-                        <th class="encabezado-tabla" width="400px">Descripción</th>
-                        <th class="encabezado-tabla">Respuesta</th>
+                        <th class=""></th>
+                        <th class="">Radicado</th>
+                        <th class="">Estado</th>
+                        <th class="">Fecha de creación</th>
+                        <th class="">NIT</th>
+                        <th class="th-razon-social">Razón social</th>
+                        <th class="th-descripcion">Descripción</th>
+                        <th class="">Email</th>
+                        <th class="">Teléfono</th>
+                        <th class="th-respuesta">Respuesta</th>
                     </tr>
                 </thead>
                 <tbody class="fs-14px">
@@ -47,14 +45,27 @@
                             (click)="irAResponderSoporte(soporte)"  
                             class="cursor-pointer" src="assets/img/buscar-documento.png" alt="buscar-encuesta" draggable="false"></td>
                         <td>{{ soporte.radicado }}</td>
+                        <td class="fw-semibold">{{ obtenerDescripcionEstado(soporte.idEstado) }}</td>
                         <td>{{ soporte.fechaCreacion | fecha: 'dd/MM/yyyy' }}</td>
                         <td>{{ soporte.nit }}</td>
-                        <td>{{ soporte.razonSocial }}</td>
+                        <td class="td-razon-social">{{ soporte.razonSocial }}</td>
+                        <td>
+                            <div class="contenedor-descripcion">
+                                {{ soporte.descripcion }}
+                            </div>
+                        </td>
                         <td>{{ soporte.email }}</td>
                         <td>{{ soporte.telefono }}</td>
-                        <td>{{ soporte.idEstado }}</td>
-                        <td>{{ soporte.descripcion }}</td>
-                        <td>{{ soporte.respuesta }}</td>
+                        <td>
+                            <div class="contenedor-respuesta">
+                                {{ soporte.respuesta }}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="soportes.length < 1">
+                        <td colspan="10" class="text-center">
+                            <span class="fw-semibold">No se encontraron soportes con los criterios de búsqueda actuales.</span>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -63,9 +74,15 @@
     <div class="d-flex justify-content-end">
         <ngb-pagination 
         [collectionSize]="this.paginador.totalRegistros ?? 0" 
-        [page]="this.paginador.pagina" 
-        [boundaryLinks]="true"
+        [page]="this.paginador.pagina"
+        [pageSize]="paginador.limite" 
+        [directionLinks]="true"
         [maxSize]="5"
-        (pageChange)="this.paginador.cambiarPagina($event)"/> 
+        (pageChange)="this.paginador.cambiarPagina($event)">
+            <ng-template ngbPaginationFirst>Prim.</ng-template>
+            <ng-template ngbPaginationLast>Ult.</ng-template>
+            <ng-template ngbPaginationPrevious>Ant.</ng-template>
+            <ng-template ngbPaginationNext>Sig.</ng-template>
+        </ngb-pagination> 
     </div>
 </div>
