@@ -18,7 +18,7 @@ export class ServicioFormularios extends Autenticable {
 
   enviarFormularioAspiranteTecnologico(formulario: PeticionGuardarAspiranteTecnologico): Observable<AspiranteTecnologico>{
     const endpoint = '/api/v1/formularios/aspirante_tecnologico'
-    return this.http.post<AspiranteTecnologico>(`${this.host}${endpoint}`, formulario, { headers: this.obtenerCabeceraAutorizacion() })
+    return this.http.post<AspiranteTecnologico>(`${this.host}${endpoint}`, formulario)
   }
 
 }
