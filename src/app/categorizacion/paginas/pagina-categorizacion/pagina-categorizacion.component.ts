@@ -97,10 +97,13 @@ export class PaginaCategorizacion implements OnInit {
     let totalConductores = 0;
     let totalVehiculos = 0;
     this.tiposCategoria.forEach( tipoCategoria => {
+      console.log('tipoCategoria', tipoCategoria)
       if(tipoCategoria.tipoCategoria.idTipo === idTipoConductores){
+        console.log('total conductores:', tipoCategoria.total)
         totalConductores = tipoCategoria.total
       }
       if(tipoCategoria.tipoCategoria.idTipo === idTipoVehiculos){
+        console.log('total vehiculos:', tipoCategoria.total)
         totalVehiculos = tipoCategoria.total
       }
     })
@@ -140,11 +143,11 @@ export class PaginaCategorizacion implements OnInit {
           totales: this.obtenerTotalesPorTipoCategoria()
         }
         console.log(info)
-        this.servicioCategorizacion.guardarInformacionCategorizacion(info).subscribe({
+        /* this.servicioCategorizacion.guardarInformacionCategorizacion(info).subscribe({
           next: (respuesta: any)=>{
             this.router.navigateByUrl(`/administrar/asignacion?clasificacion=${respuesta.nombre}`)
           }
-        })
+        }) */
       },
       alCancelar: ()=>{}
     })

@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, Input, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Dato, TipoCategoria } from '../../modelos/Categorizacion';
 import { CategoriaComponent } from '../categoria/categoria.component';
 import { ServicioClasificaciones } from '../../servicios/clasificaciones.service';
@@ -8,7 +8,7 @@ import { ServicioClasificaciones } from '../../servicios/clasificaciones.service
   templateUrl: './tipo-categoria.component.html',
   styleUrls: ['./tipo-categoria.component.css']
 })
-export class TipoCategoriaComponent implements AfterViewInit{
+export class TipoCategoriaComponent implements OnInit, AfterViewInit{
   @Input('tipoCategoria') tipoCategoria!:TipoCategoria
   @ViewChildren('categoria') categorias!: QueryList<CategoriaComponent>
   valido: boolean = true;
@@ -18,12 +18,16 @@ export class TipoCategoriaComponent implements AfterViewInit{
   constructor(private servicio: ServicioClasificaciones){
   }
 
+  ngOnInit(): void {
+  }
+
   ngAfterViewInit(): void {
     setTimeout(()=>{
       this.establecerInconsistencia(
         this.servicio.totalesCategoriasValidos(this.tipoCategoria.categoriaClasificacion)
       )
       this.validarTotalesMayoresACero()
+      this.establecerTotal( this.categorias.get(0)!.total )
     }, 60)
   }
 
@@ -34,9 +38,10 @@ export class TipoCategoriaComponent implements AfterViewInit{
     return true;
   }
 
-  manejarCambioTotalCategoria(){
+  manejarCambioTotalCategoria(total: number){
     this.totalesComponentesCategoriaValidos()
     this.validarTotalesMayoresACero()
+    this.establecerTotal(total)
   }
 
   totalesComponentesCategoriaValidos(){
@@ -81,10 +86,7 @@ export class TipoCategoriaComponent implements AfterViewInit{
     return datos
   }
 
-  establecerTotal(){
-    const primeraCategoria = this.categorias.get(0)
-    if(primeraCategoria){
-      this.total = primeraCategoria.total
-    }
+  establecerTotal(total: number){
+    this.total = total
   }
 }
