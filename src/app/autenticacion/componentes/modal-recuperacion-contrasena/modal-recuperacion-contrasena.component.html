@@ -1,12 +1,12 @@
 <ng-template #modal let-modal>
     <div class="modal-header">
-      <h4 class="modal-title fs-14px  fw-bolder">¿Olvido su contraseña?</h4>
+      <h4 class="modal-title fs-14px  fw-bolder">¿Olvidó su contraseña?</h4>
       <button type="button" class="btn-close"  aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="alert alerta-contraseña alert-dismissible fade show" role="alert">
       <label class="fs-14px">
           <span class="fw-bold">Ingrese su usuario y correo electrónico</span>
-          para iniciar con el proceso de recuperacion de contraseña.</label>
+          para iniciar con el proceso de recuperar contraseña.</label>
     </div>
     <div class="modal-body">
       <form  class="d-flex flex-column flex-gap-10" [formGroup]="this.formulario">
