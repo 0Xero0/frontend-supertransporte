@@ -4,6 +4,7 @@ import { PaginaFormularioAspiranteProveedorTecnologicoComponent } from './pagina
 import { TemplatesModule } from '../templates/templates.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InputsModule } from '../inputs/inputs.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,9 @@ import { InputsModule } from '../inputs/inputs.module';
     CommonModule,
     TemplatesModule,
     NgbModule,
-    InputsModule
+    InputsModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class FormulariosModule { }

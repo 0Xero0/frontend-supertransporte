@@ -2,7 +2,7 @@
 <div class="py-5 mt-5 px-sm-3 px-md-4 px-lg-5">
     <h3 class="texto-primario fw-semibold mb-4">Aspirante a proveedor tecnológico del SISI/PESV</h3>
 
-    <form action="">
+    <form [formGroup]="formulario">
         <div ngbAccordion>
             <div ngbAccordionItem [collapsed]="false">
                 <h2 ngbAccordionHeader>
@@ -19,32 +19,32 @@
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Razón social</label>
-                                            <input type="text" class="form-control" placeholder="Razón social">
+                                            <input formControlName="razon_social" type="text" class="form-control" placeholder="Razón social">
                                         </fieldset>
                                     </div>
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">NIT</label>
-                                            <input type="text" class="form-control" placeholder="NIT">
+                                            <input formControlName="nit" type="text" class="form-control" placeholder="NIT">
                                         </fieldset>
                                     </div>
                                     <div class="col-1">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">DV</label>
-                                            <input type="checkbox" class="form-check">
+                                            <input formControlName="dv" type="number" class="form-control">
                                         </fieldset>
                                     </div>
                                     <div class="col-2">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Sigla</label>
-                                            <input type="text" class="form-control" placeholder="Sigla">
+                                            <input formControlName="sigla" type="text" class="form-control" placeholder="Sigla">
                                         </fieldset>
                                     </div>
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Estado de la matrícula cámara y
                                                 comercio</label>
-                                            <select class="form-select">
+                                            <select formControlName="estado_matricula" class="form-select">
                                                 <option value="">Selecciona una opción</option>
                                                 <option value="1">Opcion 1</option>
                                                 <option value="2">Opcion 2</option>
@@ -56,14 +56,14 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <fieldset>
-                                            <label class="fw-semibold fs-14px">Razón social</label>
-                                            <input type="text" class="form-control" placeholder="Razón social">
+                                            <label class="fw-semibold fs-14px">Correo notificacion electrónica</label>
+                                            <input formControlName="correo_notificacion" type="text" class="form-control" placeholder="Correo electrónico">
                                         </fieldset>
                                     </div>
                                     <div class="col-6">
                                         <fieldset>
-                                            <label class="fw-semibold fs-14px">NIT</label>
-                                            <input type="text" class="form-control" placeholder="NIT">
+                                            <label class="fw-semibold fs-14px">Direccion</label>
+                                            <input formControlName="direccion" type="text" class="form-control" placeholder="Dirección">
                                         </fieldset>
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@
                 </div>
             </div>
 
-            <div ngbAccordionItem [collapsed]="false">
+            <div ngbAccordionItem [collapsed]="true">
                 <h2 ngbAccordionHeader>
                     <button ngbAccordionButton class="fw-semibold texto-primario">
                         Representante legal
@@ -89,19 +89,19 @@
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Nombres</label>
-                                            <input type="text" class="form-control" placeholder="Nombres">
+                                            <input formControlName="nombres_rep_legal" type="text" class="form-control" placeholder="Nombres">
                                         </fieldset>
                                     </div>
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Apellidos</label>
-                                            <input type="text" class="form-control" placeholder="Apellidos">
+                                            <input formControlName="apellidos_rep_legal" type="text" class="form-control" placeholder="Apellidos">
                                         </fieldset>
                                     </div>
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Tipo de documento</label>
-                                            <select class="form-select" name="" id="">
+                                            <select formControlName="tipo_documento_rep_legal" class="form-select" id="">
                                                 <option value="">Selecciona una opción</option>
                                                 <option value="CC">CC</option>
                                                 <option value="CE">CE</option>
@@ -111,7 +111,7 @@
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Nro. identificación</label>
-                                            <input type="text" class="form-control" placeholder="Nro. identificación">
+                                            <input formControlName="identificacion_rep_legal" type="text" class="form-control" placeholder="Nro. identificación">
                                         </fieldset>
                                     </div>
                                 </div>
@@ -120,19 +120,19 @@
                                     <div class="col-4">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Número de contacto</label>
-                                            <input type="text" class="form-control" placeholder="Número de contacto">
+                                            <input formControlName="numero_contacto_rep_legal" type="text" class="form-control" placeholder="Número de contacto">
                                         </fieldset>
                                     </div>
                                     <div class="col-4">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Correo electrónico</label>
-                                            <input type="text" class="form-control" placeholder="Razón social">
+                                            <input formControlName="correo_rep_legal" type="text" class="form-control" placeholder="Razón social">
                                         </fieldset>
                                     </div>
                                     <div class="col-4">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Dirección</label>
-                                            <input type="text" class="form-control" placeholder="Dirección">
+                                            <input formControlName="direccion_rep_legal" type="text" class="form-control" placeholder="Dirección">
                                         </fieldset>
                                     </div>
                                 </div>
@@ -143,7 +143,7 @@
                 </div>
             </div>
 
-            <div ngbAccordionItem [collapsed]="false">
+            <div ngbAccordionItem [collapsed]="true">
                 <h2 ngbAccordionHeader>
                     <button ngbAccordionButton class="fw-semibold texto-primario">
                         Contacto técnico
@@ -158,19 +158,19 @@
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Nombres</label>
-                                            <input type="text" class="form-control" placeholder="Nombres">
+                                            <input formControlName="nombres_cont_tecnico" type="text" class="form-control" placeholder="Nombres">
                                         </fieldset>
                                     </div>
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Apellidos</label>
-                                            <input type="text" class="form-control" placeholder="Apellidos">
+                                            <input formControlName="apellidos_cont_tecnico" type="text" class="form-control" placeholder="Apellidos">
                                         </fieldset>
                                     </div>
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Tipo de documento</label>
-                                            <select class="form-select" name="" id="">
+                                            <select formControlName="tipo_documento_cont_tecnico" class="form-select" name="" id="">
                                                 <option value="">Selecciona una opción</option>
                                                 <option value="CC">CC</option>
                                                 <option value="CE">CE</option>
@@ -180,7 +180,7 @@
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Nro. identificación</label>
-                                            <input type="text" class="form-control" placeholder="Nro. identificación">
+                                            <input formControlName="identificacion_cont_tecnico" type="text" class="form-control" placeholder="Nro. identificación">
                                         </fieldset>
                                     </div>
                                 </div>
@@ -189,19 +189,19 @@
                                     <div class="col-4">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Número de contacto</label>
-                                            <input type="text" class="form-control" placeholder="Número de contacto">
+                                            <input formControlName="numero_contacto_cont_tecnico" type="text" class="form-control" placeholder="Número de contacto">
                                         </fieldset>
                                     </div>
                                     <div class="col-4">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Correo electrónico</label>
-                                            <input type="text" class="form-control" placeholder="Razón social">
+                                            <input formControlName="correo_cont_tecnico" type="text" class="form-control" placeholder="Razón social">
                                         </fieldset>
                                     </div>
                                     <div class="col-4">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Dirección</label>
-                                            <input type="text" class="form-control" placeholder="Dirección">
+                                            <input formControlName="direccion_cont_tecnico" type="text" class="form-control" placeholder="Dirección">
                                         </fieldset>
                                     </div>
                                 </div>
@@ -212,7 +212,7 @@
                 </div>
             </div>
 
-            <div ngbAccordionItem [collapsed]="false">
+            <div ngbAccordionItem [collapsed]="true">
                 <h2 ngbAccordionHeader>
                     <button ngbAccordionButton class="fw-semibold texto-primario">
                         Carga de documentos
@@ -227,13 +227,17 @@
                                     <div class="col-6">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Cámara y comercio PDF (Máximo 20Mb)</label>
-                                            <app-input-archivo [acepta]="['.pdf']" [nombre]="'1'" [tamanoMaximoMb]="20" />
+                                            <app-input-archivo formControlName="doc_camara" [acepta]="['.pdf']" [nombre]="'1'" [tamanoMaximoMb]="20" />
                                         </fieldset>
                                     </div>
                                     <div class="col-6">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Certificación del Rep. Legal en PDF (Máximo 20Mb)</label>
-                                            <app-input-archivo [acepta]="['.pdf']" [nombre]="'2'" [tamanoMaximoMb]="20" />
+                                            <app-input-archivo 
+                                            formControlName="doc_certificacion" 
+                                            [acepta]="['.pdf']" 
+                                            [nombre]="'2'" 
+                                            [tamanoMaximoMb]="20" />
                                         </fieldset>
                                     </div>
                                 </div>
@@ -244,6 +248,10 @@
                 </div>
             </div>
 
+        </div>
+
+        <div class="d-flex justify-content-end mt-3">
+            <button class="boton primario relleno" (click)="enviarFormulario()">Enviar formulario</button>
         </div>
     </form>
 </div>
