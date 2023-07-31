@@ -5,6 +5,7 @@ import { TemplatesModule } from '../templates/templates.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InputsModule } from '../inputs/inputs.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlertasModule } from '../alertas/alertas.module';
 
 
 
@@ -18,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgbModule,
     InputsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AlertasModule
   ]
 })
 export class FormulariosModule { }

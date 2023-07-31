@@ -20,24 +20,40 @@
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Razón social</label>
                                             <input formControlName="razon_social" type="text" class="form-control" placeholder="Razón social">
+                                            <app-validacion
+                                            [control]="this.formulario.get('razon_social')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'La razón social es requerida.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">NIT</label>
                                             <input formControlName="nit" type="text" class="form-control" placeholder="NIT">
+                                            <app-validacion
+                                            [control]="this.formulario.get('nit')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'El nit es requerido.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-1">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">DV</label>
                                             <input formControlName="dv" type="number" class="form-control">
+                                            <app-validacion
+                                            [control]="this.formulario.get('dv')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'El campo es requerido.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-2">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Sigla</label>
                                             <input formControlName="sigla" type="text" class="form-control" placeholder="Sigla">
+                                            <app-validacion
+                                            [control]="this.formulario.get('sigla')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'La sigla es requerida.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-3">
@@ -49,6 +65,10 @@
                                                 <option value="1">Opcion 1</option>
                                                 <option value="2">Opcion 2</option>
                                             </select>
+                                            <app-validacion
+                                            [control]="this.formulario.get('estado_matricula')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Selecciona una opción.'" />
                                         </fieldset>
                                     </div>
                                 </div>
@@ -58,12 +78,20 @@
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Correo notificacion electrónica</label>
                                             <input formControlName="correo_notificacion" type="text" class="form-control" placeholder="Correo electrónico">
+                                            <app-validacion
+                                            [control]="this.formulario.get('correo_notificacion')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'El correo es requerido.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-6">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Direccion</label>
                                             <input formControlName="direccion" type="text" class="form-control" placeholder="Dirección">
+                                            <app-validacion
+                                            [control]="this.formulario.get('direccion')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'La direccion es requerida.'" />
                                         </fieldset>
                                     </div>
                                 </div>
@@ -90,12 +118,20 @@
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Nombres</label>
                                             <input formControlName="nombres_rep_legal" type="text" class="form-control" placeholder="Nombres">
+                                            <app-validacion
+                                            [control]="this.formulario.get('nombres_rep_legal')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Nombres requeridos.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Apellidos</label>
                                             <input formControlName="apellidos_rep_legal" type="text" class="form-control" placeholder="Apellidos">
+                                            <app-validacion
+                                            [control]="this.formulario.get('apellidos_rep_legal')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Apellidos requeridos.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-3">
@@ -106,12 +142,20 @@
                                                 <option value="CC">CC</option>
                                                 <option value="CE">CE</option>
                                             </select>
+                                            <app-validacion
+                                            [control]="this.formulario.get('tipo_documento_rep_legal')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Selecciona una opción.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Nro. identificación</label>
                                             <input formControlName="identificacion_rep_legal" type="text" class="form-control" placeholder="Nro. identificación">
+                                            <app-validacion
+                                            [control]="this.formulario.get('identificacion_rep_legal')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Número de identificación requerido.'" />
                                         </fieldset>
                                     </div>
                                 </div>
@@ -121,18 +165,30 @@
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Número de contacto</label>
                                             <input formControlName="numero_contacto_rep_legal" type="text" class="form-control" placeholder="Número de contacto">
+                                            <app-validacion
+                                            [control]="this.formulario.get('numero_contacto_rep_legal')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Contacto requerido.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-4">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Correo electrónico</label>
-                                            <input formControlName="correo_rep_legal" type="text" class="form-control" placeholder="Razón social">
+                                            <input formControlName="correo_rep_legal" type="text" class="form-control" placeholder="Correo electrónico">
+                                            <app-validacion
+                                            [control]="this.formulario.get('correo_rep_legal')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Correo requerido.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-4">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Dirección</label>
                                             <input formControlName="direccion_rep_legal" type="text" class="form-control" placeholder="Dirección">
+                                            <app-validacion
+                                            [control]="this.formulario.get('direccion_rep_legal')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Dirección requerida.'" />
                                         </fieldset>
                                     </div>
                                 </div>
@@ -159,12 +215,20 @@
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Nombres</label>
                                             <input formControlName="nombres_cont_tecnico" type="text" class="form-control" placeholder="Nombres">
+                                            <app-validacion
+                                            [control]="this.formulario.get('nombres_cont_tecnico')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Nombres requeridos.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Apellidos</label>
                                             <input formControlName="apellidos_cont_tecnico" type="text" class="form-control" placeholder="Apellidos">
+                                            <app-validacion
+                                            [control]="this.formulario.get('apellidos_cont_tecnico')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Apellidos requeridos.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-3">
@@ -175,12 +239,20 @@
                                                 <option value="CC">CC</option>
                                                 <option value="CE">CE</option>
                                             </select>
+                                            <app-validacion
+                                            [control]="this.formulario.get('tipo_documento_cont_tecnico')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Selecciona una opción.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-3">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Nro. identificación</label>
                                             <input formControlName="identificacion_cont_tecnico" type="text" class="form-control" placeholder="Nro. identificación">
+                                            <app-validacion
+                                            [control]="this.formulario.get('identificacion_cont_tecnico')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Identificación requerida.'" />
                                         </fieldset>
                                     </div>
                                 </div>
@@ -190,18 +262,30 @@
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Número de contacto</label>
                                             <input formControlName="numero_contacto_cont_tecnico" type="text" class="form-control" placeholder="Número de contacto">
+                                            <app-validacion
+                                            [control]="this.formulario.get('numero_contacto_cont_tecnico')!"
+                                            [validacion]="'required'"
+                                            [texto]="'Contacto requerido.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-4">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Correo electrónico</label>
-                                            <input formControlName="correo_cont_tecnico" type="text" class="form-control" placeholder="Razón social">
+                                            <input formControlName="correo_cont_tecnico" type="text" class="form-control" placeholder="Correo electrónico">
+                                            <app-validacion
+                                            [control]="this.formulario.get('correo_cont_tecnico')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Correo requerido.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-4">
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Dirección</label>
                                             <input formControlName="direccion_cont_tecnico" type="text" class="form-control" placeholder="Dirección">
+                                            <app-validacion
+                                            [control]="this.formulario.get('direccion_cont_tecnico')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Direccion requerida.'" />
                                         </fieldset>
                                     </div>
                                 </div>
@@ -228,6 +312,10 @@
                                         <fieldset>
                                             <label class="fw-semibold fs-14px">Cámara y comercio PDF (Máximo 20Mb)</label>
                                             <app-input-archivo formControlName="doc_camara" [acepta]="['.pdf']" [nombre]="'1'" [tamanoMaximoMb]="20" />
+                                            <app-validacion
+                                            [control]="this.formulario.get('doc_camara')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Documento requerido.'" />
                                         </fieldset>
                                     </div>
                                     <div class="col-6">
@@ -238,6 +326,10 @@
                                             [acepta]="['.pdf']" 
                                             [nombre]="'2'" 
                                             [tamanoMaximoMb]="20" />
+                                            <app-validacion
+                                            [control]="this.formulario.get('doc_certificacion')!"
+                                            [validacion]="'required'" 
+                                            [texto]="'Documento requerido.'" />
                                         </fieldset>
                                     </div>
                                 </div>
