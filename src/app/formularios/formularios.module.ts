@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PaginaFormularioAspiranteProveedorTecnologicoComponent } from './paginas/pagina-formulario-aspirante-proveedor-tecnologico/pagina-formulario-aspirante-proveedor-tecnologico.component';
 import { TemplatesModule } from '../templates/templates.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InputsModule } from '../inputs/inputs.module';
 
 
 
@@ -13,7 +14,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     TemplatesModule,
-    NgbModule
+    NgbModule,
+    InputsModule
   ]
 })
 export class FormulariosModule { }

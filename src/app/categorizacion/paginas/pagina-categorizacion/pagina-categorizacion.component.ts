@@ -142,12 +142,11 @@ export class PaginaCategorizacion implements OnInit {
           modalidadesRadioEliminar: this.formularioModalidadesRadios.registrosAEliminar,
           totales: this.obtenerTotalesPorTipoCategoria()
         }
-        console.log(info)
-        /* this.servicioCategorizacion.guardarInformacionCategorizacion(info).subscribe({
+        this.servicioCategorizacion.guardarInformacionCategorizacion(info).subscribe({
           next: (respuesta: any)=>{
             this.router.navigateByUrl(`/administrar/asignacion?clasificacion=${respuesta.nombre}`)
           }
-        }) */
+        })
       },
       alCancelar: ()=>{}
     })

@@ -1,77 +1,249 @@
-<app-cabecera/>
+<app-cabecera />
 <div class="py-5 mt-5 px-sm-3 px-md-4 px-lg-5">
     <h3 class="texto-primario fw-semibold mb-4">Aspirante a proveedor tecnológico del SISI/PESV</h3>
-    
+
     <form action="">
         <div ngbAccordion>
-            <div ngbAccordionItem [collapsed]="!(seccion === 1)" *ngFor="let seccion of [1, 2]">
-              <h2 ngbAccordionHeader>
-                <button ngbAccordionButton class="fw-semibold texto-primario">
-                    Datos operador tecnológico
-                </button>
-              </h2>
-              <div ngbAccordionCollapse>
-                <div ngbAccordionBody>
-                  <ng-template>
-                    <div class="p-4">
-                        
-                        <div class="row mb-2">
-                            <div class="col-3">
-                                <fieldset>
-                                    <label class="fw-semibold fs-14px">Razón social</label>
-                                    <input type="text" class="form-control" placeholder="Razón social">
-                                </fieldset>
-                            </div>
-                            <div class="col-3">
-                                <fieldset>
-                                    <label class="fw-semibold fs-14px">NIT</label>
-                                    <input type="text" class="form-control" placeholder="NIT">
-                                </fieldset>
-                            </div>
-                            <div class="col-1">
-                                <fieldset>
-                                    <label class="fw-semibold fs-14px">DV</label>
-                                    <input type="checkbox" class="form-check">
-                                </fieldset>
-                            </div>
-                            <div class="col-2">
-                                <fieldset>
-                                    <label class="fw-semibold fs-14px">Sigla</label>
-                                    <input type="text" class="form-control" placeholder="Sigla">
-                                </fieldset>
-                            </div>
-                            <div class="col-3">
-                                <fieldset>
-                                    <label class="fw-semibold fs-14px">Estado de la matrícula cámara y comercio</label>
-                                    <select class="form-select">
-                                        <option value="">Selecciona una opción</option>
-                                        <option value="1">Opcion 1</option>
-                                        <option value="2">Opcion 2</option>
-                                    </select>
-                                </fieldset>
-                            </div>
-                        </div>
+            <div ngbAccordionItem [collapsed]="false">
+                <h2 ngbAccordionHeader>
+                    <button ngbAccordionButton class="fw-semibold texto-primario">
+                        Datos operador tecnológico
+                    </button>
+                </h2>
+                <div ngbAccordionCollapse>
+                    <div ngbAccordionBody>
+                        <ng-template>
+                            <div class="p-4">
 
-                        <div class="row">
-                            <div class="col-6">
-                                <fieldset>
-                                    <label class="fw-semibold fs-14px">Razón social</label>
-                                    <input type="text" class="form-control" placeholder="Razón social">
-                                </fieldset>
-                            </div>
-                            <div class="col-6">
-                                <fieldset>
-                                    <label class="fw-semibold fs-14px">NIT</label>
-                                    <input type="text" class="form-control" placeholder="NIT">
-                                </fieldset>
-                            </div>
-                        </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Razón social</label>
+                                            <input type="text" class="form-control" placeholder="Razón social">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-3">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">NIT</label>
+                                            <input type="text" class="form-control" placeholder="NIT">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-1">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">DV</label>
+                                            <input type="checkbox" class="form-check">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-2">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Sigla</label>
+                                            <input type="text" class="form-control" placeholder="Sigla">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-3">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Estado de la matrícula cámara y
+                                                comercio</label>
+                                            <select class="form-select">
+                                                <option value="">Selecciona una opción</option>
+                                                <option value="1">Opcion 1</option>
+                                                <option value="2">Opcion 2</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                </div>
 
+                                <div class="row">
+                                    <div class="col-6">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Razón social</label>
+                                            <input type="text" class="form-control" placeholder="Razón social">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">NIT</label>
+                                            <input type="text" class="form-control" placeholder="NIT">
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ng-template>
                     </div>
-                  </ng-template>
                 </div>
-              </div>
             </div>
-          </div>
+
+            <div ngbAccordionItem [collapsed]="false">
+                <h2 ngbAccordionHeader>
+                    <button ngbAccordionButton class="fw-semibold texto-primario">
+                        Representante legal
+                    </button>
+                </h2>
+                <div ngbAccordionCollapse>
+                    <div ngbAccordionBody>
+                        <ng-template>
+                            <div class="p-4">
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Nombres</label>
+                                            <input type="text" class="form-control" placeholder="Nombres">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-3">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Apellidos</label>
+                                            <input type="text" class="form-control" placeholder="Apellidos">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-3">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Tipo de documento</label>
+                                            <select class="form-select" name="" id="">
+                                                <option value="">Selecciona una opción</option>
+                                                <option value="CC">CC</option>
+                                                <option value="CE">CE</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-3">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Nro. identificación</label>
+                                            <input type="text" class="form-control" placeholder="Nro. identificación">
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-4">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Número de contacto</label>
+                                            <input type="text" class="form-control" placeholder="Número de contacto">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-4">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Correo electrónico</label>
+                                            <input type="text" class="form-control" placeholder="Razón social">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-4">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Dirección</label>
+                                            <input type="text" class="form-control" placeholder="Dirección">
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+
+            <div ngbAccordionItem [collapsed]="false">
+                <h2 ngbAccordionHeader>
+                    <button ngbAccordionButton class="fw-semibold texto-primario">
+                        Contacto técnico
+                    </button>
+                </h2>
+                <div ngbAccordionCollapse>
+                    <div ngbAccordionBody>
+                        <ng-template>
+                            <div class="p-4">
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Nombres</label>
+                                            <input type="text" class="form-control" placeholder="Nombres">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-3">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Apellidos</label>
+                                            <input type="text" class="form-control" placeholder="Apellidos">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-3">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Tipo de documento</label>
+                                            <select class="form-select" name="" id="">
+                                                <option value="">Selecciona una opción</option>
+                                                <option value="CC">CC</option>
+                                                <option value="CE">CE</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-3">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Nro. identificación</label>
+                                            <input type="text" class="form-control" placeholder="Nro. identificación">
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-4">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Número de contacto</label>
+                                            <input type="text" class="form-control" placeholder="Número de contacto">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-4">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Correo electrónico</label>
+                                            <input type="text" class="form-control" placeholder="Razón social">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-4">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Dirección</label>
+                                            <input type="text" class="form-control" placeholder="Dirección">
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+
+            <div ngbAccordionItem [collapsed]="false">
+                <h2 ngbAccordionHeader>
+                    <button ngbAccordionButton class="fw-semibold texto-primario">
+                        Carga de documentos
+                    </button>
+                </h2>
+                <div ngbAccordionCollapse>
+                    <div ngbAccordionBody>
+                        <ng-template>
+                            <div class="p-4">
+
+                                <div class="row mb-2">
+                                    <div class="col-6">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Cámara y comercio PDF (Máximo 20Mb)</label>
+                                            <app-input-archivo [acepta]="['.pdf']" [nombre]="'1'" [tamanoMaximoMb]="20" />
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6">
+                                        <fieldset>
+                                            <label class="fw-semibold fs-14px">Certificación del Rep. Legal en PDF (Máximo 20Mb)</label>
+                                            <app-input-archivo [acepta]="['.pdf']" [nombre]="'2'" [tamanoMaximoMb]="20" />
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </form>
 </div>
