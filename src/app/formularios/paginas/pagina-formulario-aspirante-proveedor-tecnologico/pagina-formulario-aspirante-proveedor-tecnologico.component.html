@@ -62,8 +62,16 @@
                                                 comercio</label>
                                             <select formControlName="estado_matricula" class="form-select">
                                                 <option value="">Selecciona una opción</option>
-                                                <option value="1">Opcion 1</option>
-                                                <option value="2">Opcion 2</option>
+                                                <option value="Activa">Activa</option>
+                                                <option value="Cancelada">Cancelada</option>
+                                                <option value="Reorganización empresarial ley 1116">Reorganización empresarial ley 1116</option>
+                                                <option value="Concordato ley 550">Concordato ley 550</option>
+                                                <option value="En liquidación">En liquidación</option>
+                                                <option value="En liquidación judicial">En liquidación judicial</option>
+                                                <option value="Liquidada">Liquidada</option>
+                                                <option value="Liquidada judicialmente">Liquidada judicialmente</option>
+                                                <option value="En disolución">En disolución</option>
+                                                <option value="Disuelta">Disuelta</option>
                                             </select>
                                             <app-validacion
                                             [control]="this.formulario.get('estado_matricula')!"

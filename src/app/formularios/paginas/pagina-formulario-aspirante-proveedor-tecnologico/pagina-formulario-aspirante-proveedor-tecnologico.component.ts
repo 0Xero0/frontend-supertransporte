@@ -105,6 +105,7 @@ export class PaginaFormularioAspiranteProveedorTecnologicoComponent implements O
     }).subscribe({
       next: (aspirante)=>{
         this.popup.abrirPopupExitoso('Formulario enviado correctamente.')
+        this.formulario.reset()
       },
       error: (error)=>{
         this.popup.abrirPopupFallido('Ha ocurrido un error.', 'Intentalo más tarde.')
