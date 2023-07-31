@@ -45,15 +45,20 @@ export class ActualizarContrasenaComponent implements OnInit {
       Usuario.usuario!,
       this.formulario.controls['antigua_contrasena'].value,
       this.formulario.controls['nueva_contrasena'].value
-    )).subscribe((respuesta) => {
-      this.popup.abrirPopupExitoso('Contraseña actualizada con éxito')
-      this.limpiarFormulario()
-      this.cerrarSesion()
-    }), (error: HttpErrorResponse) => {
-      this.popup.abrirPopupFallido('Ha ocurrido un error.', 'Intentalo más tarde.')
-    }
-
-
+    )).subscribe({
+      next: (respuesta) => {
+        this.popup.abrirPopupExitoso('Contraseña actualizada con éxito')
+        this.limpiarFormulario()
+        this.cerrarSesion()
+      },
+      error: (error: HttpErrorResponse) => {
+        if(error.status === 400){
+          this.popup.abrirPopupFallido('Credenciales incorrectas.')
+        }else{
+          this.popup.abrirPopupFallido('Ha ocurrido un error.', 'Intentalo más tarde.')
+        }
+      }
+    })
   }
 
   public limpiarFormulario(): void {
