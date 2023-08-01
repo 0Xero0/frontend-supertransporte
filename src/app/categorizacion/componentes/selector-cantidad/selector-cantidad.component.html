@@ -3,5 +3,7 @@
 [ngClass]="clases"
 class="input-cantidad" 
 type="number"
-[(ngModel)]="valor"
-(change)="manejarCambio(+input.value)">
+[ngModel]="valor"
+(change)="manejarCambio(+input.value)"
+(focus)="manejarFoco(+input.value)"
+(blur)="manejarBlur(+input.value)">

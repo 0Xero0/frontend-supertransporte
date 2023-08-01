@@ -53,6 +53,18 @@ export class SelectorCantidadComponent implements OnInit, AfterViewInit {
     }
   }
 
+  manejarFoco(valor: number){
+    if(valor === 0){
+      this.valor = null
+    }
+  }
+
+  manejarBlur(valor: number | null){
+    if(!valor){
+      this.valor = SelectorCantidadComponent.VALOR_MINIMO
+    }
+  }
+
   valorValido(valor: number): boolean{
     if( valor < SelectorCantidadComponent.VALOR_MINIMO || !valor )
       return false;
