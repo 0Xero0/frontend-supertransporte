@@ -58,7 +58,7 @@ export class SoportesService extends Autenticable {
     let endpoint = `/api/v1/soportes?pagina=${pagina}&limite=${limite}`
     for (const filtro in filtros) {
       const valor = filtros[filtro as keyof FiltrosSoportes];
-      if(valor){
+      if(valor != undefined){
         endpoint+= `&${filtro}=${valor}`
       }
     }
