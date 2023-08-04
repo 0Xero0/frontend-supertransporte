@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { marcarFormularioComoSucio } from 'src/app/administrador/utilidades/Utilidades';
 import { Soporte } from '../../modelos/Soporte';
 import { ActivatedRoute } from '@angular/router';
+import { ServicioArchivos } from 'src/app/archivos/servicios/archivos.service';
 
 @Component({
   selector: 'app-pagina-responder-soporte',
@@ -17,7 +18,7 @@ export class PaginaResponderSoporteComponent implements OnInit{
   soporte?: Soporte
   respondido: boolean = false
 
-  constructor(private servicioSoporte: SoportesService, private activeRoute: ActivatedRoute){
+  constructor(private servicioSoporte: SoportesService, private servicioArchivos: ServicioArchivos, private activeRoute: ActivatedRoute){
     this.formulario = new FormGroup({
       respuesta: new FormControl<string | undefined>( {
         value: undefined,
@@ -77,7 +78,7 @@ export class PaginaResponderSoporteComponent implements OnInit{
       this.popup.abrirPopupFallido('Error al descargar el archivo.', 'Este soporte no tiene archivo adjunto.')
       return;
     }
-    this.servicioSoporte.descargarArchivo(this.soporte.documento, this.soporte.id.toString())
+    this.servicioArchivos.descargarArchivo(this.soporte.identificadorDocumento!, this.soporte.ruta!, this.soporte.documento)
   }
 
   descargarArchivoRespuesta(){

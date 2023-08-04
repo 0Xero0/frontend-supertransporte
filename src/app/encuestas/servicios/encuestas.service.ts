@@ -75,11 +75,11 @@ export class ServicioEncuestas extends Autenticable {
     })
   }
 
-  enviarRespuesta(idEncuesta: number, idReporte: number, idVigilado: string):Observable<{ mensaje: string }>{
+  enviarRespuesta(idEncuesta: number, idReporte: number, idVigilado: string, confirmar: boolean = false):Observable<{ mensaje: string }>{
     const enpoint = `/api/v1/encuestas/enviar`
     return this.http.post<{ mensaje: string }>(
       `${this.host}${enpoint}`,
-      { idEncuesta, idReporte, idVigilado },
+      { idEncuesta, idReporte, idVigilado, confirmar },
       {
         headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion()}` }
       })
