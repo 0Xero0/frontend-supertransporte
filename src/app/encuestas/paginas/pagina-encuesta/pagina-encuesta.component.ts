@@ -11,6 +11,9 @@ import { saveAs } from 'file-saver';
 import { EncuestaCuantitativa, Formulario } from '../../modelos/EncuestaCuantitativa';
 import { EncuestaCuantitativaComponent } from '../../componentes/encuesta-cuantitativa/encuesta-cuantitativa/encuesta-cuantitativa.component';
 import { DateTime } from 'luxon';
+import { ModalConfirmarEnviarComponent } from '../../componentes/modal-confirmar-enviar/modal-confirmar-enviar.component';
+import { DialogosEncuestas } from '../../dialogos-encuestas';
+import { RespuestaInvalida } from '../../modelos/RespuestaInvalida';
 
 @Component({
   selector: 'app-pagina-encuesta',
@@ -19,6 +22,7 @@ import { DateTime } from 'luxon';
 })
 export class PaginaEncuestaComponent implements OnInit {
   @ViewChild('popup') popup!: PopupComponent
+  @ViewChild('modalConfirmar') modalConfirmar!: ModalConfirmarEnviarComponent
   @ViewChild('componenteEncuesta') componenteEncuesta!: EncuestaComponent
   @ViewChild('componenteEncuestaCuantitativa') componenteEncuestaCuantitativa!: EncuestaCuantitativaComponent
   usuario?: Usuario | null
@@ -110,14 +114,33 @@ export class PaginaEncuestaComponent implements OnInit {
       this.popup.abrirPopupFallido('Error', 'Faltan datos de la encuesta, el reporte o el vigilado')
       return;
     }
-    this.servicioEncuesta.enviarRespuesta(this.idEncuesta, this.idReporte,  this.idVigilado).subscribe({
+
+    this.servicioEncuesta.enviarRespuesta(this.idEncuesta!, this.idReporte!,  this.idVigilado!).subscribe({
       next: ()=>{
         this.popup.abrirPopupExitoso('Formulario enviado', 'El formulario se ha enviado correctamente.')
         this.router.navigate(['/administrar', 'encuestas', this.idEncuesta!])
       },
       error: (error: HttpErrorResponse)=>{
-        this.componenteEncuesta.resaltarRespuestasInvalidas(error.error.faltantes)
-        this.popup.abrirPopupFallido('No se han respondido todas las preguntas.', 'Hay preguntas obligatorias sin responder.')
+        const faltantes = error.error.faltantes as RespuestaInvalida[]
+        this.componenteEncuesta.resaltarRespuestasInvalidas(faltantes)
+        this.modalConfirmar.abrir({
+          respuestasInvalidas: faltantes,
+          alAceptar: ()=>{
+            this.servicioEncuesta.enviarRespuesta(this.idEncuesta!, this.idReporte!,  this.idVigilado!, true).subscribe({
+              next: ()=>{
+                this.popup.abrirPopupExitoso('Formulario enviado', 'El formulario se ha enviado correctamente.')
+                this.router.navigate(['/administrar', 'encuestas', this.idEncuesta!])
+              },
+              error: (error: HttpErrorResponse)=>{
+                this.popup.abrirPopupFallido(
+                  DialogosEncuestas.ENVIAR_ENCUESTA_ERROR_TITULO, 
+                  DialogosEncuestas.ENVIAR_ENCUESTA_ERROR_DESCRIPCION
+                )
+              }
+            })
+          },
+          alCancelar: ()=>{}
+        })
       }
     })
   }

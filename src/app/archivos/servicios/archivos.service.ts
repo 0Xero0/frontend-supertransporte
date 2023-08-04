@@ -22,13 +22,17 @@ export class ServicioArchivos extends Autenticable {
     formData.append('archivo', archivo)
     formData.append('idVigilado', idVigilado)
     formData.append('rutaRaiz', ruta)
-    return this.http.post<ArchivoGuardado>(`${this.host}${endpoint}`, formData, { headers: { Authorization: `Bearer d4a32a3b-def6-4cc2-8f77-904a67360b53` } })
+    return this.http.post<ArchivoGuardado>(
+      `${this.host}${endpoint}`, 
+      formData, 
+      { headers: { Authorization: `Bearer d4a32a3b-def6-4cc2-8f77-904a67360b53` } }
+    )
   }
 
   descargarArchivo(nombreArchivo: string, ruta: string, nombreOriginal: string){
     this.http.get<{archivo: string}>(
       `${this.host}/api/v1/archivos?nombre=${nombreArchivo}&ruta=${ruta}`,
-      { headers: this.obtenerCabeceraAutorizacion() }
+      { headers: { Authorization: `Bearer d4a32a3b-def6-4cc2-8f77-904a67360b53` } }
     )
     .pipe(
       catchError((error: HttpErrorResponse) => {
