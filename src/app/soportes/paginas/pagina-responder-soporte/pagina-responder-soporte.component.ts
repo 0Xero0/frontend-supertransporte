@@ -86,6 +86,6 @@ export class PaginaResponderSoporteComponent implements OnInit{
       this.popup.abrirPopupFallido('Error al descargar el archivo.', 'Este soporte no tiene archivo adjunto.')
       return;
     }
-    this.servicioSoporte.descargarArchivoRespuesta(this.soporte.documentoRespuesta, this.soporte.id.toString())
+    this.servicioArchivos.descargarArchivo(this.soporte.identificadorDocumentoRespuesta!, this.soporte.ruta!, this.soporte.documentoRespuesta)
   }
 }
