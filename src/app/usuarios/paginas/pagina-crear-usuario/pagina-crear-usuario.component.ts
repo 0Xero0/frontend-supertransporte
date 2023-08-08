@@ -40,7 +40,7 @@ export class PaginaCrearUsuarioComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.paginador.inicializar()
+    this.paginador.inicializar(1, 30)
     this.obtenerRoles()
   }
 
@@ -53,6 +53,10 @@ export class PaginaCrearUsuarioComponent implements OnInit{
         }
       })
     })
+  }
+
+  manejarUsuarioActualizado(){
+    this.popup.abrirPopupExitoso('Usuario actualizado con éxito.')
   }
 
   crear(){

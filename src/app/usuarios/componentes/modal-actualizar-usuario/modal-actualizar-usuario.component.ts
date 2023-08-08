@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Usuario } from '../../modelos/Usuario';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -16,11 +16,14 @@ import { DateTime } from 'luxon';
 export class ModalActualizarUsuarioComponent implements OnInit{
   @ViewChild('modal') modal!: ElementRef
   @ViewChild('popup') popup!: PopupComponent
+
+  @Output('usuarioActualizado') usuarioActualizado: EventEmitter<void>;
   usuario?: Usuario
   formulario: FormGroup
   roles: Rol[] = []
 
   constructor(private servicioModal: NgbModal, private servicio: ServicioUsuarios){
+    this.usuarioActualizado = new EventEmitter<void>();
     this.formulario = new FormGroup({
       nombre: new FormControl(undefined, [ Validators.required ]),
       apellido: new FormControl(undefined),
@@ -44,6 +47,10 @@ export class ModalActualizarUsuarioComponent implements OnInit{
     })
   }
 
+  cerrar(){
+    this.servicioModal.dismissAll();
+  }
+
   actualizar(){
     console.log(this.formulario.controls)
     if(this.formulario.invalid){
@@ -61,11 +68,11 @@ export class ModalActualizarUsuarioComponent implements OnInit{
       telefono: controls['telefono'].value
     }).subscribe({
       next: ()=>{
-        this.popup.abrirPopupExitoso("Usuario creado con éxito.")
-        this.limpiarFormulario()
+        this.usuarioActualizado.emit();
+        this.cerrar()
       },
       error: ()=>{
-        this.popup.abrirPopupFallido("Error al crear el usuario", "Intentalo más tarde.")
+        this.popup.abrirPopupFallido("Error al actualizar el usuario", "Intentalo más tarde.")
       }
     })
   }
