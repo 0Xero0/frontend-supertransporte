@@ -24,6 +24,9 @@ export class EvidenciaEncuestaCuantitativaComponent implements OnInit{
 
   ngOnInit(): void {
     this.inicializarRespuestaEvidencia(this.evidencia)
+    if(this.evidencia.respuesta){
+      this.valor = this.evidencia.respuesta
+    }
   }
 
   manejarCambioEvidenciaArchivo(file: File | null){

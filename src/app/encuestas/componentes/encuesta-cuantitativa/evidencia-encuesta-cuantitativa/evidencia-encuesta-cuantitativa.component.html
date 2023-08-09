@@ -17,15 +17,13 @@
     <fieldset *ngIf="evidencia.tipoEvidencia === 'NUMBER'">
         <input type="number" class="form-control"
         [ngModel]="valor"
-        (ngModelChange)="manejarCambioEvidenciaNumerica($event)"
-        [value]="evidencia.respuesta">
+        (ngModelChange)="manejarCambioEvidenciaNumerica($event)">
     </fieldset>
 
     <fieldset *ngIf="evidencia.tipoEvidencia === 'STRING'">
         <input type="text" class="form-control"
         [ngModel]="valor"
-        (ngModelChange)="manejarCambioEvidenciaNumerica($event)"
-        [value]="evidencia.respuesta">
+        (ngModelChange)="manejarCambioEvidenciaNumerica($event)">
     </fieldset>
 </ng-container>
 
