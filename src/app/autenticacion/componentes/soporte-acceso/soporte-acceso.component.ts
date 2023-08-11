@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AutenticacionService } from '../../servicios/autenticacion.service';
 import { marcarFormularioComoSucio } from 'src/app/administrador/utilidades/Utilidades';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-soporte-acceso',
@@ -13,6 +14,8 @@ import { Router } from '@angular/router';
 export class SoporteAccesoComponent {
   @ViewChild('popup') popup!: PopupComponent
   formulario: FormGroup
+  generandoRadicado: boolean = false
+
   constructor(private servicioSoporte: AutenticacionService, private router: Router){
     this.formulario = new FormGroup({
       nit: new FormControl<string | undefined>( undefined, [ Validators.required ] ),
@@ -29,6 +32,7 @@ export class SoporteAccesoComponent {
       marcarFormularioComoSucio(this.formulario)
       return
     }
+    this.generandoRadicado = true
     const controls = this.formulario.controls
     this.servicioSoporte.crearSoporte({
       correo: controls['correo'].value,
@@ -39,8 +43,13 @@ export class SoporteAccesoComponent {
       adjunto: controls['adjunto'].value
     }).subscribe({
       next: ( soporte: any )=>{
+        this.generandoRadicado = false
         this.popup.abrirPopupExitoso('Soporte creado', 'Radicado', soporte.radicado)
         this.router.navigate(['/inicio-sesion'])
+      },
+      error: ( error: HttpErrorResponse )=>{
+        this.generandoRadicado = false
+        this.popup.abrirPopupFallido('Error al generar el ticket', error.error.message)
       }
     })
   }
