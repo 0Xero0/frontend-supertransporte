@@ -23,7 +23,8 @@ export class SoporteAccesoComponent {
       telefono: new FormControl<string | undefined>( undefined ),
       razonSocial: new FormControl<string | undefined>( undefined, [ Validators.required ] ),
       descripcion: new FormControl<string | undefined>( undefined, [ Validators.required ] ),
-      adjunto: new FormControl<File | undefined>( undefined )
+      adjunto: new FormControl<File | undefined>( undefined ),
+      errorAcceso: new FormControl<string | undefined>( undefined, [ Validators.required ])
     })
   }
 
@@ -40,7 +41,8 @@ export class SoporteAccesoComponent {
       nit: controls['nit'].value,
       razonSocial: controls['razonSocial'].value,
       descripcion: controls['descripcion'].value,
-      adjunto: controls['adjunto'].value
+      adjunto: controls['adjunto'].value,
+      errorAcceso: controls['errorAcceso'].value
     }).subscribe({
       next: ( soporte: any )=>{
         this.generandoRadicado = false

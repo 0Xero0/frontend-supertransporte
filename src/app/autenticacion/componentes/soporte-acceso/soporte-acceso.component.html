@@ -18,7 +18,7 @@
                 <div class="col-sm-12 col-md-6">
                     <fieldset>
                         <label>
-                            NIT<span class="validacion">*</span>
+                            NIT <span class="validacion">*</span>
                         </label>
                     </fieldset>
                     <input type="number" class="form-control" formControlName="nit"/>
@@ -30,7 +30,7 @@
                 <div class="col-sm-12 col-md-6">
                     <fieldset>
                         <label>
-                            Razón social<span class="validacion">*</span>
+                            Razón social <span class="validacion">*</span>
                         </label>
                     </fieldset>
                     <input type="text" class="form-control" formControlName="razonSocial"/>
@@ -44,7 +44,7 @@
                 <div class="col-sm-12 col-md-6">
                     <fieldset>
                         <label>
-                            Correo electrónico<span class="validacion">*</span>
+                            Correo electrónico <span class="validacion">*</span>
                         </label>
                     </fieldset>
                     <input type="text" class="form-control" formControlName="correo"/>
@@ -64,6 +64,27 @@
                             [control]="this.formulario.controls['telefono']" 
                             [texto]="'El teléfono es requerido.'" 
                             [validacion]="'required'"/>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-2">
+                            <span>Motivo/Error<span class="validacion">*</span></span>
+                        </div>
+                        <div class="col-10">
+                            <select class="form-select" formControlName="errorAcceso" >
+                                <option value="">Seleccione una opción</option>
+                                <option value="001">001 - Error de usuario</option>
+                                <option value="002">002 - Error de correo electrónico</option>
+                                <option value="003">003 - Solicitar registrarme por primera vez</option>
+                            </select>
+                            <app-validacion  
+                            [control]="this.formulario.controls['errorAcceso']" 
+                            [texto]="'Seleccione una opción.'" 
+                            [validacion]="'required'"/>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row mb-3">
