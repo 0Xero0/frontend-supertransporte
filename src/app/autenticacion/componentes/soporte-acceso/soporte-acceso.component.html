@@ -73,11 +73,13 @@
                             <span>Motivo/Error<span class="validacion">*</span></span>
                         </div>
                         <div class="col-10">
+                            <p class="validacion">
+                                Recupere su contraseña para recibir el error
+                            </p>
                             <select class="form-select" formControlName="errorAcceso" >
                                 <option value="">Seleccione una opción</option>
                                 <option value="001">001 - Error de usuario</option>
                                 <option value="002">002 - Error de correo electrónico</option>
-                                <option value="003">003 - Solicitar registrarme por primera vez</option>
                             </select>
                             <app-validacion  
                             [control]="this.formulario.controls['errorAcceso']" 
