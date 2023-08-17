@@ -24,6 +24,8 @@ export class EncuestaCuantitativaComponent implements OnInit {
   hayCambios: boolean = false;
   respuestas: Respuesta[] = [];
   evidencias: RespuestaEvidencia[] = [];
+  evidenciasFaltantes: number[] = [];
+  indicadoresFaltantes: number[] = [];
   meses: Mes[] = []
   idMes?: number
 
@@ -67,7 +69,9 @@ export class EncuestaCuantitativaComponent implements OnInit {
       next: ()=>{
         this.popup.abrirPopupExitoso(DialogosEncuestas.ENVIAR_ENCUESTA_EXITO)
       },
-      error: ()=>{
+      error: (error: HttpErrorResponse)=>{
+        this.evidenciasFaltantes = error.error.faltantesEvidencias
+        this.indicadoresFaltantes = error.error.faltantesIndicadores
         this.popup.abrirPopupFallido('No se han respondido todas las preguntas.', 'Hay preguntas obligatorias sin responder.')
       }
     })

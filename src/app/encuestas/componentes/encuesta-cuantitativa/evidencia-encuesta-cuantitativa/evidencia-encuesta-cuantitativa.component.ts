@@ -18,6 +18,7 @@ export class EvidenciaEncuestaCuantitativaComponent implements OnInit{
   respuesta?: RespuestaEvidencia
   archivo: File | null = null
   valor: string = ""
+  evidenciaFaltante: boolean = false
 
   constructor(private servicioArchivos: ServicioArchivosEncuestas){
     this.nuevaEvidencia = new EventEmitter<RespuestaEvidencia>()
@@ -71,6 +72,14 @@ export class EvidenciaEncuestaCuantitativaComponent implements OnInit{
 
   descargarEvidencia(){
     this.servicioArchivos.descargarArchivo(this.evidencia.documento, this.evidencia.ruta, this.evidencia.nombreOriginal)
+  }
+
+  evaluarEvidenciaFaltante(evidenciasFaltantes: number[]){
+    if(evidenciasFaltantes.includes(this.evidencia.idEvidencia)){
+      this.evidenciaFaltante = true
+    }else{
+      this.evidenciaFaltante = false
+    }
   }
 
 }

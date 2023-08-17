@@ -15,12 +15,15 @@ export class TabEncuestaCuantitativaComponent implements OnInit{
   @Input('evidencias') evidencias: Evidencia[] = []
   @Input('mensaje') mensaje!: string
   @Input('estadoRespuestas') estadoRespuestas: Respuesta[] = []
+  @Input() evidenciasFaltantes: number[] = []
+  @Input() indicadoresFaltantes: number[] = []
 
   @Output('nuevaRespuesta') nuevaRespuesta: EventEmitter<Respuesta>
   @Output('nuevaEvidencia') nuevaEvidencia: EventEmitter<RespuestaEvidencia>
   @Output('evidenciaExcedeTamano') evidenciaExcedeTamano: EventEmitter<number>
   @Output('errorAlCargarEvidencia') errorAlCargarEvidencia: EventEmitter<HttpErrorResponse>
   respuestas: Respuesta[] = [];
+  
 
   constructor(){
     this.nuevaRespuesta = new EventEmitter<Respuesta>();
