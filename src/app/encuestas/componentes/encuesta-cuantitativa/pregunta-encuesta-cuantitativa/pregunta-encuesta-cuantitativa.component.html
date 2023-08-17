@@ -1,15 +1,23 @@
 <fieldset class="d-flex flex-gap-10">
     <div class="d-flex align-items-center fs-12px fw-semibold">
         <div>
-            <span class="validacion" *ngIf="pregunta.obligatoria">* </span> 
+            <span class="validacion" *ngIf="pregunta.obligatoria">* </span>
             <span>{{ pregunta.pregunta }}</span>
         </div>
     </div>
-    <div class="col">
-        <input 
-        type="number" 
-        class="form-control" 
-        [ngModel]="valor" 
-        (ngModelChange)="manejarCambio($event)">
+    <div class="col" *ngIf="pregunta.validaciones.tipoDato !== 'moneda'">
+        <app-input-numerico
+        [cantidadDecimales]="pregunta.validaciones.cantDecimal"
+        [valorInicial]="pregunta.respuesta"
+        [ngModel]="valor"
+        (ngModelChange)="manejarCambio($event)"/>
     </div>
+    <div class="col" *ngIf="pregunta.validaciones.tipoDato === 'moneda'">
+        <app-input-moneda 
+        [cantidadDecimales]="pregunta.validaciones.cantDecimal"
+        [valorInicial]="pregunta.respuesta"
+        [ngModel]="valor"
+        (ngModelChange)="manejarCambio($event)"/>
+    </div>
+
 </fieldset>

@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Evidencia } from 'src/app/encuestas/modelos/EncuestaCuantitativa';
 import { RespuestaEvidencia } from 'src/app/encuestas/modelos/RespuestaEvidencia';
@@ -13,12 +14,14 @@ export class EvidenciaEncuestaCuantitativaComponent implements OnInit{
   @Input('idVigilado') idVigilado!: string
   @Output('nuevaEvidencia') nuevaEvidencia: EventEmitter<RespuestaEvidencia>
   @Output('evidenciaExcedeTamano') evidenciaExcedeTamano: EventEmitter<number>
+  @Output('errorAlCargar') errorAlCargar: EventEmitter<HttpErrorResponse>
   respuesta?: RespuestaEvidencia
   archivo: File | null = null
   valor: string = ""
 
   constructor(private servicioArchivos: ServicioArchivosEncuestas){
     this.nuevaEvidencia = new EventEmitter<RespuestaEvidencia>()
+    this.errorAlCargar = new EventEmitter<HttpErrorResponse>()
     this.evidenciaExcedeTamano = new EventEmitter<number>()
   }
 
@@ -31,13 +34,17 @@ export class EvidenciaEncuestaCuantitativaComponent implements OnInit{
 
   manejarCambioEvidenciaArchivo(file: File | null){
     if(file){
-      this.servicioArchivos.guardarArchivoTemporal(file, this.idVigilado, this.evidencia.idEvidencia, true)
+      this.servicioArchivos.guardarEvidencia(file, this.idVigilado, this.evidencia.validaciones.extension)
       .subscribe({
         next: (infoArchivo)=>{
           this.respuesta!.ruta = infoArchivo.ruta 
           this.respuesta!.documento = infoArchivo.nombreAlmacenado
           this.respuesta!.nombreArchivo = infoArchivo.nombreOriginalArchivo
           this.nuevaEvidencia.emit(this.respuesta!)
+        },
+        error: (error: HttpErrorResponse)=>{
+          this.archivo = null
+          this.errorAlCargar.emit(error)
         }
       })
     }
@@ -48,7 +55,6 @@ export class EvidenciaEncuestaCuantitativaComponent implements OnInit{
   }
 
   manejarCambioEvidenciaNumerica(valor: string){
-    console.log('valor', valor)
     this.respuesta!.valor = valor
     this.nuevaEvidencia.emit(this.respuesta)
   }

@@ -48,8 +48,11 @@ export class InputArchivoComponent implements OnInit, ControlValueAccessor {
 
   onTouched = () => { }
 
-  writeValue(archivo: File): void {
+  writeValue(archivo: File | null): void {
     this.archivo = archivo
+    if(!archivo){
+      this.removeFile()
+    }
   }
   registerOnChange(fn: any): void {
     this.onChange = fn
@@ -74,9 +77,11 @@ export class InputArchivoComponent implements OnInit, ControlValueAccessor {
   }
 
   removeFile(){
-    this.archivo = null;
-    this.input.nativeElement.value = ""
-    this.onChange(this.archivo)
+    if(this.input){
+      this.archivo = null;
+      this.input.nativeElement.value = ""
+      this.onChange(this.archivo)
+    }
   }
 
   manejarRemoverArchivo(event: Event){

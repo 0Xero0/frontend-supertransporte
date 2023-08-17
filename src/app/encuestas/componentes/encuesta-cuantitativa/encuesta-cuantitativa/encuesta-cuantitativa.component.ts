@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DateTime } from 'luxon';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
@@ -90,6 +91,10 @@ export class EncuestaCuantitativaComponent implements OnInit {
   manejarNuevaRespuesta(respuesta: Respuesta) {
     this.agregarRespuesta(respuesta)
     this.setHayCambios(true)
+  }
+
+  manejarErrorAlCambiarEvidencia(error: HttpErrorResponse){
+    this.popup.abrirPopupFallido(error.error.mensaje)
   }
 
   private agregarRespuesta(respuesta: Respuesta) {

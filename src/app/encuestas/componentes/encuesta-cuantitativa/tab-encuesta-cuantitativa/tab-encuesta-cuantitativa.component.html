@@ -7,6 +7,9 @@
                 <div class="col-7">Valores</div>
             </div>
         </li>
+        <li class="fondo-gris-1 p-3" *ngIf="subindicadores.length < 1">
+            {{ mensaje }}
+        </li>
         <li class="subindicador" *ngFor="let subindicador of subindicadores">
             <app-subindicador-encuesta-cuantitativa 
                 [subindicador]="subindicador" 
@@ -15,7 +18,7 @@
         </li>
     </ul>
 </div>
-<div class="contenedor-evidencias">
+<div class="contenedor-evidencias" *ngIf="evidencias.length > 0">
     <ul class="evidencias">
         <li class="cabeceras-evidencia">
             <div class="row">
@@ -34,6 +37,7 @@
                         [idVigilado]="idVigilado" 
                         [evidencia]="evidencia"
                         (evidenciaExcedeTamano)="manejarEvidenciaExcedeTamano($event)"
+                        (errorAlCargar)="manejarErrorAlCargar($event)"
                         (nuevaEvidencia)="manejarNuevaEvidencia($event)"/>
                     </div>
                 </div>

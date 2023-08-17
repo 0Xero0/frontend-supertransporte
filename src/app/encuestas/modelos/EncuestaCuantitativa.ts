@@ -10,6 +10,7 @@ export interface Formulario {
     nombre:       string;
     subIndicador: SubIndicador[];
     evidencias: Evidencia[];
+    mensaje: string
 }
 
 export interface SubIndicador {
@@ -49,7 +50,7 @@ export interface Pregunta {
     adjuntableObligatorio:  boolean;
     tipoPregunta:           string;
     valoresPregunta:        any[];
-    validaciones:           any[] | null;
+    validaciones:           Validacion;
     observacion:            string;
     cumple:                 string;
     observacionCumple:      string;

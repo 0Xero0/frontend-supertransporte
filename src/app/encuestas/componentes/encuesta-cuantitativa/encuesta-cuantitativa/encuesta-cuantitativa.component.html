@@ -14,9 +14,11 @@
             <app-tab-encuesta-cuantitativa
                 [idVigilado]="encuesta.idVigilado"
                 [subindicadores]="formulario.subIndicador"
+                [mensaje]="formulario.mensaje"
                 [evidencias]="formulario.evidencias"
                 [estadoRespuestas]="estadoRespuestas"
                 (evidenciaExcedeTamano)="manejarEvidenciaExcedeTamano($event)"
+                (errorAlCargarEvidencia)="manejarErrorAlCambiarEvidencia($event)"
                 (nuevaRespuesta)="manejarNuevaRespuesta($event)" 
                 (nuevaEvidencia)="manejarNuevaEvidencia($event)"/>
         </ng-template>
