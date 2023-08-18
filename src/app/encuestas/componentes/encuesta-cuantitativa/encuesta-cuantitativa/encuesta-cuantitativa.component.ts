@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { DateTime } from 'luxon';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { DialogosEncuestas } from 'src/app/encuestas/dialogos-encuestas';
@@ -29,7 +30,7 @@ export class EncuestaCuantitativaComponent implements OnInit {
   meses: Mes[] = []
   idMes?: number
 
-  constructor(private servicio: ServicioEncuestas) {
+  constructor(private servicio: ServicioEncuestas, private router: Router) {
     this.hanHabidoCambios = new EventEmitter<boolean>()
     this.cambioDeMes = new EventEmitter<number>()
   }
@@ -53,6 +54,7 @@ export class EncuestaCuantitativaComponent implements OnInit {
       this.respuestas,
       this.evidencias).subscribe({
         next: () => {
+          this.setHayCambios(false)
           this.popup.abrirPopupExitoso(DialogosEncuestas.GUARDAR_ENCUESTA_EXITO)
         },
         error: () => {
@@ -68,6 +70,7 @@ export class EncuestaCuantitativaComponent implements OnInit {
     this.servicio.enviarRespuestaIndicadores(this.encuesta.idEncuesta, Number(this.encuesta.idReporte), this.encuesta.idVigilado, this.idMes!).subscribe({
       next: ()=>{
         this.popup.abrirPopupExitoso(DialogosEncuestas.ENVIAR_ENCUESTA_EXITO)
+        this.router.navigateByUrl(`/administrar/encuestas/${this.encuesta.idEncuesta}`)
       },
       error: (error: HttpErrorResponse)=>{
         this.evidenciasFaltantes = error.error.faltantesEvidencias

@@ -4,6 +4,7 @@
         <select class="form-select" [ngModel]="idMes" (ngModelChange)="manejarCambioDeMes($event)">
             <option [value]="mes.idMes" *ngFor="let mes of meses">{{ mes.idMes }} - {{ mes.nombreMes }}</option>
         </select>
+        <span class="validacion">Al enviar a ST, se enviará la información solo del mes seleccionado.</span>
     </fieldset>
 </div>
 
