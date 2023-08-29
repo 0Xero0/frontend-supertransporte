@@ -54,6 +54,7 @@ export class AutenticacionService {
     formData.append('razonSocial', peticion.razonSocial)
     formData.append('correo', peticion.correo)
     formData.append('nit', peticion.nit)
+    formData.append('errorAcceso', peticion.errorAcceso)
     peticion.telefono ? formData.append('telefono', peticion.telefono) : undefined;
     peticion.adjunto ? formData.append('adjunto', peticion.adjunto) : undefined;
     return this.clientHttp.post<Soporte>(`${this.urlBackend}${endpoint}`, formData)

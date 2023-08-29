@@ -10,6 +10,7 @@ import { Respuesta } from 'src/app/encuestas/modelos/Respuesta';
 export class SubindicadorEncuestaCuantitativaComponent implements OnInit {
   @Input('subindicador') subindicador!: SubIndicador
   @Input('estadoRespuestas') estadoRespuestas: Respuesta[] = []
+  @Input() preguntasFaltantes: number[] = []
   @Output('nuevaRespuesta') nuevaRespuesta: EventEmitter<Respuesta>
   respuestas: Respuesta[] = []
 

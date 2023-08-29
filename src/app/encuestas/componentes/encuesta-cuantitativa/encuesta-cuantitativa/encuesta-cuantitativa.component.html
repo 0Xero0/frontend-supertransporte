@@ -4,6 +4,7 @@
         <select class="form-select" [ngModel]="idMes" (ngModelChange)="manejarCambioDeMes($event)">
             <option [value]="mes.idMes" *ngFor="let mes of meses">{{ mes.idMes }} - {{ mes.nombreMes }}</option>
         </select>
+        <span class="validacion">Al enviar a ST, se enviará la información solo del mes seleccionado.</span>
     </fieldset>
 </div>
 
@@ -14,9 +15,13 @@
             <app-tab-encuesta-cuantitativa
                 [idVigilado]="encuesta.idVigilado"
                 [subindicadores]="formulario.subIndicador"
+                [mensaje]="formulario.mensaje"
                 [evidencias]="formulario.evidencias"
                 [estadoRespuestas]="estadoRespuestas"
+                [indicadoresFaltantes]="indicadoresFaltantes"
+                [evidenciasFaltantes]="evidenciasFaltantes"
                 (evidenciaExcedeTamano)="manejarEvidenciaExcedeTamano($event)"
+                (errorAlCargarEvidencia)="manejarErrorAlCambiarEvidencia($event)"
                 (nuevaRespuesta)="manejarNuevaRespuesta($event)" 
                 (nuevaEvidencia)="manejarNuevaEvidencia($event)"/>
         </ng-template>

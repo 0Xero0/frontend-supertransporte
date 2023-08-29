@@ -5,4 +5,5 @@ export interface PeticionCrearSoporte{
     descripcion: string
     adjunto?: File
     razonSocial: string
+    errorAcceso: string
 }

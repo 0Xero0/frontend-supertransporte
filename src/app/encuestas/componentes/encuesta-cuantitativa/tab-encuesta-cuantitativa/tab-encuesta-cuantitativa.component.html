@@ -7,15 +7,19 @@
                 <div class="col-7">Valores</div>
             </div>
         </li>
+        <li class="fondo-gris-1 p-3" *ngIf="subindicadores.length < 1">
+            {{ mensaje }}
+        </li>
         <li class="subindicador" *ngFor="let subindicador of subindicadores">
-            <app-subindicador-encuesta-cuantitativa 
+            <app-subindicador-encuesta-cuantitativa
+                [preguntasFaltantes]="indicadoresFaltantes"
                 [subindicador]="subindicador" 
                 [estadoRespuestas]="estadoRespuestas"
                 (nuevaRespuesta)="manejarNuevaRespuesta($event)"/>
         </li>
     </ul>
 </div>
-<div class="contenedor-evidencias">
+<div class="contenedor-evidencias" *ngIf="evidencias.length > 0">
     <ul class="evidencias">
         <li class="cabeceras-evidencia">
             <div class="row">
@@ -24,7 +28,7 @@
                 <div class="col-7">Evidencia</div>
             </div>
         </li>
-        <li class="evidencia" *ngFor="let evidencia of evidencias">
+        <li class="evidencia" *ngFor="let evidencia of evidencias" [ngClass]="{ 'bg-invalido': evidenciasFaltantes.includes(evidencia.idEvidencia) }">
             <div class="row">
                 <div class="col-3">{{ evidencia.nombre }}</div>
                 <div class="col-2">{{ evidencia.validaciones.tipoDato }}</div>
@@ -34,6 +38,7 @@
                         [idVigilado]="idVigilado" 
                         [evidencia]="evidencia"
                         (evidenciaExcedeTamano)="manejarEvidenciaExcedeTamano($event)"
+                        (errorAlCargar)="manejarErrorAlCargar($event)"
                         (nuevaEvidencia)="manejarNuevaEvidencia($event)"/>
                     </div>
                 </div>

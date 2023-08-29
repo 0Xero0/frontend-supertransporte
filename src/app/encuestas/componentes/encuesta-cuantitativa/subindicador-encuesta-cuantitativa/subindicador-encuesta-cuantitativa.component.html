@@ -2,7 +2,8 @@
     <div class="col-1 fw-semibold">{{subindicador.codigo}}</div>
     <div class="col-4">{{subindicador.nombreSubIndicador}}</div>
     <div class="col-7 row">
-        <div class="periodo col-4 d-flex flex-column justify-content-end" *ngFor="let periodo of subindicador.preguntas">
+        <div class="periodo col-6 d-flex flex-column justify-content-end" *ngFor="let periodo of subindicador.preguntas"
+        [ngClass]="{'bg-invalido': preguntasFaltantes.includes(periodo.idPregunta)}">
             <app-pregunta-encuesta-cuantitativa
             (cambio)="manejarCambioRespuesta($event)"
             [pregunta]="periodo"

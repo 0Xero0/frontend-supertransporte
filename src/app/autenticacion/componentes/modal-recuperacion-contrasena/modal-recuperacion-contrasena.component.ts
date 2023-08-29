@@ -53,7 +53,7 @@ export class ModalRecuperacionContrasenaComponent implements OnInit {
           this.servicioModal.dismissAll();
         },
         error: (error: HttpErrorResponse) => {
-          this.popup.abrirPopupFallido('Usuario no encontrado.', error.error.mensaje)
+          this.popup.abrirPopupFallido('Error al recuperar contraseña.', error.error.message)
         }
       })
     }

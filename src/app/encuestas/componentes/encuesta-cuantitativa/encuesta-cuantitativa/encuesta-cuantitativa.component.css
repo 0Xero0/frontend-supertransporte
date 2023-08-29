@@ -1,3 +1,14 @@
 :host{
     width: 100%;
 }
+
+.nav-tabs .nav-link{
+    color: var(--azul-oscuro);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.nav-tabs .nav-link.active{
+    background-color: #E6EFFD;
+    border-bottom: none;
+}

@@ -2,7 +2,7 @@
     <fieldset *ngIf="evidencia.tipoEvidencia === 'FILE'">
         <label class="fs-12px validacion">Solo archivos {{ evidencia.validaciones.tipoDato }}</label>
         <app-input-archivo
-        [ngModel]="archivo"
+        [(ngModel)]="archivo"
         [tamanoMaximoMb]="evidencia.tamanio"
         (excedeTamano)="manejarExcedeTamano()"
         (ngModelChange)="manejarCambioEvidenciaArchivo($event)"
@@ -15,17 +15,17 @@
     </fieldset>
     
     <fieldset *ngIf="evidencia.tipoEvidencia === 'NUMBER'">
-        <input type="number" class="form-control"
+        <app-input-numerico
+        [valorInicial]="evidencia.respuesta"
+        [cantidadDecimales]="evidencia.validaciones.cantDecimal"
         [ngModel]="valor"
-        (ngModelChange)="manejarCambioEvidenciaNumerica($event)"
-        [value]="evidencia.respuesta">
+        (ngModelChange)="manejarCambioEvidenciaNumerica($event)"/>
     </fieldset>
 
     <fieldset *ngIf="evidencia.tipoEvidencia === 'STRING'">
         <input type="text" class="form-control"
         [ngModel]="valor"
-        (ngModelChange)="manejarCambioEvidenciaNumerica($event)"
-        [value]="evidencia.respuesta">
+        (ngModelChange)="manejarCambioEvidenciaNumerica($event)">
     </fieldset>
 </ng-container>
 

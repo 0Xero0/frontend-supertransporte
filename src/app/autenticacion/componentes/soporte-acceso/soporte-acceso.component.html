@@ -10,7 +10,7 @@
         <h3 class="fw-semibold texto-azul-004884 mb-3">Problemas de acceso</h3>
         <hr>
         <div class="d-flex align-items-center justify-content-center flex-gap-20 mb-3">
-            <button class="boton primario relleno" (click)="crearSoporte()">Guardar</button>
+            <button class="boton primario relleno" (click)="crearSoporte()" [disabled]="generandoRadicado">Guardar</button>
             <button class="boton primario delineado" [routerLink]="['/inicio-sesion']">Regresar</button>
         </div>
         <form [formGroup]="formulario">
@@ -18,10 +18,10 @@
                 <div class="col-sm-12 col-md-6">
                     <fieldset>
                         <label>
-                            NIT<span class="validacion">*</span>
+                            NIT <span class="validacion">*</span>
                         </label>
                     </fieldset>
-                    <input type="text" class="form-control" formControlName="nit"/>
+                    <input type="number" class="form-control" formControlName="nit"/>
                     <app-validacion  
                             [control]="this.formulario.controls['nit']" 
                             [texto]="'El nit es requerido.'" 
@@ -30,7 +30,7 @@
                 <div class="col-sm-12 col-md-6">
                     <fieldset>
                         <label>
-                            Razón social<span class="validacion">*</span>
+                            Razón social <span class="validacion">*</span>
                         </label>
                     </fieldset>
                     <input type="text" class="form-control" formControlName="razonSocial"/>
@@ -44,7 +44,7 @@
                 <div class="col-sm-12 col-md-6">
                     <fieldset>
                         <label>
-                            Correo electrónico<span class="validacion">*</span>
+                            Correo electrónico <span class="validacion">*</span>
                         </label>
                     </fieldset>
                     <input type="text" class="form-control" formControlName="correo"/>
@@ -64,6 +64,29 @@
                             [control]="this.formulario.controls['telefono']" 
                             [texto]="'El teléfono es requerido.'" 
                             [validacion]="'required'"/>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-2">
+                            <span>Motivo/Error<span class="validacion">*</span></span>
+                        </div>
+                        <div class="col-10">
+                            <p class="validacion">
+                                Recupere su contraseña para recibir el error
+                            </p>
+                            <select class="form-select" formControlName="errorAcceso" >
+                                <option value="">Seleccione una opción</option>
+                                <option value="001">001 - Error de usuario</option>
+                                <option value="002">002 - Error de correo electrónico</option>
+                            </select>
+                            <app-validacion  
+                            [control]="this.formulario.controls['errorAcceso']" 
+                            [texto]="'Seleccione una opción.'" 
+                            [validacion]="'required'"/>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row mb-3">

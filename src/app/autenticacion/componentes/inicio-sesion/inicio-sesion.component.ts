@@ -7,6 +7,7 @@ import { IniciarSesionRespuesta } from '../../modelos/IniciarSesionRespuesta';
 import { AutenticacionService } from '../../servicios/autenticacion.service';
 import { ModalRecuperacionContrasenaComponent } from '../modal-recuperacion-contrasena/modal-recuperacion-contrasena.component';
 import { environment } from 'src/environments/environment';
+import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -15,6 +16,7 @@ import { environment } from 'src/environments/environment';
 })
 export class InicioSesionComponent implements OnInit {
   @ViewChild('modalRecuperacion') modalRecuperacion!: ModalRecuperacionContrasenaComponent
+  @ViewChild('popup') popup!: PopupComponent
   public formulario: FormGroup
   public readonly llaveCaptcha = environment.llaveCaptcha
 
@@ -64,9 +66,10 @@ export class InicioSesionComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         if (error.status == 423) {
           this.abrirModalRecuperacion()
+          this.popup.abrirPopupFallido('Error al iniciar sesión', error.error.message)
         }
         if (error.status == 400) {
-          Swal.fire('credenciales incorrectas')
+          this.popup.abrirPopupFallido('Error al iniciar sesión', error.error.message)
         }
       }
     })
