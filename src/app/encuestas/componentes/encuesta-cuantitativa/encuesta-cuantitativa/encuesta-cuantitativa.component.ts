@@ -143,7 +143,7 @@ export class EncuestaCuantitativaComponent implements OnInit {
   private obtenerRespuesta(pregunta: Pregunta): Respuesta {
     return {
       preguntaId: pregunta.idPregunta,
-      valor: pregunta.respuesta ?? "",
+      valor: pregunta.respuesta.toString() ?? "",
       documento: pregunta.documento,
       nombreArchivo: pregunta.nombreOriginal,
       observacion: pregunta.observacion,

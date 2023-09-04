@@ -13,38 +13,51 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     }
   ]
 })
-export class InputMonedaComponent implements OnInit, ControlValueAccessor{
+export class InputMonedaComponent implements OnInit, ControlValueAccessor {
   @Input('cantidadDecimales') cantidadDecimales: number = 3
-  @Input('valorInicial') valorInicial: string = "";
-  valor: string = ""
+  @Input('valorInicial') valorInicial: number = 0;
+  valor: number = 0;
+  valorInput: string = ""
   valorAnterior: string = ""
   deshabilitado: boolean = false
   regex: RegExp
 
-  constructor(){
+  constructor() {
     this.regex = new RegExp(`^[0-9]+(\\.[0-9]{1,${3}})?$`)
   }
 
   ngOnInit(): void {
     this.regex = new RegExp(`^[0-9]+(\\.[0-9]{1,${this.cantidadDecimales}})?$`)
-    this.valorAnterior = this.valorInicial
+    this.valorInput = this.formatear(this.valorInicial.toString()) 
+    this.valorAnterior = this.valorInicial.toString()
   }
 
-  alCambiarValor(valor: string){
-    console.log('ejecutando al cambiar')
-    if(!this.regex.test(valor) && valor !== ""){
-      this.valor = this.valorAnterior
+  formatear(valor: string) {
+    return valor.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  }
+
+  desformatear(valor: string) {
+    return valor.replace(/,/g, "")
+  }
+
+  alCambiarValor(valor: string) {
+    valor = this.desformatear(valor)
+    if (!this.regex.test(valor) && valor !== "") {
+      this.valorInput = this.valorAnterior
+      return;
     }
-    this.valorAnterior = this.valor
+    this.valorInput = this.formatear(valor.toString()) 
+    this.valorAnterior = this.valorInput
+    this.valor = Number(this.desformatear(this.valorInput))
     this.onChange(this.valor)
   }
 
   //NgValueAccesor Interface
-  onChange = (valor: string)=>{}
+  onChange = (valor: number) => { }
 
-  onTouched = ()=>{}
+  onTouched = () => { }
 
-  writeValue(valor: string): void {
+  writeValue(valor: number): void {
     this.valor = valor
   }
 

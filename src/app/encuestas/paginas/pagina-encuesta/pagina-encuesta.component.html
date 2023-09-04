@@ -4,15 +4,15 @@
     <p *ngIf="encuesta">{{encuesta.descripcionClasificacion}}</p>
     <div class="d-block w-100 mb-3">
         <div class="d-block" *ngIf="usuario">
-            <span class="fs-14px fw-semibold texto-azul-004884">Quien realiza la encuesta: </span>
+            <span class="fs-20px fw-semibold texto-azul-004884">Identificación de quien realiza la encuesta: </span>
             <span>{{ usuario.usuario }}</span>
         </div>
         <div class="d-block " *ngIf="idVigilado && (usuario!.usuario !== idVigilado)">
-            <span class="fs-14px fw-semibold texto-azul-004884">A quien se le realiza la encuesta: </span>
+            <span class="fs-20px fw-semibold texto-azul-004884">A quien se le realiza la encuesta: </span>
             <span>{{ idVigilado }}</span>
         </div>
         <div class="d-block " *ngIf="vigencia">
-            <span class="fs-14px fw-semibold texto-azul-004884">Año de vigencia: </span>
+            <span class="fs-20px fw-semibold texto-azul-004884">Vigencia requerida: </span>
             <span>{{ vigencia }}</span>
         </div>
     </div>

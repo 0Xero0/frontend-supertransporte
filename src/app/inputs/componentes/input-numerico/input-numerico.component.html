@@ -1,5 +1,5 @@
 <fieldset class="d-flex indicador-moneda">
-    <input #input type="number" class="form-control" 
-    [(ngModel)]="valor"
+    <input #input type="text" class="form-control" 
+    [(ngModel)]="valorInput"
     (keyup)="alCambiarValor(input.value)">
 </fieldset>

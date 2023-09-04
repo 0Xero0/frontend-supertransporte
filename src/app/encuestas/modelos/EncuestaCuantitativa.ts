@@ -41,7 +41,7 @@ export interface Pregunta {
     idPregunta:             number;
     pregunta:               string;
     obligatoria:            boolean;
-    respuesta:              string;
+    respuesta:              number;
     tipoDeEvidencia:        string;
     documento:              string;
     nombreOriginal:         string;
