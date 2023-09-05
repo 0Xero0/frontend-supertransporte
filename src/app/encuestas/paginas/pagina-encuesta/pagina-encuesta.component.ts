@@ -6,14 +6,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from 'src/app/autenticacion/modelos/IniciarSesionRespuesta';
 import { EncuestaComponent } from '../../componentes/encuesta/encuesta.component';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { saveAs } from 'file-saver';
-import { EncuestaCuantitativa, Formulario } from '../../modelos/EncuestaCuantitativa';
+import { EncuestaCuantitativa } from '../../modelos/EncuestaCuantitativa';
 import { EncuestaCuantitativaComponent } from '../../componentes/encuesta-cuantitativa/encuesta-cuantitativa/encuesta-cuantitativa.component';
 import { DateTime } from 'luxon';
 import { ModalConfirmarEnviarComponent } from '../../componentes/modal-confirmar-enviar/modal-confirmar-enviar.component';
 import { DialogosEncuestas } from '../../dialogos-encuestas';
 import { RespuestaInvalida } from '../../modelos/RespuestaInvalida';
+import { combineLatest } from 'rxjs';
+import { Mes } from '../../modelos/Mes';
 
 @Component({
   selector: 'app-pagina-encuesta',
@@ -37,6 +39,9 @@ export class PaginaEncuestaComponent implements OnInit {
   camposDeVerificacion: boolean = false
   camposDeVerificacionVisibles: boolean = true
   hayCambios: boolean = false
+  historico: boolean = false
+  meses: Mes[] = []
+  idMesPorDefecto?: number 
 
   constructor(
     private servicioEncuesta: ServicioEncuestas, 
@@ -46,23 +51,22 @@ export class PaginaEncuestaComponent implements OnInit {
   ) {
     this.usuario = this.servicioLocalStorage.obtenerUsuario()
     this.idUsuario = this.usuario!.usuario
-    this.activeRoute.queryParams.subscribe({
-      next: (qs) => {
-        this.idVigilado = qs['vigilado']
-        this.idReporte = Number(qs['reporte'])
-      }
-    })
-    this.activeRoute.params.subscribe({
+    combineLatest({
+      params: this.activeRoute.params,
+      queryParams: this.activeRoute.queryParams
+    }).subscribe({
       next: (parametros)=>{
-        this.idEncuesta = parametros['idEncuestaDiligenciada']
+        this.idVigilado = parametros.queryParams['vigilado']
+        this.idReporte = Number(parametros.queryParams['reporte'])
+        this.historico = parametros.queryParams['historico'] === 'true' ? true : false;
+        this.idEncuesta = parametros.params['idEncuestaDiligenciada']
         if(this.idEncuesta == 2){
           this.obtenerEncuestaCuantitativa( this.obtenerIdMesActual() )
         }else{
           this.obtenerEncuesta()
         }
       }
-    }) 
-    
+    })
   }
 
   ngOnInit(): void {
@@ -147,10 +151,10 @@ export class PaginaEncuestaComponent implements OnInit {
 
   //Obtener información
   obtenerEncuestaCuantitativa(idMes: number){
-    this.servicioEncuesta.obtenerEncuestaCuantitativa(this.idReporte!, this.idVigilado!, idMes).subscribe({
+    this.servicioEncuesta.obtenerEncuestaCuantitativa(this.idReporte!, this.idVigilado!, idMes, this.historico).subscribe({
       next: (encuesta)=>{
         this.encuestaCuantitativa = encuesta
-        this.soloLectura = false
+        this.soloLectura = encuesta.soloLectura
         this.vigencia = encuesta.vigencia
       }
     })

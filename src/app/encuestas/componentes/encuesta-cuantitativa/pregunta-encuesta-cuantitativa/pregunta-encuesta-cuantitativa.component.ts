@@ -9,6 +9,7 @@ import { Respuesta } from 'src/app/encuestas/modelos/Respuesta';
 })
 export class PreguntaEncuestaCuantitativaComponent implements OnInit {
   @Input('pregunta') pregunta!: Pregunta
+  @Input('soloLectura') soloLectura: boolean = false
   @Output('cambio') cambio: EventEmitter<Respuesta>
   valor: number = 0;
 

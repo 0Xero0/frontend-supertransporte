@@ -1,10 +1,11 @@
 <div class="d-flex mb-4">
     <fieldset class="d-flex flex-gap-10">        
-        <div class="d-flex align-items-center fs-14px fw-semibold">Mes</div>
+        <div *ngIf="historico" class="d-flex align-items-center fs-14px fw-semibold">Periodo a visualizar</div>
+        <div *ngIf="!historico" class="d-flex align-items-center fs-14px fw-semibold">Periodo a cargar</div>
         <select class="form-select" [ngModel]="idMes" (ngModelChange)="manejarCambioDeMes($event)">
             <option [value]="mes.idMes" *ngFor="let mes of meses">{{ mes.idMes }} - {{ mes.nombreMes }}</option>
         </select>
-        <span class="validacion">Al enviar a ST, se enviará la información solo del mes seleccionado.</span>
+        <span class="validacion">Al enviar a ST, se enviará la información solo del periodo seleccionado.</span>
     </fieldset>
 </div>
 
@@ -13,6 +14,7 @@
         <button ngbNavLink>{{ formulario.nombre }}</button>
         <ng-template ngbNavContent>
             <app-tab-encuesta-cuantitativa
+                [soloLectura]="encuesta.soloLectura"
                 [idVigilado]="encuesta.idVigilado"
                 [subindicadores]="formulario.subIndicador"
                 [mensaje]="formulario.mensaje"

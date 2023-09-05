@@ -6,6 +6,7 @@
         [ngClass]="{'bg-invalido': preguntasFaltantes.includes(periodo.idPregunta)}">
             <app-pregunta-encuesta-cuantitativa
             (cambio)="manejarCambioRespuesta($event)"
+            [soloLectura]="soloLectura"
             [pregunta]="periodo"
             />
         </div>

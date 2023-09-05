@@ -12,6 +12,8 @@ import { ServicioArchivosEncuestas } from 'src/app/encuestas/servicios/archivos-
 export class EvidenciaEncuestaCuantitativaComponent implements OnInit{
   @Input('evidencia') evidencia!: Evidencia
   @Input('idVigilado') idVigilado!: string
+  @Input() soloLectura: boolean = false
+
   @Output('nuevaEvidencia') nuevaEvidencia: EventEmitter<RespuestaEvidencia>
   @Output('evidenciaExcedeTamano') evidenciaExcedeTamano: EventEmitter<number>
   @Output('errorAlCargar') errorAlCargar: EventEmitter<HttpErrorResponse>

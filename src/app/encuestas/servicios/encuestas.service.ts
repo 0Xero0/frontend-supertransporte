@@ -26,8 +26,8 @@ export class ServicioEncuestas extends Autenticable {
     this.establecerMotivos()
   }
 
-  obtenerMeses():Observable<{ meses: Mes[] }>{
-    const endpoint = '/api/v1/maestras/meses'
+  obtenerMeses(historico: boolean = false):Observable<{ meses: Mes[] }>{
+    const endpoint = `/api/v1/maestras/meses?historico=${historico}`
     return this.http.get<{ meses: Mes[] }>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }
 
@@ -51,9 +51,9 @@ export class ServicioEncuestas extends Autenticable {
     )
   }
 
-  obtenerEncuestaCuantitativa(idReporte: number, idVigilado: string, idMes: number)
+  obtenerEncuestaCuantitativa(idReporte: number, idVigilado: string, idMes: number, historico: boolean = false)
   :Observable<EncuestaCuantitativa>{
-    const endpoint = `/api/v1/inidicador/formularios?idReporte=${idReporte}&idVigilado=${idVigilado}&idMes=${idMes}`
+    const endpoint = `/api/v1/inidicador/formularios?idReporte=${idReporte}&idVigilado=${idVigilado}&idMes=${idMes}&historico=${historico}`
     return this.http.get<EncuestaCuantitativa>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }
 

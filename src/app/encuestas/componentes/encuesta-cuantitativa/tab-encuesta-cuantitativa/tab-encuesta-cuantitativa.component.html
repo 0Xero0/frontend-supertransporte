@@ -13,6 +13,7 @@
         <li class="subindicador" *ngFor="let subindicador of subindicadores">
             <app-subindicador-encuesta-cuantitativa
                 [preguntasFaltantes]="indicadoresFaltantes"
+                [soloLectura]="soloLectura"
                 [subindicador]="subindicador" 
                 [estadoRespuestas]="estadoRespuestas"
                 (nuevaRespuesta)="manejarNuevaRespuesta($event)"/>
@@ -35,6 +36,7 @@
                 <div class="col-7 row">
                     <div class="col-4">
                         <app-evidencia-encuesta-cuantitativa
+                        [soloLectura]="soloLectura"
                         [idVigilado]="idVigilado" 
                         [evidencia]="evidencia"
                         (evidenciaExcedeTamano)="manejarEvidenciaExcedeTamano($event)"
