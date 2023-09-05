@@ -63,6 +63,8 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
         next: () => {
           this.setHayCambios(false)
           this.popup.abrirPopupExitoso(DialogosEncuestas.GUARDAR_ENCUESTA_EXITO)
+          this.indicadoresFaltantes = []
+          this.evidenciasFaltantes = []
         },
         error: () => {
           this.popup.abrirPopupFallido(
