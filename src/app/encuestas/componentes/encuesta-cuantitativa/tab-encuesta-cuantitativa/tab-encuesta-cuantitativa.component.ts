@@ -18,6 +18,7 @@ export class TabEncuestaCuantitativaComponent implements OnInit{
   @Input() evidenciasFaltantes: number[] = []
   @Input() indicadoresFaltantes: number[] = []
   @Input() soloLectura: boolean = false
+  @Input() nombreFormulario!: string
 
   @Output('nuevaRespuesta') nuevaRespuesta: EventEmitter<Respuesta>
   @Output('nuevaEvidencia') nuevaEvidencia: EventEmitter<RespuestaEvidencia>

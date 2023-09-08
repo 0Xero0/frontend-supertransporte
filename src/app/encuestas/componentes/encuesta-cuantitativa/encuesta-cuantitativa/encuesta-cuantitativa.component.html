@@ -14,6 +14,7 @@
         <button ngbNavLink>{{ formulario.nombre }}</button>
         <ng-template ngbNavContent>
             <app-tab-encuesta-cuantitativa
+                [nombreFormulario]="formulario.nombre"
                 [soloLectura]="encuesta.soloLectura"
                 [idVigilado]="encuesta.idVigilado"
                 [subindicadores]="formulario.subIndicador"

@@ -1,5 +1,5 @@
 <ng-container *ngIf="evidencia && respuesta">
-    <fieldset *ngIf="evidencia.tipoEvidencia === 'FILE'">
+    <fieldset class="d-flex flex-column flex-gap-5" *ngIf="evidencia.tipoEvidencia === 'FILE'">
         <label class="fs-12px validacion">Solo archivos {{ evidencia.validaciones.tipoDato }}</label>
         <app-input-archivo
         [disabled]="soloLectura"
@@ -9,8 +9,9 @@
         (ngModelChange)="manejarCambioEvidenciaArchivo($event)"
         [nombre]="evidencia.idEvidencia.toString()"
         [acepta]="[evidencia.validaciones.extension]" />
+        <span class="fw-semibold fs-12px">Máximo {{evidencia.tamanio}} Mb</span>
         <span (click)="descargarEvidencia()" class="hipervinculo fs-12px cursor-pointer" *ngIf="evidencia.nombreOriginal != ''">
-            {{ evidencia.nombreOriginal }}
+            Evidencia {{ evidencia.consecutivo }} {{ nombreFormulario }}
         </span>
         <span class="fs-12px" *ngIf="evidencia.nombreOriginal == ''">Sin evidencia adjunta.</span>
     </fieldset>

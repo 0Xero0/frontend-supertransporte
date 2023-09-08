@@ -24,18 +24,21 @@
     <ul class="evidencias">
         <li class="cabeceras-evidencia">
             <div class="row">
+                <div class="col-1">Nro</div>
                 <div class="col-3">Descripción de las evidencias</div>
                 <div class="col-2">Tipo de evidencia</div>
-                <div class="col-7">Evidencia</div>
+                <div class="col-6">Evidencia</div>
             </div>
         </li>
         <li class="evidencia" *ngFor="let evidencia of evidencias" [ngClass]="{ 'bg-invalido': evidenciasFaltantes.includes(evidencia.idEvidencia) }">
             <div class="row">
+                <div class="col-1 fw-semibold">{{ evidencia.consecutivo }}</div>
                 <div class="col-3">{{ evidencia.nombre }}</div>
                 <div class="col-2">{{ evidencia.validaciones.tipoDato }}</div>
-                <div class="col-7 row">
+                <div class="col-6 row">
                     <div class="col-4">
                         <app-evidencia-encuesta-cuantitativa
+                        [nombreFormulario]="nombreFormulario"
                         [soloLectura]="soloLectura"
                         [idVigilado]="idVigilado" 
                         [evidencia]="evidencia"

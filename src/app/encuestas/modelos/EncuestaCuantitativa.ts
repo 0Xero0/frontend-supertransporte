@@ -22,6 +22,7 @@ export interface SubIndicador {
 }
 
 export interface Evidencia {
+    consecutivo: number
     idEvidencia: number
     nombre: string
     tipoEvidencia: string // puede ser "FILE"
