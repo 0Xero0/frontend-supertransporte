@@ -60,8 +60,21 @@ export class PaginaEncuestaComponent implements OnInit {
         this.idReporte = Number(parametros.queryParams['reporte'])
         this.historico = parametros.queryParams['historico'] === 'true' ? true : false;
         this.idEncuesta = parametros.params['idEncuestaDiligenciada']
+
+        
         if(this.idEncuesta == 2){
-          this.obtenerEncuestaCuantitativa( this.obtenerIdMesActual() )
+          this.servicioEncuesta.obtenerMeses(this.historico).subscribe({
+            next: (respuesta)=>{
+              if(respuesta.meses.length > 0){
+                this.obtenerEncuestaCuantitativa( respuesta.meses[0].idMes )
+              }else{
+                this.popup.abrirPopupFallido('Ocurrio un error.', 'Ocurrió un error inesperado al consultar los periodos.')
+              }
+            },
+            error: (error: HttpErrorResponse)=>{
+              this.popup.abrirPopupFallido('Ocurrio un error.', 'Ocurrió un error inesperado al consultar los periodos.')
+            }
+          })
         }else{
           this.obtenerEncuesta()
         }
@@ -158,10 +171,6 @@ export class PaginaEncuestaComponent implements OnInit {
         this.vigencia = encuesta.vigencia
       }
     })
-  }
-
-  obtenerIdMesActual(): number{
-    return DateTime.now().month
   }
 
   obtenerEncuesta(){
