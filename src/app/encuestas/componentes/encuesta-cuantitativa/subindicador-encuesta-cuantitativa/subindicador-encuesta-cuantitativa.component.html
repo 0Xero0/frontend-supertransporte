@@ -2,12 +2,19 @@
     <div class="col-1 fw-semibold">{{subindicador.codigo}}</div>
     <div class="col-4">{{subindicador.nombreSubIndicador}}</div>
     <div class="col-7 row">
-        <div class="periodo col-6 d-flex flex-column justify-content-end" *ngFor="let periodo of subindicador.preguntas"
+        <div class="periodo row" *ngFor="let periodo of subindicador.preguntas"
         [ngClass]="{'bg-invalido': preguntasFaltantes.includes(periodo.idPregunta)}">
-            <app-pregunta-encuesta-cuantitativa
-            (cambio)="manejarCambioRespuesta($event)"
-            [pregunta]="periodo"
-            />
+            <div class="col">
+                <app-pregunta-encuesta-cuantitativa
+                (cambio)="manejarCambioRespuesta($event)"
+                [soloLectura]="soloLectura"
+                [pregunta]="periodo"/>
+            </div>
+            <div class="col">
+                <div class="col-6">
+                    <span class="fs-12px">Tipo de dato: <span class="fw-semibold">{{ periodo.validaciones.tipoDato }}</span></span>
+                </div>        
+            </div>
         </div>
     </div>
 </div>

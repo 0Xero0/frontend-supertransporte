@@ -1,5 +1,7 @@
 export interface EncuestaCuantitativa{
     formularios: Formulario[]
+    soloLectura: boolean
+    mensaje: string
     idVigilado: string
     idReporte: string
     idEncuesta: number
@@ -20,6 +22,7 @@ export interface SubIndicador {
 }
 
 export interface Evidencia {
+    consecutivo: number
     idEvidencia: number
     nombre: string
     tipoEvidencia: string // puede ser "FILE"
@@ -41,7 +44,7 @@ export interface Pregunta {
     idPregunta:             number;
     pregunta:               string;
     obligatoria:            boolean;
-    respuesta:              string;
+    respuesta:              number;
     tipoDeEvidencia:        string;
     documento:              string;
     nombreOriginal:         string;

@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { DateTime } from 'luxon';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { DialogosEncuestas } from 'src/app/encuestas/dialogos-encuestas';
 import { EncuestaCuantitativa, Formulario, Pregunta } from 'src/app/encuestas/modelos/EncuestaCuantitativa';
@@ -15,12 +14,15 @@ import { ServicioEncuestas } from 'src/app/encuestas/servicios/encuestas.service
   templateUrl: './encuesta-cuantitativa.component.html',
   styleUrls: ['./encuesta-cuantitativa.component.css']
 })
-export class EncuestaCuantitativaComponent implements OnInit {
+export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
   @ViewChild('popup') popup!: PopupComponent
+
+  @Input('historico') historico: boolean = false
   @Input('encuesta') encuesta!: EncuestaCuantitativa
-  @Input('idMesInicial') idMesInicial!: number
+  
   @Output('hanHabidoCambios') hanHabidoCambios: EventEmitter<boolean>
   @Output('cambioDeMes') cambioDeMes: EventEmitter<number> //Emite el id del mes
+  
   estadoRespuestas: Respuesta[] = [];
   hayCambios: boolean = false;
   respuestas: Respuesta[] = [];
@@ -36,8 +38,7 @@ export class EncuestaCuantitativaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.obtenerMeses()
-    this.setIdMes(this.idMesInicial, false)
+    this.obtenerMeses(this.historico)
     this.encuesta.formularios.forEach(tab => {
       tab.subIndicador.forEach(subindicador => {
         subindicador.preguntas.forEach(pregunta => {
@@ -45,6 +46,12 @@ export class EncuestaCuantitativaComponent implements OnInit {
         })
       })
     })
+  }
+
+  ngOnChanges(cambios: SimpleChanges){
+    if(cambios['historico']){
+      this.obtenerMeses(this.historico)
+    }     
   }
 
   //Acciones
@@ -56,6 +63,8 @@ export class EncuestaCuantitativaComponent implements OnInit {
         next: () => {
           this.setHayCambios(false)
           this.popup.abrirPopupExitoso(DialogosEncuestas.GUARDAR_ENCUESTA_EXITO)
+          this.indicadoresFaltantes = []
+          this.evidenciasFaltantes = []
         },
         error: () => {
           this.popup.abrirPopupFallido(
@@ -86,7 +95,6 @@ export class EncuestaCuantitativaComponent implements OnInit {
   }
 
   manejarCambioDeMes(idMes: number) {
-    const idMesActual = this.idMes
     this.setIdMes(idMes)
   }
 
@@ -143,7 +151,7 @@ export class EncuestaCuantitativaComponent implements OnInit {
   private obtenerRespuesta(pregunta: Pregunta): Respuesta {
     return {
       preguntaId: pregunta.idPregunta,
-      valor: pregunta.respuesta ?? "",
+      valor: pregunta.respuesta.toString() ?? "",
       documento: pregunta.documento,
       nombreArchivo: pregunta.nombreOriginal,
       observacion: pregunta.observacion,
@@ -152,10 +160,13 @@ export class EncuestaCuantitativaComponent implements OnInit {
   }
   //Obtener informacion
 
-  obtenerMeses() {
-    this.servicio.obtenerMeses().subscribe({
+  obtenerMeses(historico: boolean) {
+    this.servicio.obtenerMeses(historico).subscribe({
       next: (respuesta) => {
         this.meses = respuesta.meses
+        if(this.meses.length > 0){
+          this.idMes = this.meses[0].idMes
+        }
       },
       error: (e) => {
         this.popup.abrirPopupFallido(DialogosEncuestas.ERROR_GENERICO_TITULO, DialogosEncuestas.ERROR_GENERICO_DESCRIPCION)
