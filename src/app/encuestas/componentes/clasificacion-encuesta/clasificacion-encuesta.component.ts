@@ -6,6 +6,7 @@ import { RespuestaInvalida } from '../../modelos/RespuestaInvalida';
 import { PreguntaEncuestaComponent } from '../pregunta-encuesta/pregunta-encuesta.component';
 import { RespuestaVerificacion } from '../../modelos/RespuestaVerificacion';
 import { Maestra } from 'src/app/verificaciones/modelos/Maestra';
+import { Motivo } from '../../modelos/Motivo';
 
 @Component({
   selector: 'app-clasificacion-encuesta',
@@ -19,15 +20,17 @@ export class ClasificacionEncuestaComponent implements OnInit {
   @Output('haHabidoErrorArchivo') haHabidoErrorArchivo: EventEmitter<HttpErrorResponse>
   @Output('archivoExcedeTamano') archivoExcedeTamano: EventEmitter<number>
 
-  @Input('idVigilado') idVigilado!: string
-  @Input('clasificacion') clasificacion!: Clasificacion
-  @Input('soloLectura') soloLectura: boolean = true
-  @Input('camposDeVerificacion') camposDeVerificacion: boolean = false
-  @Input('camposDeVerificacionVisibles') camposDeVerificacionVisibles: boolean = false
-  @Input('observacion') observacion: boolean  = false
-  @Input('justificable') justificable: boolean = false
-  @Input('opcionesCumplimiento') opcionesCumplimiento: Maestra[] = []
-  @Input('opcionesCorrespondencia') opcionesCorrespondencia: Maestra[] = []
+  @Input() idVigilado!: string
+  @Input() clasificacion!: Clasificacion
+  @Input() soloLectura: boolean = true
+  @Input() camposDeVerificacion: boolean = false
+  @Input() camposDeVerificacionVisibles: boolean = false
+  @Input() observacion: boolean  = false
+  @Input() justificable: boolean = false
+  @Input() opcionesCumplimiento: Maestra[] = []
+  @Input() opcionesCorrespondencia: Maestra[] = []
+  @Input() motivos: Motivo[] = []
+  
   desplegado: boolean = true
   preguntasRespondidas: Respuesta[] = []
   verificacionesRespondidas: RespuestaVerificacion[] = []

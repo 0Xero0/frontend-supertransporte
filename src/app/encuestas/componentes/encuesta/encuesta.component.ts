@@ -11,6 +11,7 @@ import { RespuestaVerificacion } from '../../modelos/RespuestaVerificacion';
 import { ServicioVerificaciones } from 'src/app/verificaciones/servicios/verificaciones.service';
 import { Maestra } from 'src/app/verificaciones/modelos/Maestra';
 import { DialogosEncuestas } from '../../dialogos-encuestas';
+import { Motivo } from '../../modelos/Motivo';
 
 @Component({
   selector: 'app-encuesta',
@@ -35,15 +36,17 @@ export class EncuestaComponent implements OnInit {
   hayCambios: boolean = false
   opcionesCumplimiento: Maestra[] = []
   opcionesCorrespondencia: Maestra[] = []
+  motivos: Motivo[] = []
   
   constructor(
     private servicioEncuestas: ServicioEncuestas,
-    private servicioVerificacion: ServicioVerificaciones,
+    private servicioVerificacion: ServicioVerificaciones
   ){
     this.hanHabidoCambios = new EventEmitter<boolean>();
   }
 
   ngOnInit(): void {
+    this.obtenerMotivos()
     this.obtenerOpcionesCumplimientoYCorrespondencia()
   }
 
@@ -85,6 +88,14 @@ export class EncuestaComponent implements OnInit {
           DialogosEncuestas.ERROR_OPCIONES_CORRESPONDENCIA_TITULO,
           DialogosEncuestas.ERROR_OPCIONES_CORRESPONDENCIA_DESCRIPCION
         )
+      }
+    })
+  }
+
+  obtenerMotivos(){
+    this.servicioEncuestas.obtenerMotivos().subscribe({
+      next: (motivos) =>{
+        this.motivos = motivos
       }
     })
   }
