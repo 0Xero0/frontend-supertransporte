@@ -16,12 +16,12 @@
 .nombre-original-archivo:hover{
     color: var(--azul);
 }
+.advertencia{
+    background-color: var(--bg-color-advertencia);
+}
 .pregunta-invalida{
     background-color: var(--bg-color-peligro);
 }
 .pregunta-valida{
     background-color: var(--bg-color-exitoso);
-}
-.advertencia{
-    background-color: var(--bg-color-advertencia);
 }
