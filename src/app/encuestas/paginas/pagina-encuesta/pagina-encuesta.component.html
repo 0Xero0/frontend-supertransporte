@@ -20,14 +20,14 @@
     </div>
     <div class="d-block w-100 mb-3" *ngIf="idEncuesta == 2">
         <button
-        *ngIf="historico"
+        *ngIf="historico && !esUsuarioAdministrador"
         type="button" 
         class="boton primario relleno" 
         [routerLink]="['/administrar', 'encuesta', idEncuesta]" 
         [queryParams]="{ vigilado: idVigilado, reporte: idReporte, historico: false }">Salir de históricos</button>
 
         <button
-        *ngIf="!historico"
+        *ngIf="!historico && !esUsuarioAdministrador"
         type="button" 
         class="boton primario relleno" 
         [routerLink]="['/administrar', 'encuesta', idEncuesta]" 
