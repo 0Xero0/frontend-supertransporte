@@ -120,4 +120,10 @@ export class ClasificacionEncuestaComponent implements OnInit {
     })
   }
 
+  limpiarResaltado(){
+    this.preguntas.forEach( pregunta => {
+      pregunta.invalida = false
+    })
+  }
+
 }

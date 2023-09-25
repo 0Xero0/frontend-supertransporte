@@ -122,6 +122,7 @@ export class EncuestaComponent implements OnInit {
     this.servicioEncuestas.guardarRespuesta(this.idReporte, { respuestas: this.obtenerRespuestas() }).subscribe({
       next: ( respuesta ) =>{
         this.popup.abrirPopupExitoso(respuesta.mensaje)
+        this.limpiarResaltado()
         this.setHayCambios(false)
       },
       error: (error: HttpErrorResponse) =>{
@@ -135,6 +136,7 @@ export class EncuestaComponent implements OnInit {
     this.servicioVerificacion.guardarVerificaciones(this.idReporte, this.obtenerVerificaciones()).subscribe({
       next: ( respuesta: any ) =>{
         this.popup.abrirPopupExitoso('Se han guardado las verificaciones')
+        this.limpiarResaltado()        
         this.setHayCambios(false)
       },
       error: (error: HttpErrorResponse) =>{
@@ -147,6 +149,12 @@ export class EncuestaComponent implements OnInit {
     this.clasificaciones.forEach( clasificacion =>{
       clasificacion.resaltarRespuestasInvalidas(invalidas)
     })
+  }
+
+  limpiarResaltado(){
+    this.clasificaciones.forEach( clasificacion =>{
+      clasificacion.limpiarResaltado()
+    } )
   }
 
   exportarPDF(){
