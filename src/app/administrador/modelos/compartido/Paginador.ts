@@ -56,7 +56,7 @@ export class Paginador<T>{
 
     filtrar(filtros?: T){
         this._filtros = filtros
-        this._funcionObtenerRecursos(this._pagina, this._limite, this._filtros).subscribe({
+        this._funcionObtenerRecursos(this.paginaActualPorDefecto, this.limitePorDefecto, this._filtros).subscribe({
             next: (paginacion) => {
                 this.cambiarTotales(paginacion)
             }

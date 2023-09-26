@@ -89,7 +89,7 @@ export class PaginaAsignacionComponent implements OnInit{
 
   seleccionarVerificador(identificacionVerificador: string){
     this.verificadorSeleccionado = identificacionVerificador
-    this.paginadorReportesAsignados.inicializar()
+    this.paginadorReportesAsignados
     this.paginadorReportesAsignados.filtrar({identificacionVerificador: identificacionVerificador})
   }
 
@@ -112,7 +112,6 @@ export class PaginaAsignacionComponent implements OnInit{
     this.servicioReportes.eliminarAsignacion(numeroReporte).subscribe({
       next:  ()=>{
         this.popup.abrirPopupExitoso('Asignación removida.')
-        this.paginadorReportesAsignados.inicializar()
         this.paginadorReportesAsignados.filtrar({identificacionVerificador: this.verificadorSeleccionado})
       },
       error: (error: HttpErrorResponse)=>{
@@ -136,7 +135,6 @@ export class PaginaAsignacionComponent implements OnInit{
       next: ()=>{
         this.paginadorReportes.refrescar()
         this.limpiarSeleccionados()
-        this.paginadorReportesAsignados.inicializar()
         this.paginadorReportesAsignados.filtrar({identificacionVerificador: this.verificadorSeleccionado})
         this.popup.abrirPopupExitoso('Reportes asignados correctamente.')
       },
