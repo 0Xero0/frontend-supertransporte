@@ -23,7 +23,6 @@ export class ServicioEncuestas extends Autenticable {
 
   constructor(private http: HttpClient) {
     super()
-    this.establecerMotivos()
   }
 
   obtenerMeses(historico: boolean = false):Observable<{ meses: Mes[] }>{
@@ -95,17 +94,9 @@ export class ServicioEncuestas extends Autenticable {
       })
   }
 
-  establecerMotivos(): void {
+  obtenerMotivos(){
     const endpoint = '/api/v1/encuestas/listar-motivo'
-    this.http.get<Motivo[]>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() }).subscribe({
-      next: (motivos)=>{
-        this.motivos = motivos
-      }
-    })
-  }
-
-  obtenerMotivos(): Motivo[] {
-    return this.motivos
+    return this.http.get<Motivo[]>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }
 
   exportarExcel(idReporte: number){

@@ -20,14 +20,15 @@ export class PreguntaEncuestaComponent implements OnInit {
   @Output('haHabidoErrorArchivo') haHabidoErrorArchivo: EventEmitter<HttpErrorResponse>
   @Output('archivoExcedeTamano') archivoExcedeTamano: EventEmitter<number>
 
-  @Input('pregunta') pregunta!: Pregunta
-  @Input('idVigilado') idVigilado!: string
-  @Input('soloLectura') soloLectura: boolean = true
-  @Input('camposDeVerificacion') camposDeVerificacion: boolean = false
-  @Input('camposDeVerificacionVisibles') camposDeVerificacionVisibles: boolean = false
-  @Input('justificable') justificable: boolean = false
-  @Input('opcionesCumplimiento') opcionesCumplimiento: Maestra[] = []
-  @Input('opcionesCorrespondencia') opcionesCorrespondencia: Maestra[] = []
+  @Input() pregunta!: Pregunta
+  @Input() idVigilado!: string
+  @Input() soloLectura: boolean = true
+  @Input() camposDeVerificacion: boolean = false
+  @Input() camposDeVerificacionVisibles: boolean = false
+  @Input() justificable: boolean = false
+  @Input() opcionesCumplimiento: Maestra[] = []
+  @Input() opcionesCorrespondencia: Maestra[] = []
+  @Input() motivos         : Motivo[] = []
 
   observacionEvidenciaCorrespondeDeshabilitado: boolean = false
   observacionDocumentoCumpleDeshabilitado:      boolean = false
@@ -36,7 +37,6 @@ export class PreguntaEncuestaComponent implements OnInit {
   invalida:                          boolean = false
   advertencia:                       boolean = false
 
-  motivos         : Motivo[] = []
   valoresNegativos: string[] = ["N", "NO", "NO APLICA"]
 
   observacion:              string = ""
@@ -53,9 +53,7 @@ export class PreguntaEncuestaComponent implements OnInit {
   clasesRespuestas = {}
   
   constructor(
-    private servicioArchivos: ServicioArchivosEncuestas,
-    private servicioEncuesta: ServicioEncuestas,
-    private servicioVerificaciones: ServicioVerificaciones,
+    private servicioArchivos: ServicioArchivosEncuestas
   ) { 
     this.valorModificado = new EventEmitter<Respuesta>();
     this.nuevaVerificacion = new EventEmitter<RespuestaVerificacion>();
@@ -64,11 +62,9 @@ export class PreguntaEncuestaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.obtenerMotivos()
-
-    if(this.pregunta.respuesta && this.valoresNegativos.includes(this.pregunta.respuesta) && !this.soloLectura){
-      this.setMotivoDeshabilitado(false)
+    if(this.pregunta.respuesta && this.valoresNegativos.includes(this.pregunta.respuesta)){
       this.setMotivo(this.pregunta.observacion, false)
+      this.setMotivoDeshabilitado(false)
     }else{
       this.setMotivoDeshabilitado(true)
     }
@@ -96,9 +92,6 @@ export class PreguntaEncuestaComponent implements OnInit {
   }
 
   //Obtener recursos
-  obtenerMotivos(){
-    this.motivos = this.servicioEncuesta.obtenerMotivos()
-  }
 
   //Manejadores de eventos
   alCambiarArchivo(){

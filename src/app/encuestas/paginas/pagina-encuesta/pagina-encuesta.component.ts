@@ -16,6 +16,7 @@ import { DialogosEncuestas } from '../../dialogos-encuestas';
 import { RespuestaInvalida } from '../../modelos/RespuestaInvalida';
 import { combineLatest } from 'rxjs';
 import { Mes } from '../../modelos/Mes';
+import { Rol } from 'src/app/autenticacion/modelos/Rol';
 
 @Component({
   selector: 'app-pagina-encuesta',
@@ -27,7 +28,9 @@ export class PaginaEncuestaComponent implements OnInit {
   @ViewChild('modalConfirmar') modalConfirmar!: ModalConfirmarEnviarComponent
   @ViewChild('componenteEncuesta') componenteEncuesta!: EncuestaComponent
   @ViewChild('componenteEncuestaCuantitativa') componenteEncuestaCuantitativa!: EncuestaCuantitativaComponent
+
   usuario?: Usuario | null
+  rol: Rol | null
   encuesta?: Encuesta
   encuestaCuantitativa?: EncuestaCuantitativa 
   vigencia?: string
@@ -40,6 +43,7 @@ export class PaginaEncuestaComponent implements OnInit {
   camposDeVerificacionVisibles: boolean = true
   hayCambios: boolean = false
   historico: boolean = false
+  esUsuarioAdministrador: boolean;
   meses: Mes[] = []
   idMesPorDefecto?: number 
 
@@ -49,8 +53,12 @@ export class PaginaEncuestaComponent implements OnInit {
     private router: Router,
     private activeRoute: ActivatedRoute
   ) {
+    
     this.usuario = this.servicioLocalStorage.obtenerUsuario()
+    this.rol = this.servicioLocalStorage.obtenerRol()
     this.idUsuario = this.usuario!.usuario
+    this.esUsuarioAdministrador = this.rol!.id === '001' ? true : false;
+
     combineLatest({
       params: this.activeRoute.params,
       queryParams: this.activeRoute.queryParams
@@ -58,7 +66,7 @@ export class PaginaEncuestaComponent implements OnInit {
       next: (parametros)=>{
         this.idVigilado = parametros.queryParams['vigilado']
         this.idReporte = Number(parametros.queryParams['reporte'])
-        this.historico = parametros.queryParams['historico'] === 'true' ? true : false;
+        this.historico = parametros.queryParams['historico'] === 'true' || this.esUsuarioAdministrador ? true : false;
         this.idEncuesta = parametros.params['idEncuestaDiligenciada']
 
         

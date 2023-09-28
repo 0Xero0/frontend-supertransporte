@@ -17,11 +17,11 @@ import { ServicioEncuestas } from 'src/app/encuestas/servicios/encuestas.service
 export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
   @ViewChild('popup') popup!: PopupComponent
 
-  @Input('historico') historico: boolean = false
-  @Input('encuesta') encuesta!: EncuestaCuantitativa
+  @Input() historico: boolean = false
+  @Input() encuesta!: EncuestaCuantitativa
   
-  @Output('hanHabidoCambios') hanHabidoCambios: EventEmitter<boolean>
-  @Output('cambioDeMes') cambioDeMes: EventEmitter<number> //Emite el id del mes
+  @Output() hanHabidoCambios: EventEmitter<boolean>
+  @Output() cambioDeMes: EventEmitter<number> //Emite el id del mes
   
   estadoRespuestas: Respuesta[] = [];
   hayCambios: boolean = false;
