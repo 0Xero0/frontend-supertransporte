@@ -170,6 +170,12 @@ export class PaginaEncuestaComponent implements OnInit {
     })
   }
 
+  //Manejadores de eventos
+
+  manejarFormularioGuardado(idMes: number){
+    this.obtenerEncuestaCuantitativa(idMes)
+  }
+
   //Obtener información
   obtenerEncuestaCuantitativa(idMes: number){
     this.servicioEncuesta.obtenerEncuestaCuantitativa(this.idReporte!, this.idVigilado!, idMes, this.historico).subscribe({

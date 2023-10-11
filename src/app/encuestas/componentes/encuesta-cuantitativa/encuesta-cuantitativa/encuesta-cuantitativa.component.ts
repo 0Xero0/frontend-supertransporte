@@ -22,6 +22,7 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
   
   @Output() hanHabidoCambios: EventEmitter<boolean>
   @Output() cambioDeMes: EventEmitter<number> //Emite el id del mes
+  @Output() formularioGuardado: EventEmitter<number>
   
   estadoRespuestas: Respuesta[] = [];
   hayCambios: boolean = false;
@@ -35,6 +36,7 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
   constructor(private servicio: ServicioEncuestas, private router: Router) {
     this.hanHabidoCambios = new EventEmitter<boolean>()
     this.cambioDeMes = new EventEmitter<number>()
+    this.formularioGuardado = new EventEmitter<number>()
   }
 
   ngOnInit(): void {
@@ -65,6 +67,7 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
           this.popup.abrirPopupExitoso(DialogosEncuestas.GUARDAR_ENCUESTA_EXITO)
           this.indicadoresFaltantes = []
           this.evidenciasFaltantes = []
+          this.formularioGuardado.emit(this.idMes)
         },
         error: () => {
           this.popup.abrirPopupFallido(

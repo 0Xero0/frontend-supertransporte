@@ -10,9 +10,15 @@
         [nombre]="evidencia.idEvidencia.toString()"
         [acepta]="[evidencia.validaciones.extension]" />
         <span class="fw-semibold fs-12px">Máximo {{evidencia.tamanio}} Mb</span>
-        <span (click)="descargarEvidencia()" class="hipervinculo fs-12px cursor-pointer" *ngIf="evidencia.nombreOriginal != ''">
-            Evidencia {{ evidencia.consecutivo }} {{ nombreFormulario }}
+        <span class="fs-12px">
+            <span class="fw-semibold">
+                Archivo adjunto: 
+            </span>
+            <span (click)="descargarEvidencia()" class="hipervinculo cursor-pointer" *ngIf="evidencia.nombreOriginal != ''">
+                Evidencia {{ evidencia.consecutivo }} {{ nombreFormulario }}
+            </span>
         </span>
+        
         <span class="fs-12px" *ngIf="evidencia.nombreOriginal == ''">Sin evidencia adjunta.</span>
     </fieldset>
     
