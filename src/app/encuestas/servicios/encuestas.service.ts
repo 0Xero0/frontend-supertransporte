@@ -15,6 +15,7 @@ import { FiltrosReportes } from '../modelos/FiltrosReportes';
 import { ResultadosIndicadoresMock } from './ResultadosIndicadoresMock';
 import { ResultadosIndicadores } from '../modelos/ResultadosIndicadores';
 import { MesVigencia } from '../modelos/MesVigencia';
+import { Vigencia } from '../modelos/Vigencia';
 
 @Injectable({
   providedIn: 'root'
@@ -117,9 +118,14 @@ export class ServicioEncuestas extends Autenticable {
     })
   }
 
-  obtenerMesesVigencia(){
-    const endpoint = '/api/v1/meses'
+  obtenerMesesVigencia(vigencia: number){
+    const endpoint = `/api/v1/meses?vigencia=${vigencia}`
     return this.http.get<MesVigencia[]>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
+  }
+
+  obtenerVigencias(){
+    const endpoint = '/api/v1/vigencias'
+    return this.http.get<Vigencia[]>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }
 
   cambiarEstadoMesVigencia(idMesVigencia: number){
