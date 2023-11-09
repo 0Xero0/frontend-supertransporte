@@ -17,6 +17,9 @@ import { PreguntaEncuestaCuantitativaComponent } from './componentes/encuesta-cu
 import { SubindicadorEncuestaCuantitativaComponent } from './componentes/encuesta-cuantitativa/subindicador-encuesta-cuantitativa/subindicador-encuesta-cuantitativa.component';
 import { EvidenciaEncuestaCuantitativaComponent } from './componentes/encuesta-cuantitativa/evidencia-encuesta-cuantitativa/evidencia-encuesta-cuantitativa.component';
 import { ModalConfirmarEnviarComponent } from './componentes/modal-confirmar-enviar/modal-confirmar-enviar.component';
+import { PaginaResultadosIndicadoresComponent } from './paginas/pagina-resultados-indicadores/pagina-resultados-indicadores.component';
+import { TablaResultadosIndicadoresComponent } from './componentes/tabla-resultados-indicadores/tabla-resultados-indicadores.component';
+import { PaginaAdministrarMesesComponent } from './paginas/pagina-administrar-meses/pagina-administrar-meses.component';
 
 
 
@@ -32,7 +35,10 @@ import { ModalConfirmarEnviarComponent } from './componentes/modal-confirmar-env
     PreguntaEncuestaCuantitativaComponent,
     SubindicadorEncuestaCuantitativaComponent,
     EvidenciaEncuestaCuantitativaComponent,
-    ModalConfirmarEnviarComponent
+    ModalConfirmarEnviarComponent,
+    PaginaResultadosIndicadoresComponent,
+    TablaResultadosIndicadoresComponent,
+    PaginaAdministrarMesesComponent
   ],
   imports: [
     CommonModule,

@@ -31,7 +31,7 @@
                     <tr *ngFor="let reporte of reportes ; let i = index">
                         <td><img 
                             [routerLink]="['/administrar', 'encuesta', reporte.idEncuestaDiligenciada]"
-                            [queryParams]="{ vigilado: reporte.idVigilado , reporte: reporte.numeroReporte }"  
+                            [queryParams]="{ vigilado: reporte.idVigilado , reporte: reporte.numeroReporte, vigencia: reporte.vigencia }"  
                             class="cursor-pointer" src="assets/img/buscar-documento.png" alt="buscar-encuesta" draggable="false"></td>
                         <td>{{ reporte.numeroReporte }}</td>
                         <td>{{ reporte.encuesta }}</td>

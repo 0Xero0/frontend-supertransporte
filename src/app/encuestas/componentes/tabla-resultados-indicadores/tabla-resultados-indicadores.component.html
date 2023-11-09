@@ -1,0 +1,31 @@
+<table class="tabla-resultados-indicadores" *ngIf="resultadosIndicadores">
+    <thead>
+        <tr>
+            <th>Nro</th>
+            <th>Indicador</th>
+            <th>Ene</th>
+            <th>Feb</th>
+            <th>Mar</th>
+            <th>Abr</th>
+            <th>May</th>
+            <th>Jun</th>
+            <th>Jul</th>
+            <th>Ago</th>
+            <th>Sep</th>
+            <th>Oct</th>
+            <th>Nov</th>
+            <th>Dic</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let indicador of resultadosIndicadores.indicadores">
+            <tr *ngFor="let fila of indicador.filas ; let i = index">
+                <td *ngIf="i === 0" [attr.rowspan]="indicador.filas.length" class="fw-semibold">{{ indicador.id }}</td>
+                <td *ngIf="i === 0" [attr.rowspan]="indicador.filas.length">{{ indicador.nombre }}</td>
+                <td *ngFor="let columna of fila.columas" [attr.colspan]="columna.span">
+                    {{ columna.valor }}
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>

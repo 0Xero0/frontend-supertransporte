@@ -33,7 +33,7 @@ export class PaginaEncuestaComponent implements OnInit {
   rol: Rol | null
   encuesta?: Encuesta
   encuestaCuantitativa?: EncuestaCuantitativa 
-  vigencia?: string
+  vigencia?: number
   idVigilado?: string
   idReporte?: number
   idUsuario: string
@@ -68,10 +68,10 @@ export class PaginaEncuestaComponent implements OnInit {
         this.idReporte = Number(parametros.queryParams['reporte'])
         this.historico = parametros.queryParams['historico'] === 'true' || this.esUsuarioAdministrador ? true : false;
         this.idEncuesta = parametros.params['idEncuestaDiligenciada']
-
+        this.vigencia = Number(parametros.queryParams['vigencia'])
         
         if(this.idEncuesta == 2){
-          this.servicioEncuesta.obtenerMeses(this.historico).subscribe({
+          this.servicioEncuesta.obtenerMeses(this.vigencia, this.historico).subscribe({
             next: (respuesta)=>{
               if(respuesta.meses.length > 0){
                 this.obtenerEncuestaCuantitativa( respuesta.meses[0].idMes )
@@ -182,7 +182,7 @@ export class PaginaEncuestaComponent implements OnInit {
       next: (encuesta)=>{
         this.encuestaCuantitativa = encuesta
         this.soloLectura = encuesta.soloLectura
-        this.vigencia = encuesta.vigencia
+        this.vigencia = Number(encuesta.vigencia)
       }
     })
   }

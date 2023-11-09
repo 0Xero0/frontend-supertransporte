@@ -15,6 +15,8 @@ import { PaginaCategorizacion } from './categorizacion/paginas/pagina-categoriza
 import { SoporteAccesoComponent } from './autenticacion/componentes/soporte-acceso/soporte-acceso.component';
 import { PaginaAsignacionTamanoOrganizacionComponent } from './categorizacion/paginas/pagina-asignacion-tamano-organizacion/pagina-asignacion-tamano-organizacion.component';
 import { PaginaFormularioAspiranteProveedorTecnologicoComponent } from './formularios/paginas/pagina-formulario-aspirante-proveedor-tecnologico/pagina-formulario-aspirante-proveedor-tecnologico.component';
+import { PaginaResultadosIndicadoresComponent } from './encuestas/paginas/pagina-resultados-indicadores/pagina-resultados-indicadores.component';
+import { PaginaAdministrarMesesComponent } from './encuestas/paginas/pagina-administrar-meses/pagina-administrar-meses.component';
 
 
 
@@ -31,6 +33,14 @@ const routes: Routes = [
       {
         path: 'encuesta/:idEncuestaDiligenciada',
         component: PaginaEncuestaComponent
+      },
+      {
+        path: 'meses-vigencia',
+        component: PaginaAdministrarMesesComponent
+      },
+      {
+        path: 'resultado-indicadores',
+        component: PaginaResultadosIndicadoresComponent
       },
       {
         path: 'informacion-general',
