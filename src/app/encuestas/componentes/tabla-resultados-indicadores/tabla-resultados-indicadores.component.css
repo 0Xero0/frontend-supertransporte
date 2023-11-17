@@ -1,0 +1,15 @@
+.tabla-resultados-indicadores{
+    border-collapse: collapse;
+}
+.tabla-resultados-indicadores td,
+.tabla-resultados-indicadores th{
+    border: 1px solid gainsboro;
+    padding: 5px 8px;
+    text-align: center;
+    font-size: 14px;
+}
+.tabla-resultados-indicadores th{
+    font-weight: 600;
+    color: var(--azul-oscuro);
+    background-color: var(--azul-claro);
+}

@@ -1,0 +1,27 @@
+<div class="px-sm-2 px-md-3 px-lg-4 my-4">
+    <h1>Administrar meses vigencia</h1>
+    <div class="vigencia my-4">
+        <fieldset class="select-vigencia">
+            <label class="fw-semibold fs-14px">Vigencia</label>
+            <select class="form-select" [(ngModel)]="vigenciaActual" (ngModelChange)="cambiarVigencia($event)">
+                <option [value]="vigencia.anio" *ngFor="let vigencia of vigencias">
+                    {{ vigencia.anio }}
+                </option>
+            </select>
+        </fieldset>
+    </div>
+    <hr>
+    <div class="meses">
+        <div class="mes" *ngFor="let mes of meses">
+            <span class="label-mes"><b>{{mes.visual}}</b> - {{mes.nombre}}</span>
+            <div class="input-mes">
+                <label class="fs-12px fw-semibold">Activo</label>
+                <label class="switch">
+                    <input type="checkbox" [checked]="mes.estado" (change)="cambiarEstadoMes(mes.id)">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+<app-popup #popup />

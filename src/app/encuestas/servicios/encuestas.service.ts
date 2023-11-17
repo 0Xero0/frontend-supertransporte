@@ -12,6 +12,10 @@ import { Observable } from 'rxjs';
 import { Mes } from '../modelos/Mes';
 import { RespuestaEvidencia } from '../modelos/RespuestaEvidencia';
 import { FiltrosReportes } from '../modelos/FiltrosReportes';
+import { ResultadosIndicadoresMock } from './ResultadosIndicadoresMock';
+import { ResultadosIndicadores } from '../modelos/ResultadosIndicadores';
+import { MesVigencia } from '../modelos/MesVigencia';
+import { Vigencia } from '../modelos/Vigencia';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +29,8 @@ export class ServicioEncuestas extends Autenticable {
     super()
   }
 
-  obtenerMeses(historico: boolean = false):Observable<{ meses: Mes[] }>{
-    const endpoint = `/api/v1/maestras/meses?historico=${historico}`
+  obtenerMeses(vigencia: number, historico: boolean = false):Observable<{ meses: Mes[] }>{
+    const endpoint = `/api/v1/maestras/meses?vigencia=${vigencia}&historico=${historico}`
     return this.http.get<{ meses: Mes[] }>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }
 
@@ -67,9 +71,9 @@ export class ServicioEncuestas extends Autenticable {
       })
   }
 
-  guardarRespuestasIndicadores(idReporte: number, respuestas: RespuestaEnviar[], evidencias: RespuestaEvidencia[]){
+  guardarRespuestasIndicadores(idReporte: number, respuestas: RespuestaEnviar[], evidencias: RespuestaEvidencia[], mesId: number ){
     const endpoint = `/api/v1/inidicador/respuestas`
-    return this.http.post(`${this.host}${endpoint}`, { reporteId: idReporte, respuestas, evidencias }, {
+    return this.http.post(`${this.host}${endpoint}`, { reporteId: idReporte, respuestas, evidencias, mesId }, {
       headers: this.obtenerCabeceraAutorizacion()
     })
   }
@@ -107,4 +111,25 @@ export class ServicioEncuestas extends Autenticable {
     })
   }
 
+  obtenerResultadosIndicadores(){
+    return new Observable<ResultadosIndicadores>(subscripcion =>{
+      subscripcion.next( ResultadosIndicadoresMock )
+      subscripcion.complete()
+    })
+  }
+
+  obtenerMesesVigencia(vigencia: number){
+    const endpoint = `/api/v1/meses?vigencia=${vigencia}`
+    return this.http.get<MesVigencia[]>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
+  }
+
+  obtenerVigencias(){
+    const endpoint = '/api/v1/vigencias'
+    return this.http.get<Vigencia[]>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
+  }
+
+  cambiarEstadoMesVigencia(idMesVigencia: number){
+    const endpoint = `/api/v1/meses/estado/${idMesVigencia}`
+    return this.http.put<MesVigencia>(`${this.host}${endpoint}`, undefined, { headers: this.obtenerCabeceraAutorizacion() })
+  }
 }
