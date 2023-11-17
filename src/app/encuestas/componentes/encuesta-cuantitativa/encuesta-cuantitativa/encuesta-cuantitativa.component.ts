@@ -19,11 +19,11 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
 
   @Input() historico: boolean = false
   @Input() encuesta!: EncuestaCuantitativa
-  
+
   @Output() hanHabidoCambios: EventEmitter<boolean>
   @Output() cambioDeMes: EventEmitter<number> //Emite el id del mes
   @Output() formularioGuardado: EventEmitter<number>
-  
+
   estadoRespuestas: Respuesta[] = [];
   hayCambios: boolean = false;
   respuestas: Respuesta[] = [];
@@ -50,10 +50,10 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
     })
   }
 
-  ngOnChanges(cambios: SimpleChanges){
-    if(cambios['historico']){
+  ngOnChanges(cambios: SimpleChanges) {
+    if (cambios['historico']) {
       this.obtenerMeses(Number(this.encuesta.vigencia), this.historico)
-    }     
+    }
   }
 
   //Acciones
@@ -61,30 +61,32 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
     this.servicio.guardarRespuestasIndicadores(
       Number(this.encuesta.idReporte),
       this.respuestas,
-      this.evidencias).subscribe({
-        next: () => {
-          this.setHayCambios(false)
-          this.popup.abrirPopupExitoso(DialogosEncuestas.GUARDAR_ENCUESTA_EXITO)
-          this.indicadoresFaltantes = []
-          this.evidenciasFaltantes = []
-          this.formularioGuardado.emit(this.idMes)
-        },
-        error: () => {
-          this.popup.abrirPopupFallido(
-            DialogosEncuestas.GUARDAR_ENCUESTA_ERROR_TITULO,
-            DialogosEncuestas.GUARDAR_ENCUESTA_ERROR_DESCRIPCION
-          )
-        }
-      })
+      this.evidencias,
+      this.idMes!
+    ).subscribe({
+      next: () => {
+        this.setHayCambios(false)
+        this.popup.abrirPopupExitoso(DialogosEncuestas.GUARDAR_ENCUESTA_EXITO)
+        this.indicadoresFaltantes = []
+        this.evidenciasFaltantes = []
+        this.formularioGuardado.emit(this.idMes)
+      },
+      error: () => {
+        this.popup.abrirPopupFallido(
+          DialogosEncuestas.GUARDAR_ENCUESTA_ERROR_TITULO,
+          DialogosEncuestas.GUARDAR_ENCUESTA_ERROR_DESCRIPCION
+        )
+      }
+    })
   }
 
   enviar() {
     this.servicio.enviarRespuestaIndicadores(this.encuesta.idEncuesta, Number(this.encuesta.idReporte), this.encuesta.idVigilado, this.idMes!).subscribe({
-      next: ()=>{
+      next: () => {
         this.popup.abrirPopupExitoso(DialogosEncuestas.ENVIAR_ENCUESTA_EXITO)
         this.router.navigateByUrl(`/administrar/encuestas/${this.encuesta.idEncuesta}`)
       },
-      error: (error: HttpErrorResponse)=>{
+      error: (error: HttpErrorResponse) => {
         this.evidenciasFaltantes = error.error.faltantesEvidencias
         this.indicadoresFaltantes = error.error.faltantesIndicadores
         this.popup.abrirPopupFallido('No se han respondido todas las preguntas.', 'Hay preguntas obligatorias sin responder.')
@@ -93,7 +95,7 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
   }
 
   //Manejadores de eventos
-  manejarEvidenciaExcedeTamano(tamano: number){
+  manejarEvidenciaExcedeTamano(tamano: number) {
     this.popup.abrirPopupFallido('Limite de tamaño excedido.', `El archivo debe pesar como máximo ${tamano} megabytes.`)
   }
 
@@ -111,7 +113,7 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
     this.setHayCambios(true)
   }
 
-  manejarErrorAlCambiarEvidencia(error: HttpErrorResponse){
+  manejarErrorAlCambiarEvidencia(error: HttpErrorResponse) {
     this.popup.abrirPopupFallido(error.error.mensaje)
   }
 
@@ -167,7 +169,7 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
     this.servicio.obtenerMeses(vigencia, historico).subscribe({
       next: (respuesta) => {
         this.meses = respuesta.meses
-        if(this.meses.length > 0){
+        if (this.meses.length > 0) {
           this.idMes = this.meses[0].idMes
         }
       },

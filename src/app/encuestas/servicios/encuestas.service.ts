@@ -71,9 +71,9 @@ export class ServicioEncuestas extends Autenticable {
       })
   }
 
-  guardarRespuestasIndicadores(idReporte: number, respuestas: RespuestaEnviar[], evidencias: RespuestaEvidencia[]){
+  guardarRespuestasIndicadores(idReporte: number, respuestas: RespuestaEnviar[], evidencias: RespuestaEvidencia[], mesId: number ){
     const endpoint = `/api/v1/inidicador/respuestas`
-    return this.http.post(`${this.host}${endpoint}`, { reporteId: idReporte, respuestas, evidencias }, {
+    return this.http.post(`${this.host}${endpoint}`, { reporteId: idReporte, respuestas, evidencias, mesId }, {
       headers: this.obtenerCabeceraAutorizacion()
     })
   }
