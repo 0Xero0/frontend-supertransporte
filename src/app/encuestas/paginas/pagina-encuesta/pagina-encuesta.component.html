@@ -17,6 +17,18 @@
             <span class="fs-20px fw-semibold texto-azul-004884">Vigencia requerida: </span>
             <span>{{ vigencia }}</span>
         </div>
+        <div class="d-block " *ngIf="encuesta">
+            <span class="fs-20px fw-semibold texto-azul-004884">Modalidad: </span>
+            <span>{{ encuesta.modalidad }}</span>
+        </div>
+        <div class="d-block " *ngIf="encuesta">
+            <span class="fs-20px fw-semibold texto-azul-004884">Total de conductores: </span>
+            <span>{{ encuesta.totalConductores }}</span>
+        </div>
+        <div class="d-block " *ngIf="encuesta">
+            <span class="fs-20px fw-semibold texto-azul-004884">Total de Vehiculos: </span>
+            <span>{{ encuesta.totalVehiculos }}</span>
+        </div>
     </div>
     <div class="d-block w-100 mb-3" *ngIf="idEncuesta == 2">
         <button

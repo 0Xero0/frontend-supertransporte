@@ -12,6 +12,9 @@ export interface Encuesta {
     razonSocila: string
     estadoActual: string
     clasificaciones: Clasificacion[];
+    modalidad: string;
+    totalConductores: number;
+    totalVehiculos: number;
 }
 
 export interface Clasificacion {
