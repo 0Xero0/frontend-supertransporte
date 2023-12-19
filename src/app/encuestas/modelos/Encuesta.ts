@@ -15,6 +15,8 @@ export interface Encuesta {
     modalidad: string;
     totalConductores: number;
     totalVehiculos: number;
+    porcentajePasos: number;
+    porcentajePreguntas: number;
 }
 
 export interface Clasificacion {
