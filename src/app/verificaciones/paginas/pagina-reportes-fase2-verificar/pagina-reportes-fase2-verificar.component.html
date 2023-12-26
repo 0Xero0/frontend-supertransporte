@@ -19,7 +19,12 @@
                         <span 
                         class="material-symbols-outlined cursor-pointer texto-gris" 
                         [routerLink]="['/administrar', 'verificar-reportes', 'fase-dos', 'reportes', reporte.idReporte]"
-                        [queryParams]="{ idEncuesta: reporte.idEncuesta, idReporte: reporte.idReporte, idVigilado: reporte.nit }">
+                        [queryParams]="{ 
+                            idEncuesta: reporte.idEncuesta, 
+                            idReporte: reporte.idReporte, 
+                            idVigilado: reporte.nit,
+                            vigencia: reporte.vigencia
+                        }">
                         visibility
                         </span>
                     </td>

@@ -49,9 +49,8 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    const vigencia = this.encuesta.vigencia ? Number(this.encuesta.vigencia) : 2023
     this.obtenerOpcionesCumplimientoYCorrespondencia()
-    this.obtenerMeses(vigencia, this.historico)
+    this.obtenerMeses(this.encuesta.vigencia, this.historico)
     this.encuesta.formularios.forEach(tab => {
       tab.subIndicador.forEach(subindicador => {
         subindicador.preguntas.forEach(pregunta => {
@@ -63,8 +62,7 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
 
   ngOnChanges(cambios: SimpleChanges) {
     if (cambios['historico']) {
-      const vigencia = this.encuesta.vigencia ? Number(this.encuesta.vigencia) : 2023
-      this.obtenerMeses(vigencia, this.historico)
+      this.obtenerMeses(this.encuesta.vigencia, this.historico)
     }
   }
 

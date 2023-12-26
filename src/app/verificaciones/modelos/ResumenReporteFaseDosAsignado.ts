@@ -7,5 +7,5 @@ export interface ResumenReporteFaseDosAsignado {
     fechaAsignacion: string
     asignado: boolean
     estadoValidacion: string
-
+    vigencia: number
 }

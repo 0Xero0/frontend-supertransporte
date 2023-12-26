@@ -14,6 +14,7 @@ export class PaginaReporteFase2VerificarComponent {
   @ViewChild('encuesta') encuesta!: EncuestaCuantitativaComponent
   idEncuesta: number = 2
   idMes?: number
+  vigencia?: number
   idReporte?: number
   idVigilado?: string
   historico: boolean = false
@@ -58,6 +59,7 @@ export class PaginaReporteFase2VerificarComponent {
   recogerParametrosUrl(parametros: Params, query: Params){
     this.idReporte = parametros['idReporte']
     this.idMes = query['idMes']
+    this.vigencia = Number(query['vigencia']) 
     this.idVigilado = query['idVigilado']
   }
 
