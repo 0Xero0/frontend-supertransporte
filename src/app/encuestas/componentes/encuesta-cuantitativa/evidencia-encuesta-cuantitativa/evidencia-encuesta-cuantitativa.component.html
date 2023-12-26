@@ -2,7 +2,7 @@
     <fieldset class="d-flex flex-column flex-gap-5" *ngIf="evidencia.tipoEvidencia === 'FILE'">
         <label class="fs-12px validacion">Solo archivos {{ evidencia.validaciones.tipoDato }}</label>
         <app-input-archivo
-        [disabled]="soloLectura"
+        [disabled]="soloLectura || !habilitarCamposVigilado"
         [(ngModel)]="archivo"
         [tamanoMaximoMb]="evidencia.tamanio"
         (excedeTamano)="manejarExcedeTamano()"
@@ -24,7 +24,7 @@
     
     <fieldset *ngIf="evidencia.tipoEvidencia === 'NUMBER'">
         <app-input-numerico
-        [disabled]="soloLectura"
+        [disabled]="soloLectura || !habilitarCamposVigilado"
         [valorInicial]="+evidencia.respuesta"
         [cantidadDecimales]="evidencia.validaciones.cantDecimal"
         [ngModel]="valor"
@@ -33,7 +33,7 @@
 
     <fieldset *ngIf="evidencia.tipoEvidencia === 'STRING'">
         <input type="text" class="form-control"
-        [disabled]="soloLectura"
+        [disabled]="soloLectura || !habilitarCamposVigilado"
         [ngModel]="valor"
         (ngModelChange)="manejarCambioEvidenciaNumerica($event)">
     </fieldset>

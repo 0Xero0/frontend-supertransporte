@@ -20,6 +20,7 @@ import { ModalConfirmarEnviarComponent } from './componentes/modal-confirmar-env
 import { PaginaResultadosIndicadoresComponent } from './paginas/pagina-resultados-indicadores/pagina-resultados-indicadores.component';
 import { TablaResultadosIndicadoresComponent } from './componentes/tabla-resultados-indicadores/tabla-resultados-indicadores.component';
 import { PaginaAdministrarMesesComponent } from './paginas/pagina-administrar-meses/pagina-administrar-meses.component';
+import { VerificacionEvidenciasComponent } from './componentes/encuesta-cuantitativa/verificacion-evidencias/verificacion-evidencias.component';
 
 
 
@@ -38,7 +39,8 @@ import { PaginaAdministrarMesesComponent } from './paginas/pagina-administrar-me
     ModalConfirmarEnviarComponent,
     PaginaResultadosIndicadoresComponent,
     TablaResultadosIndicadoresComponent,
-    PaginaAdministrarMesesComponent
+    PaginaAdministrarMesesComponent,
+    VerificacionEvidenciasComponent
   ],
   imports: [
     CommonModule,
@@ -54,6 +56,7 @@ import { PaginaAdministrarMesesComponent } from './paginas/pagina-administrar-me
     ListadoEncuestasComponent,
     PaginaEncuestaComponent,
     EncuestaComponent,
+    EncuestaCuantitativaComponent,
     PreguntaEncuestaComponent,
     ClasificacionEncuestaComponent
   ]

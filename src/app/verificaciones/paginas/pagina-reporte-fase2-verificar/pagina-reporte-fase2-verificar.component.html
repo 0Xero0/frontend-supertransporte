@@ -1,0 +1,29 @@
+<div class="px-sm-2 px-md-3 px-lg-4 my-4" *ngIf="reporte">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <button
+        type="button" 
+        class="boton primario delineado" 
+        (click)="enviarVerificacion()"
+        [disabled]="hayCambios">Enviar a ST</button>
+
+        <button 
+        type="button" 
+        class="boton primario relleno" 
+        (click)="guardarVerificacion()"
+        [disabled]="!hayCambios">Guardar</button>
+
+        <button type="button" class="boton primario delineado" 
+        [routerLink]="['/administrar', 'verificar-reportes', 'fase-dos', 'reportes']">Volver</button>
+    </div>
+
+    <app-encuesta-cuantitativa
+    #encuesta
+    [encuesta]="reporte"
+    [historico]="historico"
+    [habilitarCamposVigilado]="false"
+    [habilitarCamposVerificador]="true"
+    (cambioDeMes)="obtenerReporte($event)"
+    (hanHabidoCambios)="setHayCambios($event)"
+    (formularioGuardado)="manejarFormularioGuardado($event)"
+    />
+</div>

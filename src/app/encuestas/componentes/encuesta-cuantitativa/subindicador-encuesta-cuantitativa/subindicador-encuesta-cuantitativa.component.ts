@@ -11,6 +11,9 @@ export class SubindicadorEncuestaCuantitativaComponent implements OnInit {
   @Input('subindicador') subindicador!: SubIndicador
   @Input('estadoRespuestas') estadoRespuestas: Respuesta[] = []
   @Input() soloLectura: boolean = false
+  @Input() habilitarCamposVigilado: boolean = true
+  @Input() habilitarCamposVerificador: boolean = false
+
 
   @Input() preguntasFaltantes: number[] = []
   @Output('nuevaRespuesta') nuevaRespuesta: EventEmitter<Respuesta>

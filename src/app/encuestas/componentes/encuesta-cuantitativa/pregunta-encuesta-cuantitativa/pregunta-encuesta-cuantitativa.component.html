@@ -7,7 +7,7 @@
     </div>
     <div class="col" *ngIf="pregunta.validaciones.tipoDato !== 'moneda'">
         <app-input-numerico
-        [disabled]="soloLectura"
+        [disabled]="soloLectura || !habilitarCamposVigilado"
         [cantidadDecimales]="pregunta.validaciones.cantDecimal"
         [valorInicial]="pregunta.respuesta"
         [ngModel]="valor"
@@ -15,7 +15,7 @@
     </div>
     <div class="col" *ngIf="pregunta.validaciones.tipoDato === 'moneda'">
         <app-input-moneda
-        [disabled]="soloLectura"
+        [disabled]="soloLectura || !habilitarCamposVigilado"
         [cantidadDecimales]="pregunta.validaciones.cantDecimal"
         [valorInicial]="pregunta.respuesta"
         [ngModel]="valor"

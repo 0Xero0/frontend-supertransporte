@@ -16,6 +16,10 @@
             <app-tab-encuesta-cuantitativa
                 [nombreFormulario]="formulario.nombre"
                 [soloLectura]="encuesta.soloLectura"
+                [habilitarCamposVerificador]="habilitarCamposVerificador"
+                [habilitarCamposVigilado]="habilitarCamposVigilado"
+                [opcionesCorrespondencia]="opcionesCorrespondencia"
+                [opcionesCumplimiento]="opcionesCumplimiento"
                 [idVigilado]="encuesta.idVigilado"
                 [subindicadores]="formulario.subIndicador"
                 [mensaje]="formulario.mensaje"
@@ -26,7 +30,8 @@
                 (evidenciaExcedeTamano)="manejarEvidenciaExcedeTamano($event)"
                 (errorAlCargarEvidencia)="manejarErrorAlCambiarEvidencia($event)"
                 (nuevaRespuesta)="manejarNuevaRespuesta($event)" 
-                (nuevaEvidencia)="manejarNuevaEvidencia($event)"/>
+                (nuevaEvidencia)="manejarNuevaEvidencia($event)"
+                (nuevaVerificacion)="manejarNuevaVerificacion($event)"/>
         </ng-template>
     </li>
 </ul>

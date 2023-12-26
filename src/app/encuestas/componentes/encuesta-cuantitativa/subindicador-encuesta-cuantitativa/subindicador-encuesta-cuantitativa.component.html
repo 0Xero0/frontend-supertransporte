@@ -7,6 +7,8 @@
             <div class="col">
                 <app-pregunta-encuesta-cuantitativa
                 (cambio)="manejarCambioRespuesta($event)"
+                [habilitarCamposVerificador]="habilitarCamposVerificador"
+                [habilitarCamposVigilado]="habilitarCamposVigilado"
                 [soloLectura]="soloLectura"
                 [pregunta]="periodo"/>
             </div>

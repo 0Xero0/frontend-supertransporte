@@ -11,12 +11,10 @@
             {{ mensaje }}
         </li>
         <li class="subindicador" *ngFor="let subindicador of subindicadores">
-            <app-subindicador-encuesta-cuantitativa
-                [preguntasFaltantes]="indicadoresFaltantes"
-                [soloLectura]="soloLectura"
-                [subindicador]="subindicador" 
-                [estadoRespuestas]="estadoRespuestas"
-                (nuevaRespuesta)="manejarNuevaRespuesta($event)"/>
+            <app-subindicador-encuesta-cuantitativa [preguntasFaltantes]="indicadoresFaltantes"
+                [soloLectura]="soloLectura" [habilitarCamposVerificador]="habilitarCamposVerificador"
+                [habilitarCamposVigilado]="habilitarCamposVigilado" [subindicador]="subindicador"
+                [estadoRespuestas]="estadoRespuestas" (nuevaRespuesta)="manejarNuevaRespuesta($event)" />
         </li>
     </ul>
 </div>
@@ -27,25 +25,35 @@
                 <div class="col-1">Nro</div>
                 <div class="col-3">Descripción de las evidencias</div>
                 <div class="col-2">Tipo de evidencia</div>
-                <div class="col-6">Evidencia</div>
+                <div class="col-2">Evidencia</div>
+                <div class="col-2" *ngIf="habilitarCamposVerificador">¿La evidencia corresponde a lo solicitado?</div>
+                <div class="col-2" *ngIf="habilitarCamposVerificador">¿El documento cumple con la información o
+                    estructura solicitada?</div>
             </div>
         </li>
-        <li class="evidencia" *ngFor="let evidencia of evidencias" [ngClass]="{ 'bg-invalido': evidenciasFaltantes.includes(evidencia.idEvidencia) }">
+        <li class="evidencia" *ngFor="let evidencia of evidencias"
+            [ngClass]="{ 'bg-invalido': evidenciasFaltantes.includes(evidencia.idEvidencia) }">
             <div class="row">
                 <div class="col-1 fw-semibold">{{ evidencia.consecutivo }}</div>
                 <div class="col-3">{{ evidencia.nombre }}</div>
                 <div class="col-2">{{ evidencia.validaciones.tipoDato }}</div>
-                <div class="col-6 row">
-                    <div class="col-4">
-                        <app-evidencia-encuesta-cuantitativa
-                        [nombreFormulario]="nombreFormulario"
-                        [soloLectura]="soloLectura"
-                        [idVigilado]="idVigilado" 
-                        [evidencia]="evidencia"
-                        (evidenciaExcedeTamano)="manejarEvidenciaExcedeTamano($event)"
+                <div class="col-2">
+                    <app-evidencia-encuesta-cuantitativa [nombreFormulario]="nombreFormulario"
+                        [soloLectura]="soloLectura" [habilitarCamposVerificador]="habilitarCamposVerificador"
+                        [habilitarCamposVigilado]="habilitarCamposVigilado" [idVigilado]="idVigilado"
+                        [evidencia]="evidencia" (evidenciaExcedeTamano)="manejarEvidenciaExcedeTamano($event)"
                         (errorAlCargar)="manejarErrorAlCargar($event)"
-                        (nuevaEvidencia)="manejarNuevaEvidencia($event)"/>
-                    </div>
+                        (nuevaEvidencia)="manejarNuevaEvidencia($event)" />
+                </div>
+
+                <div class="col-4">
+                    <app-verificacion-evidencias
+                    [evidencia]="evidencia"
+                    [opcionesCorrespondencia]="opcionesCorrespondencia"
+                    [opcionesCumplimiento]="opcionesCumplimiento"
+                    [habilitarCamposVerificador]="habilitarCamposVerificador"
+                    (nuevaVerificacion)="manejarNuevaVerificacion($event)" 
+                    />
                 </div>
             </div>
         </li>

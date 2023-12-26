@@ -3,7 +3,7 @@ import { ServicioVerificaciones } from '../../servicios/verificaciones.service';
 import { Paginador } from 'src/app/administrador/modelos/compartido/Paginador';
 import { Observable } from 'rxjs';
 import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
-import { ResumenReporteAsignados } from '../../modelos/ResumenReporteAsignado';
+import { ResumenReporteAsignado } from '../../modelos/ResumenReporteAsignado';
 import { FiltrosUsuarios } from 'src/app/usuarios/modelos/FiltrosUsuarios';
 
 @Component({
@@ -13,7 +13,7 @@ import { FiltrosUsuarios } from 'src/app/usuarios/modelos/FiltrosUsuarios';
 })
 export class PaginaReportesVerificarComponent implements OnInit{
   paginador: Paginador<FiltrosUsuarios>
-  reportes: ResumenReporteAsignados[] = []
+  reportes: ResumenReporteAsignado[] = []
 
   constructor(private servicioVerifiaciones: ServicioVerificaciones){
     this.paginador = new Paginador<any>(this.obtenerReportes)
