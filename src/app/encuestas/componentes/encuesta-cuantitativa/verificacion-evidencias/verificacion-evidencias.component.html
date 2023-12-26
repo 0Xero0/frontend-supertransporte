@@ -1,36 +1,28 @@
 <div class="col" *ngIf="habilitarCamposVerificador"> <!-- corresponde -->
     <fieldset class="d-flex flex-column">
-        <select 
-        class="form-select" 
-        [(ngModel)]="corresponde"
-        (ngModelChange)="manejarCambioCorresponde($event, evidencia.idEvidencia)">
+        <select class="form-select" [(ngModel)]="corresponde"
+            (ngModelChange)="manejarCambioCorresponde($event, evidencia.idEvidencia)">
+            <option [value]="0">Selecciona una opción</option>
             <option [value]="opcion.id" *ngFor="let opcion of opcionesCorrespondencia">
                 {{opcion.id}} - {{opcion.nombre}}
             </option>
         </select>
     </fieldset>
     <label class="fs-12px fw-semibold">Observación</label>
-    <textarea 
-    class="form-control"
-    [disabled]="corresponde == 1"
-    [(ngModel)]="observacionCorresponde"
-    (ngModelChange)="manejarCambioObservacionCorresponde($event, evidencia.idEvidencia)"></textarea>
+    <textarea class="form-control" [disabled]="corresponde != 2" [(ngModel)]="observacionCorresponde"
+        (ngModelChange)="manejarCambioObservacionCorresponde($event, evidencia.idEvidencia)"></textarea>
 </div>
 <div class="col" *ngIf="habilitarCamposVerificador"> <!-- cumple -->
     <fieldset class="d-flex flex-column">
-        <select 
-        class="form-select" 
-        [(ngModel)]="cumple"
-        (ngModelChange)="manejarCambioCumple($event, evidencia.idEvidencia)">
+        <select class="form-select" [(ngModel)]="cumple"
+            (ngModelChange)="manejarCambioCumple($event, evidencia.idEvidencia)">
+            <option [value]="0">Selecciona una opción</option>
             <option [value]="opcion.id" *ngFor="let opcion of opcionesCumplimiento">
                 {{opcion.id}} - {{opcion.nombre}}
             </option>
         </select>
     </fieldset>
     <label class="fs-12px fw-semibold">Observación</label>
-    <textarea 
-    class="form-control" 
-    [disabled]="cumple == 1"
-    [(ngModel)]="observacionCumple"
-    (ngModelChange)="manejarCambioObservacionCumple($event, evidencia.idEvidencia)"></textarea>
+    <textarea class="form-control" [disabled]="cumple != 2" [(ngModel)]="observacionCumple"
+        (ngModelChange)="manejarCambioObservacionCumple($event, evidencia.idEvidencia)"></textarea>
 </div>

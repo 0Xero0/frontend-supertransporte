@@ -62,9 +62,12 @@ export class ServicioVerificaciones extends Autenticable{
     return this.clienteHttp.get<{asignadas: ResumenReporteAsignado[], paginacion: Paginacion}>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }
   //To do: cambiar el tipado de los filtros
-  obtenerReportesFaseDos(pagina: number, limite: number, { idVerificador }: { idVerificador: string }){
-    const endpoint = `/api/v1/reportes/asignados-fasedos?idVerificador=${idVerificador}&pagina=${pagina}&limite=${limite}`
-    return this.clienteHttp.get<{ asignadas: ResumenReporteFaseDosAsignado }>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
+  obtenerReportesFaseDos(pagina: number, limite: number, filtros?: { idVerificador: string }){
+    let endpoint = `/api/v1/reportes/asignados-fasedos?pagina=${pagina}&limite=${limite}`
+    if(filtros?.idVerificador){
+      endpoint+= `idVerificador=${filtros.idVerificador}`
+    }
+    return this.clienteHttp.get<{ asignadas: ResumenReporteFaseDosAsignado[], paginacion: Paginacion }>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }
 
   obtenerReporte(idEncuesta: number, idReporte: number, idVigilado: string){

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Evidencia } from 'src/app/encuestas/modelos/EncuestaCuantitativa';
 import { RespuestaVerificacionEvidencia } from 'src/app/encuestas/modelos/RespuestaVerificacionEvidencia';
 import { Maestra } from 'src/app/verificaciones/modelos/Maestra';
@@ -8,7 +8,7 @@ import { Maestra } from 'src/app/verificaciones/modelos/Maestra';
   templateUrl: './verificacion-evidencias.component.html',
   styleUrls: ['./verificacion-evidencias.component.css']
 })
-export class VerificacionEvidenciasComponent {
+export class VerificacionEvidenciasComponent implements OnInit{
   @Input() evidencia!: Evidencia
   @Input() opcionesCumplimiento: Maestra[] = []
   @Input() opcionesCorrespondencia: Maestra[] = []
@@ -16,13 +16,20 @@ export class VerificacionEvidenciasComponent {
 
   @Output('nuevaVerificacion') nuevaVerificacion: EventEmitter<RespuestaVerificacionEvidencia>
 
-  cumple: number = 1
+  cumple: number = 0
   observacionCumple: string = ""
-  corresponde: number = 1
+  corresponde: number = 0
   observacionCorresponde: string = ""
 
   constructor(){
     this.nuevaVerificacion = new EventEmitter<RespuestaVerificacionEvidencia>();
+  }
+
+  ngOnInit(): void {
+    this.cumple = Number(this.evidencia.cumple)
+    this.corresponde = Number(this.evidencia.corresponde)
+    this.observacionCorresponde = this.evidencia.observacionCorresponde 
+    this.observacionCumple = this.evidencia.observacionCumple 
   }
 
   manejarCambioCorresponde(corresponde: number, evidenciaId: number){

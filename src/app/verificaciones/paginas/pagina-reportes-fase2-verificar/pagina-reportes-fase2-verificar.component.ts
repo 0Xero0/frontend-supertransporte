@@ -31,7 +31,7 @@ export class PaginaReportesFase2VerificarComponent implements OnInit{
 
   obtenerReportes = (pagina: number, limite: number, filtros?: { idVerificador: string }) =>{
     return new Observable<Paginacion>((subscripcion) => {
-      this.servicioVerificaciones.obtenerReportes(pagina, limite, filtros).subscribe({
+      this.servicioVerificaciones.obtenerReportesFaseDos(pagina, limite, filtros).subscribe({
         next: (respuesta) =>{
           this.reportes = respuesta.asignadas
           subscripcion.next(respuesta.paginacion)

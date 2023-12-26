@@ -32,6 +32,10 @@ export interface Evidencia {
     nombreOriginal: string
     ruta: string
     tamanio: number
+    cumple: string
+    corresponde: string
+    observacionCorresponde: string
+    observacionCumple: string
 }
 
 export interface Validacion {
