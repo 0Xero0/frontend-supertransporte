@@ -3,96 +3,105 @@
         Resumen - Ficha cuestionario - Indicadores
     </h3>
     <h4 class="texto-primario fw-semibold">Reporte número {{idReporte}}</h4>
-    <form class="col-sm-100 col-md-12 mb-4" *ngIf="encuesta">
-        <div class="row">
-            <div class="col">
-                <div class="row mb-2">
-                    <div class="col">NIT</div>
+    <div class="row">
+        <div class="col-md-12 col-lg-8">
+            <form class="mb-4" *ngIf="encuesta">
+                <div class="row">
                     <div class="col">
-                        <input type="text" class="form-control" disabled [value]="reporte.idVigilado">
+                        <div class="row mb-2">
+                            <div class="col">NIT</div>
+                            <div class="col">
+                                <input type="text" class="form-control" disabled [value]="reporte.idVigilado">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">Razón social</div>
+                            <div class="col">
+                                <input type="text" class="form-control" disabled [value]="reporte.razonSocila">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">Estado actual</div>
+                            <div class="col">
+                                <input type="text" class="form-control" disabled [value]="reporte.estadoActual">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">Clasificación según resolución 20223040040595 DE 2022</div>
+                            <div class="col">
+                                <input type="text" class="form-control" disabled [value]="reporte.clasificaion">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">Modalidad</div>
+                            <div class="col">
+                                <input type="text" class="form-control" disabled [value]="reporte.modalidad">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col">Razón social</div>
-                    <div class="col">
-                        <input type="text" class="form-control" disabled [value]="reporte.razonSocila">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col">Estado actual</div>
-                    <div class="col">
-                        <input type="text" class="form-control" disabled [value]="reporte.estadoActual">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col">Clasificación según resolución 20223040040595 DE 2022</div>
-                    <div class="col">
-                        <input type="text" class="form-control" disabled [value]="reporte.clasificaion">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col">Modalidad</div>
-                    <div class="col">
-                        <input type="text" class="form-control" disabled [value]="reporte.modalidad">
-                    </div>
-                </div>
-            </div>
 
-            <div class="col">
-                <div class="row mb-2">
-                    <div class="col">Total de conductores</div>
                     <div class="col">
-                        <input type="text" class="form-control" disabled [value]="reporte.totalConductores">
+                        <div class="row mb-2">
+                            <div class="col">Total de conductores</div>
+                            <div class="col">
+                                <input type="text" class="form-control" disabled [value]="reporte.totalConductores">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">Total de Vehiculos</div>
+                            <div class="col">
+                                <input type="text" class="form-control" disabled [value]="reporte.totalVehiculos">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">Evidencias entregadas</div>
+                            <div class="col">
+                                <input type="text" class="form-control" disabled [value]="reporte.evidenciasEntregadas">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">Variables entregadas</div>
+                            <div class="col">
+                                <input type="text" class="form-control" disabled [value]="reporte.variablesEntregadas">
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="row mb-2">
-                    <div class="col">Total de Vehiculos</div>
-                    <div class="col">
-                        <input type="text" class="form-control" disabled [value]="reporte.totalVehiculos">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col">Evidencias entregadas</div>
-                    <div class="col">
-                        <input type="text" class="form-control" disabled [value]="reporte.evidenciasEntregadas">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col">Variables entregadas</div>
-                    <div class="col">
-                        <input type="text" class="form-control" disabled [value]="reporte.variablesEntregadas">
-                    </div>
-                </div>
+            </form>
+        </div>
+        <div class="col-md-12 col-lg-4" *ngIf="reporte">
+            <div class="table-responsive tabla-envios-st custom-scroll">
+                <table class="table tabla-primaria fs-14px">
+                    <thead>
+                        <tr>
+                            <th>Mes</th>
+                            <th>Envío a ST</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let enviadoSt of reporte.enviadosSt">
+                            <td>{{ enviadoSt.mes }}</td>
+                            <td>{{ enviadoSt.envioSt }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        
-    </form>
-
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <button
-        type="button" 
-        class="boton primario delineado" 
-        (click)="enviarVerificacion()"
-        [disabled]="hayCambios">Enviar a ST</button>
-
-        <button 
-        type="button" 
-        class="boton primario relleno" 
-        (click)="guardarVerificacion()"
-        [disabled]="!hayCambios">Guardar</button>
-
-        <button type="button" class="boton primario delineado" 
-        [routerLink]="['/administrar', 'verificar-reportes', 'fase-dos', 'reportes']">Volver</button>
     </div>
 
-    <app-encuesta-cuantitativa
-    #encuesta
-    [encuesta]="reporte"
-    [historico]="historico"
-    [habilitarCamposVigilado]="false"
-    [habilitarCamposVerificador]="true"
-    (cambioDeMes)="obtenerReporte($event)"
-    (hanHabidoCambios)="setHayCambios($event)"
-    (formularioGuardado)="manejarFormularioGuardado($event)"
-    />
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <button type="button" class="boton primario delineado" (click)="enviarVerificacion()"
+            [disabled]="hayCambios">Enviar a ST</button>
+
+        <button type="button" class="boton primario relleno" (click)="guardarVerificacion()"
+            [disabled]="!hayCambios">Guardar</button>
+
+        <button type="button" class="boton primario delineado"
+            [routerLink]="['/administrar', 'verificar-reportes', 'fase-dos', 'reportes']">Volver</button>
+    </div>
+
+    <app-encuesta-cuantitativa #encuesta [encuesta]="reporte" [historico]="historico" [habilitarCamposVigilado]="false"
+        [habilitarCamposVerificador]="true" (cambioDeMes)="obtenerReporte($event)"
+        (hanHabidoCambios)="setHayCambios($event)" (formularioGuardado)="manejarFormularioGuardado($event)" />
 </div>

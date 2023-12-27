@@ -14,6 +14,12 @@ export interface EncuestaCuantitativa{
     estadoActual: string
     razonSocila: string
     modalidad: string
+    enviadosSt: EnviadoSt[]
+}
+
+export interface EnviadoSt{
+    mes: string
+    envioSt: string
 }
 
 export interface Formulario {
