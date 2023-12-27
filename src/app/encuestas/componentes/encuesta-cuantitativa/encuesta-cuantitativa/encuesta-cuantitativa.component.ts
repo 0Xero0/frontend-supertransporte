@@ -98,6 +98,8 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
     }).subscribe({
       next: () => {
         this.setHayCambios(false)
+        this.evidenciasFaltantes = []
+        this.indicadoresFaltantes = []
         this.popup.abrirPopupExitoso(DialogosEncuestas.GUARDAR_ENCUESTA_EXITO)
         this.formularioGuardado.emit(this.idMes)
       },
@@ -135,8 +137,9 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
         this.popup.abrirPopupExitoso(DialogosEncuestas.ENVIAR_ENCUESTA_EXITO)
         this.router.navigateByUrl(`/administrar/verificar-reportes/fase-dos/reportes`)
       },
-      error: ()=>{
-        this.popup.abrirPopupFallido('Error inesperado.', 'Ocurrió un error al enviar las verificaciones, intentalo más tarde.')
+      error: (error: HttpErrorResponse)=>{
+        this.popup.abrirPopupFallido('No se han respondido todas las preguntas.', 'Hay preguntas obligatorias sin responder.')
+        this.evidenciasFaltantes = error.error.faltantes
       }
     })
   }
