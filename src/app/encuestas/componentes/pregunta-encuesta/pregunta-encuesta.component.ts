@@ -83,7 +83,10 @@ export class PreguntaEncuestaComponent implements OnInit {
     this.setObservacionNoCorresponde(this.pregunta.observacionCorresponde, false)
     this.setObservacionNoCumple(this.pregunta.observacionCumple, false)
      
-    this.pregunta.respuesta ? this.setValor(this.pregunta.respuesta, false) : ""
+    this.pregunta.respuesta ? this.setValor(this.pregunta.respuesta, false) : this.setValor("", false)
+    if(this.valor === ""){
+      this.setArchivoDeshabilitado(true)
+    }
 
     this.clasesRespuestas = {
       'respuesta-positiva': this.pregunta.respuesta === 'SI' && this.soloLectura,
@@ -196,6 +199,9 @@ export class PreguntaEncuestaComponent implements OnInit {
       this.setMotivoDeshabilitado(true)
       this.setArchivoDeshabilitado(false)
     }
+    if(this.valor === ""){
+      this.setArchivoDeshabilitado(true)
+    }
     if(dispararEvento) this.emitirVerificacion();
   }
 
@@ -238,6 +244,7 @@ export class PreguntaEncuestaComponent implements OnInit {
     this.evidenciaCorresponde = corresponde
     if(corresponde == 2){ // 2 = no corresponde
       this.setObservacionEvidenciaCorrespondeDeshabilitado(false)
+      this.setDocumentoCumple(2)
     }else{
       this.setObservacionEvidenciaCorrespondeDeshabilitado(true)
     }
