@@ -244,6 +244,7 @@ export class PreguntaEncuestaComponent implements OnInit {
     this.evidenciaCorresponde = corresponde
     if(corresponde == 2){ // 2 = no corresponde
       this.setObservacionEvidenciaCorrespondeDeshabilitado(false)
+      this.setDocumentoCumple(2)
     }else{
       this.setObservacionEvidenciaCorrespondeDeshabilitado(true)
     }
