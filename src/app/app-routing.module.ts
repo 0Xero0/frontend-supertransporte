@@ -17,6 +17,7 @@ import { PaginaAsignacionTamanoOrganizacionComponent } from './categorizacion/pa
 import { PaginaFormularioAspiranteProveedorTecnologicoComponent } from './formularios/paginas/pagina-formulario-aspirante-proveedor-tecnologico/pagina-formulario-aspirante-proveedor-tecnologico.component';
 import { PaginaResultadosIndicadoresComponent } from './encuestas/paginas/pagina-resultados-indicadores/pagina-resultados-indicadores.component';
 import { PaginaAdministrarMesesComponent } from './encuestas/paginas/pagina-administrar-meses/pagina-administrar-meses.component';
+import { PaginaEmpresaTecnologicaComponent } from './empresa-tecnologica/pagina-empresa-tecnologica/pagina-empresa-tecnologica.component';
 
 
 
@@ -65,6 +66,10 @@ const routes: Routes = [
       {
         path: 'asignacion',
         component: PaginaAsignacionTamanoOrganizacionComponent
+      },
+      {
+        path: 'empresa-tecnologica',
+        component: PaginaEmpresaTecnologicaComponent
       },
       { 
         path: 'asignaciones', 
