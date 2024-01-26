@@ -81,11 +81,9 @@ export class PaginaEmpresaTecnologicaComponent {
   cambiarEstado(idEmpresa: string, estado: boolean){
     console.log(idEmpresa,estado)
     if(estado === false){
-      estado = true
       console.log(idEmpresa, estado)
       this.servicioEmpresaTecnologica.activar(idEmpresa).subscribe({
         next: (respuesta)=>{
-          //console.log(respuesta)
           this.empresasSeleccionadas() 
         },
         error: (error)=>{
@@ -93,9 +91,15 @@ export class PaginaEmpresaTecnologicaComponent {
         }
       })
     }else{
-      estado = false
       console.log(idEmpresa, estado)
-      this.empresasSeleccionadas()
+      this.servicioEmpresaTecnologica.activar(idEmpresa).subscribe({
+        next: (respuesta)=>{
+          this.empresasSeleccionadas() 
+        },
+        error: (error)=>{
+          this.popup.abrirPopupFallido("Ocurrió un error inesperado", error)
+        }
+      })
     }
     
     
