@@ -1,4 +1,4 @@
-export interface ResumenReporteAsignado {
+export interface ResumenReporteFaseDosAsignado {
     idReporte: number
     nit: string
     idEncuesta: number
@@ -7,4 +7,5 @@ export interface ResumenReporteAsignado {
     fechaAsignacion: string
     asignado: boolean
     estadoValidacion: string
+    vigencia: number
 }

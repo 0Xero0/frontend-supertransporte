@@ -13,6 +13,8 @@ export class EvidenciaEncuestaCuantitativaComponent implements OnInit{
   @Input() evidencia!: Evidencia
   @Input() idVigilado!: string
   @Input() soloLectura: boolean = false
+  @Input() habilitarCamposVigilado: boolean = true
+  @Input() habilitarCamposVerificador: boolean = false
   @Input() nombreFormulario!: string
 
   @Output('nuevaEvidencia') nuevaEvidencia: EventEmitter<RespuestaEvidencia>

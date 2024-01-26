@@ -1,0 +1,33 @@
+<ng-template #modal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title fs-14px  fw-bolder">Editar asignar</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formulario">
+      <div class="row mb-4 mt-2">
+        <div class="col-4">
+            <label class="fw-semibold fs-14px">Empresa tecnológica:</label>
+            <input  formControlName="nombre" type="text" class="form-control" readonly="readonly">
+        </div>
+        <div class="col-3">
+            <label class="fw-semibold fs-14px">Fecha inicial:</label>
+            <input formControlName="fechaInicial" type="date" class="form-control" >
+        </div>
+        <div class="col-3">
+            <label class="fw-semibold fs-14px">Fecha final:</label>
+            <input formControlName="fechaFinal" type="date" class="form-control" >
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer d-flex">
+    <div class="d-flex justify-content-end">
+      <button type="button" class="boton primario relleno" 
+      (click)="actualizar()">
+        Guardar
+      </button>
+    </div>
+  </div>
+</ng-template>
+<app-popup #popup></app-popup>

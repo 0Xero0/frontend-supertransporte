@@ -5,7 +5,21 @@ export interface EncuestaCuantitativa{
     idVigilado: string
     idReporte: string
     idEncuesta: number
-    vigencia: string
+    vigencia: number
+    totalConductores: number
+    totalVehiculos: number
+    variablesEntregadas: number
+    evidenciasEntregadas: number
+    clasificaion: string
+    estadoActual: string
+    razonSocila: string
+    modalidad: string
+    enviadosSt: EnviadoSt[]
+}
+
+export interface EnviadoSt{
+    mes: string
+    envioSt: string
 }
 
 export interface Formulario {
@@ -32,6 +46,10 @@ export interface Evidencia {
     nombreOriginal: string
     ruta: string
     tamanio: number
+    cumple: string
+    corresponde: string
+    observacionCorresponde: string
+    observacionCumple: string
 }
 
 export interface Validacion {

@@ -45,7 +45,6 @@ export class PaginaEncuestaComponent implements OnInit {
   historico: boolean = false
   esUsuarioAdministrador: boolean;
   meses: Mes[] = []
-  idMesPorDefecto?: number 
 
   constructor(
     private servicioEncuesta: ServicioEncuestas, 

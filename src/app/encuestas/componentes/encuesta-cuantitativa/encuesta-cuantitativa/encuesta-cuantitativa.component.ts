@@ -1,13 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { DateTime } from 'luxon';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { DialogosEncuestas } from 'src/app/encuestas/dialogos-encuestas';
 import { EncuestaCuantitativa, Formulario, Pregunta } from 'src/app/encuestas/modelos/EncuestaCuantitativa';
 import { Mes } from 'src/app/encuestas/modelos/Mes';
 import { Respuesta } from 'src/app/encuestas/modelos/Respuesta';
 import { RespuestaEvidencia } from 'src/app/encuestas/modelos/RespuestaEvidencia';
+import { RespuestaVerificacionEvidencia } from 'src/app/encuestas/modelos/RespuestaVerificacionEvidencia';
 import { ServicioEncuestas } from 'src/app/encuestas/servicios/encuestas.service';
+import { Maestra } from 'src/app/verificaciones/modelos/Maestra';
+import { ServicioVerificaciones } from 'src/app/verificaciones/servicios/verificaciones.service';
 
 @Component({
   selector: 'app-encuesta-cuantitativa',
@@ -19,6 +23,8 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
 
   @Input() historico: boolean = false
   @Input() encuesta!: EncuestaCuantitativa
+  @Input() habilitarCamposVigilado: boolean = true
+  @Input() habilitarCamposVerificador: boolean = false
 
   @Output() hanHabidoCambios: EventEmitter<boolean>
   @Output() cambioDeMes: EventEmitter<number> //Emite el id del mes
@@ -28,19 +34,23 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
   hayCambios: boolean = false;
   respuestas: Respuesta[] = [];
   evidencias: RespuestaEvidencia[] = [];
+  verificaciones: RespuestaVerificacionEvidencia[] = [];
   evidenciasFaltantes: number[] = [];
   indicadoresFaltantes: number[] = [];
+  opcionesCumplimiento: Maestra[] = []
+  opcionesCorrespondencia: Maestra[] = []
   meses: Mes[] = []
   idMes?: number
 
-  constructor(private servicio: ServicioEncuestas, private router: Router) {
+  constructor(private servicio: ServicioEncuestas, private servicioVerificacion: ServicioVerificaciones, private router: Router) {
     this.hanHabidoCambios = new EventEmitter<boolean>()
     this.cambioDeMes = new EventEmitter<number>()
     this.formularioGuardado = new EventEmitter<number>()
   }
 
   ngOnInit(): void {
-    this.obtenerMeses(Number(this.encuesta.vigencia), this.historico)
+    this.obtenerOpcionesCumplimientoYCorrespondencia()
+    this.obtenerMeses(this.encuesta.vigencia, this.historico)
     this.encuesta.formularios.forEach(tab => {
       tab.subIndicador.forEach(subindicador => {
         subindicador.preguntas.forEach(pregunta => {
@@ -52,7 +62,7 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
 
   ngOnChanges(cambios: SimpleChanges) {
     if (cambios['historico']) {
-      this.obtenerMeses(Number(this.encuesta.vigencia), this.historico)
+      this.obtenerMeses(this.encuesta.vigencia, this.historico)
     }
   }
 
@@ -80,6 +90,28 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
     })
   }
 
+  guardarVerificacion() {
+    this.servicioVerificacion.guardarVerificacionesFaseDos({
+      idReporte: Number(this.encuesta.idReporte),
+      vigencia: Number(this.encuesta.vigencia),
+      evidencias: this.verificaciones
+    }).subscribe({
+      next: () => {
+        this.setHayCambios(false)
+        this.evidenciasFaltantes = []
+        this.indicadoresFaltantes = []
+        this.popup.abrirPopupExitoso(DialogosEncuestas.GUARDAR_ENCUESTA_EXITO)
+        this.formularioGuardado.emit(this.idMes)
+      },
+      error: () => {
+        this.popup.abrirPopupFallido(
+          DialogosEncuestas.GUARDAR_ENCUESTA_ERROR_TITULO,
+          DialogosEncuestas.GUARDAR_ENCUESTA_ERROR_DESCRIPCION
+        )
+      }
+    })
+  }
+
   enviar() {
     this.servicio.enviarRespuestaIndicadores(this.encuesta.idEncuesta, Number(this.encuesta.idReporte), this.encuesta.idVigilado, this.idMes!).subscribe({
       next: () => {
@@ -90,6 +122,24 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
         this.evidenciasFaltantes = error.error.faltantesEvidencias
         this.indicadoresFaltantes = error.error.faltantesIndicadores
         this.popup.abrirPopupFallido('No se han respondido todas las preguntas.', 'Hay preguntas obligatorias sin responder.')
+      }
+    })
+  }
+
+  enviarVerificacion(){
+    this.servicioVerificacion.enviarVerificacionesFaseDos({
+      idEncuesta: Number(this.encuesta.idReporte),
+      idMes: this.idMes!,
+      idReporte: Number(this.encuesta.idReporte),
+      idVigilado: this.encuesta.idVigilado
+    }).subscribe({
+      next: ()=>{
+        this.popup.abrirPopupExitoso(DialogosEncuestas.ENVIAR_ENCUESTA_EXITO)
+        this.router.navigateByUrl(`/administrar/verificar-reportes/fase-dos/reportes`)
+      },
+      error: (error: HttpErrorResponse)=>{
+        this.popup.abrirPopupFallido('No se han respondido todas las preguntas.', 'Hay preguntas obligatorias sin responder.')
+        this.evidenciasFaltantes = error.error.faltantes
       }
     })
   }
@@ -113,6 +163,11 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
     this.setHayCambios(true)
   }
 
+  manejarNuevaVerificacion(verificacion: RespuestaVerificacionEvidencia) {
+    this.agregarVerificacion(verificacion)
+    this.setHayCambios(true)
+  }
+
   manejarErrorAlCambiarEvidencia(error: HttpErrorResponse) {
     this.popup.abrirPopupFallido(error.error.mensaje)
   }
@@ -131,6 +186,13 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
     this.evidencias.push(respuesta)
   }
 
+  private agregarVerificacion(verificacion: RespuestaVerificacionEvidencia) {
+    if (this.existeVerificacion(verificacion)) {
+      this.eliminarVerificacion(verificacion)
+    }
+    this.verificaciones.push(verificacion)
+  }
+
   private existeRespuesta(respuesta: Respuesta): boolean {
     const idPreguntasRespondidas = this.respuestas.map(preguntaRespondida => preguntaRespondida.preguntaId)
     return idPreguntasRespondidas.includes(respuesta.preguntaId) ? true : false
@@ -139,6 +201,11 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
   private existeEvidencia(respuesta: RespuestaEvidencia): boolean {
     const idEvidenciasRespondidas = this.evidencias.map(evidenciasRespondidas => evidenciasRespondidas.evidenciaId)
     return idEvidenciasRespondidas.includes(respuesta.evidenciaId)
+  }
+
+  private existeVerificacion(verificacion: RespuestaVerificacionEvidencia): boolean {
+    const idVerificacionesRespondidas = this.verificaciones.map(verificacionesRespondidas => verificacionesRespondidas.evidenciaId)
+    return idVerificacionesRespondidas.includes(verificacion.evidenciaId)
   }
 
   private eliminarRespuesta(respuesta: Respuesta): void {
@@ -150,6 +217,12 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
   private eliminarEvidencia(respuesta: RespuestaEvidencia) {
     this.evidencias = this.evidencias.filter(evidenciaRespondida => {
       return evidenciaRespondida.evidenciaId !== respuesta.evidenciaId ? true : false
+    })
+  }
+
+  private eliminarVerificacion(verificacion: RespuestaVerificacionEvidencia) {
+    this.verificaciones = this.verificaciones.filter(verificacionRespondida => {
+      return verificacionRespondida.evidenciaId !== verificacion.evidenciaId ? true : false
     })
   }
 
@@ -175,6 +248,31 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
       },
       error: (e) => {
         this.popup.abrirPopupFallido(DialogosEncuestas.ERROR_GENERICO_TITULO, DialogosEncuestas.ERROR_GENERICO_DESCRIPCION)
+      }
+    })
+  }
+
+  obtenerOpcionesCumplimientoYCorrespondencia() {
+    this.servicioVerificacion.obtenerOpcionesCumplimiento().subscribe({
+      next: (opciones) => {
+        this.opcionesCumplimiento = opciones
+      },
+      error: () => {
+        this.popup.abrirPopupFallido(
+          DialogosEncuestas.ERROR_OPCIONES_CUMPLIMIENTO_TITULO,
+          DialogosEncuestas.ERROR_OPCIONES_CUMPLIMIENTO_DESCRIPCION
+        )
+      }
+    })
+    this.servicioVerificacion.obtenerOpcionesCorrespondencia().subscribe({
+      next: (opciones) => {
+        this.opcionesCorrespondencia = opciones
+      },
+      error: () => {
+        this.popup.abrirPopupFallido(
+          DialogosEncuestas.ERROR_OPCIONES_CORRESPONDENCIA_TITULO,
+          DialogosEncuestas.ERROR_OPCIONES_CORRESPONDENCIA_DESCRIPCION
+        )
       }
     })
   }
