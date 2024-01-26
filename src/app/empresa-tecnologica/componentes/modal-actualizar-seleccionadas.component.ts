@@ -62,6 +62,8 @@ export class ModalActualizarSeleccionadasComponent {
       nombre: '',
       fechaInicial: controls['fechaInicial'].value,
       fechaFinal: controls['fechaFinal'].value,
+      fechaInicialMostrar: '',
+      fechaFinalMostrar: '',
       idVigilado: 0,
       token: '',
       estado: false

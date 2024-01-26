@@ -5,6 +5,8 @@ export interface EmpresaTecnologica {
     idVigilado: number;
     token: string;
     estado: boolean;
+    fechaInicialMostrar: string;
+    fechaFinalMostrar: string
     fechaInicial: string;
     fechaFinal: string;
 }
