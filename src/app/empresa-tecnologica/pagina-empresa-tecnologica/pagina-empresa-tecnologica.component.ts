@@ -9,6 +9,7 @@ import { EmpresaTecnologicaService } from '../servicios/empresa-tecnologica.serv
 import { EmpresaTecnologica } from '../modelos/EmpresaTecnologica';
 import { ModalActualizarSeleccionadasComponent } from '../componentes/modal-actualizar-seleccionadas.component';
 import { DateTime } from 'luxon';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-pagina-empresa-tecnologica',
@@ -64,11 +65,11 @@ export class PaginaEmpresaTecnologicaComponent {
     }else{
       this.servicioEmpresaTecnologica.asignar(this.idEmpresa,this.fechaInicial,this.fechaFinal).subscribe({
         next: (respuesta)=>{
-          console.log(respuesta)
+          console.log(respuesta)          
           this.empresasSeleccionadas()
         },
         error: (error)=>{
-          this.popup.abrirPopupFallido("Ocurrió un error inesperado")
+          this.popup.abrirPopupFallido('Ya existe un registro con esta empresa')
         }
       })
     }
@@ -80,24 +81,13 @@ export class PaginaEmpresaTecnologicaComponent {
 
   cambiarEstado(idEmpresa: string, estado: boolean){
     console.log(idEmpresa,estado)
-    if(estado === false){
-      estado = true
-      console.log(idEmpresa, estado)
-      this.servicioEmpresaTecnologica.activar(idEmpresa).subscribe({
-        next: (respuesta)=>{
-          //console.log(respuesta)
-          this.empresasSeleccionadas() 
-        },
-        error: (error)=>{
-          this.popup.abrirPopupFallido("Ocurrió un error inesperado", error)
-        }
-      })
-    }else{
-      estado = false
-      console.log(idEmpresa, estado)
-      this.empresasSeleccionadas()
-    }
-    
-    
+    this.servicioEmpresaTecnologica.activar(idEmpresa).subscribe({
+      next: (respuesta)=>{
+        this.empresasSeleccionadas() 
+      },
+      error: (error)=>{
+        this.popup.abrirPopupFallido("Ocurrió un error inesperado", error)
+      }
+    })    
   }
 }
