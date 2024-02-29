@@ -120,8 +120,25 @@ export class PaginaEncuestaComponent implements OnInit {
 
   //Acciones
   aprobarVerificacion(aprobar: boolean){
-    var respuesta = document.getElementById('textArea') as HTMLTextAreaElement
-    this.servicioEncuesta.aprovarVerificacion(this.idReporte, aprobar, respuesta.value)
+    const respuesta = document.getElementById('textArea') as HTMLTextAreaElement
+
+    let mensaje = ''
+        if (aprobar) {
+          mensaje = 'Esta seguro de aprobar el reporte?'
+        }else{
+          mensaje = 'El reporte será devuelto al verificador para su revisión'
+        }
+
+        /* 
+        Mostrar un modal con el mensaje anterior, si la respuesta es si se ejecuta la siguiente linea
+        sino
+        no se hace nada
+        */
+    this.servicioEncuesta.aprovarVerificacion(this.idReporte, aprobar, respuesta.value).subscribe(
+      {
+        next: () =>  this.router.navigate(['/administrar', 'encuestas', 1])
+      }
+    )
   }
 
   exportarPDF(){

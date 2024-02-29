@@ -30,14 +30,17 @@ export class ServicioEncuestas extends Autenticable {
   }
   aprovarVerificacion(idReporte?: number, aprobar?: boolean, observacion?: string){
     const endpoint = `/api/v1/reportes/aprobar-verificacion`
-    try{
-      console.log(idReporte, aprobar, observacion, this.host, endpoint)
-      this.http.post(`${this.host}${endpoint}`, {idReporte, aprobar, observacion}, {
+    /* try{
+      console.log(`${this.host}${endpoint}`);
+      
+      const f = this.http.post(`${this.host}${endpoint}`, {idReporte, aprobar, observacion}, {
         headers: this.obtenerCabeceraAutorizacion()
       })
+      console.log(f);
+      
     }catch(error){
-      console.log(error)
-    }
+      console.log({error})
+    } */
     return this.http.post(`${this.host}${endpoint}`, {idReporte, aprobar, observacion}, {
       headers: this.obtenerCabeceraAutorizacion()
     })
