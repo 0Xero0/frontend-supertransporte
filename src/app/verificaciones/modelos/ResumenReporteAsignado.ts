@@ -7,4 +7,6 @@ export interface ResumenReporteAsignado {
     fechaAsignacion: string
     asignado: boolean
     estadoValidacion: string
+    estadoAprobado: string
+    observacion: string
 }

@@ -29,6 +29,32 @@
             <span class="fs-20px fw-semibold texto-azul-004884">Total de Vehiculos: </span>
             <span>{{ encuesta.totalVehiculos }}</span>
         </div>
+        <div class="d-block " *ngIf="encuesta">
+            <span class="fs-20px fw-semibold texto-azul-004884">Obligado: </span>
+            <span>{{ obligado }}</span>
+        </div>
+    </div>
+    <div class="d-block w-100 mb-3">
+        <div class="row mb-3">
+            <div class="col-5">
+                <textarea id="textArea" class="form-control" style="height: 130px;"></textarea>
+            </div>
+            <div class="col-2" style="text-align: justify;">
+                <br><br>
+                <div class="row mb-3">
+                    <button id="aprobar" class="boton primario relleno"
+                    (click)="aprobarVerificacion(true)">
+                        Aprobar
+                    </button>
+                </div>
+                <div class="row mb-3">
+                    <button id="devolver" type="button" class="boton primario relleno"
+                    (click)="aprobarVerificacion(false)">
+                        Devolver
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="d-block w-100 mb-3" *ngIf="idEncuesta == 2">
         <button

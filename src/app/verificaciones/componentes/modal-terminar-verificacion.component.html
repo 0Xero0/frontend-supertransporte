@@ -1,0 +1,28 @@
+<ng-template #modal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title fs-14px  fw-bolder">Terminar verificación</h4>
+        <button type="button" class="btn-close mb-2" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row mb-3" style="text-align: center;">
+            <h2 class="fw-semibold fs-14px">El vigilado está marcado como No obligado</h2>
+        </div>
+        <div class="row mb-3" style="text-align: center;">
+            <h2 class="fw-semibold fs-14px">¿Desea continuar sin completar toda la verificación?</h2>
+        </div>
+        <div class="row mb3">
+            <div class="col-6" style="text-align: center;">
+                <button type="button" class="boton primario relleno"
+                (click)="terminarVerificacion()">
+                    Si
+                </button>
+            </div>
+            <div class="col-6" style="text-align: center;">
+                <button type="button" class="boton primario relleno"
+                (click)="modal.dismiss('Cross click')">
+                    No
+                </button>
+            </div>
+        </div>
+      </div>
+</ng-template>

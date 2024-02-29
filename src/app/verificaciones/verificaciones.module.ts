@@ -9,7 +9,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { AlertasModule } from '../alertas/alertas.module';
 import { PaginaReportesFase2VerificarComponent } from './paginas/pagina-reportes-fase2-verificar/pagina-reportes-fase2-verificar.component';
 import { PaginaReporteFase2VerificarComponent } from './paginas/pagina-reporte-fase2-verificar/pagina-reporte-fase2-verificar.component';
-
+import { ModalTerminarVerificacion } from './componentes/modal-terminar-verificacion.component';
 
 
 @NgModule({
@@ -17,7 +17,8 @@ import { PaginaReporteFase2VerificarComponent } from './paginas/pagina-reporte-f
     PaginaReportesVerificarComponent,
     PaginaReporteVerificarComponent,
     PaginaReportesFase2VerificarComponent,
-    PaginaReporteFase2VerificarComponent
+    PaginaReporteFase2VerificarComponent,
+    ModalTerminarVerificacion
   ],
   imports: [
     CommonModule,
