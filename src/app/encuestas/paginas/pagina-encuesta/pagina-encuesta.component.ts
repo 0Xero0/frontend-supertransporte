@@ -17,6 +17,8 @@ import { RespuestaInvalida } from '../../modelos/RespuestaInvalida';
 import { combineLatest } from 'rxjs';
 import { Mes } from '../../modelos/Mes';
 import { Rol } from 'src/app/autenticacion/modelos/Rol';
+import { PaginaReporteVerificarComponent } from 'src/app/verificaciones/paginas/pagina-reporte-verificar/pagina-reporte-verificar.component';
+import { ServicioVerificaciones } from 'src/app/verificaciones/servicios/verificaciones.service';
 
 @Component({
   selector: 'app-pagina-encuesta',
@@ -28,6 +30,7 @@ export class PaginaEncuestaComponent implements OnInit {
   @ViewChild('modalConfirmar') modalConfirmar!: ModalConfirmarEnviarComponent
   @ViewChild('componenteEncuesta') componenteEncuesta!: EncuestaComponent
   @ViewChild('componenteEncuestaCuantitativa') componenteEncuestaCuantitativa!: EncuestaCuantitativaComponent
+  @ViewChild('componentePaginaReporteVerificar') componentePaginaReporteVerificar!: PaginaReporteVerificarComponent
 
   usuario?: Usuario | null
   rol: Rol | null
@@ -45,8 +48,12 @@ export class PaginaEncuestaComponent implements OnInit {
   historico: boolean = false
   esUsuarioAdministrador: boolean;
   meses: Mes[] = []
+  noObligado?: boolean
+  obligado?: string
+  estado?: boolean
 
   constructor(
+    private servicioVerificaciones: ServicioVerificaciones,
     private servicioEncuesta: ServicioEncuestas, 
     private servicioLocalStorage: ServicioLocalStorage,
     private router: Router,
@@ -90,9 +97,32 @@ export class PaginaEncuestaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.servicioVerificaciones.obtenerReporte(
+      this.idEncuesta, 
+      this.idReporte, 
+      this.idVigilado
+    ).subscribe({
+      next: (encuesta)=>{
+        this.encuesta = encuesta
+        this.noObligado = encuesta.noObligado
+        //console.log(this.noObligado)
+      }
+    })
+
+    if(this.encuesta?.noObligado == true){
+      this.obligado = 'No'
+      this.estado = false
+    }else{
+      this.obligado = 'Si'
+      this.estado = true
+    }
   }
 
   //Acciones
+  aprobarVerificacion(aprobar: boolean){
+    var respuesta = document.getElementById('textArea') as HTMLTextAreaElement
+    this.servicioEncuesta.aprovarVerificacion(this.idReporte, aprobar, respuesta.value)
+  }
 
   exportarPDF(){
     this.componenteEncuesta.exportarPDF()

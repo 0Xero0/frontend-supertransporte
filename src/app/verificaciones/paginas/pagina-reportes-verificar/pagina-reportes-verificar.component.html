@@ -11,6 +11,9 @@
                     <th class="">Asignado por</th>
                     <th class="">Fecha de asignación</th>
                     <th class="">Estado de validación</th>
+                    <!--<th class="">Vigencia</th>-->
+                    <th class="">Observación</th>
+                    <th class="">Aprobado</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,6 +32,9 @@
                     <td>{{ reporte.asignador }}</td>
                     <td>{{ reporte.fechaAsignacion | fecha: 'dd/MM/yyyy' }}</td>
                     <td>{{ reporte.estadoValidacion }}</td>
+                    <!--<td></td>-->
+                    <td>{{ reporte.observacion }}</td>
+                    <td>{{ reporte.estadoAprobado }}</td>
                 </tr>
                 <tr *ngIf="reportes.length === 0">
                     <td colspan="8" class="fw-semibold text-center">Sin reportes asignados</td>
