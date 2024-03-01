@@ -21,6 +21,7 @@ import { PaginaResultadosIndicadoresComponent } from './paginas/pagina-resultado
 import { TablaResultadosIndicadoresComponent } from './componentes/tabla-resultados-indicadores/tabla-resultados-indicadores.component';
 import { PaginaAdministrarMesesComponent } from './paginas/pagina-administrar-meses/pagina-administrar-meses.component';
 import { VerificacionEvidenciasComponent } from './componentes/encuesta-cuantitativa/verificacion-evidencias/verificacion-evidencias.component';
+import { ModalAprobarObservacion } from './componentes/modal-aprobar-observacion/modal-aprobar-observacion.component';
 
 
 
@@ -37,6 +38,7 @@ import { VerificacionEvidenciasComponent } from './componentes/encuesta-cuantita
     SubindicadorEncuestaCuantitativaComponent,
     EvidenciaEncuestaCuantitativaComponent,
     ModalConfirmarEnviarComponent,
+    ModalAprobarObservacion,
     PaginaResultadosIndicadoresComponent,
     TablaResultadosIndicadoresComponent,
     PaginaAdministrarMesesComponent,
