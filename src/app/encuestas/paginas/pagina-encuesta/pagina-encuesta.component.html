@@ -37,19 +37,19 @@
     <div class="d-block w-100 mb-3">
         <div class="row mb-3">
             <div class="col-5">
-                <textarea id="textArea" class="form-control" style="height: 130px;"></textarea>
+                <textarea id="textArea" class="form-control" style="height: 130px;">{{observacionAdmin}}</textarea>
             </div>
             <div class="col-2" style="text-align: justify;">
                 <br><br>
                 <div class="row mb-3">
                     <button id="aprobar" class="boton primario relleno"
-                    (click)="aprobarVerificacion(true)">
+                    (click)="abrirModalAprobarObservacion(true)">
                         Aprobar
                     </button>
                 </div>
                 <div class="row mb-3">
                     <button id="devolver" type="button" class="boton primario relleno"
-                    (click)="aprobarVerificacion(false)">
+                    (click)="abrirModalAprobarObservacion(false)">
                         Devolver
                     </button>
                 </div>
@@ -125,3 +125,4 @@
 </div>
 <app-popup #popup/>
 <app-modal-confirmar-enviar #modalConfirmar />
+<app-modal-aprobar-observacion #modalAprobarObservacion></app-modal-aprobar-observacion>

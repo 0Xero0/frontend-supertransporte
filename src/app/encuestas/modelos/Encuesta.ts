@@ -18,6 +18,7 @@ export interface Encuesta {
     porcentajePasos: number;
     porcentajePreguntas: number;
     noObligado: boolean;
+    observacionAdmin: string;
 }
 
 export interface Clasificacion {

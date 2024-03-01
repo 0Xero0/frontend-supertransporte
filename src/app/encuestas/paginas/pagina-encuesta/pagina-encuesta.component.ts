@@ -19,6 +19,7 @@ import { Mes } from '../../modelos/Mes';
 import { Rol } from 'src/app/autenticacion/modelos/Rol';
 import { PaginaReporteVerificarComponent } from 'src/app/verificaciones/paginas/pagina-reporte-verificar/pagina-reporte-verificar.component';
 import { ServicioVerificaciones } from 'src/app/verificaciones/servicios/verificaciones.service';
+import { ModalAprobarObservacion } from '../../componentes/modal-aprobar-observacion/modal-aprobar-observacion.component';
 
 @Component({
   selector: 'app-pagina-encuesta',
@@ -28,6 +29,7 @@ import { ServicioVerificaciones } from 'src/app/verificaciones/servicios/verific
 export class PaginaEncuestaComponent implements OnInit {
   @ViewChild('popup') popup!: PopupComponent
   @ViewChild('modalConfirmar') modalConfirmar!: ModalConfirmarEnviarComponent
+  @ViewChild('modalAprobarObservacion') modalAprobarObservacion!: ModalAprobarObservacion
   @ViewChild('componenteEncuesta') componenteEncuesta!: EncuestaComponent
   @ViewChild('componenteEncuestaCuantitativa') componenteEncuestaCuantitativa!: EncuestaCuantitativaComponent
   @ViewChild('componentePaginaReporteVerificar') componentePaginaReporteVerificar!: PaginaReporteVerificarComponent
@@ -51,6 +53,7 @@ export class PaginaEncuestaComponent implements OnInit {
   noObligado?: boolean
   obligado?: string
   estado?: boolean
+  observacionAdmin?: string
 
   constructor(
     private servicioVerificaciones: ServicioVerificaciones,
@@ -119,22 +122,14 @@ export class PaginaEncuestaComponent implements OnInit {
   }
 
   //Acciones
+  abrirModalAprobarObservacion(aprobar: boolean){
+    this.modalAprobarObservacion.abrir(aprobar)
+  }
+
   aprobarVerificacion(aprobar: boolean){
-    const respuesta = document.getElementById('textArea') as HTMLTextAreaElement
-
-    let mensaje = ''
-        if (aprobar) {
-          mensaje = 'Esta seguro de aprobar el reporte?'
-        }else{
-          mensaje = 'El reporte será devuelto al verificador para su revisión'
-        }
-
-        /* 
-        Mostrar un modal con el mensaje anterior, si la respuesta es si se ejecuta la siguiente linea
-        sino
-        no se hace nada
-        */
-    this.servicioEncuesta.aprovarVerificacion(this.idReporte, aprobar, respuesta.value).subscribe(
+    const observacion = document.getElementById('textArea') as HTMLTextAreaElement
+    //console.log(aprobar)
+    this.servicioEncuesta.aprovarVerificacion(this.idReporte, aprobar, observacion.value).subscribe(
       {
         next: () =>  this.router.navigate(['/administrar', 'encuestas', 1])
       }
@@ -240,6 +235,7 @@ export class PaginaEncuestaComponent implements OnInit {
         this.soloLectura = !encuesta.encuestaEditable
         this.camposDeVerificacion = encuesta.verificacionEditable
         this.camposDeVerificacionVisibles = encuesta.verificacionVisible
+        this.observacionAdmin = encuesta.observacionAdmin
       }
     })
   }
