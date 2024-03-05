@@ -29,12 +29,13 @@
             <span class="fs-20px fw-semibold texto-azul-004884">Total de Vehiculos: </span>
             <span>{{ encuesta.totalVehiculos }}</span>
         </div>
-        <div class="d-block " *ngIf="encuesta">
+        <div class="d-block " *ngIf="reporte">
             <span class="fs-20px fw-semibold texto-azul-004884">Obligado: </span>
-            <span>{{ obligado }}</span>
+            <span *ngIf="reporte?.noObligado == true">No</span>
+            <span *ngIf="reporte?.noObligado == false">Si</span>
         </div>
     </div>
-    <div class="d-block w-100 mb-3">
+    <div class="d-block w-100 mb-3" *ngIf="esUsuarioAdministrador">
         <div class="row mb-3">
             <div class="col-5">
                 <textarea id="textArea" class="form-control" style="height: 130px;">{{observacionAdmin}}</textarea>
