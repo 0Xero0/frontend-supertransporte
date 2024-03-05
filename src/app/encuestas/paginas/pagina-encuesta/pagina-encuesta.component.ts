@@ -37,6 +37,7 @@ export class PaginaEncuestaComponent implements OnInit {
   usuario?: Usuario | null
   rol: Rol | null
   encuesta?: Encuesta
+  reporte?: Encuesta
   encuestaCuantitativa?: EncuestaCuantitativa 
   vigencia?: number
   idVigilado?: string
@@ -51,8 +52,6 @@ export class PaginaEncuestaComponent implements OnInit {
   esUsuarioAdministrador: boolean;
   meses: Mes[] = []
   noObligado?: boolean
-  obligado?: string
-  estado?: boolean
   observacionAdmin?: string
 
   constructor(
@@ -100,28 +99,24 @@ export class PaginaEncuestaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.obtenerReporte()
+  }
+
+  //Acciones
+  obtenerReporte(){
     this.servicioVerificaciones.obtenerReporte(
       this.idEncuesta, 
       this.idReporte, 
       this.idVigilado
     ).subscribe({
-      next: (encuesta)=>{
-        this.encuesta = encuesta
-        this.noObligado = encuesta.noObligado
-        //console.log(this.noObligado)
+      next: (reporte)=>{
+        this.reporte = reporte
+        this.noObligado = reporte.noObligado
+        //console.log(this.reporte.noObligado," init")
       }
     })
-
-    if(this.encuesta?.noObligado == true){
-      this.obligado = 'No'
-      this.estado = false
-    }else{
-      this.obligado = 'Si'
-      this.estado = true
-    }
   }
 
-  //Acciones
   abrirModalAprobarObservacion(aprobar: boolean){
     this.modalAprobarObservacion.abrir(aprobar)
   }
