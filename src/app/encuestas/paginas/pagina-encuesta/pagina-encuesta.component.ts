@@ -53,6 +53,7 @@ export class PaginaEncuestaComponent implements OnInit {
   meses: Mes[] = []
   noObligado?: boolean
   observacionAdmin?: string
+  aprobado?: boolean
 
   constructor(
     private servicioVerificaciones: ServicioVerificaciones,
@@ -100,6 +101,11 @@ export class PaginaEncuestaComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerReporte()
+    if(this.encuesta?.aprobado == true){
+      this.aprobado = true
+    }else{
+      this.aprobado = false
+    }
   }
 
   //Acciones
@@ -231,6 +237,7 @@ export class PaginaEncuestaComponent implements OnInit {
         this.camposDeVerificacion = encuesta.verificacionEditable
         this.camposDeVerificacionVisibles = encuesta.verificacionVisible
         this.observacionAdmin = encuesta.observacionAdmin
+        this.aprobado = encuesta.aprobado
       }
     })
   }

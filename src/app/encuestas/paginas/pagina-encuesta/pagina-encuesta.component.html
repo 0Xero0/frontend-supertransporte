@@ -38,18 +38,22 @@
     <div class="d-block w-100 mb-3" *ngIf="esUsuarioAdministrador">
         <div class="row mb-3">
             <div class="col-5">
-                <textarea id="textArea" class="form-control" style="height: 130px;">{{observacionAdmin}}</textarea>
+                <textarea id="textArea" class="form-control" 
+                style="height: 130px; resize: none;"
+                [readOnly]="aprobado">
+                    {{observacionAdmin}}
+                </textarea>
             </div>
             <div class="col-2" style="text-align: justify;">
                 <br><br>
                 <div class="row mb-3">
-                    <button id="aprobar" class="boton primario relleno"
+                    <button id="aprobar" class="boton primario relleno" [disabled]="aprobado"
                     (click)="abrirModalAprobarObservacion(true)">
                         Aprobar
                     </button>
                 </div>
                 <div class="row mb-3">
-                    <button id="devolver" type="button" class="boton primario relleno"
+                    <button id="devolver" type="button" class="boton primario relleno" [disabled]="aprobado"
                     (click)="abrirModalAprobarObservacion(false)">
                         Devolver
                     </button>
