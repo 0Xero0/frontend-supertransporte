@@ -2,19 +2,23 @@
     <ul class="subindicadores">
         <li class="cabeceras-subindicador">
             <div class="row">
-                <div class="col-1">Variable del indicador</div>
+                <div class="col-2">Variable del indicador</div>
                 <div class="col-4">Indicadores</div>
-                <div class="col-7">Valores</div>
+                <div class="col-6">Valores</div>
             </div>
         </li>
         <li class="fondo-gris-1 p-3" *ngIf="subindicadores.length < 1">
             {{ mensaje }}
         </li>
         <li class="subindicador" *ngFor="let subindicador of subindicadores">
-            <app-subindicador-encuesta-cuantitativa [preguntasFaltantes]="indicadoresFaltantes"
-                [soloLectura]="soloLectura" [habilitarCamposVerificador]="habilitarCamposVerificador"
-                [habilitarCamposVigilado]="habilitarCamposVigilado" [subindicador]="subindicador"
-                [estadoRespuestas]="estadoRespuestas" (nuevaRespuesta)="manejarNuevaRespuesta($event)" />
+            <app-subindicador-encuesta-cuantitativa 
+                [preguntasFaltantes]="indicadoresFaltantes"
+                [soloLectura]="soloLectura" 
+                [habilitarCamposVerificador]="habilitarCamposVerificador"
+                [habilitarCamposVigilado]="habilitarCamposVigilado" 
+                [subindicador]="subindicador"
+                [estadoRespuestas]="estadoRespuestas" 
+                (nuevaRespuesta)="manejarNuevaRespuesta($event)" />
         </li>
     </ul>
 </div>
@@ -38,10 +42,14 @@
                 <div class="col-3">{{ evidencia.nombre }}</div>
                 <div class="col-2">{{ evidencia.validaciones.tipoDato }}</div>
                 <div class="col-2">
-                    <app-evidencia-encuesta-cuantitativa [nombreFormulario]="nombreFormulario"
-                        [soloLectura]="soloLectura" [habilitarCamposVerificador]="habilitarCamposVerificador"
-                        [habilitarCamposVigilado]="habilitarCamposVigilado" [idVigilado]="idVigilado"
-                        [evidencia]="evidencia" (evidenciaExcedeTamano)="manejarEvidenciaExcedeTamano($event)"
+                    <app-evidencia-encuesta-cuantitativa 
+                        [nombreFormulario]="nombreFormulario"
+                        [soloLectura]="soloLectura" 
+                        [habilitarCamposVerificador]="habilitarCamposVerificador"
+                        [habilitarCamposVigilado]="habilitarCamposVigilado" 
+                        [idVigilado]="idVigilado"
+                        [evidencia]="evidencia" 
+                        (evidenciaExcedeTamano)="manejarEvidenciaExcedeTamano($event)"
                         (errorAlCargar)="manejarErrorAlCargar($event)"
                         (nuevaEvidencia)="manejarNuevaEvidencia($event)" />
                 </div>

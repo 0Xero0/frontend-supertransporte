@@ -101,7 +101,12 @@
             [routerLink]="['/administrar', 'verificar-reportes', 'fase-dos', 'reportes']">Volver</button>
     </div>
 
-    <app-encuesta-cuantitativa #encuesta [encuesta]="reporte" [historico]="historico" [habilitarCamposVigilado]="false"
-        [habilitarCamposVerificador]="true" (cambioDeMes)="obtenerReporte($event)"
-        (hanHabidoCambios)="setHayCambios($event)" (formularioGuardado)="manejarFormularioGuardado($event)" />
+    <app-encuesta-cuantitativa #encuesta 
+        [encuesta]="reporte" 
+        [historico]="historico" 
+        [habilitarCamposVigilado]="false"
+        [habilitarCamposVerificador]="true" 
+        (cambioDeMes)="obtenerReporte($event)"
+        (hanHabidoCambios)="setHayCambios($event)" 
+        (formularioGuardado)="manejarFormularioGuardado($event)" />
 </div>

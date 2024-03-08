@@ -122,7 +122,7 @@
         *ngIf="idEncuesta == 2 && encuestaCuantitativa" 
         [encuesta]="encuestaCuantitativa"
         [historico]="historico"
-        (cambioDeMes)="obtenerEncuestaCuantitativa($event)"
+        (cambioDeMes)="($event)"
         (hanHabidoCambios)="setHayCambios($event)"
         (formularioGuardado)="manejarFormularioGuardado($event)"
         />
