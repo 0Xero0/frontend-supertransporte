@@ -4,6 +4,7 @@ import { ServicioVerificaciones } from '../../servicios/verificaciones.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { combineLatest } from 'rxjs'
 import { EncuestaCuantitativaComponent } from 'src/app/encuestas/componentes/encuesta-cuantitativa/encuesta-cuantitativa/encuesta-cuantitativa.component';
+import { ServicioEncuestas } from 'src/app/encuestas/servicios/encuestas.service';
 
 @Component({
   selector: 'app-pagina-reporte-fase2-verificar',
@@ -22,14 +23,21 @@ export class PaginaReporteFase2VerificarComponent {
   hayCambios: boolean = false
   soloLectura: boolean = false
 
-  constructor(private servicioVerificacion: ServicioVerificaciones, private activedRoute: ActivatedRoute){
+  constructor(
+    private servicioVerificacion: ServicioVerificaciones,
+    private servicioEncuesta: ServicioEncuestas, 
+    private activedRoute: ActivatedRoute){
     combineLatest({
       parametros: this.activedRoute.params, 
       query: this.activedRoute.queryParams
     }).subscribe({
       next: ({ parametros, query})=>{
         this.recogerParametrosUrl(parametros, query)
-        this.obtenerReporte(this.idMes!)
+        this.servicioEncuesta.obtenerMeses(this.vigencia!,this.historico).subscribe({
+          next: (respuesta) => {
+            this.obtenerReporte(respuesta.meses[0].idMes)
+          }
+        })
       }
     })
   }
