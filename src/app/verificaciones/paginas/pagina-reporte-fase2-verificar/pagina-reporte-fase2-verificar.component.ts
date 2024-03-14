@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { EncuestaCuantitativa } from 'src/app/encuestas/modelos/EncuestaCuantitativa';
+import { EnviadoSt } from 'src/app/encuestas/modelos/EncuestaCuantitativa';
 import { ServicioVerificaciones } from '../../servicios/verificaciones.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { combineLatest } from 'rxjs'
@@ -22,6 +23,7 @@ export class PaginaReporteFase2VerificarComponent {
   reporte?: EncuestaCuantitativa
   hayCambios: boolean = false
   soloLectura: boolean = false
+  envioSt?: EnviadoSt
 
   constructor(
     private servicioVerificacion: ServicioVerificaciones,
@@ -52,8 +54,18 @@ export class PaginaReporteFase2VerificarComponent {
       next: (reporte)=>{
         this.reporte = reporte
         this.soloLectura = reporte.soloLectura
+        this.envioSt = reporte.enviadosSt[idMes-1]
+        this.habilitarEnvioSt()
       }
     })
+  }
+
+  habilitarEnvioSt(){
+    if(this.envioSt?.envioSt === 'NO'){
+      this.setHayCambios(true)
+    }else{
+      this.setHayCambios(false)
+    }
   }
 
   guardarVerificacion(){
