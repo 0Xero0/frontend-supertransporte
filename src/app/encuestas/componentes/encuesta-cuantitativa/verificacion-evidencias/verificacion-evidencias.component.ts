@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Evidencia } from 'src/app/encuestas/modelos/EncuestaCuantitativa';
+import { EncuestaCuantitativa, Evidencia } from 'src/app/encuestas/modelos/EncuestaCuantitativa';
 import { RespuestaVerificacionEvidencia } from 'src/app/encuestas/modelos/RespuestaVerificacionEvidencia';
 import { Maestra } from 'src/app/verificaciones/modelos/Maestra';
+import { PaginaReporteFase2VerificarComponent } from 'src/app/verificaciones/paginas/pagina-reporte-fase2-verificar/pagina-reporte-fase2-verificar.component';
 
 @Component({
   selector: 'app-verificacion-evidencias',
@@ -10,6 +11,7 @@ import { Maestra } from 'src/app/verificaciones/modelos/Maestra';
 })
 export class VerificacionEvidenciasComponent implements OnInit{
   @Input() evidencia!: Evidencia
+  @Input() reporte!: EncuestaCuantitativa
   @Input() opcionesCumplimiento: Maestra[] = []
   @Input() opcionesCorrespondencia: Maestra[] = []
   @Input() habilitarCamposVerificador: boolean = false
@@ -20,6 +22,7 @@ export class VerificacionEvidenciasComponent implements OnInit{
   observacionCumple: string = ""
   corresponde: number = 0
   observacionCorresponde: string = ""
+  soloLecturaV: string = "false"
 
   constructor(){
     this.nuevaVerificacion = new EventEmitter<RespuestaVerificacionEvidencia>();
@@ -29,7 +32,8 @@ export class VerificacionEvidenciasComponent implements OnInit{
     this.cumple = Number(this.evidencia.cumple)
     this.corresponde = Number(this.evidencia.corresponde)
     this.observacionCorresponde = this.evidencia.observacionCorresponde 
-    this.observacionCumple = this.evidencia.observacionCumple 
+    this.observacionCumple = this.evidencia.observacionCumple
+    this.soloLecturaV =  localStorage.getItem("soloLecturaV")??"false"
   }
 
   manejarCambioCorresponde(corresponde: number, evidenciaId: number){

@@ -1,6 +1,6 @@
 <div class="col" *ngIf="habilitarCamposVerificador"> <!-- corresponde -->
     <fieldset class="d-flex flex-column">
-        <select class="form-select" [(ngModel)]="corresponde"
+        <select class="form-select" [(ngModel)]="corresponde" [disabled]="soloLecturaV"
             (ngModelChange)="manejarCambioCorresponde($event, evidencia.idEvidencia)">
             <option [value]="0">Selecciona una opción</option>
             <option [value]="opcion.id" *ngFor="let opcion of opcionesCorrespondencia">
@@ -14,7 +14,7 @@
 </div>
 <div class="col" *ngIf="habilitarCamposVerificador"> <!-- cumple -->
     <fieldset class="d-flex flex-column">
-        <select class="form-select" [(ngModel)]="cumple"
+        <select class="form-select" [(ngModel)]="cumple" [disabled]="soloLecturaV"
             (ngModelChange)="manejarCambioCumple($event, evidencia.idEvidencia)">
             <option [value]="0">Selecciona una opción</option>
             <option [value]="opcion.id" *ngFor="let opcion of opcionesCumplimiento">

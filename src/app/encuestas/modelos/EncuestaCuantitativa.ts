@@ -1,6 +1,7 @@
 export interface EncuestaCuantitativa{
     formularios: Formulario[]
     soloLectura: boolean
+    soloLecturaV: boolean
     mensaje: string
     idVigilado: string
     idReporte: string
