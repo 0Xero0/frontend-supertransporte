@@ -23,7 +23,10 @@ export class PaginaReporteFase2VerificarComponent {
   reporte?: EncuestaCuantitativa
   hayCambios: boolean = false
   soloLectura: boolean = false
+  soloLecturaV: boolean = false
   envioSt?: EnviadoSt
+  evidenciaEntregada?: string
+  variablesEntregadas?: string
 
   constructor(
     private servicioVerificacion: ServicioVerificaciones,
@@ -54,6 +57,11 @@ export class PaginaReporteFase2VerificarComponent {
       next: (reporte)=>{
         this.reporte = reporte
         this.soloLectura = reporte.soloLectura
+        this.soloLecturaV = reporte.soloLecturaV
+        this.evidenciaEntregada = reporte.evidenciasEntregadas.toFixed(2)
+        this.variablesEntregadas = reporte.variablesEntregadas.toFixed(2)
+        localStorage.removeItem("soloLecturaV")
+        localStorage.setItem("soloLecturaV",reporte.soloLecturaV.toString())
         this.envioSt = reporte.enviadosSt[idMes-1]
         this.habilitarEnvioSt()
       }
@@ -61,7 +69,7 @@ export class PaginaReporteFase2VerificarComponent {
   }
 
   habilitarEnvioSt(){
-    if(this.envioSt?.envioSt === 'NO'){
+    if(this.envioSt?.envioSt === 'NO' || this.soloLecturaV){
       this.setHayCambios(true)
     }else{
       this.setHayCambios(false)
