@@ -66,7 +66,7 @@ export class ServicioVerificaciones extends Autenticable{
   obtenerReportesFaseDos(pagina: number, limite: number, filtros?: { idVerificador: string }){
     let endpoint = `/api/v1/reportes/asignados-fasedos?pagina=${pagina}&limite=${limite}`
     if(filtros?.idVerificador){
-      endpoint+= `idVerificador=${filtros.idVerificador}`
+      endpoint+= `&idVerificador=${filtros.idVerificador}`
     }
     return this.clienteHttp.get<{ asignadas: ResumenReporteFaseDosAsignado[], paginacion: Paginacion }>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }
