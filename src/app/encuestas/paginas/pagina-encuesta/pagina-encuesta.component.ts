@@ -54,6 +54,7 @@ export class PaginaEncuestaComponent implements OnInit {
   noObligado?: boolean
   observacionAdmin?: string
   aprobado?: boolean
+  idMes?: number
 
   constructor(
     private servicioVerificaciones: ServicioVerificaciones,
@@ -130,7 +131,7 @@ export class PaginaEncuestaComponent implements OnInit {
   aprobarVerificacion(aprobar: boolean){
     const observacion = document.getElementById('textArea') as HTMLTextAreaElement
     //console.log(aprobar)
-    this.servicioEncuesta.aprovarVerificacion(this.idReporte, aprobar, observacion.value).subscribe(
+    this.servicioEncuesta.aprovarVerificacion(this.idReporte, aprobar, observacion.value, this.idMes).subscribe(
       {
         next: () =>  this.router.navigate(['/administrar', 'encuestas', 1])
       }
@@ -225,11 +226,15 @@ export class PaginaEncuestaComponent implements OnInit {
         this.encuestaCuantitativa = encuesta
         this.soloLectura = encuesta.soloLectura
         this.vigencia = Number(encuesta.vigencia)
+        this.observacionAdmin = encuesta.observacionAdmin
+        this.aprobado = encuesta.aprobado
+        this.idMes = idMes
       }
     })
   }
 
   obtenerEncuesta(){
+    console.log("Aquí llega")
     this.servicioEncuesta.obtenerEncuesta(this.idVigilado!, this.idEncuesta!, this.idReporte!).subscribe({
       next: ( encuesta )=>{
         this.encuesta = encuesta
@@ -238,6 +243,7 @@ export class PaginaEncuestaComponent implements OnInit {
         this.camposDeVerificacionVisibles = encuesta.verificacionVisible
         this.observacionAdmin = encuesta.observacionAdmin
         this.aprobado = encuesta.aprobado
+        
       }
     })
   }
