@@ -29,9 +29,9 @@ export class ServicioEncuestas extends Autenticable {
     super()
   }
   
-  aprovarVerificacion(idReporte?: number, aprobar?: boolean, observacion?: string){
+  aprovarVerificacion(idReporte?: number, aprobar?: boolean, observacion?: string, idMes?: number){
     const endpoint = `/api/v1/reportes/aprobar-verificacion`
-    return this.http.post(`${this.host}${endpoint}`, {idReporte, aprobar, observacion}, {
+    return this.http.post(`${this.host}${endpoint}`, {idReporte, aprobar, observacion, idMes}, {
       headers: this.obtenerCabeceraAutorizacion()
     })
   }
