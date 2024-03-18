@@ -8,4 +8,6 @@ export interface ResumenReporteFaseDosAsignado {
     asignado: boolean
     estadoValidacion: string
     vigencia: number
+    estadoAprobado: string
+    observacion: string
 }
