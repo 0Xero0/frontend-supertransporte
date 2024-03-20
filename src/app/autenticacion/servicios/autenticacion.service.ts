@@ -39,6 +39,7 @@ export class AutenticacionService {
     localStorage.removeItem(this.llaveUsuarioLocalStorage)
     localStorage.removeItem(this.llaveTokenLocalStorage)
     localStorage.removeItem(this.llaveRolesLocalStorage)
+    localStorage.removeItem("soloLecturaV")
   }
 
   public guardarInformacionInicioSesion(jwt:string, rol:object, Usuario: object):void{

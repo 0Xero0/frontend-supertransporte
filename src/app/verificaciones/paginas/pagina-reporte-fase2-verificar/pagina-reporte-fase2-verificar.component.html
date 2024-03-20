@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col">Total de Vehiculos</div>
+                            <div class="col">Total de Vehículos</div>
                             <div class="col">
                                 <input type="text" class="form-control" disabled [value]="reporte.totalVehiculos">
                             </div>
@@ -56,13 +56,13 @@
                         <div class="row mb-2">
                             <div class="col">Evidencias entregadas</div>
                             <div class="col">
-                                <input type="text" class="form-control" disabled [value]="reporte.evidenciasEntregadas">
+                                <input type="text" class="form-control" disabled value="{{evidenciaEntregada}} %">
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col">Variables entregadas</div>
                             <div class="col">
-                                <input type="text" class="form-control" disabled [value]="reporte.variablesEntregadas">
+                                <input type="text" class="form-control" disabled value="{{variablesEntregadas}} %">
                             </div>
                         </div>
                     </div>
@@ -95,13 +95,18 @@
             [disabled]="hayCambios">Enviar a ST</button>
 
         <button type="button" class="boton primario relleno" (click)="guardarVerificacion()"
-            [disabled]="!hayCambios">Guardar</button>
+            [disabled]="!hayCambios || soloLecturaV">Guardar</button>
 
         <button type="button" class="boton primario delineado"
             [routerLink]="['/administrar', 'verificar-reportes', 'fase-dos', 'reportes']">Volver</button>
     </div>
 
-    <app-encuesta-cuantitativa #encuesta [encuesta]="reporte" [historico]="historico" [habilitarCamposVigilado]="false"
-        [habilitarCamposVerificador]="true" (cambioDeMes)="obtenerReporte($event)"
-        (hanHabidoCambios)="setHayCambios($event)" (formularioGuardado)="manejarFormularioGuardado($event)" />
+    <app-encuesta-cuantitativa #encuesta 
+        [encuesta]="reporte" 
+        [historico]="historico" 
+        [habilitarCamposVigilado]="false"
+        [habilitarCamposVerificador]="true" 
+        (cambioDeMes)="obtenerReporte($event)"
+        (hanHabidoCambios)="setHayCambios($event)" 
+        (formularioGuardado)="manejarFormularioGuardado($event)" />
 </div>

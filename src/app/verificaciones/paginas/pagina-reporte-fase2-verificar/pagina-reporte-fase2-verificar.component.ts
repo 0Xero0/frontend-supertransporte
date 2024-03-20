@@ -1,9 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { EncuestaCuantitativa } from 'src/app/encuestas/modelos/EncuestaCuantitativa';
+import { EnviadoSt } from 'src/app/encuestas/modelos/EncuestaCuantitativa';
 import { ServicioVerificaciones } from '../../servicios/verificaciones.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { combineLatest } from 'rxjs'
 import { EncuestaCuantitativaComponent } from 'src/app/encuestas/componentes/encuesta-cuantitativa/encuesta-cuantitativa/encuesta-cuantitativa.component';
+import { ServicioEncuestas } from 'src/app/encuestas/servicios/encuestas.service';
 
 @Component({
   selector: 'app-pagina-reporte-fase2-verificar',
@@ -21,15 +23,26 @@ export class PaginaReporteFase2VerificarComponent {
   reporte?: EncuestaCuantitativa
   hayCambios: boolean = false
   soloLectura: boolean = false
+  soloLecturaV: boolean = false
+  envioSt?: EnviadoSt
+  evidenciaEntregada?: string
+  variablesEntregadas?: string
 
-  constructor(private servicioVerificacion: ServicioVerificaciones, private activedRoute: ActivatedRoute){
+  constructor(
+    private servicioVerificacion: ServicioVerificaciones,
+    private servicioEncuesta: ServicioEncuestas, 
+    private activedRoute: ActivatedRoute){
     combineLatest({
       parametros: this.activedRoute.params, 
       query: this.activedRoute.queryParams
     }).subscribe({
       next: ({ parametros, query})=>{
         this.recogerParametrosUrl(parametros, query)
-        this.obtenerReporte(this.idMes!)
+        this.servicioEncuesta.obtenerMeses(this.vigencia!,this.historico).subscribe({
+          next: (respuesta) => {
+            this.obtenerReporte(respuesta.meses[0].idMes)
+          }
+        })
       }
     })
   }
@@ -44,8 +57,23 @@ export class PaginaReporteFase2VerificarComponent {
       next: (reporte)=>{
         this.reporte = reporte
         this.soloLectura = reporte.soloLectura
+        this.soloLecturaV = reporte.soloLecturaV
+        this.evidenciaEntregada = reporte.evidenciasEntregadas.toFixed(2)
+        this.variablesEntregadas = reporte.variablesEntregadas.toFixed(2)
+        localStorage.removeItem("soloLecturaV")
+        localStorage.setItem("soloLecturaV",reporte.soloLecturaV.toString())
+        this.envioSt = reporte.enviadosSt[idMes-1]
+        this.habilitarEnvioSt()
       }
     })
+  }
+
+  habilitarEnvioSt(){
+    if(this.envioSt?.envioSt === 'NO' || this.soloLecturaV){
+      this.setHayCambios(true)
+    }else{
+      this.setHayCambios(false)
+    }
   }
 
   guardarVerificacion(){

@@ -25,11 +25,12 @@ export class ServicioVerificaciones extends Autenticable{
     super() 
   }
 
-  guardarVerificaciones(idReporte: number, verificaciones: RespuestaVerificacion[]){
+  guardarVerificaciones(idReporte: number, verificaciones: RespuestaVerificacion[], noObligado:boolean){
     const endpoint = '/api/v1/respuestas/verificar'
+    console.log(noObligado)
     return this.clienteHttp.post(
       `${this.host}${endpoint}`, 
-      { idReporte: idReporte, respuestas: verificaciones }, 
+      { idReporte: idReporte, respuestas: verificaciones, noObligado: noObligado }, 
       { headers: this.obtenerCabeceraAutorizacion() }
     )
   }
@@ -43,9 +44,9 @@ export class ServicioVerificaciones extends Autenticable{
     )
   }
 
-  enviarVerificaciones(idEncuesta: number, idReporte: number, idVigilado: string){
+  enviarVerificaciones(idEncuesta: number, idReporte: number, idVigilado: string, noObligado: boolean){
     const endpoint = `/api/v1/respuestas/finalizar-verificacion`
-    return this.clienteHttp.post<{mensaje: string}>(`${this.host}${endpoint}`, {idEncuesta, idReporte, idVigilado}, { headers: this.obtenerCabeceraAutorizacion() })
+    return this.clienteHttp.post<{mensaje: string}>(`${this.host}${endpoint}`, {idEncuesta, idReporte, idVigilado, noObligado}, { headers: this.obtenerCabeceraAutorizacion() })
   }
 
   enviarVerificacionesFaseDos({ idEncuesta, idReporte, idMes, idVigilado }:{ idEncuesta: number, idReporte: number, idMes: number, idVigilado: string }){
@@ -65,12 +66,12 @@ export class ServicioVerificaciones extends Autenticable{
   obtenerReportesFaseDos(pagina: number, limite: number, filtros?: { idVerificador: string }){
     let endpoint = `/api/v1/reportes/asignados-fasedos?pagina=${pagina}&limite=${limite}`
     if(filtros?.idVerificador){
-      endpoint+= `idVerificador=${filtros.idVerificador}`
+      endpoint+= `&idVerificador=${filtros.idVerificador}`
     }
     return this.clienteHttp.get<{ asignadas: ResumenReporteFaseDosAsignado[], paginacion: Paginacion }>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }
 
-  obtenerReporte(idEncuesta: number, idReporte: number, idVigilado: string){
+  obtenerReporte(idEncuesta?: number, idReporte?: number, idVigilado?: string){
     const endpoint = `/api/v1/reportes/visualizar?idEncuesta=${idEncuesta}&idReporte=${idReporte}&idVigilado=${idVigilado}`
     return this.clienteHttp.get<Encuesta>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }

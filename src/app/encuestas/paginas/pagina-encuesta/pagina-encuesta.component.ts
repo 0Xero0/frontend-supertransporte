@@ -17,6 +17,9 @@ import { RespuestaInvalida } from '../../modelos/RespuestaInvalida';
 import { combineLatest } from 'rxjs';
 import { Mes } from '../../modelos/Mes';
 import { Rol } from 'src/app/autenticacion/modelos/Rol';
+import { PaginaReporteVerificarComponent } from 'src/app/verificaciones/paginas/pagina-reporte-verificar/pagina-reporte-verificar.component';
+import { ServicioVerificaciones } from 'src/app/verificaciones/servicios/verificaciones.service';
+import { ModalAprobarObservacion } from '../../componentes/modal-aprobar-observacion/modal-aprobar-observacion.component';
 
 @Component({
   selector: 'app-pagina-encuesta',
@@ -26,12 +29,15 @@ import { Rol } from 'src/app/autenticacion/modelos/Rol';
 export class PaginaEncuestaComponent implements OnInit {
   @ViewChild('popup') popup!: PopupComponent
   @ViewChild('modalConfirmar') modalConfirmar!: ModalConfirmarEnviarComponent
+  @ViewChild('modalAprobarObservacion') modalAprobarObservacion!: ModalAprobarObservacion
   @ViewChild('componenteEncuesta') componenteEncuesta!: EncuestaComponent
   @ViewChild('componenteEncuestaCuantitativa') componenteEncuestaCuantitativa!: EncuestaCuantitativaComponent
+  @ViewChild('componentePaginaReporteVerificar') componentePaginaReporteVerificar!: PaginaReporteVerificarComponent
 
   usuario?: Usuario | null
   rol: Rol | null
   encuesta?: Encuesta
+  reporte?: Encuesta
   encuestaCuantitativa?: EncuestaCuantitativa 
   vigencia?: number
   idVigilado?: string
@@ -45,8 +51,13 @@ export class PaginaEncuestaComponent implements OnInit {
   historico: boolean = false
   esUsuarioAdministrador: boolean;
   meses: Mes[] = []
+  noObligado?: boolean
+  observacionAdmin?: string
+  aprobado?: boolean
+  idMes?: number
 
   constructor(
+    private servicioVerificaciones: ServicioVerificaciones,
     private servicioEncuesta: ServicioEncuestas, 
     private servicioLocalStorage: ServicioLocalStorage,
     private router: Router,
@@ -90,9 +101,42 @@ export class PaginaEncuestaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.obtenerReporte()
+    if(this.encuesta?.aprobado == true){
+      this.aprobado = true
+    }else{
+      this.aprobado = false
+    }
   }
 
   //Acciones
+  obtenerReporte(){
+    this.servicioVerificaciones.obtenerReporte(
+      this.idEncuesta, 
+      this.idReporte, 
+      this.idVigilado
+    ).subscribe({
+      next: (reporte)=>{
+        this.reporte = reporte
+        this.noObligado = reporte.noObligado
+        //console.log(this.reporte.noObligado," init")
+      }
+    })
+  }
+
+  abrirModalAprobarObservacion(aprobar: boolean){
+    this.modalAprobarObservacion.abrir(aprobar)
+  }
+
+  aprobarVerificacion(aprobar: boolean){
+    const observacion = document.getElementById('textArea') as HTMLTextAreaElement
+    //console.log(aprobar)
+    this.servicioEncuesta.aprovarVerificacion(this.idReporte, aprobar, observacion.value, this.idMes).subscribe(
+      {
+        next: () =>  this.router.navigate(['/administrar', 'encuestas', 1])
+      }
+    )
+  }
 
   exportarPDF(){
     this.componenteEncuesta.exportarPDF()
@@ -182,17 +226,24 @@ export class PaginaEncuestaComponent implements OnInit {
         this.encuestaCuantitativa = encuesta
         this.soloLectura = encuesta.soloLectura
         this.vigencia = Number(encuesta.vigencia)
+        this.observacionAdmin = encuesta.observacionAdmin
+        this.aprobado = encuesta.aprobado
+        this.idMes = idMes
       }
     })
   }
 
   obtenerEncuesta(){
+    console.log("Aquí llega")
     this.servicioEncuesta.obtenerEncuesta(this.idVigilado!, this.idEncuesta!, this.idReporte!).subscribe({
       next: ( encuesta )=>{
         this.encuesta = encuesta
         this.soloLectura = !encuesta.encuestaEditable
         this.camposDeVerificacion = encuesta.verificacionEditable
         this.camposDeVerificacionVisibles = encuesta.verificacionVisible
+        this.observacionAdmin = encuesta.observacionAdmin
+        this.aprobado = encuesta.aprobado
+        
       }
     })
   }

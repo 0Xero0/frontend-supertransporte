@@ -27,6 +27,7 @@ export class EncuestaComponent implements OnInit {
   @Input('justificable') justificable: boolean = false
   @Input('camposDeVerificacion') camposDeVerificacion: boolean = false
   @Input('camposDeVerificacionVisibles') camposDeVerificacionVisibles: boolean = true
+  @Input('noObligado') noObligado: boolean = false
   @Output('hanHabidoCambios') hanHabidoCambios: EventEmitter<boolean>
   @ViewChildren('clasificacion') clasificaciones!: QueryList<ClasificacionEncuestaComponent>
   @ViewChild('popup') popup!: PopupComponent
@@ -43,6 +44,7 @@ export class EncuestaComponent implements OnInit {
     private servicioVerificacion: ServicioVerificaciones
   ){
     this.hanHabidoCambios = new EventEmitter<boolean>();
+    console.log(this.noObligado,'encuenta')
   }
 
   ngOnInit(): void {
@@ -133,7 +135,7 @@ export class EncuestaComponent implements OnInit {
   }
 
   guardarVerificaciones(){
-    this.servicioVerificacion.guardarVerificaciones(this.idReporte, this.obtenerVerificaciones()).subscribe({
+    this.servicioVerificacion.guardarVerificaciones(this.idReporte, this.obtenerVerificaciones(), this.noObligado).subscribe({
       next: ( respuesta: any ) =>{
         this.popup.abrirPopupExitoso('Se han guardado las verificaciones')
         this.limpiarResaltado()        

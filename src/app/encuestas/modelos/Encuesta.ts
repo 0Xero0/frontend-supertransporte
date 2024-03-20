@@ -17,6 +17,9 @@ export interface Encuesta {
     totalVehiculos: number;
     porcentajePasos: number;
     porcentajePreguntas: number;
+    noObligado: boolean;
+    observacionAdmin: string;
+    aprobado: boolean;
 }
 
 export interface Clasificacion {

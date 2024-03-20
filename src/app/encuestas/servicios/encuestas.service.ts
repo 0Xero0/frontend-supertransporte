@@ -28,6 +28,13 @@ export class ServicioEncuestas extends Autenticable {
   constructor(private http: HttpClient) {
     super()
   }
+  
+  aprovarVerificacion(idReporte?: number, aprobar?: boolean, observacion?: string, idMes?: number){
+    const endpoint = `/api/v1/reportes/aprobar-verificacion`
+    return this.http.post(`${this.host}${endpoint}`, {idReporte, aprobar, observacion, idMes}, {
+      headers: this.obtenerCabeceraAutorizacion()
+    })
+  }
 
   obtenerMeses(vigencia: number, historico: boolean = false):Observable<{ meses: Mes[] }>{
     const endpoint = `/api/v1/maestras/meses?vigencia=${vigencia}&historico=${historico}`

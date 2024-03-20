@@ -1,6 +1,7 @@
 export interface EncuestaCuantitativa{
     formularios: Formulario[]
     soloLectura: boolean
+    soloLecturaV: boolean
     mensaje: string
     idVigilado: string
     idReporte: string
@@ -15,6 +16,8 @@ export interface EncuestaCuantitativa{
     razonSocila: string
     modalidad: string
     enviadosSt: EnviadoSt[]
+    observacionAdmin: string;
+    aprobado: boolean;
 }
 
 export interface EnviadoSt{

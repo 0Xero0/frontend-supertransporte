@@ -8,6 +8,7 @@ import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.componen
 import { DialogosVerificaciones } from '../../Dialogos';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RespuestaInvalida } from 'src/app/encuestas/modelos/RespuestaInvalida';
+import { ModalTerminarVerificacion } from '../../componentes/modal-terminar-verificacion.component';
 
 @Component({
   selector: 'app-pagina-reporte-verificar',
@@ -17,6 +18,9 @@ import { RespuestaInvalida } from 'src/app/encuestas/modelos/RespuestaInvalida';
 export class PaginaReporteVerificarComponent implements OnInit {
   @ViewChild('popup') popup!: PopupComponent
   @ViewChild('componenteEncuesta') componenteEncuesta!: EncuestaComponent
+  @ViewChild('modalTerminarVerificacion') modalTerminarVerificacion!: ModalTerminarVerificacion
+
+  noObligado: boolean = false
   encuesta?: Encuesta
   idVigilado?: string
   idEncuesta?: number
@@ -29,7 +33,11 @@ export class PaginaReporteVerificarComponent implements OnInit {
   razonSocial?: string
   estadoActual?: string
   clasificacionResolucion?: string
-  constructor(private servicioVerificaciones: ServicioVerificaciones, private activatedRoute: ActivatedRoute, private router: Router) {}
+  
+  constructor(
+    private servicioVerificaciones: ServicioVerificaciones, 
+    private activatedRoute: ActivatedRoute, 
+    private router: Router) {}
 
   ngOnInit(): void {
     combineLatest({
@@ -54,14 +62,39 @@ export class PaginaReporteVerificarComponent implements OnInit {
             this.soloLectura = !encuesta.encuestaEditable
             this.camposDeVerificacion = encuesta.verificacionEditable
             this.camposDeVerificacionVisibles = encuesta.verificacionVisible
+            this.noObligado = encuesta.noObligado
           }
         })
       }
     })
   }
 
+  formatoPorcentajes(porcentaje: number){
+    if(porcentaje % 1==0){
+      return porcentaje
+    }else{
+      return porcentaje.toFixed(2)
+    }
+  }
+
+  toggleCheckbox() {
+    this.noObligado = !this.noObligado;
+    this.manejarHayCambios(true)
+  }
+
   guardarVerificaciones(){
+    //console.log('verificar', this.noObligado)
     this.componenteEncuesta.guardarVerificaciones()
+  }
+
+  abrirModalTerminarVerificacion(){
+    var estadoCheckbox = document.getElementById('check') as HTMLInputElement
+    //console.log(respuesta.checked)
+    if(estadoCheckbox.checked == true){
+      this.modalTerminarVerificacion.abrir()
+    }else{
+      this.enviarVerificaciones()
+    }
   }
 
   manejarHayCambios(hayCambios: boolean){
@@ -69,7 +102,7 @@ export class PaginaReporteVerificarComponent implements OnInit {
   }
 
   enviarVerificaciones(){
-    this.servicioVerificaciones.enviarVerificaciones(this.idEncuesta!, this.idReporte!, this.idVigilado!).subscribe({
+    this.servicioVerificaciones.enviarVerificaciones(this.idEncuesta!, this.idReporte!, this.idVigilado!, this.noObligado!).subscribe({
       next: (respuesta)=>{
         this.popup.abrirPopupExitoso(DialogosVerificaciones.VERIFICACION_ENVIADA)
         this.router.navigateByUrl('/administrar/verificar-reportes')
