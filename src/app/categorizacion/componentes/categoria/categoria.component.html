@@ -1,9 +1,9 @@
-<app-acordeon [invalido]="inconsistencia || esIgualACero">
+<app-acordeon [invalido]="inconsistencia">
     <div cabecera class="d-flex">
         <span class="d-flex align-items-center mb-0 fs-16px texto-primario fw-semibold mx-2">
             {{ categoria.nombre }}
         </span>
-        <span class="d-flex validacion align-items-center" *ngIf="inconsistencia || esIgualACero">
+        <span class="d-flex validacion align-items-center" *ngIf="inconsistencia">
             *
         </span>
     </div>
@@ -68,7 +68,7 @@
                         </tbody>
                     </table>
                     <span *ngIf="inconsistencia" class="validacion fs-12px">Los totales de "{{tipoCategoria.nombre}}" no coinciden.</span>
-                    <span *ngIf="esIgualACero" class="validacion fs-12px">El total debe ser mayor a cero.</span>
+                    <!-- <span *ngIf="esIgualACero" class="validacion fs-12px">El total debe ser mayor a cero.</span> -->
                 </div>
             </div>
         </div>

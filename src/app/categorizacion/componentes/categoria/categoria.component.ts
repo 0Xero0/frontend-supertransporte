@@ -44,7 +44,7 @@ export class CategoriaComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnInit(): void {
     this.descriptiva = this.categoria.id === 4 ? true : false;
     this.clases = {
-      'invalido': this.inconsistencia || this.esIgualACero
+      'invalido': this.inconsistencia //|| this.esIgualACero
     }
   }
 
@@ -136,7 +136,7 @@ export class CategoriaComponent implements OnInit, AfterViewInit, OnChanges {
 
   actualizarClasesTablaTotal(){
     this.clases = {
-      'invalido': this.inconsistencia || this.esIgualACero
+      'invalido': this.inconsistencia //|| this.esIgualACero
     }
   }
 }
