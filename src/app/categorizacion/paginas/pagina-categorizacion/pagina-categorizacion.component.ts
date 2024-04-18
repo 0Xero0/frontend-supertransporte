@@ -126,7 +126,7 @@ export class PaginaCategorizacion implements OnInit {
       return;
     }
     if(this.debePresentarPesv && (!this.totalesValidos() /* || !this.totalesMayoresACero() */)){
-      this.popup.abrirPopupFallido('Totales inválidos.', 'Porfavor rectifica que los totales coinciden y son mayores a cero.')
+      this.popup.abrirPopupFallido('Totales inválidos.', 'Porfavor rectifica que los totales coinciden.')
       return;
     }
     if(this.debePresentarPesv && !this.selectoresValidos()){
