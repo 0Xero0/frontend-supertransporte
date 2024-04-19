@@ -64,6 +64,9 @@ export class CategoriaComponent implements OnInit, AfterViewInit, OnChanges {
       if(selector.idFila === fila && !selector.totalizable){
         if(valor <= 0){
           selector.establecerHabilitado(false)
+          selector.valor = 0
+          selector.manejarFoco(0)
+          selector.manejarBlur(null)
         }else{
           selector.establecerHabilitado(true)
         }
