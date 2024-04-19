@@ -66,14 +66,14 @@ export class SelectorCantidadComponent implements OnInit, AfterViewInit {
   }
 
   valorValido(valor: number): boolean{
-    if( valor < SelectorCantidadComponent.VALOR_MINIMO || !valor)
+    if( valor < SelectorCantidadComponent.VALOR_MINIMO || !valor || valor !== Math.round(valor))
       return false;
     else
       return true;
   }
 
   cambiarValor(valor: number){
-    this.valor = Math.round(valor);
+    this.valor = valor;
     this.nuevoValor.emit(this.valor);
     if(this.totalizable){
       this.nuevoValorEspecial.emit({fila: this.idFila, valor: this.valor})
