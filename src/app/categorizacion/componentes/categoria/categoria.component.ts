@@ -44,7 +44,7 @@ export class CategoriaComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnInit(): void {
     this.descriptiva = this.categoria.id === 4 ? true : false;
     this.clases = {
-      'invalido': this.inconsistencia || this.esIgualACero
+      'invalido': this.inconsistencia //|| this.esIgualACero
     }
   }
 
@@ -64,6 +64,9 @@ export class CategoriaComponent implements OnInit, AfterViewInit, OnChanges {
       if(selector.idFila === fila && !selector.totalizable){
         if(valor <= 0){
           selector.establecerHabilitado(false)
+          selector.valor = 0
+          selector.manejarFoco(0)
+          selector.manejarBlur(null)
         }else{
           selector.establecerHabilitado(true)
         }
@@ -136,7 +139,7 @@ export class CategoriaComponent implements OnInit, AfterViewInit, OnChanges {
 
   actualizarClasesTablaTotal(){
     this.clases = {
-      'invalido': this.inconsistencia || this.esIgualACero
+      'invalido': this.inconsistencia //|| this.esIgualACero
     }
   }
 }

@@ -26,7 +26,7 @@ export class TipoCategoriaComponent implements OnInit, AfterViewInit{
       this.establecerInconsistencia(
         this.servicio.totalesCategoriasValidos(this.tipoCategoria.categoriaClasificacion)
       )
-      this.validarTotalesMayoresACero()
+      //this.validarTotalesMayoresACero()
       this.establecerTotal( this.categorias.get(0)!.total )
     }, 60)
   }
@@ -40,7 +40,7 @@ export class TipoCategoriaComponent implements OnInit, AfterViewInit{
 
   manejarCambioTotalCategoria(total: number){
     this.totalesComponentesCategoriaValidos()
-    this.validarTotalesMayoresACero()
+    //this.validarTotalesMayoresACero()
     this.establecerTotal(total)
   }
 
