@@ -15,12 +15,12 @@ export class MenuComponent implements OnInit {
   usuario?: Usuario | null;
   isCollapsed = false;
   desplegado = true
-  
+
   constructor(
-    private servicioLocalStorage: ServicioLocalStorage, 
+    private servicioLocalStorage: ServicioLocalStorage,
     private servicioAutenticacion: AutenticacionService,
     private router: Router
-  ) { 
+  ) {
   }
 
   ngOnInit(): void {
@@ -38,7 +38,9 @@ export class MenuComponent implements OnInit {
 
   public cerrarSesion(){
     this.servicioAutenticacion.cerrarSesion()
-    this.router.navigateByUrl('/inicio-sesion')
+    const ruta = 'http://localhost:4200/administrar/administrar-aplicativos'
+    location.href=ruta
+    /* this.router.navigateByUrl('') */
   }
   imprimirRuta(submodulo: Submodulo){
     console.log(`/administrar${submodulo.ruta}`)
