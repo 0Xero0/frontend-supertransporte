@@ -20,7 +20,7 @@ export class InicioVigia2Component {
 
   token: string | null = null
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private servicioAutenticacion: AutenticacionService,private enrutador: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void{
     // Obtener el token de la URL
@@ -30,8 +30,38 @@ export class InicioVigia2Component {
       // Aquí puedes hacer algo con el token, como almacenarlo en el localStorage
       if (this.token) {
         localStorage.setItem('authToken', this.token);
-      }
-    });
+        this.servicioAutenticacion.inicioVigia2(this.token).subscribe({
+          next: (respuesta: IniciarSesionRespuesta) => {
+            this.servicioAutenticacion.guardarInformacionInicioSesion(
+              respuesta.token,
+              respuesta.rol,
+              respuesta.usuario
+            )
+            if (respuesta.claveTemporal === true) {
+              this.enrutador.navigateByUrl('/actualizar-contrasena')
+            } else {
+              if(respuesta.rol.modulos.length > 0){
+                if(!respuesta.rol.modulos[0].ruta && respuesta.rol.modulos[0].submodulos.length > 0){
+                  this.enrutador.navigateByUrl(`/administrar${respuesta.rol.modulos[0].submodulos[0].ruta}`);
+                }else{
+                  this.enrutador.navigateByUrl(`/administrar${respuesta.rol.modulos[0].ruta}`);
+                }
+              }
+              else{
+                this.enrutador.navigateByUrl(`/administrar`);
+              }
+            }
+          },
+          error: (error: HttpErrorResponse) => {
+            if (error.status == 423) {
+              this.popup.abrirPopupFallido('Error al iniciar sesión', error.error.message)
+            }
+            if (error.status == 400) {
+              this.popup.abrirPopupFallido('Error al iniciar sesión', error.error.message)
+            }
+          }
+        })
+      };
+    })
   }
-
 }
