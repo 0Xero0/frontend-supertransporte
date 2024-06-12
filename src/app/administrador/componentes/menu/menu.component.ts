@@ -38,7 +38,7 @@ export class MenuComponent implements OnInit {
 
   public cerrarSesion(){
     this.servicioAutenticacion.cerrarSesion()
-    const ruta = 'http://localhost:4200/administrar/administrar-aplicativos'
+    const ruta = 'http://172.16.2.104/administrar/administrar-aplicativos'
     location.href=ruta
     /* this.router.navigateByUrl('') */
   }
