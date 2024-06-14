@@ -66,7 +66,7 @@ export class SelectorCantidadComponent implements OnInit, AfterViewInit {
   }
 
   valorValido(valor: number): boolean{
-    if( valor < SelectorCantidadComponent.VALOR_MINIMO || !valor || valor !== Math.round(valor))
+    if( valor < SelectorCantidadComponent.VALOR_MINIMO || !valor )
       return false;
     else
       return true;
