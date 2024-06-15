@@ -51,10 +51,10 @@ export class PreguntaEncuestaComponent implements OnInit {
 
   documento: File | null = null
   clasesRespuestas = {}
-  
+
   constructor(
     private servicioArchivos: ServicioArchivosEncuestas
-  ) { 
+  ) {
     this.valorModificado = new EventEmitter<Respuesta>();
     this.nuevaVerificacion = new EventEmitter<RespuestaVerificacion>();
     this.haHabidoErrorArchivo = new EventEmitter<HttpErrorResponse>()
@@ -74,7 +74,7 @@ export class PreguntaEncuestaComponent implements OnInit {
     }else{
       this.setEvidenciaCorresponde(undefined, false)
     }
-    
+
     if(this.pregunta.cumple && this.pregunta.cumple != ""){
       this.setDocumentoCumple(Number(this.pregunta.cumple), false)
     }else{
@@ -82,7 +82,7 @@ export class PreguntaEncuestaComponent implements OnInit {
     }
     this.setObservacionNoCorresponde(this.pregunta.observacionCorresponde, false)
     this.setObservacionNoCumple(this.pregunta.observacionCumple, false)
-     
+
     this.pregunta.respuesta ? this.setValor(this.pregunta.respuesta, false) : this.setValor("", false)
     if(this.valor === ""){
       this.setArchivoDeshabilitado(true)
@@ -244,7 +244,7 @@ export class PreguntaEncuestaComponent implements OnInit {
     this.evidenciaCorresponde = corresponde
     if(corresponde == 2){ // 2 = no corresponde
       this.setObservacionEvidenciaCorrespondeDeshabilitado(false)
-      this.setDocumentoCumple(2)
+      this.setDocumentoCumple(2,dispararEvento)
     }else{
       this.setObservacionEvidenciaCorrespondeDeshabilitado(true)
     }
