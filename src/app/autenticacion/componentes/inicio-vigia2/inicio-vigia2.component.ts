@@ -11,7 +11,7 @@ import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.componen
 
 @Component({
   selector: 'app-inicio-vigia2',
-  templateUrl: './inicio-vigia2.component.html',
+  /* templateUrl: './inicio-vigia2.component.html', */
   styleUrls: ['./inicio-vigia2.component.css']
 })
 export class InicioVigia2Component {
