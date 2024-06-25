@@ -26,7 +26,7 @@ export class InicioVigia2Component {
     // Obtener el token de la URL
     this.route.queryParamMap.subscribe(params => {
       this.token = params.get('token');
-      console.log('Token:', this.token);
+      /* console.log('Token:', this.token); */
       // Aquí puedes hacer algo con el token, como almacenarlo en el localStorage
       if (this.token) {
         localStorage.setItem('authToken', this.token);
