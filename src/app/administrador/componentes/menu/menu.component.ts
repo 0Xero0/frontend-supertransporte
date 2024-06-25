@@ -43,9 +43,6 @@ export class MenuComponent implements OnInit {
       window.open("", nombreVentana);
       window.close();
     }
-
-    /* const ruta = 'http://172.16.2.104/vigia/administrar/administrar-aplicativos'
-    location.href=ruta */
     /* this.router.navigateByUrl('') */
   }
   imprimirRuta(submodulo: Submodulo){
