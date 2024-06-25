@@ -41,8 +41,9 @@ export class MenuComponent implements OnInit {
     var nombreVentana = 'SNST'
     var ruta = 'http://172.16.2.104/vigia/administrar/administrar-aplicativos'
     if(window.open('','SISI/PESV')){
-      window.open(ruta, nombreVentana);
-      window.close();
+      console.log('Aquí entra')
+      /* window.open("", nombreVentana);
+      window.close(); */
     }
     /* this.router.navigateByUrl('') */
   }
