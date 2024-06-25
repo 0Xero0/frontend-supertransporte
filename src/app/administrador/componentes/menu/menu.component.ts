@@ -38,8 +38,14 @@ export class MenuComponent implements OnInit {
 
   public cerrarSesion(){
     this.servicioAutenticacion.cerrarSesion()
-    const ruta = 'http://172.16.2.104/vigia/administrar/administrar-aplicativos'
-    location.href=ruta
+    var nombreVentana = 'SNST'
+    if(window.open('','SISI/PESV')){
+      window.open("", nombreVentana);
+      window.close();
+    }
+
+    /* const ruta = 'http://172.16.2.104/vigia/administrar/administrar-aplicativos'
+    location.href=ruta */
     /* this.router.navigateByUrl('') */
   }
   imprimirRuta(submodulo: Submodulo){
