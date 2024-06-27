@@ -8,7 +8,8 @@ export const environment = {
   urlBackendVigia: 'http://127.0.0.1:3334',
   urlBackendArchivos: 'http://127.0.0.1:4333',
   tokenBackendArchivos: 'd4a32a3b-def6-4cc2-8f77-904a67360b53',
-  llaveCaptcha: '6Ldw7FwmAAAAAJZyFVhvohzUI7mEK4wRPEqpGU9g'
+  llaveCaptcha: '6Ldw7FwmAAAAAJZyFVhvohzUI7mEK4wRPEqpGU9g',
+  urlVigia2: 'http://172.16.2.104/vigia'
 };
 
 /*
