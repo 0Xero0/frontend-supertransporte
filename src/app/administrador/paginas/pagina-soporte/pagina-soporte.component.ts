@@ -43,6 +43,7 @@ export class PaginaSoporteComponent {
       controls['motivo'].value,
       controls['adjunto'].value).subscribe({
       next: ( soporte: any )=>{
+        this.limpiarFormulario()
         this.popup.abrirPopupExitoso('Soporte creado', 'Radicado', soporte.radicado)
       }
     })
