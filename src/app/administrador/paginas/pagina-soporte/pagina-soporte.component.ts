@@ -47,4 +47,8 @@ export class PaginaSoporteComponent {
       }
     })
   }
+
+  limpiarFormulario(){
+    this.formulario.reset()
+  }
 }
