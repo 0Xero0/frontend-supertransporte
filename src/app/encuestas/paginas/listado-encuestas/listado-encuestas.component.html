@@ -24,6 +24,7 @@
                         <th class="">Fecha de envío a ST</th>
                         <th class="">Razón social - NIT</th>
                         <th class="">Email</th>
+                        <th class="">Vigencia</th>
                         <th class="">Estado actual</th>
                     </tr>
                 </thead>
@@ -46,6 +47,7 @@
                         <td>{{ reporte.fechaEnvioST | fecha: 'dd/MM/yyyy'}}</td>
                         <td class="td-razon-social">{{ reporte.razonSocial }} - {{ reporte.nit }}</td>
                         <td>{{ reporte.email }}</td>
+                        <td>{{ reporte.vigencia }}</td>
                         <td>{{ reporte.estado }}</td>
                     </tr>
                 </tbody>
