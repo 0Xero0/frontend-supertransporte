@@ -40,6 +40,8 @@ export class ListadoEncuestasComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    
     this.activatedRoute.params.subscribe({
       next: (params) =>{
         this.idEncuesta = Number(params['idEncuesta'])
