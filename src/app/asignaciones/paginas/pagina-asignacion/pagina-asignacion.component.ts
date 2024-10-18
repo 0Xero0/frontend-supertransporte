@@ -68,7 +68,7 @@ export class PaginaAsignacionComponent implements OnInit{
 
   obtenerReportesAsignados = (pagina: number, limite: number, filtros?: FiltrosReportesAsignados)=>{
     return new Observable<Paginacion>( subscribcion =>{
-      this.servicioReportes.obtenerReportesAsignados(pagina, limite, filtros).subscribe({
+      this.servicioReportes.obtenerReportesVerificador(pagina, limite, filtros).subscribe({
         next: ( respuesta )=>{
           this.reportesAsignados = respuesta.asignadas
           subscribcion.next(respuesta.paginacion)
@@ -76,7 +76,7 @@ export class PaginaAsignacionComponent implements OnInit{
         }
       })
     })
-    
+
   }
 
   obtenerVerificadores(){
@@ -98,8 +98,8 @@ export class PaginaAsignacionComponent implements OnInit{
   }
 
   removerReporte(numeroReporte: number){
-    this.reportesSeleccionados = this.reportesSeleccionados.filter( 
-      (reporteSeleccionado) => numeroReporte !== reporteSeleccionado.numeroReporte 
+    this.reportesSeleccionados = this.reportesSeleccionados.filter(
+      (reporteSeleccionado) => numeroReporte !== reporteSeleccionado.numeroReporte
     );
   }
 
