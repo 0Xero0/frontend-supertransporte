@@ -1,5 +1,16 @@
 <div class="p-md-3 p-lg-5">
     <h3 class="texto-primario fw-semibold mb-4">Lista de reportes Fase dos</h3>
+    <div class="d-flex flex-gap-20 align-items-center mb-4" *ngIf="this.rol && this.rol.id !== '003'">
+      <fieldset>
+        <input type="text" class="form-control" placeholder="Ingrese el termino" [(ngModel)]="termino">
+      </fieldset>
+      <fieldset>
+        <button class="boton primario relleno" (click)="actualizarFiltros()">Filtrar</button>
+      </fieldset>
+      <fieldset>
+        <button class="boton primario delineado" (click)="limpiarFiltro()">Limpiar</button>
+      </fieldset>
+    </div>
     <div class="table-responsive">
         <table class="table table-bordered tabla-primaria fs-14px">
             <thead>
@@ -18,12 +29,12 @@
             <tbody>
                 <tr *ngFor="let reporte of reportes">
                     <td class="text-center">
-                        <span 
-                        class="material-symbols-outlined cursor-pointer texto-gris" 
+                        <span
+                        class="material-symbols-outlined cursor-pointer texto-gris"
                         [routerLink]="['/administrar', 'verificar-reportes', 'fase-dos', 'reportes', reporte.idReporte]"
-                        [queryParams]="{ 
-                            idEncuesta: reporte.idEncuesta, 
-                            idReporte: reporte.idReporte, 
+                        [queryParams]="{
+                            idEncuesta: reporte.idEncuesta,
+                            idReporte: reporte.idReporte,
                             idVigilado: reporte.nit,
                             vigencia: reporte.vigencia
                         }">
@@ -46,11 +57,11 @@
         </table>
     </div>
     <div class="d-flex justify-content-end">
-        <ngb-pagination 
-        [collectionSize]="this.paginador.totalRegistros ?? 0" 
+        <ngb-pagination
+        [collectionSize]="this.paginador.totalRegistros ?? 0"
         [pageSize]="this.paginador.limite"
         [page]="this.paginador.pagina"
-        (pageChange)="this.paginador.cambiarPagina($event)" 
+        (pageChange)="this.paginador.cambiarPagina($event)"
         [maxSize]="5">
             <ng-template ngbPaginationFirst>Prim.</ng-template>
             <ng-template ngbPaginationLast>Ult.</ng-template>

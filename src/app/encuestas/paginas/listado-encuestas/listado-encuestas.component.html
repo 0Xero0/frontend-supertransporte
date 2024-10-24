@@ -1,12 +1,15 @@
 <div class="px-md-3 px-lg-4 mt-4">
     <h2 class="fw-semibold texto-azul-004884 mb-3" *ngIf="idEncuesta != 1 && idEncuesta != 2">Encuestas</h2>
     <h2 class="fw-semibold texto-azul-004884 mb-3" *ngIf="idEncuesta == 1 || idEncuesta == 2">Encuestas fase {{idEncuesta}}</h2>
-    <div class="d-flex flex-gap-20 align-items-center mb-4" *ngIf="this.rol && this.rol.id != '003'">
+    <div class="d-flex flex-gap-20 align-items-center mb-4" *ngIf="this.rol && this.rol.id === '003'">
         <fieldset>
             <app-input-busqueda [(ngModel)]="termino" />
         </fieldset>
         <fieldset>
             <button class="boton primario relleno" (click)="actualizarFiltros()">Buscar</button>
+        </fieldset>
+        <fieldset>
+          <button class="boton primario delineado" (click)="limpiarFiltros()">Limpiar</button>
         </fieldset>
     </div>
     <div class="d-flex">
@@ -29,9 +32,9 @@
                 </thead>
                 <tbody class="fs-14px">
                     <tr *ngFor="let reporte of reportes ; let i = index">
-                        <td><img 
+                        <td><img
                             [routerLink]="['/administrar', 'encuesta', reporte.idEncuestaDiligenciada]"
-                            [queryParams]="{ vigilado: reporte.idVigilado , reporte: reporte.numeroReporte, vigencia: reporte.vigencia }"  
+                            [queryParams]="{ vigilado: reporte.idVigilado , reporte: reporte.numeroReporte, vigencia: reporte.vigencia }"
                             class="cursor-pointer" src="assets/img/buscar-documento.png" alt="buscar-encuesta" draggable="false"></td>
                         <td>{{ reporte.numeroReporte }}</td>
                         <td>{{ reporte.encuesta }}</td>
@@ -55,7 +58,7 @@
     <div class="d-flex align-items-center justify-content-center mt-3">
         <ngb-pagination
         *ngIf="this.paginador.totalRegistros && this.paginador.totalRegistros > 5"
-        [collectionSize]="this.paginador.totalRegistros" 
+        [collectionSize]="this.paginador.totalRegistros"
         [page]="this.paginador.pagina"
         [maxSize]="6"
         (pageChange)="this.paginador.cambiarPagina($event)"
