@@ -30,7 +30,7 @@ export class ListadoEncuestasComponent implements OnInit {
   constructor(
     private servicioEncuestas: ServicioEncuestas,
     private servicioCategorizacion: CategorizacionService,
-    private servicioLocalStorage: ServicioLocalStorage, 
+    private servicioLocalStorage: ServicioLocalStorage,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
@@ -71,6 +71,9 @@ export class ListadoEncuestasComponent implements OnInit {
 
   actualizarFiltros(){
     this.paginador.filtrar({ termino: this.termino })
+  }
+  limpiarFiltros(){
+    this.paginador.inicializar()
   }
 
 }
