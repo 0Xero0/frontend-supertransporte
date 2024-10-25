@@ -87,7 +87,11 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'inicio-vigia2',
+    path: 'inicio-sesion',
+    component: InicioSesionComponent
+  },
+  {
+    path: 'inicio-vigia2/:token',
     component: InicioVigia2Component
   },
   {
@@ -105,7 +109,7 @@ const routes: Routes = [
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: 'inicio-vigia2'
+    redirectTo: 'inicio-sesion'
   }
 ];
 
