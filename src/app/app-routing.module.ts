@@ -91,7 +91,7 @@ const routes: Routes = [
     component: InicioSesionComponent
   },
   {
-    path: 'inicio-vigia2/:token',
+    path: 'inicio-vigia2',
     component: InicioVigia2Component
   },
   {
