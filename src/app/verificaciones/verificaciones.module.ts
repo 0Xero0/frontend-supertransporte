@@ -10,6 +10,8 @@ import { AlertasModule } from '../alertas/alertas.module';
 import { PaginaReportesFase2VerificarComponent } from './paginas/pagina-reportes-fase2-verificar/pagina-reportes-fase2-verificar.component';
 import { PaginaReporteFase2VerificarComponent } from './paginas/pagina-reporte-fase2-verificar/pagina-reporte-fase2-verificar.component';
 import { ModalTerminarVerificacion } from './componentes/modal-terminar-verificacion.component';
+import { InputsModule } from '../inputs/inputs.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { ModalTerminarVerificacion } from './componentes/modal-terminar-verifica
     EncuestasModule,
     PipesModule,
     NgbModule,
-    AlertasModule
+    AlertasModule,
+    InputsModule,
+    FormsModule
   ],
   exports: [
     PaginaReportesVerificarComponent

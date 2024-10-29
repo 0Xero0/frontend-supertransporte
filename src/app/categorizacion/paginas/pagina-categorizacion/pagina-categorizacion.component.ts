@@ -10,6 +10,7 @@ import { PeticionGuardarCategorizacion } from '../../modelos/PeticionGuardarCate
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { ModalConfirmacionComponent } from '../../componentes/modal-confirmacion/modal-confirmacion.component';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pagina-categorizacion',
@@ -26,7 +27,7 @@ export class PaginaCategorizacion implements OnInit {
   debePresentarPesv: boolean = true
 
   constructor(
-    private localStorage: ServicioLocalStorage, 
+    private localStorage: ServicioLocalStorage,
     private servicioCategorizacion: CategorizacionService,
     private router: Router
     ){
@@ -113,14 +114,14 @@ export class PaginaCategorizacion implements OnInit {
   guardarInformacion(){
     if(!this.alMenosUnModuloRadio()){
       this.popup.abrirPopupFallido(
-        'Datos de modalidad y radio incorrectos.', 
+        'Datos de modalidad y radio incorrectos.',
         'Debe haber por lo menos un dato de radio y modalidad.'
       )
       return;
     }
     if(this.estaAgregandoModuloRadio()){
       this.popup.abrirPopupFallido(
-        'Hay cambios en curso.', 
+        'Hay cambios en curso.',
         'Estás agregando datos de modalidad y radio de acción.\nConfirma o cancela los cambios para poder continuar.'
       )
       return;
@@ -142,8 +143,15 @@ export class PaginaCategorizacion implements OnInit {
           modalidadesRadioEliminar: this.formularioModalidadesRadios.registrosAEliminar,
           totales: this.obtenerTotalesPorTipoCategoria()
         }
+        Swal.fire({
+          icon: 'info',
+          allowOutsideClick: false,
+          text: 'Espere por favor...',
+        });
+        Swal.showLoading(null);
         this.servicioCategorizacion.guardarInformacionCategorizacion(info).subscribe({
           next: (respuesta: any)=>{
+            Swal.close()
             this.router.navigateByUrl(`/administrar/asignacion?clasificacion=${respuesta.nombre}`)
           }
         })

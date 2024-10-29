@@ -15,9 +15,9 @@ import { FiltrosReportesEnviados } from '../modelos/FiltrosReportesEnviados';
 })
 export class ServicioReportes extends Autenticable {
 
-  private readonly host = environment.urlBackend 
+  private readonly host = environment.urlBackend
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     super()
   }
 
@@ -39,6 +39,17 @@ export class ServicioReportes extends Autenticable {
 
   obtenerReportesAsignados(pagina: number, limite: number, filtros?: FiltrosReportesAsignados){
     let endpoint = `/api/v1/reportes/asignados?pagina=${pagina}&limite=${limite}`
+    if(filtros){
+      endpoint+=`&idVerificador=${filtros.identificacionVerificador}`
+    }
+    return this.http.get<{ asignadas: ResumenReporteAsignado[], paginacion: Paginacion}>(
+      `${this.host}${endpoint}`,
+      { headers: this.obtenerCabeceraAutorizacion() }
+    )
+  }
+
+  obtenerReportesVerificador(pagina: number, limite: number, filtros?: FiltrosReportesAsignados){
+    let endpoint = `/api/v1/reportes/asignados-verificador?pagina=${pagina}&limite=${limite}`
     if(filtros){
       endpoint+=`&idVerificador=${filtros.identificacionVerificador}`
     }
