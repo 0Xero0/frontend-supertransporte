@@ -1,76 +1,94 @@
 <div class="px-md-3 px-lg-4 mt-4">
-    <div class="flex-column justify-content-between align-items-start mb-4">
-        <div class="formulario">
-            <div class="row mb-4 mt-2">
-                <div class="col-4">
-                    <label class="fw-semibold fs-14px">Empresas:</label>
-                    <fieldset>
-                        <select [(ngModel)]="idEmpresa" class="form-select">
-                            <option value="">Selecciona una empresa</option>
-                            <option *ngFor="let empresa of empresas" [value]="empresa.idEmpresa">
-                                {{empresa.nombre}}
-                            </option>
-                        </select>
-                    </fieldset>
-                </div>
-                <div class="col-3">
-                    <label class="fw-semibold fs-14px">Fecha inicial:</label>
-                    <input [(ngModel)]="fechaInicial" type="date" class="form-control" >
-                </div>
-                <div class="col-3">
-                    <label class="fw-semibold fs-14px">Fecha final:</label>
-                    <input [(ngModel)]="fechaFinal" type="date" class="form-control" >
-                </div>
-                <div class="col-2 mb-3 mt-4">
-                    <button type="button" class="boton primario relleno" (click)="asignarEmpresa()">
-                        Asignar
-                    </button>
-                </div>
-            </div>
-            <div class="row mb-4 mt-2">
-                <div class="col-12">
-                    <div class="d-flex">
-                        <div class="table-responsive custom-scroll">
-                            <table class="table table-bordered tabla-primaria">
-                                <thead>
-                                    <tr class="fs-14px">
-                                        <th class="">Empresa</th>
-                                        <th class="">Fecha inicial</th>
-                                        <th class="">Fecha final</th>
-                                        <th class="">Token</th>
-                                        <th class="">Estado</th>
-                                        <th class="">Editar</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="fs-14px">
-                                    <tr *ngFor="let seleccionada of seleccionadas; let i=index">
-                                        <td>{{seleccionada.nombre}}</td>
-                                        <td>{{seleccionada.fechaInicialMostrar}}</td>
-                                        <td>{{seleccionada.fechaFinalMostrar}}</td>
-                                        <td>{{seleccionada.token}}</td>
-                                        <td>
-                                            <label class="switch">
-                                                <input type="checkbox" [checked]="seleccionada.estado" 
-                                                (change)="cambiarEstado(seleccionada.idEmpresa, seleccionada.estado)">
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="boton primario relleno" 
-                                            (click)="abrirModalActualizarSeleccionada(seleccionada)">
-                                                Editar
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+  <div class="flex-column justify-content-between align-items-start mb-4">
+    <div class="formulario">
+      <div class="row mb-4 mt-2">
+        <div class="col-5">
+          <label class="fw-semibold fs-14px">Empresas:</label>
+          <fieldset>
+            <select [(ngModel)]="idEmpresa" class="form-select">
+              <option value="">Selecciona una empresa</option>
+              <option *ngFor="let empresa of empresas" [value]="empresa.idEmpresa">
+                {{empresa.nombre}}
+              </option>
+            </select>
+          </fieldset>
         </div>
+        <div class="col-4">
+          <label class="fw-semibold fs-14px">Cargue del contrato: <span class="fs-12px">Max. {{tamanoMaximoMb}}Mb</span></label>
+          <label class="input-archivo d-flex" [for]="1">
+            <div class="boton-adjuntar d-flex align-items-center justify-content-center">Adjuntar</div>
+            <div class="archivos">
+              <div class="archivo d-flex" *ngIf="contrato?.nombreOriginalArchivo">
+                <span class="nombre-archivo">{{ contrato?.nombreOriginalArchivo }}</span>
+                <button class="eliminar-archivo" (click)="manejarRemoverArchivo(input,$event,usuario?.usuario)">X</button>
+              </div>
+            </div>
+            <input #input type="file" [id]="1" name="adjuntar" accept=".pdf"
+            (change)="guardarArchivo($event,usuario?.usuario)">
+          </label>
+        </div>
+      </div>
+      <div class="row mb-4 mt-2">
+        <div class="col-4">
+          <label class="fw-semibold fs-14px">Fecha inicial:</label>
+          <input [(ngModel)]="fechaInicial" type="date" class="form-control">
+        </div>
+        <div class="col-4">
+          <label class="fw-semibold fs-14px">Fecha final:</label>
+          <input [(ngModel)]="fechaFinal" type="date" class="form-control">
+        </div>
+        <div class="col-2 mb-3 mt-4">
+          <button type="button" class="boton primario relleno" (click)="asignarEmpresa()">
+            Asignar
+          </button>
+        </div>
+      </div>
+      <div class="row mb-4 mt-2">
+        <div class="col-12">
+          <div class="d-flex">
+            <div class="table-responsive custom-scroll">
+              <table class="table table-bordered tabla-primaria">
+                <thead>
+                  <tr class="fs-14px">
+                    <th class="">Empresa</th>
+                    <th class="">Fecha inicial</th>
+                    <th class="">Fecha final</th>
+                    <th>Contrato</th>
+                    <th class="">Token</th>
+                    <th class="">Estado</th>
+                    <th class="">Editar</th>
+                  </tr>
+                </thead>
+                <tbody class="fs-14px">
+                  <tr *ngFor="let seleccionada of seleccionadas; let i=index">
+                    <td>{{seleccionada.nombre}}</td>
+                    <td>{{seleccionada.fechaInicialMostrar}}</td>
+                    <td>{{seleccionada.fechaFinalMostrar}}</td>
+                    <td>{{seleccionada.nombreOriginal}}</td>
+                    <td>{{seleccionada.token}}</td>
+                    <td>
+                      <label class="switch">
+                        <input type="checkbox" [checked]="seleccionada.estado"
+                          (change)="cambiarEstado(seleccionada.idEmpresa, seleccionada.estado)">
+                        <span class="slider round"></span>
+                      </label>
+                    </td>
+                    <td>
+                      <button type="button" class="boton primario relleno"
+                        (click)="abrirModalActualizarSeleccionada(seleccionada)">
+                        Editar
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
+  </div>
 </div>
 <app-popup #popup></app-popup>
 <app-modal-actualizar-seleccionadas #modalActualizarSeleccionadas></app-modal-actualizar-seleccionadas>
