@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Evidencia } from 'src/app/encuestas/modelos/EncuestaCuantitativa';
 import { RespuestaEvidencia } from 'src/app/encuestas/modelos/RespuestaEvidencia';
 import { ServicioArchivosEncuestas } from 'src/app/encuestas/servicios/archivos-encuestas.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-evidencia-encuesta-cuantitativa',
@@ -40,15 +41,23 @@ export class EvidenciaEncuestaCuantitativaComponent implements OnInit{
 
   manejarCambioEvidenciaArchivo(file: File | null){
     if(file){
+      Swal.fire({
+        icon: 'info',
+        allowOutsideClick: false,
+        text: 'Espere por favor...',
+      });
+      Swal.showLoading(null);
       this.servicioArchivos.guardarEvidencia(file, this.idVigilado, this.evidencia.validaciones.extension)
       .subscribe({
         next: (infoArchivo)=>{
-          this.respuesta!.ruta = infoArchivo.ruta 
+          Swal.close()
+          this.respuesta!.ruta = infoArchivo.ruta
           this.respuesta!.documento = infoArchivo.nombreAlmacenado
           this.respuesta!.nombreArchivo = infoArchivo.nombreOriginalArchivo
           this.nuevaEvidencia.emit(this.respuesta!)
         },
         error: (error: HttpErrorResponse)=>{
+          Swal.close()
           this.archivo = null
           this.errorAlCargar.emit(error)
         }

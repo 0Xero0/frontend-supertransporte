@@ -12,6 +12,7 @@ import { ServicioVerificaciones } from 'src/app/verificaciones/servicios/verific
 import { Maestra } from 'src/app/verificaciones/modelos/Maestra';
 import { DialogosEncuestas } from '../../dialogos-encuestas';
 import { Motivo } from '../../modelos/Motivo';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-encuesta',
@@ -38,7 +39,7 @@ export class EncuestaComponent implements OnInit {
   opcionesCumplimiento: Maestra[] = []
   opcionesCorrespondencia: Maestra[] = []
   motivos: Motivo[] = []
-  
+
   constructor(
     private servicioEncuestas: ServicioEncuestas,
     private servicioVerificacion: ServicioVerificaciones
@@ -76,7 +77,7 @@ export class EncuestaComponent implements OnInit {
       },
       error: ()=>{
         this.popup.abrirPopupFallido(
-          DialogosEncuestas.ERROR_OPCIONES_CUMPLIMIENTO_TITULO, 
+          DialogosEncuestas.ERROR_OPCIONES_CUMPLIMIENTO_TITULO,
           DialogosEncuestas.ERROR_OPCIONES_CUMPLIMIENTO_DESCRIPCION
         )
       }
@@ -101,7 +102,7 @@ export class EncuestaComponent implements OnInit {
       }
     })
   }
-  
+
   //Manejadores de eventos
   alResponderPreguntas(respuestas: any){
     this.setHayCambios(true)
@@ -121,13 +122,21 @@ export class EncuestaComponent implements OnInit {
 
   //Acciones
   guardarRespuestas(){
+    Swal.fire({
+      icon: 'info',
+      allowOutsideClick: false,
+      text: 'Espere por favor...',
+    });
+    Swal.showLoading(null);
     this.servicioEncuestas.guardarRespuesta(this.idReporte, { respuestas: this.obtenerRespuestas() }).subscribe({
       next: ( respuesta ) =>{
+        Swal.close()
         this.popup.abrirPopupExitoso(respuesta.mensaje)
         this.limpiarResaltado()
         this.setHayCambios(false)
       },
       error: (error: HttpErrorResponse) =>{
+        Swal.close()
         this.popup.abrirPopupFallido('Error', error.error.message)
       }
     })
@@ -135,13 +144,21 @@ export class EncuestaComponent implements OnInit {
   }
 
   guardarVerificaciones(){
+    Swal.fire({
+      icon: 'info',
+      allowOutsideClick: false,
+      text: 'Espere por favor...',
+    });
+    Swal.showLoading(null);
     this.servicioVerificacion.guardarVerificaciones(this.idReporte, this.obtenerVerificaciones(), this.noObligado).subscribe({
       next: ( respuesta: any ) =>{
+        Swal.close()
         this.popup.abrirPopupExitoso('Se han guardado las verificaciones')
-        this.limpiarResaltado()        
+        this.limpiarResaltado()
         this.setHayCambios(false)
       },
       error: (error: HttpErrorResponse) =>{
+        Swal.close()
         this.popup.abrirPopupFallido('Error', error.error.message)
       }
     })
