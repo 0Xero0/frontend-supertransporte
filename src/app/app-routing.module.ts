@@ -109,7 +109,7 @@ const routes: Routes = [
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: 'inicio-sesion'
+    redirectTo: 'inicio-vigia2'
   }
 ];
 
