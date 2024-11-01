@@ -1,7 +1,8 @@
 <div class="px-md-3 px-lg-4 mt-4">
     <h2 class="fw-semibold texto-azul-004884 mb-3" *ngIf="idEncuesta != 1 && idEncuesta != 2">Encuestas</h2>
     <h2 class="fw-semibold texto-azul-004884 mb-3" *ngIf="idEncuesta == 1 || idEncuesta == 2">Encuestas fase {{idEncuesta}}</h2>
-    <div class="d-flex flex-gap-20 align-items-center mb-4" *ngIf="this.rol && this.rol.id === '003'">
+    <div class="d-flex flex-gap-20 align-items-center mb-4"
+    *ngIf="this.rol && (this.rol.id === '003' || this.rol.id === '008')">
         <fieldset>
             <app-input-busqueda [(ngModel)]="termino" />
         </fieldset>
