@@ -3,5 +3,9 @@
       <div class="logo">
         <img class="img-fluid" src="assets/img/cabecera/gov.png" alt="">
       </div>
+      <div class="d-flex align-items-center justify-content-end ms-auto me-3-personal" *ngIf="usuario" style="color: white;">
+        <span class="fs-12px p-3" style="cursor: default; user-select: none;"><b></b>{{ usuario.nombre }} {{ usuario.apellido }}</span>
+        <i class="bi bi-person-circle"></i>
+      </div>
     </div>
 </nav>

@@ -55,6 +55,7 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-3 d-flex flex-column align-items-center justify-content-center">
+                    <div class="table-responsive">
                     <table  class="table border fs-14px" [ngClass]="clases">
                         <thead>
                             <tr>
@@ -67,6 +68,7 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
                     <span *ngIf="inconsistencia" class="validacion fs-12px">Los totales de "{{tipoCategoria.nombre}}" no coinciden.</span>
                     <!-- <span *ngIf="esIgualACero" class="validacion fs-12px">El total debe ser mayor a cero.</span> -->
                 </div>

@@ -5,6 +5,7 @@ import { AutenticacionService } from '../../servicios/autenticacion.service';
 import { marcarFormularioComoSucio } from 'src/app/administrador/utilidades/Utilidades';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-soporte-acceso',
@@ -54,5 +55,17 @@ export class SoporteAccesoComponent {
         this.popup.abrirPopupFallido('Error al generar el ticket', error.error.message)
       }
     })
+  }
+  manejarExcedeTamano(){
+
+    Swal.fire({
+      icon: 'error',
+      title: 'El archivo pesa más de 7 Mb',
+     // text: detalleError,
+      confirmButtonText: 'Cerrar',
+      confirmButtonColor: '#d33'
+  });
+
+   // this.popup.abrirPopupFallido("El archivo pesa más de 7 Mb")
   }
 }

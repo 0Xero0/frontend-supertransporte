@@ -1,7 +1,8 @@
 <div class="px-md-3 px-lg-4 mt-4">
-    <h2 class="fw-semibold texto-azul-004884 mb-3" *ngIf="idEncuesta != 1 && idEncuesta != 2">Encuestas</h2>
-    <h2 class="fw-semibold texto-azul-004884 mb-3" *ngIf="idEncuesta == 1 || idEncuesta == 2">Encuestas fase {{idEncuesta}}</h2>
+    <h2 class=" texto-tituloencuesta mb-3" *ngIf="idEncuesta != 1 && idEncuesta != 2">Encuestas</h2>
+    <h2 class=" texto-tituloencuesta mb-3" *ngIf="idEncuesta == 1 || idEncuesta == 2">Encuestas fase {{idEncuesta}}</h2>
     <div class="d-flex flex-gap-20 align-items-center mb-4" *ngIf="this.rol && this.rol.id === '003'">
+        <!--
         <fieldset>
             <app-input-busqueda [(ngModel)]="termino" />
         </fieldset>
@@ -10,14 +11,16 @@
         </fieldset>
         <fieldset>
           <button class="boton primario delineado" (click)="limpiarFiltros()">Limpiar</button>
-        </fieldset>
+        </fieldset>-->
+
     </div>
     <div class="d-flex">
         <div class="table-responsive custom-scroll">
             <table class="table table-bordered tabla-primaria">
                 <thead>
                     <tr class="fs-14px">
-                        <th class="">Acceso a formulario</th>
+                        <th class="" style="
+    border-radius: 5px 0 0 0;">Acceso a formulario</th>
                         <th class="">No. Reporte</th>
                         <th class="">Nombre del formulario</th>
                         <th class="">Descripción</th>
@@ -28,7 +31,8 @@
                         <th class="">Razón social - NIT</th>
                         <th class="">Email</th>
                         <th class="">Vigencia</th>
-                        <th class="">Estado actual</th>
+                        <th class="" style="
+    border-radius: 0 5px  0 0;">Estado actual</th>
                     </tr>
                 </thead>
                 <tbody class="fs-14px">
