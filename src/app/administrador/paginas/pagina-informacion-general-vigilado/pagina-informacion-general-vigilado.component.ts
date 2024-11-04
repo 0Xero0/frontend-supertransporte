@@ -7,6 +7,7 @@ import { ErrorAutorizacion } from 'src/app/errores/ErrorAutorizacion';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pagina-informacion-general-vigilado',
@@ -62,7 +63,12 @@ export class PaginaInformacionGeneralVigiladoComponent implements OnInit {
       error: (error: HttpErrorResponse) => { 
         this.mensajeError = error.error.mensaje
         this.hayError = true
-        this.popup.abrirPopupFallido('¡Lo sentimos!', this.mensajeError)
+        //this.popup.abrirPopupFallido('¡Lo sentimos!', this.mensajeError)
+        Swal.fire({
+          icon: 'error',
+          title: '¡Lo sentimos!',
+          text: this.mensajeError,
+      });
       }
     })
   }
