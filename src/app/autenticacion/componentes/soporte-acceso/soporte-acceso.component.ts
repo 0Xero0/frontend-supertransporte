@@ -47,12 +47,26 @@ export class SoporteAccesoComponent {
     }).subscribe({
       next: ( soporte: any )=>{
         this.generandoRadicado = false
-        this.popup.abrirPopupExitoso('Soporte creado', 'Radicado', soporte.radicado)
+        Swal.fire({
+          icon: 'success',
+          title: 'Soporte creado',
+          html: `<strong> Radicado: </strong> ${soporte.radicado}`, 
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#3085d6'
+      });
+       // this.popup.abrirPopupExitoso('Soporte creado', 'Radicado', soporte.radicado)
         this.router.navigate(['/inicio-sesion'])
       },
       error: ( error: HttpErrorResponse )=>{
         this.generandoRadicado = false
-        this.popup.abrirPopupFallido('Error al generar el ticket', error.error.message)
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al generar el ticket',
+         // text: detalleError,
+          confirmButtonText: 'Cerrar',
+          confirmButtonColor: '#d33'
+      });
+       // this.popup.abrirPopupFallido('Error al generar el ticket', error.error.message)
       }
     })
   }
