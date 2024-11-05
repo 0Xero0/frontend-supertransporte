@@ -10,10 +10,10 @@ export interface Indicador {
 }
 
 export interface Fila {
-    columas: Columa[];
+    columnas: Columna[];
 }
 
-export interface Columa {
+export interface Columna {
     valor: string;
     span:  number;
 }

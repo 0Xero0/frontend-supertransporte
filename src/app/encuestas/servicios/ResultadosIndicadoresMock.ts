@@ -1,6 +1,6 @@
 import { ResultadosIndicadores } from "../modelos/ResultadosIndicadores";
 
-export const ResultadosIndicadoresMock: ResultadosIndicadores = {
+/* export const ResultadosIndicadoresMock: ResultadosIndicadores = {
     "indicadores": [{
         "id": 1,
         "nombre": "Tasa de siniestros viales por nivel de pérdida",
@@ -492,4 +492,4 @@ export const ResultadosIndicadoresMock: ResultadosIndicadores = {
             }]
         }]
     }]
-}
+} */

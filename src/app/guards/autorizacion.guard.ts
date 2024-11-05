@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AutorizacionGuard implements CanActivate {
-  public readonly llaveRolesLocalStorage = 'rol'
+  public readonly llaveRolesLocalStorage = 'rolPesv'
   constructor(private enrutador: Router) {
   }
   async canActivate(siguiente: ActivatedRouteSnapshot, estado: RouterStateSnapshot): Promise<boolean>{

@@ -11,11 +11,11 @@ export class TablaResultadosIndicadoresComponent implements OnInit {
   resultadosIndicadores?: ResultadosIndicadores
 
   constructor(private servicioEncuesta: ServicioEncuestas){}
-  
+
   ngOnInit(): void {
-    this.servicioEncuesta.obtenerResultadosIndicadores().subscribe({
+    this.servicioEncuesta.obtenerResultadosIndicadores(7107,900461196).subscribe({
       next: (resultados)=>{
-        this.resultadosIndicadores = resultados 
+        this.resultadosIndicadores = resultados
       }
     })
   }
