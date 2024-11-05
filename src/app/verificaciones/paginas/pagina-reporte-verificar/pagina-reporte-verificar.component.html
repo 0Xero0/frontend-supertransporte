@@ -2,37 +2,37 @@
     <h3 class="texto-primario fw-semibold" *ngIf="encuesta">
         Resumen - Ficha cuestionario - {{encuesta.nombreEncuesta}}
     </h3>
-    <h4 class="texto-primario fw-semibold">Reporte número {{idReporte}}</h4>
+    <h6 class="texto-primario fw-semibold">Reporte número {{idReporte}}</h6>
     <form class="col-sm-100 col-md-12 mb-4" *ngIf="encuesta">
         <div class="row">
             <div class="col">
                 <div class="row mb-2">
                     <div class="col">NIT</div>
-                    <div class="col">
+                    <div class="">
                         <input type="text" class="form-control" disabled [value]="encuesta.idVigilado">
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col">Razón social</div>
-                    <div class="col">
+                    <div class="">
                         <input type="text" class="form-control" disabled [value]="encuesta.razonSocila">
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col">Estado actual</div>
-                    <div class="col">
+                    <div class="">
                         <input type="text" class="form-control" disabled [value]="encuesta.estadoActual">
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col">Clasificación según resolución 20223040040595 DE 2022</div>
-                    <div class="col">
+                    <div class="">
                         <input type="text" class="form-control" disabled [value]="clasificacionResolucion">
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col">Modalidad</div>
-                    <div class="col">
+                    <div class="">
                         <input type="text" class="form-control" disabled [value]="encuesta.modalidad">
                     </div>
                 </div>
@@ -41,26 +41,26 @@
             <div class="col">
                 <div class="row mb-2">
                     <div class="col">Total de conductores</div>
-                    <div class="col">
+                    <div class="">
                         <input type="text" class="form-control" disabled [value]="encuesta.totalConductores">
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col">Total de Vehículos</div>
-                    <div class="col">
+                    <div class="">
                         <input type="text" class="form-control" disabled [value]="encuesta.totalVehiculos">
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col">Porcentaje de pasos</div>
-                    <div class="col">
+                    <div class="">
                         <input type="text" class="form-control" disabled 
                         [value]="formatoPorcentajes(encuesta.porcentajePasos)">
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col">Procentaje de preguntas</div>
-                    <div class="col">
+                    <div class="">
                         <input type="text" class="form-control" disabled 
                         [value]="formatoPorcentajes(encuesta.porcentajePreguntas)">
                     </div>
@@ -69,12 +69,12 @@
         </div>
         
     </form>
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-left align-items-center mb-4">
         <button
         [disabled]="hayCambios || !camposDeVerificacion"
         type="button" 
         class="boton primario relleno" 
-        (click)="abrirModalTerminarVerificacion()">Terminar verificación</button>
+        (click)="abrirModalTerminarVerificacion()">Enviar</button>
         <button
         [disabled]="!hayCambios"
         type="button" 

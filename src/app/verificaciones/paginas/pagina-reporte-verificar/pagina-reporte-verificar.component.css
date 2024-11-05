@@ -3,3 +3,23 @@
     margin-left: 22px;
     margin-right: 22px;
 }
+
+button {
+    margin-right: 115px; /* Ajusta el espacio según sea necesario */
+}
+
+button:last-child {
+    margin-right: 0; /* Evita el margen derecho en el último botón */
+}
+
+
+.col-md-12 {
+    flex: 0 0 auto;
+    width: 75%;
+}
+.form-control:disabled {
+    background-color: #e9ecef;
+    opacity: 1;
+    border: 0;
+    border-radius: 5px;
+}
