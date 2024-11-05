@@ -10,6 +10,8 @@
     outline: none;
     font-size: 14px;
     padding: 5px;
+   margin-left: -5px;
+    
 }
 .input-cantidad:disabled{
     background-color: #f4f4f4;

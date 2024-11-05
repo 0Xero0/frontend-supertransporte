@@ -65,11 +65,40 @@ export class InicioSesionComponent implements OnInit {
 
       error: (error: HttpErrorResponse) => {
         if (error.status == 423) {
-          this.abrirModalRecuperacion()
-          this.popup.abrirPopupFallido('Error al iniciar sesión', error.error.message)
+          // this.abrirModalRecuperacion()
+           //this.popup.abrirPopupFallido('Error al iniciar sesión', error.error.message)
+           Swal.fire({
+             icon: 'warning',
+             title: 'Cuenta Bloqueada',
+             text: error.error.message,
+         });
+ 
+         }
+         if (error.status == 400) {
+          error.error.message = error.error.message || 'Credenciales inválidas.';
+          Swal.fire({
+              icon: 'error',
+              title: 'Credenciales Incorrectas',
+              //text: error.error.message,
+          });
+          //this.popup.abrirPopupFallido('Error al iniciar sesión', error.error.message)
         }
-        if (error.status == 400) {
-          this.popup.abrirPopupFallido('Error al iniciar sesión', error.error.message)
+        if (error.status == 500) {
+          error.error.message = error.error.message || 'Error en el Servidor';
+          Swal.fire({
+              icon: 'error',
+              title: 'Error en el servidor',
+              //text: error.error.message,
+          });
+          //this.popup.abrirPopupFallido('Error al iniciar sesión', error.error.message)
+        }
+        if(!error.status){
+          //this.popup.abrirPopupFallido('Error al iniciar sesión','Posiblemente esté presentando dificultades de conexión')
+          Swal.fire({
+            icon: 'error',
+            title: 'Problema de Conexión',
+            //text: mensajeError,
+        });
         }
       }
     })

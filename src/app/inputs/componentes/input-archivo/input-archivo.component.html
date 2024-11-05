@@ -3,7 +3,7 @@
     <div class="archivos">
         <div class="archivo d-flex" *ngIf="archivo; else noArchivo">
             <span class="nombre-archivo">{{ archivo.name }}</span>
-            <button class="eliminar-archivo" (click)="manejarRemoverArchivo($event)"><i class="bi bi-trash"></i></button>
+            <button class="eliminar-archivo" (click)="manejarRemoverArchivo($event)"><i class="bi bi-trash" style="color: #004884;"></i></button>
         </div> 
         <ng-template #noArchivo>
             <span class="sin-archivo">Sin archivo seleccionado</span>

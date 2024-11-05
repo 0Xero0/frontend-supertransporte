@@ -1,23 +1,7 @@
 .invalido{
     border: 1px solid #e00909 !important;
 }
-tbody, td, tfoot, th, thead, tr {
-    border-color: inherit;
-     border-style: hidden; 
-    border-width: 1px;
-    border-bottom: 1px solid #ddd;
-    border-top: none;
-}
 
-table {
-    caption-side: bottom;
-    border-collapse: collapse;
-    
-    border-radius: 5px;
-    opacity: 1;
-    border-radius: 5px;
-    border-bottom: hidden;
-}
 
 .table-responsive {
     overflow-x: auto;
@@ -26,4 +10,11 @@ table {
     border-radius: 5px;
     opacity: 1;
    
+}
+
+.table>:not(caption)>*>* {
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 1px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
 }
