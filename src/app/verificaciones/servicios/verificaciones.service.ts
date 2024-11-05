@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
 import { ResumenReporteFaseDosAsignado } from '../modelos/ResumenReporteFaseDosAsignado';
 import { EncuestaCuantitativa } from 'src/app/encuestas/modelos/EncuestaCuantitativa';
 import { RespuestaVerificacionEvidencia } from 'src/app/encuestas/modelos/RespuestaVerificacionEvidencia';
-import { FiltrosReportes } from 'src/app/encuestas/modelos/FiltrosReportes';
 
 @Injectable({
   providedIn: 'root'
@@ -22,16 +21,16 @@ export class ServicioVerificaciones extends Autenticable{
   private opcionesCumplimiento: Maestra[] = []
   private opcionesCorrespondencia: Maestra[] = []
 
-  constructor(private clienteHttp: HttpClient) {
-    super()
+  constructor(private clienteHttp: HttpClient) { 
+    super() 
   }
 
   guardarVerificaciones(idReporte: number, verificaciones: RespuestaVerificacion[], noObligado:boolean){
     const endpoint = '/api/v1/respuestas/verificar'
     console.log(noObligado)
     return this.clienteHttp.post(
-      `${this.host}${endpoint}`,
-      { idReporte: idReporte, respuestas: verificaciones, noObligado: noObligado },
+      `${this.host}${endpoint}`, 
+      { idReporte: idReporte, respuestas: verificaciones, noObligado: noObligado }, 
       { headers: this.obtenerCabeceraAutorizacion() }
     )
   }
@@ -39,7 +38,7 @@ export class ServicioVerificaciones extends Autenticable{
   guardarVerificacionesFaseDos({ idReporte, vigencia, evidencias }: { idReporte: number, vigencia: number, evidencias: RespuestaVerificacionEvidencia[] }){
     const endpoint = '/api/v1/inidicador/verificar'
     return this.clienteHttp.post(
-      `${this.host}${endpoint}`,
+      `${this.host}${endpoint}`, 
       { idReporte, anio: vigencia, evidencias },
       { headers: this.obtenerCabeceraAutorizacion() }
     )
@@ -53,27 +52,21 @@ export class ServicioVerificaciones extends Autenticable{
   enviarVerificacionesFaseDos({ idEncuesta, idReporte, idMes, idVigilado }:{ idEncuesta: number, idReporte: number, idMes: number, idVigilado: string }){
     const endpoint = `/api/v1/respuestas/finalizar-verificacion-fasedos`
     return this.clienteHttp.post(
-      `${this.host}${endpoint}`,
+      `${this.host}${endpoint}`, 
       { idReporte, idEncuesta, idMes, idVigilado },
       { headers: this.obtenerCabeceraAutorizacion() }
     )
   }
 
-  obtenerReportes(pagina: number, limite: number, filtros?: FiltrosReportes){
-    let endpoint = `/api/v1/reportes/asignados?pagina=${pagina}&limite=${limite}`
-    if(filtros){
-      if(filtros.termino) endpoint+= `&termino=${filtros.termino}`;
-    }
+  obtenerReportes(pagina: number, limite: number, filtros: any){
+    const endpoint = `/api/v1/reportes/asignados?pagina=${pagina}&limite=${limite}`
     return this.clienteHttp.get<{asignadas: ResumenReporteAsignado[], paginacion: Paginacion}>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }
   //To do: cambiar el tipado de los filtros
-  obtenerReportesFaseDos(pagina: number, limite: number, filtros?:{ idVerificador: string, termino?:string } ){
+  obtenerReportesFaseDos(pagina: number, limite: number, filtros?: { idVerificador: string }){
     let endpoint = `/api/v1/reportes/asignados-fasedos?pagina=${pagina}&limite=${limite}`
     if(filtros?.idVerificador){
-      endpoint+= `&idVerificador=${filtros?.idVerificador}`
-    }
-    if(filtros?.termino){
-      endpoint+= `&termino=${filtros.termino}`
+      endpoint+= `&idVerificador=${filtros.idVerificador}`
     }
     return this.clienteHttp.get<{ asignadas: ResumenReporteFaseDosAsignado[], paginacion: Paginacion }>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }

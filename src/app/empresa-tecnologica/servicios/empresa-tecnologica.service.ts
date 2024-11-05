@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Autenticable } from 'src/app/administrador/servicios/compartido/Autenticable';
 import { EmpresaTecnologica } from '../modelos/EmpresaTecnologica';
-import { ArchivoGuardado } from 'src/app/archivos/modelos/ArchivoGuardado';
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +24,13 @@ export class EmpresaTecnologicaService extends Autenticable {
     return this.http.get<EmpresaTecnologica[]>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
   }
 
-  asignar(idEmpresa: string, fechaInicial: string, fechaFinal: string, contrato:ArchivoGuardado){
-    const datosEmpresa = `/api/v1/empresas/asignar?idEmpresa=${idEmpresa}&fechaInicial=${fechaInicial}&fechaFinal=${fechaFinal}`
-    const datosContrato = `&documento=${contrato.nombreAlmacenado}&ruta=${contrato.ruta}&nombreOriginal=${contrato.nombreOriginalArchivo}`
-    const endpoint = datosEmpresa+datosContrato
-    return this.http.post<EmpresaTecnologica[]>(`${this.host}${endpoint}`,{}, { headers: this.obtenerCabeceraAutorizacion() })
+  asignar(idEmpresa: string, fechaInicial: string, fechaFinal: string){
+    const endpoint = `/api/v1/empresas/asignar`
+    const formData = new FormData()
+    formData.append('idEmpresa', idEmpresa)
+    formData.append('fechaInicial', fechaInicial)
+    formData.append('fechaFinal', fechaFinal)
+    return this.http.post<EmpresaTecnologica[]>(`${this.host}${endpoint}`,formData, { headers: this.obtenerCabeceraAutorizacion() })
   }
 
   editar(seleccionadas: EmpresaTecnologica){

@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { EmpresaTecnologicaService } from '../servicios/empresa-tecnologica.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EmpresaTecnologica } from '../modelos/EmpresaTecnologica';
+import { EmpresaTecnologica } from '../modelos/EmpresaTecnologica'; 
 import { marcarFormularioComoSucio } from 'src/app/administrador/utilidades/Utilidades';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { DateTime } from 'luxon';
@@ -26,9 +26,9 @@ export class ModalActualizarSeleccionadasComponent {
   fechaInicial: string = ""
   fechaFinal: string = ""
 
-  constructor(private servicioModal: NgbModal,
+  constructor(private servicioModal: NgbModal, 
     private servicioEmpresaTecnologica: EmpresaTecnologicaService,
-    private paginaEmpresaTecnologicaComponent: PaginaEmpresaTecnologicaComponent,
+    private paginaEmpresaTecnologicaComponent: PaginaEmpresaTecnologicaComponent
     ){
     this.empresaActualizada = new EventEmitter<void>();
     this.formulario = new FormGroup({
@@ -66,10 +66,7 @@ export class ModalActualizarSeleccionadasComponent {
       fechaFinalMostrar: '',
       idVigilado: 0,
       token: '',
-      estado: false,
-      documento: '',
-      ruta: '',
-      nombreOriginal: ''
+      estado: false
     }).subscribe({
       next: ()=>{
         this.empresaActualizada.emit();

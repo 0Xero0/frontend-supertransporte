@@ -38,7 +38,7 @@ export class PaginaEncuestaComponent implements OnInit {
   rol: Rol | null
   encuesta?: Encuesta
   reporte?: Encuesta
-  encuestaCuantitativa?: EncuestaCuantitativa
+  encuestaCuantitativa?: EncuestaCuantitativa 
   vigencia?: number
   idVigilado?: string
   idReporte?: number
@@ -58,12 +58,12 @@ export class PaginaEncuestaComponent implements OnInit {
 
   constructor(
     private servicioVerificaciones: ServicioVerificaciones,
-    private servicioEncuesta: ServicioEncuestas,
+    private servicioEncuesta: ServicioEncuestas, 
     private servicioLocalStorage: ServicioLocalStorage,
     private router: Router,
     private activeRoute: ActivatedRoute
   ) {
-
+    
     this.usuario = this.servicioLocalStorage.obtenerUsuario()
     this.rol = this.servicioLocalStorage.obtenerRol()
     this.idUsuario = this.usuario!.usuario
@@ -74,14 +74,12 @@ export class PaginaEncuestaComponent implements OnInit {
       queryParams: this.activeRoute.queryParams
     }).subscribe({
       next: (parametros)=>{
-        console.log(parametros.queryParams['vigencia']);
-
         this.idVigilado = parametros.queryParams['vigilado']
         this.idReporte = Number(parametros.queryParams['reporte'])
         this.historico = parametros.queryParams['historico'] === 'true' || this.esUsuarioAdministrador ? true : false;
         this.idEncuesta = parametros.params['idEncuestaDiligenciada']
         this.vigencia = Number(parametros.queryParams['vigencia'])
-
+        
         if(this.idEncuesta == 2){
           this.servicioEncuesta.obtenerMeses(this.vigencia, this.historico).subscribe({
             next: (respuesta)=>{
@@ -114,8 +112,8 @@ export class PaginaEncuestaComponent implements OnInit {
   //Acciones
   obtenerReporte(){
     this.servicioVerificaciones.obtenerReporte(
-      this.idEncuesta,
-      this.idReporte,
+      this.idEncuesta, 
+      this.idReporte, 
       this.idVigilado
     ).subscribe({
       next: (reporte)=>{
@@ -203,7 +201,7 @@ export class PaginaEncuestaComponent implements OnInit {
               },
               error: (error: HttpErrorResponse)=>{
                 this.popup.abrirPopupFallido(
-                  DialogosEncuestas.ENVIAR_ENCUESTA_ERROR_TITULO,
+                  DialogosEncuestas.ENVIAR_ENCUESTA_ERROR_TITULO, 
                   DialogosEncuestas.ENVIAR_ENCUESTA_ERROR_DESCRIPCION
                 )
               }
@@ -245,7 +243,7 @@ export class PaginaEncuestaComponent implements OnInit {
         this.camposDeVerificacionVisibles = encuesta.verificacionVisible
         this.observacionAdmin = encuesta.observacionAdmin
         this.aprobado = encuesta.aprobado
-
+        
       }
     })
   }

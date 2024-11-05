@@ -10,11 +10,6 @@ import { EmpresaTecnologica } from '../modelos/EmpresaTecnologica';
 import { ModalActualizarSeleccionadasComponent } from '../componentes/modal-actualizar-seleccionadas.component';
 import { DateTime } from 'luxon';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ArchivoGuardado } from 'src/app/archivos/modelos/ArchivoGuardado';
-import Swal from 'sweetalert2';
-import { ServicioArchivos } from 'src/app/archivos/servicios/archivos.service';
-import { Usuario } from 'src/app/autenticacion/modelos/IniciarSesionRespuesta';
-import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
 
 @Component({
   selector: 'app-pagina-empresa-tecnologica',
@@ -34,16 +29,8 @@ export class PaginaEmpresaTecnologicaComponent {
   fechaInicial: string = ""
   fechaFinal: string = ""
 
-  contrato?:ArchivoGuardado
-  tamanoMaximoMb:number = 5
-  usuario:Usuario | null
-
   constructor(
-    private servicioEmpresaTecnologica: EmpresaTecnologicaService,
-    private servicioArchivos: ServicioArchivos,
-    private servicioLocalStorage: ServicioLocalStorage
-  ){
-    this.usuario = servicioLocalStorage.obtenerUsuario()
+    private servicioEmpresaTecnologica: EmpresaTecnologicaService){
     this.listarEmpresas()
     this.empresasSeleccionadas()
     this.formulario = new FormGroup({
@@ -52,7 +39,7 @@ export class PaginaEmpresaTecnologicaComponent {
       fechaFinal: new FormControl<string | undefined>( "", [ Validators.required ] ),
     })
   }
-
+  
 
   listarEmpresas(){
     this.servicioEmpresaTecnologica.listarEmpresas().subscribe({
@@ -73,13 +60,12 @@ export class PaginaEmpresaTecnologicaComponent {
 
   asignarEmpresa(){
     console.log(this.idEmpresa, this.fechaInicial, this.fechaFinal)
-    if(this.idEmpresa === "" || this.fechaInicial === "" || this.fechaFinal === "" || this.contrato === undefined){
+    if(this.idEmpresa === "" || this.fechaInicial === "" || this.fechaFinal === ""){
       this.popup.abrirPopupFallido("Debe rellenar todos los campos antes de asignar")
     }else{
-      this.servicioEmpresaTecnologica.asignar(this.idEmpresa,this.fechaInicial,this.fechaFinal,this.contrato!).subscribe({
+      this.servicioEmpresaTecnologica.asignar(this.idEmpresa,this.fechaInicial,this.fechaFinal).subscribe({
         next: (respuesta)=>{
-          console.log(respuesta)
-          this.limpiarForm()
+          console.log(respuesta)          
           this.empresasSeleccionadas()
         },
         error: (error)=>{
@@ -97,56 +83,11 @@ export class PaginaEmpresaTecnologicaComponent {
     console.log(idEmpresa,estado)
     this.servicioEmpresaTecnologica.activar(idEmpresa).subscribe({
       next: (respuesta)=>{
-        this.empresasSeleccionadas()
+        this.empresasSeleccionadas() 
       },
       error: (error)=>{
         this.popup.abrirPopupFallido("Ocurrió un error inesperado", error)
       }
-    })
-  }
-
-  guardarArchivo(event:any,codigo?:string){
-    if(event){
-      Swal.fire({
-        icon: 'info',
-        allowOutsideClick: false,
-        text: 'Espere por favor...',
-      });
-      Swal.showLoading(null);
-      console.log(this.tamanoValido(event.target.files[0]))
-      if(this.tamanoValido(event.target.files[0])){
-        this.servicioArchivos.guardarArchivo(event.target.files[0], 'contratos', this.usuario?.usuario!).subscribe({
-          next: (archivo:any)=>{
-            Swal.close()
-            this.contrato = archivo
-            console.log(this.contrato)
-          }
-        })
-      }else{
-        Swal.fire({icon: 'error', titleText: '¡Error alcargar el archivo!',text:'El tamaño máximo del archivo debe ser de hasta '+this.tamanoMaximoMb+'Mb.'});
-      }
-    }
-  }
-
-  manejarRemoverArchivo(input:HTMLInputElement,event:any,codigo?:string){
-    input.value = ''
-    event.preventDefault();
-    this.contrato = undefined
-    //this.removeFile(codigo)
-  }
-
-  private tamanoValido(archivo: File): boolean{
-    if(this.tamanoMaximoMb){
-      return this.tamanoMaximoMb * 1048576 >= archivo.size ? true : false
-    }else{
-      return true
-    }
-  }
-
-  limpiarForm(){
-    this.idEmpresa = ''
-    this.fechaInicial = ''
-    this.fechaFinal = ''
-    this.contrato = undefined
+    })    
   }
 }

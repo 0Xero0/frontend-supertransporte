@@ -12,7 +12,6 @@ import { RespuestaVerificacionEvidencia } from 'src/app/encuestas/modelos/Respue
 import { ServicioEncuestas } from 'src/app/encuestas/servicios/encuestas.service';
 import { Maestra } from 'src/app/verificaciones/modelos/Maestra';
 import { ServicioVerificaciones } from 'src/app/verificaciones/servicios/verificaciones.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-encuesta-cuantitativa',
@@ -69,12 +68,6 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
 
   //Acciones
   guardar() {
-    Swal.fire({
-      icon: 'info',
-      allowOutsideClick: false,
-      text: 'Espere por favor...',
-    });
-    Swal.showLoading(null);
     this.servicio.guardarRespuestasIndicadores(
       Number(this.encuesta.idReporte),
       this.respuestas,
@@ -82,7 +75,6 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
       this.idMes!
     ).subscribe({
       next: () => {
-        Swal.close()
         this.setHayCambios(false)
         this.popup.abrirPopupExitoso(DialogosEncuestas.GUARDAR_ENCUESTA_EXITO)
         this.indicadoresFaltantes = []
@@ -90,7 +82,6 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
         this.formularioGuardado.emit(this.idMes)
       },
       error: () => {
-        Swal.close()
         this.popup.abrirPopupFallido(
           DialogosEncuestas.GUARDAR_ENCUESTA_ERROR_TITULO,
           DialogosEncuestas.GUARDAR_ENCUESTA_ERROR_DESCRIPCION
@@ -100,19 +91,12 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
   }
 
   guardarVerificacion() {
-    Swal.fire({
-      icon: 'info',
-      allowOutsideClick: false,
-      text: 'Espere por favor...',
-    });
-    Swal.showLoading(null);
     this.servicioVerificacion.guardarVerificacionesFaseDos({
       idReporte: Number(this.encuesta.idReporte),
       vigencia: Number(this.encuesta.vigencia),
       evidencias: this.verificaciones
     }).subscribe({
       next: () => {
-        Swal.close()
         this.setHayCambios(false)
         this.evidenciasFaltantes = []
         this.indicadoresFaltantes = []
@@ -120,7 +104,6 @@ export class EncuestaCuantitativaComponent implements OnInit, OnChanges {
         this.formularioGuardado.emit(this.idMes)
       },
       error: () => {
-        Swal.close()
         this.popup.abrirPopupFallido(
           DialogosEncuestas.GUARDAR_ENCUESTA_ERROR_TITULO,
           DialogosEncuestas.GUARDAR_ENCUESTA_ERROR_DESCRIPCION
