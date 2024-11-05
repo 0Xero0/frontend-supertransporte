@@ -18,7 +18,7 @@ import { PaginaFormularioAspiranteProveedorTecnologicoComponent } from './formul
 import { PaginaResultadosIndicadoresComponent } from './encuestas/paginas/pagina-resultados-indicadores/pagina-resultados-indicadores.component';
 import { PaginaAdministrarMesesComponent } from './encuestas/paginas/pagina-administrar-meses/pagina-administrar-meses.component';
 import { PaginaEmpresaTecnologicaComponent } from './empresa-tecnologica/pagina-empresa-tecnologica/pagina-empresa-tecnologica.component';
-import { InicioVigia2Component } from './autenticacion/componentes/inicio-vigia2/inicio-vigia2.component';
+import { TablaResultadosIndicadoresComponent } from './encuestas/componentes/tabla-resultados-indicadores/tabla-resultados-indicadores.component';
 
 
 
@@ -91,10 +91,6 @@ const routes: Routes = [
     component: InicioSesionComponent
   },
   {
-    path: 'inicio-vigia2',
-    component: InicioVigia2Component
-  },
-  {
     path: 'actualizar-contrasena',
     component: ActualizarContrasenaComponent
   },
@@ -109,7 +105,7 @@ const routes: Routes = [
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: 'inicio-vigia2'
+    redirectTo: 'inicio-sesion'
   }
 ];
 

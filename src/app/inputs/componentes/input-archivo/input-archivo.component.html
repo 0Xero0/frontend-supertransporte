@@ -1,11 +1,15 @@
 <label [for]="nombre" class="input-archivo d-flex" [ngClass]="{'disabled': disabled}">
+    <div class="boton-adjuntar d-flex align-items-center justify-content-center">Seleccionar archivo</div>
     <div class="archivos">
-        <div class="archivo d-flex" *ngIf="archivo">
+        <div class="archivo d-flex" *ngIf="archivo; else noArchivo">
             <span class="nombre-archivo">{{ archivo.name }}</span>
-            <button class="eliminar-archivo" (click)="manejarRemoverArchivo($event)">x</button>
-        </div>
+            <button class="eliminar-archivo" (click)="manejarRemoverArchivo($event)"><i class="bi bi-trash" style="color: #004884;"></i></button>
+        </div> 
+        <ng-template #noArchivo>
+            <span class="sin-archivo">Sin archivo seleccionado</span>
+          </ng-template>
     </div>
-    <div class="boton-adjuntar d-flex align-items-center justify-content-center">Adjuntar</div>
+    
     <input 
     #input 
     type="file" 

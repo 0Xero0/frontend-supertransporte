@@ -13,9 +13,9 @@ import { Soporte } from 'src/app/soportes/modelos/Soporte';
 export class AutenticacionService {
   private urlBackend: string
   headers: HttpHeaders;
-  public readonly llaveTokenLocalStorage = 'jwt'
-  public readonly llaveUsuarioLocalStorage = 'Usuario'
-  public readonly llaveRolesLocalStorage = 'rol'
+  public readonly llaveTokenLocalStorage = 'jwtPesv'
+  public readonly llaveUsuarioLocalStorage = 'UsuarioPesv'
+  public readonly llaveRolesLocalStorage = 'rolPesv'
 
 
   constructor(private clientHttp:HttpClient) {
@@ -23,10 +23,6 @@ export class AutenticacionService {
     this.headers = new HttpHeaders({
       "Content-Type": "application/json",
     })
-  }
-  public inicioVigia2(token:string){
-    const endpoint = '/api/v1/autenticacion/inicio-vigia'
-    return this.clientHttp.post<any>(`${this.urlBackend}${endpoint}`, {token: token})
   }
 
   public iniciarSesion(documento:string, clave:string):Observable<IniciarSesionRespuesta>{

@@ -15,26 +15,28 @@
                         <table class="table fs-14px">
                             <thead>
                                 <tr *ngIf="categoria.titulo && categoria.titulo != ''">
-                                    <th class="border-bottom-0"></th>
+ <!--
+                                    <th class=""></th>
+                                   
                                     <th class="text-center" [attr.colspan]="categoria.cabeceras.length">
                                         {{ categoria.titulo }}
-                                    </th>
+                                    </th>-->
                                 </tr>
-                                <tr>
-                                    <th width="300px"></th> <!-- titulo categoria -->
+                                <tr >
+                                    <th   class=" fondo-secundario texto-primario"  width="300px">{{categoria.nombre}}</th> <!-- titulo categoria -->
                                     <!-- ----------------------------------- -->
                                     <th 
-                                    class="border fondo-secundario texto-primario" 
+                                    class=" fondo-secundario texto-primario" 
                                     *ngFor="let cabecera of categoria.cabeceras">
                                         {{ cabecera }}
                                     </th>   
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody >
                                 <tr #fila height="37px" *ngFor="let fila of categoria.filas ; let nFila = index"> 
                                     <td height="37px">{{ fila.nombre }}</td>
                                     <td height="37px" 
-                                    class="border p-0" 
+                                    class="" 
                                     *ngFor="let dato of fila.datos ; let nColumna = index">
                                         <app-selector-cantidad
                                         #selector
@@ -54,8 +56,9 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-3 d-flex flex-column align-items-center justify-content-center">
-                    <table  class="table border fs-14px" [ngClass]="clases">
+                <div class="col-sm-12 col-md-3  flex-column align-items-center ">
+                    <div class="table-responsive">
+                    <table  class="table  fs-14px " [ngClass]="clases">
                         <thead>
                             <tr>
                                 <th class="fondo-secundario texto-primario">Total - {{categoria.nombre}}</th>
@@ -67,6 +70,7 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
                     <span *ngIf="inconsistencia" class="validacion fs-12px">Los totales de "{{tipoCategoria.nombre}}" no coinciden.</span>
                     <!-- <span *ngIf="esIgualACero" class="validacion fs-12px">El total debe ser mayor a cero.</span> -->
                 </div>

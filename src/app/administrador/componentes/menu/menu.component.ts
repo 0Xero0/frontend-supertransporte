@@ -4,7 +4,8 @@ import { ServicioLocalStorage } from '../../servicios/local-storage.service';
 import { Usuario } from 'src/app/autenticacion/modelos/IniciarSesionRespuesta';
 import { AutenticacionService } from 'src/app/autenticacion/servicios/autenticacion.service';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { MenuHeaderPService } from '../../utilidades/services-menu-p/menu-header-p-service';
+
 
 @Component({
   selector: 'app-menu',
@@ -17,16 +18,26 @@ export class MenuComponent implements OnInit {
   isCollapsed = false;
   desplegado = true
 
+  
+  nombrePrimerModulo: string = '';
+  nombreModuloSeleccionado: string = '';
+  primerModulo?: string;
+  
   constructor(
-    private servicioLocalStorage: ServicioLocalStorage,
+    private servicioLocalStorage: ServicioLocalStorage, 
     private servicioAutenticacion: AutenticacionService,
-    private router: Router
-  ) {
+    private router: Router,
+    public ServiceMenuP:MenuHeaderPService
+  ) { 
   }
 
   ngOnInit(): void {
     this.rol = this.servicioLocalStorage.obtenerRol()
     this.usuario = this.servicioLocalStorage.obtenerUsuario()
+    this.setNombreModuloInicial();
+    if (this.rol && this.rol.modulos && this.rol.modulos.length > 0) {
+      this.nombrePrimerModulo = this.rol.modulos[0].nombre;
+    }
   }
 
   public abrir():void{
@@ -37,13 +48,20 @@ export class MenuComponent implements OnInit {
     this.desplegado = false
   }
 
+  public SeleccionarMenuP(rutaModelo:string) :boolean
+  {
+    //console.log(this.ServiceMenuP.RutaModelo);
+    //console.log(`/administrar${rutaModelo}`);
+    if(this.ServiceMenuP.RutaModelo===`/administrar${rutaModelo}`)
+    {
+      return true
+    }
+    return false
+  }
+
   public cerrarSesion(){
     this.servicioAutenticacion.cerrarSesion()
-    window.location.href = environment.urlVigia2+'/administrar/administrar-aplicativos'
-    /* if(window.open('','SISI/PESV')){
-      window.close();
-    } */
-    /* this.router.navigateByUrl('') */
+    this.router.navigateByUrl('/inicio-sesion')
   }
   imprimirRuta(submodulo: Submodulo){
     console.log(`/administrar${submodulo.ruta}`)
@@ -53,4 +71,48 @@ export class MenuComponent implements OnInit {
     this.imprimirRuta(submodulo)
     this.router.navigateByUrl(`/administrar${submodulo.ruta}`)
   }
+
+  private setNombreModuloInicial() {
+    const currentRoute = this.router.url;
+  
+    if (this.rol && this.rol.modulos && this.rol.modulos.length > 0) {
+      // Buscar un módulo o submódulo que coincida con la ruta actual
+      let moduloActual = this.rol.modulos.find(modulo => 
+        currentRoute.includes(`/administrar${modulo.ruta}`)
+      );
+      
+      if (!moduloActual) {
+        // Si no hay coincidencia en la ruta, establece el primer módulo como el seleccionado por defecto
+        moduloActual = this.rol.modulos[0];
+      }
+      
+      this.nombreModuloSeleccionado = moduloActual.nombre;
+    }
+  }
+
+
+// Método para cambiar el módulo seleccionado
+seleccionarModulo(modulo: string) {
+  this.nombreModuloSeleccionado = modulo;
 }
+
+
+  getPrimeraRutaModulo(): string {
+    if (this.rol && this.rol.modulos && this.rol.modulos.length > 0) {
+      // Obtiene el primer módulo disponible
+      const primerModulo = this.rol.modulos[0];
+  
+      // Muestra el nombre del primer módulo en la consola
+     
+      this.nombrePrimerModulo = primerModulo.nombre; // Asigna el nombre del primer módulo a la variable
+      // Redirige al primer módulo disponible con el prefijo "administrar"
+      return `/administrar${primerModulo.ruta}`;
+    } else {
+      // Si no hay módulos disponibles, redirige a una página de error o la ruta que prefieras
+      return '/error'; // Ajusta esta ruta según tu app o añade manejo adicional 
+    }
+  }
+
+
+}
+

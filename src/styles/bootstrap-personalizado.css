@@ -146,3 +146,52 @@ padding:0px;
 .accordion-button:not(.collapsed)::after{
   background-image: url('../assets/img/menos.png');
 }
+
+.footer {
+    height: 75px;
+    background-color: #3366cc;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+  }
+  html,
+body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .content {
+    flex: 1;
+  }
+
+  .titulo {
+    margin: 0%;
+    font-size: 32px;
+    font-weight: bold;
+    margin-left: 40px;
+    color: #ffffff;
+}
+.contenedor-titulo {
+    height: 83px;
+    background-color: #333333;
+    padding: 1.8%;
+}
+.custom-breadcrumb {
+    margin-left: 72px;
+    margin-top: 11px;
+}
+.texto-subti{
+    margin: 31px 45px 9px;
+    height: 39px;
+        font: normal normal bold 32px/16px Montserrat;
+    letter-spacing: 0px;
+    color: #004884;
+    opacity: 1;
+    
+    }

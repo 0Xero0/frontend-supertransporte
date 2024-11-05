@@ -1,9 +1,16 @@
 <div class="px-sm-3 px-md-5" *ngIf="filtros">
     <div class="d-block w-100">
-        <h3 class="fw-semibold texto-primario mb-3 mt-4 w-100">Categorización</h3>
-        <p>Estimado vigilado, tenga en cuenta que la información suministrada deberá ser veraz, completa, exacta, actualizada y comprobable, de conformidad con lo dispuesto en la Ley 366 de 1996 y decretos reglamentarios.</p>
-        <p>De acuerdo con lo anterior, la información debe estar acorde a lo estipulado en la resolución 20223040040595 de 2022 y así mismo determinar si su empresa se encuentra en Nivel Básico,  Nivel Estándar, Nivel Avanzado.</p>
+        <div class="texto-subti">Categorización</div>
+        <div class="info-container">
+            <div class="info-box">
+                <p>Estimado vigilado, tenga en cuenta que la información suministrada deberá ser veraz, completa, exacta, actualizada y comprobable, de conformidad con lo dispuesto en la Ley 366 de 1996 y decretos reglamentarios.</p>
+            </div>
+            <div class="info-box">
+                <p>De acuerdo con lo anterior, la información debe estar acorde a lo estipulado en la resolución 20223040040595 de 2022 y así mismo determinar si su empresa se encuentra en Nivel Básico, Nivel Estándar, Nivel Avanzado.</p>
+            </div>
+        </div>
     </div>
+    
     <div class="mb-3">
         <app-formulario-modalidad-radio-operacion 
         #formularioModalidades 
@@ -20,7 +27,7 @@
 
     
     
-    <div class="d-flex align-items-center justify-content-end">
+    <div class="d-flex align-items-center justify-content-center">
         <button type="button" class="boton primario relleno mb-5" (click)="guardarInformacion()">Guardar</button>
     </div>
 </div>
