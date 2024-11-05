@@ -30,3 +30,13 @@ table {
     margin-left: 22px;
     margin-right: 22px;
 }
+
+.boton {
+    height: 34px;
+    padding: 0;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    font-size: 19px;
+    width: 132px;
+}

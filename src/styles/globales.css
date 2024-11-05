@@ -360,3 +360,16 @@ h1,h2{
   font-family: inherit;
   font-size: 1rem;
 }
+
+.govco-eye {
+  background-image: url(/assets/img/iconos/eye.svg);
+  /* min-width: 1rem; */
+  /* min-height: 1rem; */
+  display: inline-block;
+  background-repeat: no-repeat;
+  /* background-size: 1rem 1rem; */
+  width: 25px;
+  height: 22px;
+
+ 
+}

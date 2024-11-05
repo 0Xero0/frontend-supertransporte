@@ -10,3 +10,11 @@
     padding-right: 4.5rem !important;
     padding-left: 4.5rem !important;
 }
+
+button {
+    margin-right: 115px; /* Ajusta el espacio según sea necesario */
+}
+
+button:last-child {
+    margin-right: 0; /* Evita el margen derecho en el último botón */
+}
