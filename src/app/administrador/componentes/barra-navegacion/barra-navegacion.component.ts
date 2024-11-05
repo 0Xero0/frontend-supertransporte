@@ -17,8 +17,8 @@ export class BarraNavegacionComponent implements OnInit {
   public nombre: string = '';
   public cabeceraModulo: string[] = [];
   public menuOpcionesDeUsuarioColapsado = true;
-  public readonly llaveRolesLocalStorage = 'rol'
-  public readonly llaveUsuarioLocalStorage = 'Usuario'
+  public readonly llaveRolesLocalStorage = 'rolPesv'
+  public readonly llaveUsuarioLocalStorage = 'UsuarioPesv'
 
   constructor(private servicioCabecera: ServicioCabeceraService,  private servicioLocalStorage: ServicioLocalStorage,) {
     this.usuarioQuiereCerrarSesion = new EventEmitter<void>()
