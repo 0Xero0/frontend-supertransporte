@@ -9,27 +9,28 @@
       >{{modulo.nombre}}</span>
       <ul class="submodulos" *ngIf="modulo.submodulos">
         <li class="submodulo" *ngFor="let submodulo of modulo.submodulos" (click)="navegarAlSubmodulo(submodulo)">
-          <span class="nombre-submodulo">{{ submodulo.nombre }}</span> 
+          <span class="nombre-submodulo">{{ submodulo.nombre }}</span>
         </li>
       </ul>
     </li>
     <li class="modulo moduloseguridad" style="margin-left: 16px;" >
       <span class="nombre-modulo  " >Seguridad</span>
-      
+
       <ul class=" submodulosseguridad" >
-        
+
         <li class="submoduloseguridad "(click)="cerrarSesion()"  >
-          
-          
-          <span class="nombre-submodulo nombre-submoduloseguridad">Cerrar PESV</span>
+
+
+          <span *ngIf="inicioVigia2" class="nombre-submodulo nombre-submoduloseguridad">Volver</span>
+          <span *ngIf="inicioSesion" class="nombre-submodulo nombre-submoduloseguridad">Salir</span>
         </li>
       </ul>
     </li>
   </ul>
- 
+
 </nav>
 
-<div class="contenedor-titulo"> 
+<div class="contenedor-titulo">
   <h1 class="titulo">PESV</h1>
 </div>
 <div class="linea"></div>
@@ -37,8 +38,8 @@
 <nav *ngIf="nombrePrimerModulo === 'Inicio' && nombreModuloSeleccionado !== 'Módulos'" class="custom-breadcrumb" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <a 
-        [routerLink]="getPrimeraRutaModulo()" 
+      <a
+        [routerLink]="getPrimeraRutaModulo()"
         (click)="seleccionarModulo(nombrePrimerModulo)"
         [ngClass]="{'disabled-link': nombreModuloSeleccionado === 'Inicio'}"
       >

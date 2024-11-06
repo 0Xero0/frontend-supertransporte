@@ -35,6 +35,11 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const inicioSesion = JSON.parse(localStorage.getItem('inicio-sesion') || 'false');
+    if(inicioSesion){this.inicioSesion = inicioSesion}
+    const inicioVigia2 = JSON.parse(localStorage.getItem('inicio-vigia2') || 'false');
+    if(inicioVigia2){this.inicioVigia2 = inicioVigia2}
+
     this.rol = this.servicioLocalStorage.obtenerRol()
     this.usuario = this.servicioLocalStorage.obtenerUsuario()
     this.setNombreModuloInicial();
