@@ -14,7 +14,7 @@ import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.componen
   templateUrl: './inicio-vigia2.component.html',
   styleUrls: ['./inicio-vigia2.component.css']
 })
-export class InicioVigia2Component {
+export class InicioVigia2Component implements OnInit {
   @ViewChild('popup') popup!: PopupComponent
   public readonly llaveCaptcha = environment.llaveCaptcha
 
@@ -30,8 +30,16 @@ export class InicioVigia2Component {
       // Aquí puedes hacer algo con el token, como almacenarlo en el localStorage
       if (this.token) {
         localStorage.setItem('authToken', this.token);
+        Swal.fire({
+          icon: 'info',
+          allowOutsideClick: false,
+          text: 'Espere por favor...',
+        });
+        Swal.showLoading(null);
         this.servicioAutenticacion.inicioVigia2(this.token).subscribe({
           next: (respuesta: IniciarSesionRespuesta) => {
+            Swal.close()
+            localStorage.setItem('inicio-vigia2',JSON.stringify(true))
             this.servicioAutenticacion.guardarInformacionInicioSesion(
               respuesta.token,
               respuesta.rol,

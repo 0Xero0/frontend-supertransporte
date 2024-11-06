@@ -37,11 +37,19 @@ export class InicioSesionComponent implements OnInit {
       this.marcarFormularioComoSucio()
       return;
     }
+    Swal.fire({
+      icon: 'info',
+      allowOutsideClick: false,
+      text: 'Espere por favor...',
+    });
+    Swal.showLoading(null);
     this.servicioAutenticacion.iniciarSesion(
       this.formulario.controls['usuario'].value.toString(),
       this.formulario.controls['clave'].value,
     ).subscribe({
       next: (respuesta: IniciarSesionRespuesta) => {
+        Swal.close()
+        localStorage.setItem('inicio-sesion',JSON.stringify(true))
         this.servicioAutenticacion.guardarInformacionInicioSesion(
           respuesta.token,
           respuesta.rol,
@@ -72,7 +80,7 @@ export class InicioSesionComponent implements OnInit {
              title: 'Cuenta Bloqueada',
              text: error.error.message,
          });
- 
+
          }
          if (error.status == 400) {
           error.error.message = error.error.message || 'Credenciales inválidas.';
