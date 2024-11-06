@@ -70,6 +70,7 @@ export class MenuComponent implements OnInit {
   public cerrarSesion(){
     /* this.servicioAutenticacion.cerrarSesion()
     this.router.navigateByUrl('/inicio-sesion') */
+    this.servicioAutenticacion.cerrarSesion()
     if(this.inicioVigia2){
       window.location.href = environment.urlVigia2+'/administrar/administrar-aplicativos'
     }else if(this.inicioSesion){
