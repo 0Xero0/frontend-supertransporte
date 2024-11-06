@@ -1,58 +1,64 @@
 <div class="p-md-3 p-lg-5">
-    <h3 class="texto-primario fw-semibold mb-4">Lista de reportes</h3>
-    <div class="table-responsive">
-        <table class="table table-bordered tabla-primaria fs-14px">
-            <thead>
-                <tr class="fw-semibold">
-                    <th class="">Validar</th>
-                    <th class="">Id</th>
-                    <th class="">NIT</th>
-                    <th class="">Razón social</th>
-                    <th class="">Asignado por</th>
-                    <th class="">Fecha de asignación</th>
-                    <th class="">Estado de validación</th>
-                    <!--<th class="">Vigencia</th>-->
-                    <th class="">Observación</th>
-                    <th class="">Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let reporte of reportes">
-                    <td class="text-center">
-                        <span 
-                        class="material-symbols-outlined cursor-pointer texto-gris" 
-                        [routerLink]="['/administrar', 'verificar-reportes', reporte.idReporte]"
-                        [queryParams]="{ idEncuesta: reporte.idEncuesta, idReporte: reporte.idReporte, idVigilado: reporte.nit }">
-                        visibility
-                        </span>
-                    </td>
-                    <td>{{ reporte.idReporte }}</td>
-                    <td>{{ reporte.nit }}</td>
-                    <td>{{ reporte.razonSocial }}</td>
-                    <td>{{ reporte.asignador }}</td>
-                    <td>{{ reporte.fechaAsignacion | fecha: 'dd/MM/yyyy' }}</td>
-                    <td>{{ reporte.estadoValidacion }}</td>
-                    <!--<td></td>-->
-                    <td>{{ reporte.observacion }}</td>
-                    <td>{{ reporte.estadoAprobado }}</td>
-                </tr>
-                <tr *ngIf="reportes.length === 0">
-                    <td colspan="8" class="fw-semibold text-center">Sin reportes asignados</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="d-flex justify-content-end">
-        <ngb-pagination 
-        [collectionSize]="this.paginador.totalRegistros ?? 0" 
-        [pageSize]="this.paginador.limite"
-        [page]="this.paginador.pagina"
-        (pageChange)="this.paginador.cambiarPagina($event)" 
-        [maxSize]="5">
-            <ng-template ngbPaginationFirst>Prim.</ng-template>
-            <ng-template ngbPaginationLast>Ult.</ng-template>
-            <ng-template ngbPaginationPrevious>Ant.</ng-template>
-            <ng-template ngbPaginationNext>Sig.</ng-template>
-        </ngb-pagination>
-    </div>
+  <h3 class="texto-primario fw-semibold mb-4">Lista de reportes</h3>
+  <div class="d-flex flex-gap-20 align-items-center mb-4" *ngIf="this.rol && this.rol.id !== '003'">
+    <fieldset>
+      <input type="text" class="form-control" placeholder="Ingrese el termino" [(ngModel)]="termino">
+    </fieldset>
+    <fieldset>
+      <button class="boton primario relleno" (click)="actualizarFiltros()">Filtrar</button>
+    </fieldset>
+    <fieldset>
+      <button class="boton primario delineado" (click)="limpiarFiltros()">Limpiar</button>
+    </fieldset>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered tabla-primaria fs-14px">
+      <thead>
+        <tr class="fw-semibold">
+          <th class="">Validar</th>
+          <th class="">Id</th>
+          <th class="">NIT</th>
+          <th class="">Razón social</th>
+          <th class="">Asignado por</th>
+          <th class="">Fecha de asignación</th>
+          <th class="">Estado de validación</th>
+          <!--<th class="">Vigencia</th>-->
+          <th class="">Observación</th>
+          <th class="">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reporte of reportes">
+          <td class="text-center">
+            <span class="govco-eye cursor-pointer texto-gris"
+              [routerLink]="['/administrar', 'verificar-reportes', reporte.idReporte]"
+              [queryParams]="{ idEncuesta: reporte.idEncuesta, idReporte: reporte.idReporte, idVigilado: reporte.nit }">
+              
+            </span>
+          </td>
+          <td>{{ reporte.idReporte }}</td>
+          <td>{{ reporte.nit }}</td>
+          <td>{{ reporte.razonSocial }}</td>
+          <td>{{ reporte.asignador }}</td>
+          <td>{{ reporte.fechaAsignacion | fecha: 'dd/MM/yyyy' }}</td>
+          <td>{{ reporte.estadoValidacion }}</td>
+          <!--<td></td>-->
+          <td>{{ reporte.observacion }}</td>
+          <td>{{ reporte.estadoAprobado }}</td>
+        </tr>
+        <tr *ngIf="reportes.length === 0">
+          <td colspan="8" class="fw-semibold text-center">Sin reportes asignados</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-center">
+    <ngb-pagination [collectionSize]="this.paginador.totalRegistros ?? 0" [pageSize]="this.paginador.limite"
+      [page]="this.paginador.pagina" (pageChange)="this.paginador.cambiarPagina($event)" [maxSize]="5">
+      <ng-template ngbPaginationFirst>Prim.</ng-template>
+      <ng-template ngbPaginationLast>Ult.</ng-template>
+      <ng-template ngbPaginationPrevious>Ant.</ng-template>
+      <ng-template ngbPaginationNext>Sig.</ng-template>
+    </ngb-pagination>
+  </div>
 </div>

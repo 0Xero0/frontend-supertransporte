@@ -38,7 +38,7 @@
     <div class="d-block w-100 mb-3" *ngIf="esUsuarioAdministrador">
         <div class="row mb-3">
             <div class="col-5">
-                <textarea id="textArea" class="form-control" 
+                <textarea id="textArea" class="form-control"
                 style="height: 130px; resize: none;"
                 [readOnly]="aprobado">
                     {{observacionAdmin}}
@@ -64,40 +64,40 @@
     <div class="d-block w-100 mb-3" *ngIf="idEncuesta == 2">
         <button
         *ngIf="historico && !esUsuarioAdministrador"
-        type="button" 
-        class="boton primario relleno" 
-        [routerLink]="['/administrar', 'encuesta', idEncuesta]" 
-        [queryParams]="{ vigilado: idVigilado, reporte: idReporte, historico: false }">Salir de históricos</button>
+        type="button"
+        class="boton primario relleno"
+        [routerLink]="['/administrar', 'encuesta', idEncuesta]"
+        [queryParams]="{ vigilado: idVigilado, reporte: idReporte, historico: false, vigencia }">Salir de históricos</button>
 
         <button
         *ngIf="!historico && !esUsuarioAdministrador"
-        type="button" 
-        class="boton primario relleno" 
-        [routerLink]="['/administrar', 'encuesta', idEncuesta]" 
-        [queryParams]="{ vigilado: idVigilado, reporte: idReporte, historico: true }">Ir a históricos</button>
+        type="button"
+        class="boton primario relleno"
+        [routerLink]="['/administrar', 'encuesta', idEncuesta]"
+        [queryParams]="{ vigilado: idVigilado, reporte: idReporte, historico: true, vigencia }">Ir a históricos</button>
     </div>
-    <div class="d-flex justify-content-between align-items-center" *ngIf="!soloLectura">
+    <div class="d-flex justify-content-left align-items-center" *ngIf="!soloLectura">
         <div ngbDropdown *ngIf="idEncuesta != 2">
-            <button 
-            ngbDropdownToggle 
-            type="button" 
-            class="boton primario relleno" 
+            <button
+            ngbDropdownToggle
+            type="button"
+            class="boton primario relleno"
             id="dropdownBasic1">Exportar</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button ngbDropdownItem (click)="this.exportarExcel()">Excel</button>
                 <button ngbDropdownItem (click)="this.exportarPDF()">PDF</button>
             </div>
         </div>
-        
-        <button
-        type="button" 
-        class="boton primario delineado" 
-        (click)="enviarEncuesta()"
-        [disabled]="hayCambios || soloLectura">Enviar a ST</button>
 
-        <button 
-        type="button" 
-        class="boton primario relleno" 
+        <button
+        type="button"
+        class="boton primario delineado"
+        (click)="enviarEncuesta()"
+        [disabled]="hayCambios || soloLectura">Enviar</button>
+
+        <button
+        type="button"
+        class="boton primario relleno"
         (click)="guardarEncuesta()"
         [disabled]="!hayCambios || soloLectura">Guardar</button>
         <button type="button" class="boton primario delineado" [routerLink]="['/administrar', 'encuestas', idEncuesta]">Volver</button>
@@ -106,7 +106,7 @@
         <app-encuesta
         #componenteEncuesta
         class="w-100"
-        *ngIf="encuesta && idReporte && idEncuesta && idVigilado && idEncuesta != 2" 
+        *ngIf="encuesta && idReporte && idEncuesta && idVigilado && idEncuesta != 2"
         [soloLectura]="soloLectura"
         [camposDeVerificacion]="camposDeVerificacion"
         [camposDeVerificacionVisibles]="camposDeVerificacionVisibles"
@@ -119,8 +119,9 @@
 
         <app-encuesta-cuantitativa
         #componenteEncuestaCuantitativa
-        *ngIf="idEncuesta == 2 && encuestaCuantitativa" 
+        *ngIf="idEncuesta == 2 && encuestaCuantitativa"
         [encuesta]="encuestaCuantitativa"
+        [habilitarCamposVerificador]="camposDeVerificacion"
         [historico]="historico"
         (cambioDeMes)="obtenerEncuestaCuantitativa($event)"
         (hanHabidoCambios)="setHayCambios($event)"

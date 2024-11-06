@@ -1,4 +1,4 @@
-<div class="px-sm-3 px-md-5">
+<div class="px-sm-3 px-md-5 margen-personal">
     <div class="d-block w-100">
         <h3 class="fw-semibold texto-primario mb-3 mt-4 w-100">
             Tamaño de la organización
@@ -10,20 +10,22 @@
         </p>
         <div class="d-flex align-items-center flex-gap-30">
             <span class="fs-16px">Su organización se encuentra clasificada en el nivel</span>
-            <div class="d-flex border p-3 justify-content-center align-items-center">
+            <div class="d-flex border p-3 justify-content-center align-items-center" style="
+    border-radius: 5px;">
                 <span class="fs-18px fw-semibold">{{ clasificacion }}</span>
             </div>
         </div>
-        <table class="table-bordered my-3 tabla-clasificacion">
+        <table class=" my-3 tabla-clasificacion">
             <thead>
                 <tr>
-                    <th colspan="2" class="align-middle encabezado-tabla">
+                    <th colspan="2" class="align-middle encabezado-tabla" style="
+    border-radius: 5px 0 0 0;">
                         <div class="fw-normal">
                             Nivel diseño implementación PESV
                         </div>
                     </th>
                     <th class="align-middle encabezado-tabla">
-                        <div class="d-flex flex-column fw-normal">
+                        <div class="d-flex flex-column fw-normal" >
                             <div>
                                 Empresas prestadoras de servicio Transporte Terrestre Automotor
                             </div>
@@ -34,7 +36,8 @@
                             </div>
                         </div>
                     </th>
-                    <th class="align-middle encabezado-tabla">
+                    <th class="align-middle encabezado-tabla" style="
+    border-radius: 0 5px 0 0;">
                         <div class="d-flex flex-column fw-normal">
                             <div>
                                 Empresas con actividad diferente al transporte
@@ -55,7 +58,7 @@
                 <tr>
                     <td>Básico</td>
                     <td>
-                        <div class="d-flex justify-content-around">
+                        <div class="d-flex justify-content-around" >
                             <div>11 - 19</div>
                             <div>2 - 19</div>
                         </div>
@@ -102,7 +105,7 @@
         <div class="d-flex">
             <span class="fs-16px">Esta clasificación esta basada en la información suministrada en el filtro anterior </span>
         </div>
-        <div class="d-flex justify-content-center align-items-center mt-3">
+        <div class="d-flex justify-content-center align-items-center mt-3 mb-4">
             <button class="boton primario relleno" [routerLink]="['/administrar', 'encuestas', '1']">Continuar</button>
         </div>
     </div>
