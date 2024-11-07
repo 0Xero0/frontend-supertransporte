@@ -1,113 +1,120 @@
 <div class="p-md-3 p-lg-5">
-    <h3 class="texto-primario fw-semibold" *ngIf="encuesta">
-        Resumen - Ficha cuestionario - {{encuesta.nombreEncuesta}}
-    </h3>
-    <h6 class="texto-primario fw-semibold">Reporte número {{idReporte}}</h6>
-    <form class="col-sm-100 col-md-12 mb-4" *ngIf="encuesta">
-        <div class="row">
-            <div class="col">
-                <div class="row mb-2">
-                    <div class="col">NIT</div>
-                    <div class="">
-                        <input type="text" class="form-control" disabled [value]="encuesta.idVigilado">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col">Razón social</div>
-                    <div class="">
-                        <input type="text" class="form-control" disabled [value]="encuesta.razonSocila">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col">Estado actual</div>
-                    <div class="">
-                        <input type="text" class="form-control" disabled [value]="encuesta.estadoActual">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col">Clasificación según resolución 20223040040595 DE 2022</div>
-                    <div class="">
-                        <input type="text" class="form-control" disabled [value]="clasificacionResolucion">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col">Modalidad</div>
-                    <div class="">
-                        <input type="text" class="form-control" disabled [value]="encuesta.modalidad">
-                    </div>
-                </div>
-            </div>
+  <h3 class="texto-primario fw-semibold" *ngIf="encuesta">
+    Resumen - Ficha cuestionario - {{encuesta.nombreEncuesta}}
+  </h3>
+  <h6 class="texto-primario fw-semibold">Reporte número {{idReporte}}</h6>
+  <form class="col-sm-100 col-md-12 mb-4" *ngIf="encuesta">
+    <div class="row">
+      <div class="col">
+        <div class="row mb-2">
+          <div class="col">NIT</div>
+          <div class="">
+            <input type="text" class="form-control" disabled [value]="encuesta.idVigilado">
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">Razón social</div>
+          <div class="">
+            <input type="text" class="form-control" disabled [value]="encuesta.razonSocila">
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">Estado actual</div>
+          <div class="">
+            <input type="text" class="form-control" disabled [value]="encuesta.estadoActual">
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">Clasificación según resolución 20223040040595 DE 2022</div>
+          <div class="">
+            <input type="text" class="form-control" disabled [value]="clasificacionResolucion">
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">Modalidad</div>
+          <div class="">
+            <input type="text" class="form-control" disabled [value]="encuesta.modalidad">
+          </div>
+        </div>
+      </div>
 
-            <div class="col">
-                <div class="row mb-2">
-                    <div class="col">Total de conductores</div>
-                    <div class="">
-                        <input type="text" class="form-control" disabled [value]="encuesta.totalConductores">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col">Total de Vehículos</div>
-                    <div class="">
-                        <input type="text" class="form-control" disabled [value]="encuesta.totalVehiculos">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col">Porcentaje de pasos</div>
-                    <div class="">
-                        <input type="text" class="form-control" disabled 
-                        [value]="formatoPorcentajes(encuesta.porcentajePasos)">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col">Procentaje de preguntas</div>
-                    <div class="">
-                        <input type="text" class="form-control" disabled 
-                        [value]="formatoPorcentajes(encuesta.porcentajePreguntas)">
-                    </div>
-                </div>
-            </div>
+      <div class="col">
+        <div class="row mb-2">
+          <div class="col">Total de conductores</div>
+          <div class="">
+            <input type="text" class="form-control" disabled [value]="encuesta.totalConductores">
+          </div>
         </div>
-        
-    </form>
-    <div class="d-flex justify-content-left align-items-center mb-4">
-        <button
-        [disabled]="hayCambios || !camposDeVerificacion"
-        type="button" 
-        class="boton primario relleno" 
-        (click)="abrirModalTerminarVerificacion()">Enviar</button>
-        <button
-        [disabled]="!hayCambios"
-        type="button" 
-        class="boton primario relleno" 
-        (click)="guardarVerificaciones()">Guardar</button>
-        <button class="boton primario delineado" [routerLink]="['/administrar', 'verificar-reportes']">Volver</button>
-    </div>
-    <div class="d-flex align-items-center mb-12">
-        <div class="row">
-            <div class="col-sm-1">
-                <input type="checkbox" id="check"
-                [checked]="encuesta?.noObligado" 
-                (click)="toggleCheckbox()">
-            </div>
-            <div class="col-sm-10">
-                No obligado
-            </div>
+        <div class="row mb-2">
+          <div class="col">Total de Vehículos</div>
+          <div class="">
+            <input type="text" class="form-control" disabled [value]="encuesta.totalVehiculos">
+          </div>
         </div>
+        <div class="row mb-2">
+          <div class="col">Porcentaje de pasos</div>
+          <div class="">
+            <input type="text" class="form-control" disabled [value]="formatoPorcentajes(encuesta.porcentajePasos)">
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">Procentaje de preguntas</div>
+          <div class="">
+            <input type="text" class="form-control" disabled [value]="formatoPorcentajes(encuesta.porcentajePreguntas)">
+          </div>
+        </div>
+      </div>
     </div>
-    <br>
-    <app-encuesta
-        *ngIf="encuesta && idReporte && idEncuesta && idVigilado" 
-        #componenteEncuesta 
-        [noObligado]="noObligado"
-        [soloLectura]="soloLectura"
-        [camposDeVerificacion]="camposDeVerificacion"
-        [camposDeVerificacionVisibles]="camposDeVerificacionVisibles" 
-        class="w-100" 
-        [idVigilado]="idVigilado"
-        [idReporte]="idReporte"
-        [encuesta]="encuesta"
-        [idEncuesta]="idEncuesta"
-        (hanHabidoCambios)="manejarHayCambios($event)"/>
+  </form>
+  <div class="d-block w-100 mb-3" *ngIf="esUsuarioAdministrador">
+    <div class="row mb-3">
+      <div class="col-5">
+        <textarea id="textArea" class="form-control" style="height: 130px; resize: none;" [readOnly]="aprobado">
+          {{observacionAdmin}}
+        </textarea>
+      </div>
+      <div class="col-2" style="text-align: justify;">
+        <br><br>
+        <div class="row mb-3">
+          <button id="aprobar" class="boton primario relleno" [disabled]="aprobado"
+            (click)="abrirModalAprobarObservacion(true)">
+            Aprobar
+          </button>
+        </div>
+        <div class="row mb-3">
+          <button id="devolver" type="button" class="boton primario relleno" [disabled]="aprobado"
+            (click)="abrirModalAprobarObservacion(false)">
+            Devolver
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-left align-items-center mb-4">
+    <button [disabled]="hayCambios || !camposDeVerificacion" type="button" class="boton primario relleno"
+      (click)="abrirModalTerminarVerificacion()">Enviar</button>
+    <button [disabled]="!hayCambios" type="button" class="boton primario relleno"
+      (click)="guardarVerificaciones()">Guardar</button>
+    <button class="boton primario delineado" [routerLink]="['/administrar', 'verificar-reportes']">Volver</button>
+  </div>
+  <div class="d-flex align-items-center mb-12">
+    <div class="row">
+      <div class="col-sm-1">
+        <input type="checkbox" id="check" [checked]="encuesta?.noObligado" (click)="toggleCheckbox()"
+        [disabled]="esUsuarioAdministrador">
+      </div>
+      <div class="col-sm-10">
+        No obligado
+      </div>
+    </div>
+  </div>
+  <br>
+  <app-encuesta *ngIf="encuesta && idReporte && idEncuesta && idVigilado" #componenteEncuesta [noObligado]="noObligado"
+    [soloLectura]="soloLectura" [camposDeVerificacion]="camposDeVerificacion"
+    [camposDeVerificacionVisibles]="camposDeVerificacionVisibles" class="w-100" [idVigilado]="idVigilado"
+    [idReporte]="idReporte" [encuesta]="encuesta" [idEncuesta]="idEncuesta"
+    (hanHabidoCambios)="manejarHayCambios($event)" />
 </div>
 <app-popup #popup />
 <app-modal-terminar-verificacion #modalTerminarVerificacion></app-modal-terminar-verificacion>
+<app-modal-aprobar-observacion #modalAprobarObservacion></app-modal-aprobar-observacion>

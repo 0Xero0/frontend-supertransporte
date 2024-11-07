@@ -12,7 +12,7 @@ import { PaginaReporteFase2VerificarComponent } from './paginas/pagina-reporte-f
 import { ModalTerminarVerificacion } from './componentes/modal-terminar-verificacion.component';
 import { InputsModule } from '../inputs/inputs.module';
 import { FormsModule } from '@angular/forms';
-
+import { ModalAprobarObservacion } from './modal-aprobar-observacion/modal-aprobar-observacion.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import { FormsModule } from '@angular/forms';
     PaginaReporteVerificarComponent,
     PaginaReportesFase2VerificarComponent,
     PaginaReporteFase2VerificarComponent,
-    ModalTerminarVerificacion
+    ModalTerminarVerificacion,
+    ModalAprobarObservacion
   ],
   imports: [
     CommonModule,

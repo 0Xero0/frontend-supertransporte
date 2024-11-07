@@ -26,6 +26,13 @@ export class ServicioVerificaciones extends Autenticable{
     super()
   }
 
+  aprovarVerificacion(idReporte?: number, aprobar?: boolean, observacion?: string, idMes?: number){
+    const endpoint = `/api/v1/reportes/aprobar-verificacion`
+    return this.clienteHttp.post(`${this.host}${endpoint}`, {idReporte, aprobar, observacion, idMes}, {
+      headers: this.obtenerCabeceraAutorizacion()
+    })
+  }
+
   guardarVerificaciones(idReporte: number, verificaciones: RespuestaVerificacion[], noObligado:boolean){
     const endpoint = '/api/v1/respuestas/verificar'
     console.log(noObligado)
