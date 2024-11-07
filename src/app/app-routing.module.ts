@@ -90,7 +90,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'inicio-sesion'
+    redirectTo: 'inicio-vigia2'
   },
   {
     path: 'inicio-vigia2',
@@ -115,7 +115,7 @@ const routes: Routes = [
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: 'inicio-sesion'
+    redirectTo: 'inicio-vigia2'
   }
 ];
 
