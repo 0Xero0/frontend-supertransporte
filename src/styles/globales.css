@@ -362,14 +362,6 @@ h1,h2{
 }
 
 .govco-eye {
-  background-image: url(/assets/img/iconos/eye.svg);
-  /* min-width: 1rem; */
-  /* min-height: 1rem; */
-  display: inline-block;
-  background-repeat: no-repeat;
-  /* background-size: 1rem 1rem; */
-  width: 25px;
-  height: 22px;
-
- 
+  filter: invert(22%) sepia(44%) saturate(1700%) hue-rotate(210deg) brightness(90%) contrast(95%);
 }
+ 

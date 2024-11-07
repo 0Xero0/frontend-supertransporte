@@ -1,9 +1,12 @@
 <div class="p-md-3 p-lg-5">
   <h3 class="texto-primario fw-semibold mb-4">Lista de reportes</h3>
   <div class="d-flex flex-gap-20 align-items-center mb-4" *ngIf="this.rol && this.rol.id !== '003'">
-    <fieldset>
+   <!--<fieldset>
       <input type="text" class="form-control" placeholder="Ingrese el termino" [(ngModel)]="termino">
-    </fieldset>
+    </fieldset>--> 
+    <fieldset>
+      <app-input-busqueda [(ngModel)]="termino" />
+  </fieldset>
     <fieldset>
       <button class="boton primario relleno" (click)="actualizarFiltros()">Filtrar</button>
     </fieldset>
@@ -30,7 +33,7 @@
       <tbody>
         <tr *ngFor="let reporte of reportes">
           <td class="text-center">
-            <span class="govco-eye cursor-pointer texto-gris"
+            <span class="govco-eye cursor-pointer "
               [routerLink]="['/administrar', 'verificar-reportes', reporte.idReporte]"
               [queryParams]="{ idEncuesta: reporte.idEncuesta, idReporte: reporte.idReporte, idVigilado: reporte.nit }">
               
