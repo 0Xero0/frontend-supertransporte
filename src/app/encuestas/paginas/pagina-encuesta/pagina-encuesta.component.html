@@ -4,37 +4,64 @@
     <h3 class="fw-semibold texto-primario" *ngIf="encuesta">Clasificación: {{encuesta.clasificaion}}</h3>
     <p *ngIf="encuesta">{{encuesta.descripcionClasificacion}}</p>
     <p *ngIf="encuestaCuantitativa">{{encuestaCuantitativa.mensaje}}</p>
-    <div class="d-block w-100 mb-3">
-        <div class="d-block" *ngIf="usuario">
-            <span class="fs-20px fw-semibold texto-azul-004884">Identificación de quien realiza la encuesta: </span>
-            <span>{{ usuario.usuario }}</span>
-        </div>
-        <div class="d-block " *ngIf="idVigilado && (usuario!.usuario !== idVigilado)">
-            <span class="fs-20px fw-semibold texto-azul-004884">A quien se le realiza la encuesta: </span>
-            <span>{{ idVigilado }}</span>
-        </div>
-        <div class="d-block " *ngIf="vigencia">
-            <span class="fs-20px fw-semibold texto-azul-004884">Vigencia requerida: </span>
-            <span>{{ vigencia }}</span>
-        </div>
-        <div class="d-block " *ngIf="encuesta">
-            <span class="fs-20px fw-semibold texto-azul-004884">Modalidad: </span>
-            <span>{{ encuesta.modalidad }}</span>
-        </div>
-        <div class="d-block " *ngIf="encuesta">
-            <span class="fs-20px fw-semibold texto-azul-004884">Total de conductores: </span>
-            <span>{{ encuesta.totalConductores }}</span>
-        </div>
-        <div class="d-block " *ngIf="encuesta">
-            <span class="fs-20px fw-semibold texto-azul-004884">Total de Vehículos: </span>
-            <span>{{ encuesta.totalVehiculos }}</span>
-        </div>
-        <div class="d-block " *ngIf="reporte">
-            <span class="fs-20px fw-semibold texto-azul-004884">Obligado: </span>
-            <span *ngIf="reporte?.noObligado == true">No</span>
-            <span *ngIf="reporte?.noObligado == false">Si</span>
-        </div>
-    </div>
+
+    <div class="p-md-3 p-lg-5 margen">
+      
+        <form class="col-sm-100 col-md-12 mb-4">
+          <div class="row mb-3" *ngIf="usuario">
+            <div class="col">
+              <label class="texto-azul-004884 fs-20px fw-semibold">Identificación de quien realiza la encuesta:</label>
+              <input type="text" class="form-control" disabled [value]="usuario.usuario">
+            </div>
+          </div>
+      
+          <div class="row mb-3" *ngIf="idVigilado && (usuario!.usuario!== idVigilado)">
+            <div class="col">
+              <label class="texto-azul-004884 fs-20px fw-semibold">A quien se le realiza la encuesta:</label>
+              <input type="text" class="form-control" disabled [value]="idVigilado">
+            </div>
+          </div>
+      
+          <div class="row mb-3" *ngIf="vigencia">
+            <div class="col">
+              <label class="texto-azul-004884 fs-20px fw-semibold">Vigencia requerida:</label>
+              <input type="text" class="form-control" disabled [value]="vigencia">
+            </div>
+          </div>
+      
+          <div class="row mb-3" *ngIf="encuesta">
+            <div class="col">
+              <label class="texto-azul-004884 fs-20px fw-semibold">Modalidad:</label>
+              <input type="text" class="form-control" disabled [value]="encuesta.modalidad">
+            </div>
+          </div>
+      
+          <div class="row mb-3" *ngIf="encuesta">
+            <div class="col">
+              <label class="texto-azul-004884 fs-20px fw-semibold">Total de conductores:</label>
+              <input type="text" class="form-control" disabled [value]="encuesta.totalConductores">
+            </div>
+          </div>
+      
+          <div class="row mb-3" *ngIf="encuesta">
+            <div class="col">
+              <label class="texto-azul-004884 fs-20px fw-semibold">Total de Vehículos:</label>
+              <input type="text" class="form-control" disabled [value]="encuesta.totalVehiculos">
+            </div>
+          </div>
+      
+          <div class="row mb-3" *ngIf="reporte">
+            <div class="col">
+              <label class="texto-azul-004884 fs-20px fw-semibold">Obligado:</label>
+              <input type="text" class="form-control" disabled [value]="reporte.noObligado ? 'No' : 'Sí'">
+            </div>
+          </div>
+        </form>
+      </div>
+      
+
+
+    
     <div class="d-block w-100 mb-3" *ngIf="esUsuarioAdministrador">
         <div class="row mb-3">
             <div class="col-5">
