@@ -18,3 +18,17 @@ button {
 button:last-child {
     margin-right: 0; /* Evita el margen derecho en el último botón */
 }
+.form-control:disabled {
+    background-color: #e9ecef;
+    opacity: 1;
+    border: 0;
+    border-radius: 5px;
+}
+.col-md-12 {
+    flex: 0 0 auto;
+    width: 40%;
+}
+.margen{
+    margin-left: -44px;
+    margin-top: -45px;
+}
