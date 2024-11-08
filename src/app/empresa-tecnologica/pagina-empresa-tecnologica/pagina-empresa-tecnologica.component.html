@@ -15,11 +15,13 @@
       <div class="col-4">
         <label class="fw-semibold fs-14px">Cargue del contrato: <span class="fs-12px">Max. {{tamanoMaximoMb}}Mb</span></label>
         <label class="input-archivo d-flex" [for]="1">
-          <div class="boton-adjuntar d-flex align-items-center justify-content-center">Adjuntar</div>
+          <div class="boton-adjuntar d-flex align-items-center justify-content-center">Seleccionar archivo</div>
           <div class="archivos">
             <div class="archivo d-flex" *ngIf="contrato?.nombreOriginalArchivo">
               <span class="nombre-archivo">{{ contrato?.nombreOriginalArchivo }}</span>
-              <button class="eliminar-archivo" (click)="manejarRemoverArchivo(input,$event,usuario?.usuario)">X</button>
+              <button class="eliminar-archivo" (click)="manejarRemoverArchivo(input,$event,usuario?.usuario)">
+                <i class="bi bi-trash"></i>
+              </button>
             </div>
           </div>
           <input #input type="file" [id]="1" name="adjuntar" accept=".pdf"
