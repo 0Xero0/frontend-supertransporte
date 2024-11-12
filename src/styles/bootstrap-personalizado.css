@@ -92,14 +92,16 @@ input.form-control[type=number] {
     color: var(--rojo-flamingo);
     text-decoration: none;
     background-color: var(--bs-pagination-bg);
-    border: var(--bs-pagination-border-width) solid var(--bs-pagination-border-color);
+    border: none;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    border-radius: 5px;
 }
 .active>.page-link, .page-link.active {
     z-index: 3;
     color: white;
-    background-color: var(--azul);
-    border-color: var(--azul);
+    background-color: #004884;
+    border-color: #004884;
+    border-radius: 5px;
 }
 
 ngb-pagination li{
@@ -146,3 +148,81 @@ padding:0px;
 .accordion-button:not(.collapsed)::after{
   background-image: url('../assets/img/menos.png');
 }
+
+.footer {
+    height: 75px;
+    background-color: #3366cc;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+  }
+  html,
+body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .content {
+    flex: 1;
+  }
+
+  .titulo {
+    margin: 0%;
+    font-size: 32px;
+    font-weight: bold;
+    margin-left: 40px;
+    color: #ffffff;
+}
+.contenedor-titulo {
+    height: 83px;
+    background-color: #333333;
+    padding: 1.8%;
+}
+.custom-breadcrumb {
+    margin-left: 72px;
+    margin-top: 11px;
+}
+.texto-subti{
+    margin: 31px 45px 9px;
+    height: 39px;
+        font: normal normal bold 32px/16px Montserrat;
+    letter-spacing: 0px;
+    color: #004884;
+    opacity: 1;
+    
+    }
+
+    .page-item:first-child .page-link {
+        border-top-left-radius: var(--bs-pagination-border-radius);
+        border-bottom-left-radius: var(--bs-pagination-border-radius);
+        text-decoration: underline;
+    }
+    .page-item:last-child .page-link {
+        border-top-right-radius: var(--bs-pagination-border-radius);
+        border-bottom-right-radius: var(--bs-pagination-border-radius);
+        text-decoration: underline;
+    }
+    ngb-pagination li {
+        font-weight: bold;
+        font: normal normal medium 14px / 16px Work Sans;
+        letter-spacing: 0px;
+        color: #3366CC;
+        opacity: 1;
+        font: normal normal 500 14px / 16px 'Work Sans', sans-serif;
+    }
+    .page-item:not(:first-child) .page-link {
+        margin-left: 2px;
+        margin-right: 2px;
+        
+    }
+    .pagination {
+        margin-top: 10px;
+        --bs-pagination-focus-box-shadow: none; 
+       
+    }

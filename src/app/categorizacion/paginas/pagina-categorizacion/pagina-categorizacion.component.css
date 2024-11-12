@@ -10,3 +10,35 @@
     font-weight: 600;
 /*     background-color: var(--azul-claro); */
 }
+
+
+.info-container {
+    display: flex;
+    gap: 45px; 
+    margin-left: 18px;
+    margin-right: 18px;
+}
+
+.info-box {
+    background: #E6EFFD 0% 0% no-repeat padding-box;
+    padding: 15px; 
+    border-radius: 5px; 
+    flex: 1; 
+    
+    margin-bottom: 22px;
+   
+}
+p {
+    margin-top: 0;
+     margin-bottom: 0rem; 
+     text-align: left;
+     font-family: 'Montserrat', sans-serif;
+     font-size: 16px;
+     font-weight: normal;
+     line-height: 16px;
+     font-style: normal;
+    letter-spacing: 0px;
+    color: #4B4B4B;
+    opacity: 1;
+}
+

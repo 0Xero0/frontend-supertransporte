@@ -9,6 +9,9 @@ import { DialogosVerificaciones } from '../../Dialogos';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RespuestaInvalida } from 'src/app/encuestas/modelos/RespuestaInvalida';
 import { ModalTerminarVerificacion } from '../../componentes/modal-terminar-verificacion.component';
+import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
+import { Rol } from 'src/app/autenticacion/modelos/Rol';
+import { ModalAprobarObservacion } from 'src/app/encuestas/componentes/modal-aprobar-observacion/modal-aprobar-observacion.component';
 
 @Component({
   selector: 'app-pagina-reporte-verificar',
@@ -19,6 +22,7 @@ export class PaginaReporteVerificarComponent implements OnInit {
   @ViewChild('popup') popup!: PopupComponent
   @ViewChild('componenteEncuesta') componenteEncuesta!: EncuestaComponent
   @ViewChild('modalTerminarVerificacion') modalTerminarVerificacion!: ModalTerminarVerificacion
+  @ViewChild('modalAprobarObservacion') modalAprobarObservacion!: ModalAprobarObservacion
 
   noObligado: boolean = false
   encuesta?: Encuesta
@@ -33,11 +37,21 @@ export class PaginaReporteVerificarComponent implements OnInit {
   razonSocial?: string
   estadoActual?: string
   clasificacionResolucion?: string
-  
+
+  esUsuarioAdministrador: boolean;
+  observacionAdmin?: string
+  aprobado?: boolean
+  rol: Rol | null
+
   constructor(
-    private servicioVerificaciones: ServicioVerificaciones, 
-    private activatedRoute: ActivatedRoute, 
-    private router: Router) {}
+    private servicioVerificaciones: ServicioVerificaciones,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private servicioLocalStorage: ServicioLocalStorage
+  ) {
+      this.rol = this.servicioLocalStorage.obtenerRol()
+      this.esUsuarioAdministrador = this.rol!.id === '001' ? true : false;
+    }
 
   ngOnInit(): void {
     combineLatest({
@@ -46,7 +60,7 @@ export class PaginaReporteVerificarComponent implements OnInit {
     }).subscribe({
       next: (parametros) => {
         this.servicioVerificaciones.obtenerReporte(
-          Number(parametros.queryParams['idEncuesta']), 
+          Number(parametros.queryParams['idEncuesta']),
           Number(parametros.params['idReporte']),
           parametros.queryParams['idVigilado']
         ).subscribe({
@@ -67,6 +81,20 @@ export class PaginaReporteVerificarComponent implements OnInit {
         })
       }
     })
+  }
+
+  abrirModalAprobarObservacion(aprobar: boolean){
+    this.modalAprobarObservacion.abrir(aprobar)
+  }
+
+  aprobarVerificacion(aprobar: boolean){
+    const observacion = document.getElementById('textArea') as HTMLTextAreaElement
+    //console.log(aprobar)
+    this.servicioVerificaciones.aprovarVerificacion(this.idReporte, aprobar, observacion.value).subscribe(
+      {
+        next: () =>  this.router.navigate(['/administrar', 'verificar-reportes'])
+      }
+    )
   }
 
   formatoPorcentajes(porcentaje: number){
@@ -110,10 +138,10 @@ export class PaginaReporteVerificarComponent implements OnInit {
       error: (e: HttpErrorResponse)=>{
         if(e.status === 400){
           this.popup.abrirPopupFallido(
-            DialogosVerificaciones.FALTAN_VERIFICACIONES_TITULO, 
-            DialogosVerificaciones.FALTAN_VERIFICACIONES_DESCRIPCION 
+            DialogosVerificaciones.FALTAN_VERIFICACIONES_TITULO,
+            DialogosVerificaciones.FALTAN_VERIFICACIONES_DESCRIPCION
           )
-          this.componenteEncuesta.resaltarRespuestasInvalidas( e.error.faltantes.map( (faltante: number) =>{  
+          this.componenteEncuesta.resaltarRespuestasInvalidas( e.error.faltantes.map( (faltante: number) =>{
             let respuestaFaltante: RespuestaInvalida = {
               preguntaId: faltante,
               archivoObligatorio: false
@@ -122,11 +150,11 @@ export class PaginaReporteVerificarComponent implements OnInit {
           }))
         }else{
           this.popup.abrirPopupFallido(
-            DialogosVerificaciones.VERIFICACION_ENVIADA_ERROR_TITULO, 
+            DialogosVerificaciones.VERIFICACION_ENVIADA_ERROR_TITULO,
             DialogosVerificaciones.VERIFICACION_ENVIADA_ERROR_DESCRIPCION
           )
         }
-        
+
       }
     })
   }

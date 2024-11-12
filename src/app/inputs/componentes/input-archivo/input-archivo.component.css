@@ -1,10 +1,19 @@
-:host{
-    width: 100%;
-}
-input[type="file"]{
+.custom-file-input {
+    box-sizing: border-box;
+    width: 85px;
+    padding: 5px 10px;
+    border: 1px solid var(--azul);
+    color: var(--azul);
+    background-color: #ffff;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  
+  input[type="file"]{
     display: none;
-}
-.input-archivo{
+  }
+  .input-archivo{
     cursor: pointer;
     display: block;
     width: 100%;
@@ -20,73 +29,80 @@ input[type="file"]{
     border: 1px solid #CFCBCB;
     -webkit-appearance: none;
     appearance: none;
-    border-radius: 10px;
+    border-radius: 5px 3px 3px 5px;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     overflow: visible;
-}
-.input-archivo .boton-adjuntar{
+  }
+  
+  .input-archivo .boton-adjuntar{
     box-sizing: border-box;
-    width: 85px;
+    width: 180px;
     padding: 5px 10px;
     border: 1px solid var(--azul);
-    color: var(--azul);
-    background-color: #ffff;
-    border-radius: 6px;
+    color: #ffff;
+    background-color: var(--azul);
+    border-radius: 3px 0 0 3px;
     font-size: 11px;
     font-weight: 600;
-}
-.input-archivo>.boton-adjuntar:hover{
-    background-color: var(--azul);
+    margin-right: auto;
+  }
+  .input-archivo>.boton-adjuntar:hover{
+    background-color: #004884;
     color: #ffff;
-}
-.archivos{
+  }
+  
+  .archivos{
     display: flex;
     width: calc(100% - 85px);
     align-items: center;
     padding: 5px 15px;
     overflow: hidden;
-}
-.archivo{
+  }
+  .archivo{
     box-sizing: border-box;
     max-width: 100%;
     height: 27px;
-    border: 1px solid #C4C4C4;
-    background-color: #EAEAEA;
+    border: none;
+    background-color: white;
     padding: 5px 7px;
     border-radius: 6px;
     gap: 10px;
-}
-.nombre-archivo{
+  }
+  
+  .nombre-archivo{
     width: 100%;
     display: block;
     font-size: 12px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-}
-.eliminar-archivo{
+  }
+  .sin-archivo{
+    font-size: 11px;
+    font-weight: 600;
+    color: #878787;
+  }
+  
+  .eliminar-archivo{
     display: flex;
     align-items: center;
     outline: none;
     border: none;
-}
-.placeholder{
-    height: 100%;
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-}
-.disabled{
+    background-color: white;
+    font-size: 20px;
+  }
+  
+  .disabled{
     cursor: initial;
     background-color: #e9ecef;
-}
-.disabled .boton-adjuntar{
+  }
+  .disabled .boton-adjuntar{
     background-color: #e9ecef;
     color: #878787;
     border-color: #C4C4C4;
-}
-.disabled .boton-adjuntar:hover{
+  }
+  .disabled .boton-adjuntar:hover{
     background-color: #e9ecef;
     color: #878787;
     border-color: #C4C4C4;
-}
+  }

@@ -12,7 +12,6 @@ import { Observable } from 'rxjs';
 import { Mes } from '../modelos/Mes';
 import { RespuestaEvidencia } from '../modelos/RespuestaEvidencia';
 import { FiltrosReportes } from '../modelos/FiltrosReportes';
-import { ResultadosIndicadoresMock } from './ResultadosIndicadoresMock';
 import { ResultadosIndicadores } from '../modelos/ResultadosIndicadores';
 import { MesVigencia } from '../modelos/MesVigencia';
 import { Vigencia } from '../modelos/Vigencia';
@@ -28,7 +27,7 @@ export class ServicioEncuestas extends Autenticable {
   constructor(private http: HttpClient) {
     super()
   }
-  
+
   aprovarVerificacion(idReporte?: number, aprobar?: boolean, observacion?: string, idMes?: number){
     const endpoint = `/api/v1/reportes/aprobar-verificacion`
     return this.http.post(`${this.host}${endpoint}`, {idReporte, aprobar, observacion, idMes}, {
@@ -112,17 +111,19 @@ export class ServicioEncuestas extends Autenticable {
 
   exportarExcel(idReporte: number){
     const endpoint = `/api/v1/exportar/encuesta?idReporte=${idReporte}`
-    return this.http.get(`${this.host}${endpoint}`, { 
+    return this.http.get(`${this.host}${endpoint}`, {
       headers: this.obtenerCabeceraAutorizacion(),
       responseType: 'blob',
     })
   }
 
-  obtenerResultadosIndicadores(){
-    return new Observable<ResultadosIndicadores>(subscripcion =>{
+  obtenerResultadosIndicadores(idReporte:any,idVigilado:any){
+    const endpoint = `/api/v1/resultados?idReporte=${idReporte}&idVigilado=${idVigilado}`
+    return this.http.get<any>(`${this.host}${endpoint}`, { headers: this.obtenerCabeceraAutorizacion() })
+    /* return new Observable<ResultadosIndicadores>(subscripcion =>{
       subscripcion.next( ResultadosIndicadoresMock )
       subscripcion.complete()
-    })
+    }) */
   }
 
   obtenerMesesVigencia(vigencia: number){

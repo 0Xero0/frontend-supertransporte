@@ -1,13 +1,17 @@
 <div class="contenedor-input">
-    <div class="icono">
-        <img src="assets/img/buscar.svg" alt="buscar" draggable="false">
+
+    <div class="search-govco">
+        <div class="bar-search-govco">
+          <input  
+          #input
+          class="form-control" 
+          type="text" 
+          placeholder="Buscar..."
+          [value]="texto"
+          (change)="manejar(input.value)"
+          (keyup)="manejar(input.value)" class="input-search-govco" aria-label="Buscador"/>
+          <button class="icon-search-govco icon-close-search-govco" aria-label="Limpiar"></button>
+          <div class="icon-search-govco search-icon-search-govco" aria-hidden="true"></div>
+        </div>
     </div>
-    <input
-    #input
-    class="form-control" 
-    type="text" 
-    placeholder="Buscar..."
-    [value]="texto"
-    (change)="manejar(input.value)"
-    (keyup)="manejar(input.value)">
-</div>
+      </div>

@@ -2,7 +2,7 @@
     <ul class="subindicadores">
         <li class="cabeceras-subindicador">
             <div class="row">
-                <div class="col-2">Variable del indicador</div>
+                <div class="col-1">Variable del indicador</div>
                 <div class="col-4">Indicadores</div>
                 <div class="col-6">Valores</div>
             </div>
@@ -28,8 +28,8 @@
             <div class="row">
                 <div class="col-1">Nro</div>
                 <div class="col-3">Descripción de las evidencias</div>
-                <div class="col-2">Tipo de evidencia</div>
-                <div class="col-2">Evidencia</div>
+                <div class="col-1">Tipo de evidencia</div>
+                <div class="col-3">Evidencia</div>
                 <div class="col-2" *ngIf="habilitarCamposVerificador">¿La evidencia corresponde a lo solicitado?</div>
                 <div class="col-2" *ngIf="habilitarCamposVerificador">¿El documento cumple con la información o
                     estructura solicitada?</div>
@@ -40,8 +40,8 @@
             <div class="row">
                 <div class="col-1 fw-semibold">{{ evidencia.consecutivo }}</div>
                 <div class="col-3">{{ evidencia.nombre }}</div>
-                <div class="col-2">{{ evidencia.validaciones.tipoDato }}</div>
-                <div class="col-2">
+                <div class="col-1">{{ evidencia.validaciones.tipoDato }}</div>
+                <div class="col-3">
                     <app-evidencia-encuesta-cuantitativa 
                         [nombreFormulario]="nombreFormulario"
                         [soloLectura]="soloLectura" 

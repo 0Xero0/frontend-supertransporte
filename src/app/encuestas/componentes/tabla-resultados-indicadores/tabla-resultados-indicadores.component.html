@@ -1,3 +1,57 @@
+<!-- AGREGAR ENCABEZADO -->
+<div class="d-flex flex-gap-20 align-items-center mb-4" >
+     <fieldset>
+       <app-input-busqueda  />
+   </fieldset>
+     <fieldset>
+       <button class="boton primario relleno" >Filtrar</button>
+     </fieldset>
+     <fieldset>
+       <button class="boton primario delineado" >Limpiar</button>
+     </fieldset>
+   </div>
+
+<div class="table-responsive">
+    <table class="table table-bordered tabla-primaria fs-14px">
+      <thead>
+        <tr class="fw-semibold">
+          <th class="">Validar</th>
+          <th class="">texto_ejemplo</th>
+          <th class="">texto_ejemplo</th>
+          <th class="">texto_ejemplo</th>
+          <th class="">texto_ejemplo</th>
+          <th class="">texto_ejemplo</th>
+          <th class="">texto_ejemplo</th>
+          <th class="">texto_ejemplo</th>
+          <th class="">texto_ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr >
+          <td class="text-center">
+            <span class="govco-eye cursor-pointer "
+              [routerLink]="['/administrar', 'verificar-reportes', ]"
+              [queryParams]="{  }">
+              
+            </span>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <!--<td></td>-->
+          <td></td>
+          <td></td>
+        </tr>
+        <tr >
+          <td colspan="8" class="fw-semibold text-center">Sin reportes asignados</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
 <table class="tabla-resultados-indicadores" *ngIf="resultadosIndicadores">
     <thead>
         <tr>
@@ -22,10 +76,11 @@
             <tr *ngFor="let fila of indicador.filas ; let i = index">
                 <td *ngIf="i === 0" [attr.rowspan]="indicador.filas.length" class="fw-semibold">{{ indicador.id }}</td>
                 <td *ngIf="i === 0" [attr.rowspan]="indicador.filas.length">{{ indicador.nombre }}</td>
-                <td *ngFor="let columna of fila.columas" [attr.colspan]="columna.span">
+                <td *ngFor="let columna of fila.columnas" [attr.colspan]="columna.span">
                     {{ columna.valor }}
                 </td>
             </tr>
         </ng-container>
     </tbody>
+
 </table>

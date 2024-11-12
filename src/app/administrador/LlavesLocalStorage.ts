@@ -1,7 +1,7 @@
 export enum LlavesLocalStorage {
-    Rol = "rol",
-    Usuario = "Usuario",
-    DocumentoUsuario = "documentoUsuario",
-    ExpiracionToken = "expira",
-    Token = "jwt"
+    Rol = "rolPesv",
+    Usuario = "UsuarioPesv",
+    DocumentoUsuario = "documentoUsuarioPesv",
+    ExpiracionToken = "expiraPesv",
+    Token = "jwtPesv"
 }

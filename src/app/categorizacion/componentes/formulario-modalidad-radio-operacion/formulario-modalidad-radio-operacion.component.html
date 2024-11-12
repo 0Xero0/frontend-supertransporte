@@ -13,9 +13,11 @@
                 <table class="tabla-modalidad-radio table border mb-1">
                     <thead>
                         <tr height="38px" class="fs-14px  fondo-secundario texto-primario">
+                            <th class="fw-semibold" style="
+    border-radius: 5px 0 0 0;"></th>
                             <th class="fw-semibold"></th>
-                            <th class="fw-semibold"></th>
-                            <th class="fw-semibold" *ngFor="let cabecera of modalidadRadio.cabeceras">
+                            <th class="fw-semibold" *ngFor="let cabecera of modalidadRadio.cabeceras; let i = index" 
+                            [ngStyle]="{ 'border-radius': i === modalidadRadio.cabeceras.length - 1 ? '0 5px 0 0' : '0' }"> 
                                 <div class="d-flex">
                                     <span class="me-2">
                                         {{ cabecera.nombre }}
@@ -24,12 +26,16 @@
                                     *ngIf="cabecera.leyenda != ''"
                                     [ngbPopover]="cabecera.leyenda"
                                     triggers="mouseenter:mouseleave" 
-                                    class="material-symbols-outlined fs-16px d-flex align-items-center cursor-pointer">
+                                    class="material-symbols-outlined fs-16px d-flex align-items-center cursor-pointer" >
                                         help
                                     </span>
+                                   
                                 </div>
+                                
                             </th>
+                           
                         </tr>
+                        
                     </thead>
                     <tbody>
                         <tr 
@@ -104,16 +110,22 @@
                                 <app-validacion [control]="this.formulario.controls['idRadio']" [validacion]="'required'"
                                     [texto]="'Selecciona un radio.'" />
                             </td>
+                            
                         </tr>
+                      
                     </tbody>
-                </table>
-                <span class="validacion" *ngIf="!valido">
-                    Debe haber por lo menos un registro de modalidad y radio.
-                </span>
-                <div class="d-flex my-3" *ngIf="!formularioVisible">
-                    <button type="button" class="boton primario relleno" (click)="mostrarFormulario()" >
+                 <div class="lineasuperior">
+                    <button type="button" class="boton primario relleno" (click)="mostrarFormulario()">
                         Agregar
                     </button>
+                </div>
+                </table>
+                <!--
+                <span class="validacion" *ngIf="!valido">
+                    Debe haber por lo menos un registro de modalidad y radio.
+                </span>-->
+                <div class="d-flex my-3" *ngIf="!formularioVisible">
+                    
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 col-lg-6">

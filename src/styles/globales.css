@@ -343,3 +343,25 @@ h1,h2{
   background-color: var(--color-scroll-hover); /* Color del thumb al pasar el cursor sobre él */
   cursor: pointer !important;
 }
+
+.swal2-popup {
+  display: none;
+  position: relative;
+  box-sizing: border-box;
+  grid-template-columns: minmax(0,100%);
+  min-width: 360px !important;
+  width: fit-content !important;
+  max-width: 100%;
+  padding: 0 0 0 !important;
+  border: none;
+  border-radius: 5px;
+  background: #fff;
+  color: #545454;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.govco-eye {
+  filter: invert(22%) sepia(44%) saturate(1700%) hue-rotate(210deg) brightness(90%) contrast(95%);
+}
+ 

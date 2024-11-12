@@ -25,3 +25,8 @@
 .pregunta-valida{
     background-color: var(--bg-color-exitoso);
 }
+
+/*.col-2 {
+    flex: 0 0 auto;
+    width: 28.666667%;
+}*/

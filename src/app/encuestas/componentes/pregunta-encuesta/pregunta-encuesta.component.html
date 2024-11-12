@@ -4,7 +4,7 @@
   }
 ">
     <div class="col-1 columna border-top">
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-left">
             <span class="fs-14px">{{ pregunta.numeroPregunta }}</span>
         </div>
     </div>
@@ -47,7 +47,7 @@
         </div>
     </div>
     <!-- Seleccionar | ver archivo -->
-    <div class="col-2 columna border-top">
+    <div class="col-4 columna border-top">
         <div class="d-flex w-100 flex-column flex-gap-10">
             <div class="w-100" [ngClass]="{'d-none': soloLectura}">
                 <app-input-archivo
@@ -75,7 +75,7 @@
         </div>
     </div>
     <!-- Campos verificador -->
-    <div class="col-2 columna d-flex flex-column border-top" *ngIf="camposDeVerificacionVisibles">
+    <div class="col-3 columna d-flex flex-column border-top" *ngIf="camposDeVerificacionVisibles">
         <div class="d-flex justify-content-start">
             <select 
             [ngModel]="evidenciaCorresponde" 
@@ -100,30 +100,37 @@
             </div>
         </div>
     </div>
-    <div class="col-2 columna d-flex flex-column border-top" *ngIf="camposDeVerificacionVisibles">
+    <div *ngIf="camposDeVerificacionVisibles; else columnaVacia" class="col-3 columna d-flex flex-column border-top">
         <div class="d-flex justify-content-start">
             <select
-            [ngModel]="documentoCumple" 
-            (ngModelChange)="alCambiarDocumentoCumple($event)"  
-            class="form-select"
-            [disabled]="!camposDeVerificacion || pregunta.respuesta == ''">
+                [ngModel]="documentoCumple" 
+                (ngModelChange)="alCambiarDocumentoCumple($event)"  
+                class="form-select"
+                [disabled]="!camposDeVerificacion || pregunta.respuesta == ''">
                 <option [value]="0">Selecciona una opción</option>
                 <option [value]="opcion.id" *ngFor="let opcion of opcionesCumplimiento">{{opcion.id}} - {{ opcion.nombre }}</option>
             </select>
         </div>
-        <div> <!-- observacion documento cumple -->
+        
+        <div> <!-- Observación documento cumple -->
             <label class="fs-12px fw-semibold">Observación</label>
             <div class="d-flex justify-content-start">
                 <textarea
-                [disabled]="!camposDeVerificacion || observacionDocumentoCumpleDeshabilitado || pregunta.respuesta == ''"
-                [ngModel]="observacionNoCumple"
-                (ngModelChange)="alCambiarObservacionDocumentoNoCumple($event)"
-                placeholder="Escribe aquí tus observaciones"
-                class="form-control fs-12px" 
-                cols="30"
-                rows="5"></textarea>
+                    [disabled]="!camposDeVerificacion || observacionDocumentoCumpleDeshabilitado || pregunta.respuesta == ''"
+                    [ngModel]="observacionNoCumple"
+                    (ngModelChange)="alCambiarObservacionDocumentoNoCumple($event)"
+                    placeholder="Escribe aquí tus observaciones"
+                    class="form-control fs-12px" 
+                    cols="30"
+                    rows="5"></textarea>
             </div>
         </div>
     </div>
+    
+    <ng-template #columnaVacia>
+        <div class="col-2 border-top"></div> <!-- Columna vacía -->
+    </ng-template>
+    
+   
     
 </div>
