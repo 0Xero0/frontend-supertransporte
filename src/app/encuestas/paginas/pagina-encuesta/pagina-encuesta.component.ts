@@ -236,7 +236,7 @@ export class PaginaEncuestaComponent implements OnInit {
   }
 
   obtenerEncuesta(){
-    console.log("Aquí llega")
+    //console.log("Aquí llega")
     this.servicioEncuesta.obtenerEncuesta(this.idVigilado!, this.idEncuesta!, this.idReporte!).subscribe({
       next: ( encuesta )=>{
         this.encuesta = encuesta
