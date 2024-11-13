@@ -81,7 +81,7 @@ export class PaginaReporteFase2VerificarComponent {
   }
 
   abrirModalAprobarObservacion(aprobar: boolean){
-    this.modalAprobarObservacion2.abrir(aprobar)
+    this.modalAprobarObservacion2.abrir(aprobar,2)
   }
 
   aprobarVerificacion(aprobar: boolean){

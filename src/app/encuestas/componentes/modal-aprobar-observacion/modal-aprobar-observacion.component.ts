@@ -14,6 +14,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
     mensaje: string = ''
     aprobar: boolean = false
+    fase?: number
 
     constructor(
         private servicioModal: NgbModal,
