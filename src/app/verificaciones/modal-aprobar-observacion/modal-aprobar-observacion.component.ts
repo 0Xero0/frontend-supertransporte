@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PaginaReporteVerificarComponent } from '../paginas/pagina-reporte-verificar/pagina-reporte-verificar.component';
@@ -15,16 +15,19 @@ import { PaginaReporteFase2VerificarComponent } from '../paginas/pagina-reporte-
 
     mensaje: string = ''
     aprobar: boolean = false
+    fase?: number
 
     constructor(
         private servicioModal: NgbModal,
-        private ReporteVerificar: PaginaReporteFase2VerificarComponent
+        private ReporteVerificar: PaginaReporteVerificarComponent,
+        private ReporteVerificarFase2: PaginaReporteFase2VerificarComponent
         ){}
 
     ngOnInit(): void {}
 
-    abrir(aprobar: boolean){
+    abrir(aprobar: boolean, fase:number){
         this.aprobar = aprobar
+        this.fase = fase
         this.servicioModal.open(this.modal, {
             size: 'x1',
         })
@@ -33,8 +36,15 @@ import { PaginaReporteFase2VerificarComponent } from '../paginas/pagina-reporte-
         this.servicioModal.dismissAll();
     }
 
-    aprobarObservacion(aprobar: boolean){
+    aprobarObservacion(aprobar: boolean, fase?: number){
+      //console.log(aprobar,fase)
+      if(fase === 1){
         this.ReporteVerificar.aprobarVerificacion(aprobar)
-        this.cerrar()
+      }
+      else if(fase === 2) {
+        //console.log(aprobar,fase)
+        this.ReporteVerificarFase2.aprobarVerificacion(aprobar)
+      }
+      this.cerrar()
     }
   }

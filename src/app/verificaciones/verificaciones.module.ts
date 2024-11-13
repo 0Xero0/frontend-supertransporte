@@ -35,6 +35,10 @@ import { ModalAprobarObservacion2 } from './modal-aprobar-observacion/modal-apro
   ],
   exports: [
     PaginaReportesVerificarComponent
+  ],
+  providers: [
+    PaginaReporteVerificarComponent,
+    PaginaReporteFase2VerificarComponent
   ]
 })
 export class VerificacionesModule { }
