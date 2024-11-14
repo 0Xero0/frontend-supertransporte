@@ -1,44 +1,44 @@
 <div class="px-sm-2 px-md-3 px-lg-4 my-4" *ngIf="reporte">
-  <h3 class="texto-primario fw-semibold" *ngIf="encuesta">
-    Resumen - Ficha cuestionario - Indicadores
-  </h3>
-  <h6 class="texto-primario fw-semibold">Reporte número {{idReporte}}</h6>
-  <div class="row">
-    <div class="col-md-12 col-lg-8">
-      <form class="mb-4" *ngIf="encuesta">
-        <div class="row">
-          <div class="col">
-            <div class="row mb-2">
-              <div class="col">NIT</div>
-              <div class="">
-                <input type="text" class="form-control" disabled [value]="reporte.idVigilado">
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col">Razón social</div>
-              <div class="">
-                <input type="text" class="form-control" disabled [value]="reporte.razonSocila">
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col">Estado actual</div>
-              <div class="">
-                <input type="text" class="form-control" disabled [value]="reporte.estadoActual">
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col">Clasificación según resolución 20223040040595 DE 2022</div>
-              <div class="">
-                <input type="text" class="form-control" disabled [value]="reporte.clasificaion">
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col">Modalidad</div>
-              <div class="">
-                <input type="text" class="form-control" disabled [value]="reporte.modalidad">
-              </div>
-            </div>
-          </div>
+    <h3 class="texto-primario fw-semibold" *ngIf="encuesta">
+        Resumen - Ficha cuestionario - Indicadores
+    </h3>
+    <h6 class="texto-primario fw-semibold">Reporte número {{idReporte}}</h6>
+    <div class="row">
+        <div class="col-md-12 col-lg-8">
+            <form class="mb-4" *ngIf="encuesta">
+                <div class="row">
+                    <div class="col">
+                        <div class="row mb-2">
+                            <div class="col">NIT</div>
+                            <div class="">
+                                <input type="text" class="form-control" disabled [value]="reporte.idVigilado">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">Razón social</div>
+                            <div class="">
+                                <input type="text" class="form-control" disabled [value]="reporte.razonSocila">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">Estado actual</div>
+                            <div class="">
+                                <input type="text" class="form-control" disabled [value]="reporte.estadoActual">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">Clasificación según resolución 20223040040595 DE 2022</div>
+                            <div class="">
+                                <input type="text" class="form-control" disabled [value]="reporte.clasificaion">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">Modalidad</div>
+                            <div class="">
+                                <textarea class="form-control text-area" disabled>{{ reporte.modalidad }}</textarea>
+                            </div>
+                        </div>
+                    </div>
 
           <div class="col">
             <div class="row mb-2">

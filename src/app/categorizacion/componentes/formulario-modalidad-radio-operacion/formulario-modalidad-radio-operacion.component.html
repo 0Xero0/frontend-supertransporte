@@ -1,5 +1,5 @@
-<app-acordeon [invalido]="!valido">
-    <div cabecera class="d-flex">
+<app-acordeon [invalido]="!valido" >
+    <div cabecera class="d-flex ">
         <span class="d-flex align-items-center mb-0 fs-16px texto-primario fw-semibold mx-2">
             Datos de modalidad y radio de acción
         </span>
@@ -114,16 +114,16 @@
                         </tr>
                       
                     </tbody>
-                 <div class="lineasuperior">
-                    <button type="button" class="boton primario relleno" (click)="mostrarFormulario()">
-                        Agregar
-                    </button>
-                </div>
+                    <div class="lineasuperior" *ngIf="!formularioVisible">
+                        <button type="button" class="boton primario relleno" (click)="mostrarFormulario()">
+                            Agregar
+                        </button>
+                    </div>
                 </table>
-                <!--
+                
                 <span class="validacion" *ngIf="!valido">
                     Debe haber por lo menos un registro de modalidad y radio.
-                </span>-->
+                </span>
                 <div class="d-flex my-3" *ngIf="!formularioVisible">
                     
                 </div>

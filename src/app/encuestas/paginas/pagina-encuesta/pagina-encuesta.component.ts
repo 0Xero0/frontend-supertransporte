@@ -255,4 +255,8 @@ export class PaginaEncuestaComponent implements OnInit {
     this.hayCambios = hayCambios
   }
 
+  
+
 }
+
+
