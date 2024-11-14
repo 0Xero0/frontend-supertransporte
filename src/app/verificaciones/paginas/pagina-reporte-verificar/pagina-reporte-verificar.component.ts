@@ -12,6 +12,7 @@ import { ModalTerminarVerificacion } from '../../componentes/modal-terminar-veri
 import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
 import { Rol } from 'src/app/autenticacion/modelos/Rol';
 import { ModalAprobarObservacion } from 'src/app/encuestas/componentes/modal-aprobar-observacion/modal-aprobar-observacion.component';
+import { ModalAprobarObservacion2 } from '../../modal-aprobar-observacion/modal-aprobar-observacion.component';
 
 @Component({
   selector: 'app-pagina-reporte-verificar',
@@ -22,7 +23,7 @@ export class PaginaReporteVerificarComponent implements OnInit {
   @ViewChild('popup') popup!: PopupComponent
   @ViewChild('componenteEncuesta') componenteEncuesta!: EncuestaComponent
   @ViewChild('modalTerminarVerificacion') modalTerminarVerificacion!: ModalTerminarVerificacion
-  @ViewChild('modalAprobarObservacion') modalAprobarObservacion!: ModalAprobarObservacion
+  @ViewChild('modalAprobarObservacion2') modalAprobarObservacion!: ModalAprobarObservacion2
 
   noObligado: boolean = false
   encuesta?: Encuesta
@@ -84,12 +85,12 @@ export class PaginaReporteVerificarComponent implements OnInit {
   }
 
   abrirModalAprobarObservacion(aprobar: boolean){
-    this.modalAprobarObservacion.abrir(aprobar)
+    this.modalAprobarObservacion.abrir(aprobar,1)
   }
 
   aprobarVerificacion(aprobar: boolean){
     const observacion = document.getElementById('textArea') as HTMLTextAreaElement
-    //console.log(aprobar)
+    console.log(aprobar)
     this.servicioVerificaciones.aprovarVerificacion(this.idReporte, aprobar, observacion.value).subscribe(
       {
         next: () =>  this.router.navigate(['/administrar', 'verificar-reportes'])
