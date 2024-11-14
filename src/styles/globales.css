@@ -365,3 +365,6 @@ h1,h2{
   filter: invert(22%) sepia(44%) saturate(1700%) hue-rotate(210deg) brightness(90%) contrast(95%);
 }
  
+.text-area{
+height: auto;
+}
