@@ -30,18 +30,18 @@
                     <span class="fs-14px">Tipo de evidencia</span>
                 </div>
             </div>
-            <div class="col-4 encabezado">
+            <div [ngClass]="camposDeVerificacionVisibles ? 'col-2 encabezado' : 'col-4 encabezado'"> 
                 <div class="d-flex justify-content-left">
                     <span class="fs-14px">Documento</span>
                 </div>
             </div>
-            <div *ngIf="camposDeVerificacionVisibles; else columnaVacia1" class="col-3 encabezado">
+            <div *ngIf="camposDeVerificacionVisibles; else columnaVacia1" class="col-2 encabezado">
                 <div class="d-flex justify-content-left">
                     <span class="fs-14px">¿La evidencia corresponde a lo solicitado?</span>
                 </div>
             </div>
             
-            <div *ngIf="camposDeVerificacionVisibles; else columnaVacia2" class="col-3 encabezado">
+            <div *ngIf="camposDeVerificacionVisibles; else columnaVacia2" class=" encabezado">
                 <div class="d-flex justify-content-left">
                     <span class="fs-14px">¿El documento cumple con la información o estructura solicitada?</span>
                 </div>

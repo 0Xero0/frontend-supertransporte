@@ -47,7 +47,7 @@
         </div>
     </div>
     <!-- Seleccionar | ver archivo -->
-    <div class="col-4 columna border-top">
+    <div  [ngClass]="camposDeVerificacionVisibles ? 'col-2 columna border-top' : 'col-4 columna border-top'">
         <div class="d-flex w-100 flex-column flex-gap-10">
             <div class="w-100" [ngClass]="{'d-none': soloLectura}">
                 <app-input-archivo
@@ -75,7 +75,7 @@
         </div>
     </div>
     <!-- Campos verificador -->
-    <div class="col-3 columna d-flex flex-column border-top" *ngIf="camposDeVerificacionVisibles">
+    <div class="col-2 columna d-flex flex-column border-top" *ngIf="camposDeVerificacionVisibles">
         <div class="d-flex justify-content-start">
             <select 
             [ngModel]="evidenciaCorresponde" 
@@ -100,7 +100,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="camposDeVerificacionVisibles; else columnaVacia" class="col-3 columna d-flex flex-column border-top">
+    <div *ngIf="camposDeVerificacionVisibles; else columnaVacia" class="col-2 columna d-flex flex-column border-top">
         <div class="d-flex justify-content-start">
             <select
                 [ngModel]="documentoCumple" 
