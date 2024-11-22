@@ -18,6 +18,7 @@ import { ModalAprobarObservacion2 } from '../../modal-aprobar-observacion/modal-
 export class PaginaReporteFase2VerificarComponent {
   @ViewChild('encuesta') encuesta!: EncuestaCuantitativaComponent
   @ViewChild('modalAprobarObservacion2') modalAprobarObservacion2!: ModalAprobarObservacion2
+  
   idEncuesta: number = 2
   idMes?: number
   vigencia?: number

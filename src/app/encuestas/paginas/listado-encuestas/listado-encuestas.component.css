@@ -29,6 +29,7 @@
     color: #004884;
     vertical-align: middle;
     border: 0;
+    text-align: center;
 }
 .table>thead {
     vertical-align: bottom;
@@ -48,7 +49,8 @@
 }
 
 .table > tbody > tr:last-child > td:last-child {
-    border-bottom: none; /* Quitar el borde inferior de la última celda de la última fila */
+    border-bottom: none;
+    
 }
 .table {
     --bs-table-color: var(--bs-body-color);
@@ -86,4 +88,5 @@ tbody, td, tfoot, th, thead, tr {
     border-style: solid;
     border-width: 0;
     border-bottom: 1px solid #ddd; border-top: none;
+    text-align: justify;
 }

@@ -56,6 +56,7 @@ export class PaginaReportesFase2VerificarComponent implements OnInit{
     this.paginador.filtrar({termino: this.termino} )
   }
   limpiarFiltro(){
+    this.termino = '';
     this.iniciarListaReporte()
   }
 }

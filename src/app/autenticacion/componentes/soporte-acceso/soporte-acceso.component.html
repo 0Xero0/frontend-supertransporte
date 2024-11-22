@@ -31,11 +31,21 @@
                             NIT <span class="validacion">*</span>
                         </label>
                     </fieldset>
-                    <input type="number" placeholder="Ingrese aquí su número de documento" class="form-control" formControlName="nit"/>
+                    <input type="number" placeholder="Ingrese aquí su NIT sin dígito de verificación" class="form-control" formControlName="nit" 
+                    required [ngClass]="{'input-error':this.formulario.controls['nit'].errors &&
+              this.formulario.controls['nit'].dirty && (this.formulario.controls['nit'].errors['required'] || 
+              this.formulario.controls['nit'].errors['minlength']) }"
+               (input)="validateNitLength()"/>
                     <app-validacion  
                             [control]="this.formulario.controls['nit']" 
                             [texto]="'El nit es requerido.'" 
                             [validacion]="'required'"/>
+
+                            <app-validacion  
+                            [control]="this.formulario.controls['nit']" 
+                            [texto]="'Debe tener al menos 6 dígitos.'" 
+                            [validacion]="'minlength'"/>
+                           
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <fieldset>
@@ -43,7 +53,10 @@
                             Razón social <span class="validacion">*</span>
                         </label>
                     </fieldset>
-                    <input type="text" placeholder="Ingrese aquí su razón social" class="form-control" formControlName="razonSocial"/>
+                    <input type="text" placeholder="Ingrese aquí su razón social" class="form-control" formControlName="razonSocial"
+                    required [ngClass]="{'input-error':this.formulario.controls['razonSocial'].errors &&
+                    this.formulario.controls['razonSocial'].dirty && this.formulario.controls['razonSocial'].errors['required'] }"
+                    />
                     <app-validacion  
                             [control]="this.formulario.controls['razonSocial']" 
                             [texto]="'La razón social es requerida.'" 
@@ -57,11 +70,20 @@
                             Correo electrónico <span class="validacion">*</span>
                         </label>
                     </fieldset>
-                    <input type="text" placeholder="Ingrese aquí su correo electónico" class="form-control" formControlName="correo"/>
+                    <input type="email" placeholder="Ingrese aquí su correo electrónico" class="form-control" formControlName="correo"
+                    required [ngClass]="{'input-error':this.formulario.controls['correo'].errors &&
+                    this.formulario.controls['correo'].dirty && (this.formulario.controls['correo'].errors['required'] || 
+                    this.formulario.controls['correo'].errors['email']) }"
+                    />
                     <app-validacion  
                             [control]="this.formulario.controls['correo']" 
                             [texto]="'El correo es requerido.'" 
                             [validacion]="'required'"/>
+
+                            <app-validacion  
+                            [control]="this.formulario.controls['correo']" 
+                            [texto]="'Ingrese un correo válido.'" 
+                            [validacion]="'email'"/>
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <fieldset>
@@ -73,7 +95,7 @@
                     <app-validacion  
                             [control]="this.formulario.controls['telefono']" 
                             [texto]="'El teléfono es requerido.'" 
-                            [validacion]="'required'"/>
+                            [validacion]="'required'"/>   
                 </div>
             </div>
             <div class="row mb-3">
@@ -84,7 +106,10 @@
                         </div>
                         <div class="col-8">
                             
-                            <select class="form-select" formControlName="errorAcceso" >
+                            <select class="form-select" formControlName="errorAcceso" 
+                            required [ngClass]="{'input-error':this.formulario.controls['errorAcceso'].errors &&
+                            this.formulario.controls['errorAcceso'].dirty && this.formulario.controls['errorAcceso'].errors['required']  }"
+                            >
                                 <option value="">Seleccione una opción</option>
                                 <option value="001">001 - Error de usuario</option>
                                 <option value="002">002 - Error de correo electrónico</option>
@@ -104,7 +129,10 @@
                             <span>Descripción <span class="">*</span></span>
                         </div>
                         <div class="col-8">
-                            <textarea class="form-control alto-textarea" formControlName="descripcion" cols="30" rows="50" ></textarea>
+                            <textarea  class="form-control alto-textarea" formControlName="descripcion" cols="30" rows="50"
+                    required [ngClass]="{'input-error':this.formulario.controls['descripcion'].errors &&
+                    this.formulario.controls['descripcion'].dirty && this.formulario.controls['descripcion'].errors['required']  }"
+                            ></textarea>
                             <app-validacion  
                             [control]="this.formulario.controls['descripcion']" 
                             [texto]="'La descripción es requerida.'" 

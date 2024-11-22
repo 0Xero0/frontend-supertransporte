@@ -1,6 +1,6 @@
 <div class="p-md-3 p-lg-5">
   <h3 class="texto-primario fw-semibold" *ngIf="encuesta">
-    Resumen - Ficha cuestionario - {{encuesta.nombreEncuesta}}
+    Resumen - ficha cuestionario - {{encuesta.nombreEncuesta}}
   </h3>
   <h6 class="texto-primario fw-semibold">Reporte número {{idReporte}}</h6>
   <form class="col-sm-100 col-md-12 mb-4" *ngIf="encuesta">
@@ -30,12 +30,21 @@
             <input type="text" class="form-control" disabled [value]="clasificacionResolucion">
           </div>
         </div>
-        <div class="row mb-2">
-          <div class="col">Modalidad</div>
-          <div class="">
-            <textarea class="form-control text-area" disabled>{{ encuesta.modalidad }}</textarea>
+
+        <div class="row mb-3" *ngIf="encuesta">
+          <div class="col">
+            <label for="modalidadTextarea" class="">Modalidad</label>
+            <textarea 
+              #modalidadTextarea
+              class="form-control text-area" 
+              [value]="encuesta.modalidad"
+              disabled
+              rows="1"  
+              style="resize: none; overflow-y: auto; height: auto;" 
+              [ngStyle]="{'height': modalidadTextarea.scrollHeight + 'px'}"></textarea>
           </div>
         </div>
+
       </div>
 
       <div class="col">

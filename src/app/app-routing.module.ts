@@ -44,6 +44,12 @@ const routes: Routes = [
         path: 'resultado-indicadores',
         component: PaginaResultadosIndicadoresComponent
       },
+
+      {
+        path: 'indicadores',
+        component: TablaResultadosIndicadoresComponent
+      },
+      
       {
         path: 'informacion-general',
         component: PaginaInformacionGeneralVigiladoComponent
@@ -56,6 +62,7 @@ const routes: Routes = [
         path: 'responder-soporte/:idSoporte',
         component: PaginaResponderSoporteComponent
       },
+     
       {
         path: 'soportes',
         component: PaginaSoportesComponent

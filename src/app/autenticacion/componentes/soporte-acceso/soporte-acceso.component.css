@@ -216,7 +216,7 @@ opacity: 1;
   /* width: 100%; */
   color: #AC0404;
   font-size: 12px;
-  margin-left: 36px;
+
 }
 
 .mb-4 {
@@ -246,6 +246,7 @@ opacity: 1;
 .alto-textarea
 {
   height: 200px;
+  resize: none;
 }
 
 .pagina{

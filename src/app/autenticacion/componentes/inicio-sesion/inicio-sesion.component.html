@@ -7,13 +7,13 @@
           <h3 class="fs-40px texto-blanco"><b>PESV</b></h3>
         </div>
         <div class="texto-login">
-          <p class="fs-14px mt-3">
+          <p class="fs-14px mt-3 text-justificado">
             La información aquí contenida es solicitada por esta Autoridad
             con fines de vigilancia, inspección y control propios de sus funciones.
             Podrá consultar la Política Institucional de Seguridad y Privacidad de
             la información en el siguiente enlace
             <a class="fw-semibold fs-14px cursor-pointer"
-              href="assets/documentos/TIC-PO-001-V2-Seguridad-y-Privacidad-de-la-Informacion.pdf" target="_blank">
+              href="assets/documentos/POLITICA GENERAL DE SEGURIDAD Y PRIVACIDAD DE LA INFORMACION.pdf" target="_blank">
               ver política
             </a>
           </p>
@@ -38,12 +38,20 @@
         <fieldset class="mb-4">
          <label class="fs-16px mb-2 texto-gris-4B4B4B" for="usuario">Usuario</label>
           <input placeholder="Ingrese aquí su número de documento" class="form-control" type="text" name="usuario" formControlName="usuario" required [ngClass]="{'input-error':this.formulario.controls['usuario'].errors &&
-                    this.formulario.controls['usuario'].dirty && this.formulario.controls['usuario'].errors['required']}">
+                    this.formulario.controls['usuario'].dirty && (this.formulario.controls['usuario'].errors['required'] || 
+                    this.formulario.controls['usuario'].errors['minlength']) }"
+                     minlength="6">
          <span class="validacion"
             *ngIf="this.formulario.controls['usuario'].errors &&
                     this.formulario.controls['usuario'].dirty && this.formulario.controls['usuario'].errors['required']">
-            Ingrese su usuario
+            Ingrese su usuario.
          </span>
+         <span class="validacion"
+        *ngIf="this.formulario.controls['usuario'].errors && 
+               this.formulario.controls['usuario'].dirty && 
+               this.formulario.controls['usuario'].errors['minlength']">
+    Debe tener al menos 6 dígitos.
+  </span>
        </fieldset>
       <fieldset class="mb-4">
          <label class="fs-16px mb-2 texto-gris-4B4B4B" for="clave">Contraseña</label>

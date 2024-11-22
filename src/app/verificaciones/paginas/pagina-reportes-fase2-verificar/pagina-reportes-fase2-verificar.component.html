@@ -1,13 +1,12 @@
 <div class="p-md-3 p-lg-5">
-    <h3 class="texto-primario fw-semibold mb-4">Lista de reportes Fase dos</h3>
+    <h3 class="texto-primario fw-semibold mb-4">Lista de reportes fase dos</h3>
     <div class="d-flex flex-gap-20 align-items-center mb-4" *ngIf="this.rol && this.rol.id !== '003'">
       
       <fieldset>
-        <app-input-busqueda [(ngModel)]="termino" />
+        <app-input-busqueda 
+        (buscar)="actualizarFiltros()"
+        [(ngModel)]="termino" />
     </fieldset>
-      <fieldset>
-        <button class="boton primario relleno" (click)="actualizarFiltros()">Filtrar</button>
-      </fieldset>
       <fieldset>
         <button class="boton primario delineado" (click)="limpiarFiltro()">Limpiar</button>
       </fieldset>
@@ -15,7 +14,7 @@
     <div class="table-responsive">
         <table class="table table-bordered tabla-primaria fs-14px">
             <thead>
-                <tr class="fw-semibold">
+                <tr class="fw-semibold text-center">
                     <th class="">Validar</th>
                     <th class="">Id</th>
                     <th class="">NIT</th>
@@ -27,7 +26,7 @@
                     <th class="">Estado</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="text-center">
                 <tr *ngFor="let reporte of reportes">
                     <td class="text-center">
                         <span

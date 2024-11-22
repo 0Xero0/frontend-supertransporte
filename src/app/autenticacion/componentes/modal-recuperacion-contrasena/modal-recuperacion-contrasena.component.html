@@ -12,9 +12,9 @@
       <button type="button" class="btn-close"  aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="alert alerta-contraseña alert-dismissible fade show" role="alert">
-      <label class="fs-14px-personal">
+      <label class="fs-14px-personal">Para comenzar con el proceso de recuperación de contraseña, 
           <span class="fw-bold">Ingrese su usuario y correo electrónico principal</span>
-          registrado en el Sistema de Supervisión al transporte VIGÍA, para iniciar con el proceso de recuperar contraseña.</label>
+          registrado en el Sistema de Supervisión al Transporte Vigía.</label>
     </div>
     <div class="modal-body">
       <form  class="d-flex flex-column flex-gap-10" [formGroup]="this.formulario">
@@ -22,32 +22,41 @@
           <div class="col-6">
             <fieldset>
               <label for="usuario" class="fw-semibold">Usuario</label>
-              <input class="form-control" formControlName="usuario" type="text" required placeholder="Ingrese su usuario">
+              <input 
+              placeholder="Ingrese su usuario"class="form-control" type="text" name="usuario" formControlName="usuario" required [ngClass]="{'input-error':this.formulario.controls['usuario'].errors &&
+              this.formulario.controls['usuario'].dirty && (this.formulario.controls['usuario'].errors['required'] || 
+              this.formulario.controls['usuario'].errors['minlength']) }"
+               minlength="6">
               <span class="validacion"
-                    *ngIf="this.formulario.controls['usuario'].errors &&
+              *ngIf="this.formulario.controls['usuario'].errors &&
                     this.formulario.controls['usuario'].dirty && this.formulario.controls['usuario'].errors['required']">
                     Ingrese su usuario
                 </span>
               <span class="validacion"
-                    *ngIf="this.formulario.controls['usuario'].errors &&
-                    this.formulario.controls['usuario'].dirty && this.formulario.controls['usuario'].errors['pattern']">
-                    Debe tener almenos 6 dígitos.
+              *ngIf="this.formulario.controls['usuario'].errors && 
+              this.formulario.controls['usuario'].dirty && 
+              this.formulario.controls['usuario'].errors['minlength']">
+   Debe tener al menos 6 dígitos.
                 </span>
             </fieldset>
           </div>
           <div class="col-6">
             <fieldset>
               <label for="correo" class="fw-semibold">Correo electrónico  </label>
-              <input class="form-control" formControlName="correo" type="email" required placeholder="Ingrese su correo electrónico">
+              <input class="form-control" formControlName="correo" type="email" required placeholder="Ingrese su correo electrónico" 
+              required [ngClass]="{'input-error':this.formulario.controls['correo'].errors &&
+              this.formulario.controls['correo'].dirty && (this.formulario.controls['correo'].errors['required'] || 
+              this.formulario.controls['correo'].errors['email']) }"
+              >
               <span class="validacion"
               *ngIf="this.formulario.controls['correo'].errors &&
               this.formulario.controls['correo'].dirty && this.formulario.controls['correo'].errors['required']">
-              Ingrese su correo electronico
+              Ingrese su correo electrónico.
           </span>
           <span class="validacion"
               *ngIf="this.formulario.controls['correo'].errors &&
               this.formulario.controls['correo'].dirty && this.formulario.controls['correo'].errors['email']">
-              Ingrese un correo valido
+              Ingrese un correo válido.
           </span>
             </fieldset>
           </div>
@@ -63,7 +72,7 @@
 
 
     <div class="container text-center mb-5">
-      <h3 class="fw-bold">Video Tutorial: Cómo establecer o recuperar contraseña en el aplicativo PESV</h3>
+      <h3 class="fw-bold">Videotutorial: Como establecer o recuperar contraseña en el aplicativo PESV</h3>
       <div class="d-flex justify-content-center mt-3">
           <div class="embed-responsive embed-responsive-16by9" style=" border: 5px solid #707070;">
               <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/4zJH7N8OgV4" allowfullscreen></iframe>

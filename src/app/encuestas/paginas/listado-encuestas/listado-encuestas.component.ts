@@ -73,6 +73,7 @@ export class ListadoEncuestasComponent implements OnInit {
     this.paginador.filtrar({ termino: this.termino })
   }
   limpiarFiltros(){
+    this.termino = '';
     this.paginador.inicializar()
   }
 

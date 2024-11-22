@@ -38,6 +38,10 @@
         font-size: 14px !important;
         margin-left: 103px;
         margin-right: 47px;
+        text-align: justify;
     }
       
-      
+    .input-error{
+      border-color: red;
+    }
+    

@@ -9,8 +9,14 @@
         </select>
     </fieldset>
     <label class="fs-12px fw-semibold">Observación</label>
-    <textarea class="form-control" [disabled]="corresponde != 2" [(ngModel)]="observacionCorresponde"
-        (ngModelChange)="manejarCambioObservacionCorresponde($event, evidencia.idEvidencia)"></textarea>
+    <textarea
+    class="form-control"
+    [disabled]="corresponde != 2"
+    [(ngModel)]="observacionCorresponde"
+    (ngModelChange)="manejarCambioObservacionCorresponde($event, evidencia.idEvidencia)"
+    (input)="autoExpand($event)"
+    style="overflow:hidden; resize:none;"></textarea>
+  
 </div>
 <div class="col" *ngIf="habilitarCamposVerificador"> <!-- cumple -->
     <fieldset class="d-flex flex-column">
@@ -23,6 +29,11 @@
         </select>
     </fieldset>
     <label class="fs-12px fw-semibold">Observación</label>
-    <textarea class="form-control" [disabled]="cumple != 2" [(ngModel)]="observacionCumple"
-        (ngModelChange)="manejarCambioObservacionCumple($event, evidencia.idEvidencia)"></textarea>
+    <textarea class="form-control" 
+    [disabled]="cumple != 2"
+     [(ngModel)]="observacionCumple"
+        (ngModelChange)="manejarCambioObservacionCumple($event, evidencia.idEvidencia)"
+        (input)="autoExpand($event)"
+    style="overflow:hidden; resize:none;"
+        ></textarea>
 </div>
