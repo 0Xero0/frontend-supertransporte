@@ -8,10 +8,14 @@
           type="text" 
           placeholder="Buscar..."
           [value]="texto"
+          (input)="manejar(input.value)" 
+        (keyup.enter)="realizarBusqueda()" 
+        [disabled]="estaDeshabilitado" 
           (change)="manejar(input.value)"
-          (keyup)="manejar(input.value)" class="input-search-govco" aria-label="Buscador"/>
-          <button class="icon-search-govco icon-close-search-govco" aria-label="Limpiar"></button>
-          <div class="icon-search-govco search-icon-search-govco" aria-hidden="true"></div>
+          (keyup)="manejar(input.value)"
+           class="input-search-govco" aria-label="Buscador"/>
+          <button  class="icon-search-govco icon-close-search-govco" aria-label="Limpiar"></button>
+          <div (click)="realizarBusqueda()" class="icon-search-govco search-icon-search-govco" aria-hidden="true"></div>
         </div>
     </div>
       </div>

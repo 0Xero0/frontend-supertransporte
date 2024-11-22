@@ -20,12 +20,14 @@ export class SoporteAccesoComponent {
   constructor(private servicioSoporte: AutenticacionService, private router: Router){
     this.formulario = new FormGroup({
       nit: new FormControl<string | undefined>( undefined, [ Validators.required ] ),
-      correo: new FormControl<string | undefined>( undefined, [ Validators.required ] ),
+      //correo: new FormControl<string | undefined>( undefined, [ Validators.required ] ),
       telefono: new FormControl<string | undefined>( undefined ),
       razonSocial: new FormControl<string | undefined>( undefined, [ Validators.required ] ),
       descripcion: new FormControl<string | undefined>( undefined, [ Validators.required ] ),
       adjunto: new FormControl<File | undefined>( undefined ),
-      errorAcceso: new FormControl<string | undefined>( undefined, [ Validators.required ])
+      errorAcceso: new FormControl<string | undefined>( undefined, [ Validators.required ]),
+      correo: new FormControl('', [Validators.required, Validators.email]),
+
     })
   }
 
@@ -81,5 +83,19 @@ export class SoporteAccesoComponent {
   });
 
    // this.popup.abrirPopupFallido("El archivo pesa más de 7 Mb")
+  }
+
+  validateNitLength() {
+    const nitValue = this.formulario.controls['nit'].value;
+    
+    
+    if (nitValue && nitValue.toString().length < 6) {
+      this.formulario.controls['nit'].setErrors({ minlength: true });
+    } else {
+      
+      if (this.formulario.controls['nit'].hasError('minlength')) {
+        this.formulario.controls['nit'].setErrors(null);
+      }
+    }
   }
 }

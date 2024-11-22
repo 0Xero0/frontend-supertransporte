@@ -284,4 +284,9 @@ export class PreguntaEncuestaComponent implements OnInit {
     this.observacion = motivo
     if(emitir) this.emitirValorModificado();
   }
+  autoExpand(event: Event): void {
+    const textarea = event.target as HTMLTextAreaElement;
+    textarea.style.height = 'auto'; 
+    textarea.style.height = `${textarea.scrollHeight}px`; 
+  }
 }

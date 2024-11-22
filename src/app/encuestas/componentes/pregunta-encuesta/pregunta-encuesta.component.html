@@ -4,13 +4,13 @@
   }
 ">
     <div class="col-1 columna border-top">
-        <div class="d-flex justify-content-left">
+        <div class="d-flex justify-content-center">
             <span class="fs-14px">{{ pregunta.numeroPregunta }}</span>
         </div>
     </div>
     <!-- Pregunta -->
     <div class="col-2 columna border-top">
-        <div class="d-flex justify-content-start">
+        <div class="d-flex texto-justificado">
             <span class="validacion fw-semibold" *ngIf="pregunta.obligatoria">*</span>
             <span class="fs-14px">{{ pregunta.pregunta }}</span>
         </div>
@@ -19,7 +19,7 @@
     <div 
     class="col-2 columna d-flex flex-column border-top" 
     [ngClass]="clasesRespuestas">
-        <div class="d-flex justify-content-start">
+        <div class="d-flex justify-content-center">
             <div class="d-block w-100">
                 <select [disabled]="soloLectura" [(ngModel)]="valor" class="form-select" (change)="alCambiarRespuesta(this.valor)">
                     <option value="">Escoge una opción.</option>
@@ -41,13 +41,13 @@
             </select>
         </div>
     </div>
-    <div class="col-1 columna border-top">
-        <div class="d-flex justify-content-start">
+    <div  [ngClass]="camposDeVerificacionVisibles ? 'col-1 columna border-top' : 'col-2 columna border-top' ">
+        <div class="d-flex texto-justificado">
             <span class="fs-12px">{{ pregunta.tipoDeEvidencia }}</span>
         </div>
     </div>
     <!-- Seleccionar | ver archivo -->
-    <div  [ngClass]="camposDeVerificacionVisibles ? 'col-2 columna border-top' : 'col-4 columna border-top'">
+    <div  [ngClass]="camposDeVerificacionVisibles ? 'col-2 columna border-top' : 'col-3 columna border-top'">
         <div class="d-flex w-100 flex-column flex-gap-10">
             <div class="w-100" [ngClass]="{'d-none': soloLectura}">
                 <app-input-archivo
@@ -96,7 +96,10 @@
                 placeholder="Escribe aquí tus observaciones"
                 class="form-control fs-12px" 
                 cols="30"
-                 rows="5"></textarea>
+                 rows="5"
+                 (input)="autoExpand($event)"
+                    style="overflow:hidden; resize:none; min-height:50px;">
+                 ></textarea>
             </div>
         </div>
     </div>
@@ -116,13 +119,16 @@
             <label class="fs-12px fw-semibold">Observación</label>
             <div class="d-flex justify-content-start">
                 <textarea
-                    [disabled]="!camposDeVerificacion || observacionDocumentoCumpleDeshabilitado || pregunta.respuesta == ''"
+                [disabled]="!camposDeVerificacion || observacionDocumentoCumpleDeshabilitado || pregunta.respuesta == ''"
                     [ngModel]="observacionNoCumple"
                     (ngModelChange)="alCambiarObservacionDocumentoNoCumple($event)"
                     placeholder="Escribe aquí tus observaciones"
                     class="form-control fs-12px" 
                     cols="30"
-                    rows="5"></textarea>
+                    rows="5"
+                    (input)="autoExpand($event)"
+                    style="overflow:hidden; resize:none; min-height:50px;">
+                    ></textarea>
             </div>
         </div>
     </div>

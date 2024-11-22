@@ -78,4 +78,9 @@ export class VerificacionEvidenciasComponent implements OnInit{
       observacionCumple: observacion
     })
   }
+  autoExpand(event: Event): void {
+    const textarea = event.target as HTMLTextAreaElement;
+    textarea.style.height = 'auto'; 
+    textarea.style.height = `${textarea.scrollHeight}px`; 
+  }
 }

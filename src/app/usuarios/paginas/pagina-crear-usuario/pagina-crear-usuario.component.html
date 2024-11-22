@@ -1,4 +1,4 @@
-<div class="p-5">
+<div class="p-5 margenes">
     <h2 class="texto-primario fw-semibold mb-3">Crear usuario</h2>
     <form [formGroup]="formulario">
         <div class="row mb-3">
@@ -86,7 +86,7 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-center">
             <button type="button" class="boton primario relleno" (click)="crear()">
                 Guardar
             </button>
@@ -97,7 +97,9 @@
     <div class="d-flex mb-3 flex-gap-20">
         <fieldset>
             <label class="fs-14px fw-semibold">Palabra clave</label>
-            <app-input-busqueda [(ngModel)]="termino" />
+            <app-input-busqueda 
+            (buscar)="actualizarFiltros()"
+            [(ngModel)]="termino" />
         </fieldset>
         <fieldset>
             <label class="fs-14px fw-semibold">Rol</label>

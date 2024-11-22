@@ -48,11 +48,13 @@
 }
 
 .logo-supertransporte {
-  width: 425px;
+  width: 260px;
   min-width: 240px;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   display: flex;
   justify-content: center;
+  margin-top: -35px;
+  height: 77px;
 }
 
 .input-error{
@@ -61,4 +63,8 @@
 
 .etiquetas{
   margin-left:10px;
+}
+
+.margenes{
+  height: 83px;
 }

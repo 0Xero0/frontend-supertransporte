@@ -1,6 +1,6 @@
 <div class="px-sm-2 px-md-3 px-lg-4 my-4" *ngIf="encuesta || encuestaCuantitativa">
-    <h2 class="fw-semibold texto-primario mb-3" *ngIf="encuesta">Resumen - Ficha cuestionario - {{encuesta.nombreEncuesta}}</h2>
-    <h2 class="fw-semibold texto-primario mb-3" *ngIf="encuestaCuantitativa">Resumen - Ficha cuestionario - Subindicadores</h2>
+    <h2 class="fw-semibold texto-primario mb-3" *ngIf="encuesta">Resumen - ficha cuestionario - {{encuesta.nombreEncuesta}}</h2>
+    <h2 class="fw-semibold texto-primario mb-3" *ngIf="encuestaCuantitativa">Resumen - ficha cuestionario - subindicadores</h2>
     <h3 class="fw-semibold texto-primario" *ngIf="encuesta">Clasificación: {{encuesta.clasificaion}}</h3>
     <p *ngIf="encuesta">{{encuesta.descripcionClasificacion}}</p>
     <p *ngIf="encuestaCuantitativa">{{encuestaCuantitativa.mensaje}}</p>
@@ -31,11 +31,18 @@
       
           <div class="row mb-3" *ngIf="encuesta">
             <div class="col">
-              <label class="texto-azul-004884 fs-20px fw-semibold">Modalidad:</label>
-              <textarea class="form-control text-area" disabled>{{ encuesta.modalidad }}</textarea>
+              <label for="modalidadTextarea" class="texto-azul-004884 fs-20px fw-semibold">Modalidad:</label>
+              <textarea 
+                #modalidadTextarea
+                class="form-control text-area" 
+                [value]="encuesta.modalidad"
+                disabled
+                rows="1"  
+                style="resize: none; overflow-y: auto; height: auto;" 
+                [ngStyle]="{'height': modalidadTextarea.scrollHeight + 'px'}"></textarea>
             </div>
           </div>
-      
+          
           <div class="row mb-3" *ngIf="encuesta">
             <div class="col">
               <label class="texto-azul-004884 fs-20px fw-semibold">Total de conductores:</label>
@@ -45,7 +52,7 @@
       
           <div class="row mb-3" *ngIf="encuesta">
             <div class="col">
-              <label class="texto-azul-004884 fs-20px fw-semibold">Total de Vehículos:</label>
+              <label class="texto-azul-004884 fs-20px fw-semibold">Total de vehículos:</label>
               <input type="text" class="form-control" disabled [value]="encuesta.totalVehiculos">
             </div>
           </div>

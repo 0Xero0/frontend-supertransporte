@@ -33,6 +33,8 @@ button:last-child {
     margin-top: -45px;
 }
 
-.text-area{
-    height: auto;
-}
+.text-area {
+   text-align: justify;
+    
+  }
+  

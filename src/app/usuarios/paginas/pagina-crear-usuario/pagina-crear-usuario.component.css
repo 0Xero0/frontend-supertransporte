@@ -1,3 +1,7 @@
 .lista-de-usuarios th{
     color: var(--azul-oscuro);
 }
+.margenes{
+    margin-left: 40px;
+    margin-right: 40px;
+}

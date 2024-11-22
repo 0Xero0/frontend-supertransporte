@@ -11,38 +11,38 @@
     <div class="w-100 overflow-auto custom-scroll" [ngClass]="{'d-none': !desplegado, 'd-block': desplegado}">
         <div class="d-flex mx-0">
             <div class="col-1 encabezado">
-                <div class="d-flex justify-content-left">
+                <div class="d-flex justify-content-center">
                     <span class="fs-14px">No.</span>
                 </div>
             </div>
             <div class="col-2 encabezado">
-                <div class="d-flex justify-content-left">
+                <div class="d-flex justify-content-center">
                     <span class="fs-14px">Pregunta</span>
                 </div>
             </div>
             <div class="col-2 encabezado">
-                <div class="d-flex justify-content-left">
+                <div class="d-flex justify-content-center">
                     <span class="fs-14px">¿Existe?</span>
                 </div>
             </div>
-            <div class="col-1 encabezado">
-                <div class="d-flex justify-content-left">
+            <div [ngClass]="camposDeVerificacionVisibles ? 'col-1 encabezado' : 'col-2 encabezado'">
+                <div class="d-flex justify-content-center">
                     <span class="fs-14px">Tipo de evidencia</span>
                 </div>
             </div>
-            <div [ngClass]="camposDeVerificacionVisibles ? 'col-2 encabezado' : 'col-4 encabezado'"> 
-                <div class="d-flex justify-content-left">
+            <div [ngClass]="camposDeVerificacionVisibles ? 'col-2 encabezado' : 'col-3 encabezado'"> 
+                <div class="d-flex justify-content-center">
                     <span class="fs-14px">Documento</span>
                 </div>
             </div>
             <div *ngIf="camposDeVerificacionVisibles; else columnaVacia1" class="col-2 encabezado">
-                <div class="d-flex justify-content-left">
+                <div class="d-flex justify-content-center">
                     <span class="fs-14px">¿La evidencia corresponde a lo solicitado?</span>
                 </div>
             </div>
             
             <div *ngIf="camposDeVerificacionVisibles; else columnaVacia2" class=" encabezado">
-                <div class="d-flex justify-content-left">
+                <div class="d-flex justify-content-center">
                     <span class="fs-14px">¿El documento cumple con la información o estructura solicitada?</span>
                 </div>
             </div>
