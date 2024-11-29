@@ -16,18 +16,17 @@ import { FiltrosReportes } from 'src/app/encuestas/modelos/FiltrosReportes';
   styleUrls: ['./pagina-resultados-indicadores.component.css']
 })
 export class PaginaResultadosIndicadoresComponent implements OnInit{
-  paginador: Paginador<FiltrosUsuarios>
+  paginador: Paginador<any>
   reportes: ResumenReporteAsignado[] = []
 
   termino: any = ""
   rol: Rol | null
 
   constructor(
-    private servicioEncuestas: ServicioEncuestas,
-    private servicioVerifiaciones: ServicioVerificaciones,
+    private servicioVerificaciones: ServicioVerificaciones,
     private servicioLocalStorage: ServicioLocalStorage,
   ){
-    this.paginador = new Paginador<FiltrosReportes>(this.obtenerReportes)
+    this.paginador = new Paginador<{ idVerificador: string, termino?:string }>(this.obtenerReportes);
     this.rol = this.servicioLocalStorage.obtenerRol()
   }
 
@@ -36,9 +35,9 @@ export class PaginaResultadosIndicadoresComponent implements OnInit{
     
   }
 
-  obtenerReportes = (pagina: number, limite: number, filtros?: FiltrosReportes) =>{
+  obtenerReportes = (pagina: number, limite: number,filtros?: { idVerificador: string, termino?:string }) =>{
     return new Observable<Paginacion>((subscripcion) => {
-      this.servicioVerifiaciones.obtenerReportes(pagina, limite, filtros).subscribe({
+      this.servicioVerificaciones.obtenerReportesFaseDos(pagina, limite, filtros).subscribe({
         next: (respuesta) =>{
           this.reportes = respuesta.asignadas
           subscripcion.next(respuesta.paginacion)
