@@ -6,11 +6,10 @@
              <input type="text" class="form-control" placeholder="Ingrese el termino" [(ngModel)]="termino">
            </fieldset>--> 
            <fieldset>
-             <app-input-busqueda [(ngModel)]="termino"  />
+             <app-input-busqueda (buscar)="actualizarFiltros()"
+             [(ngModel)]="termino" />
          </fieldset>
-         <fieldset>
-          <button class="boton primario relleno" (click)="actualizarFiltros()">Filtrar</button>
-        </fieldset>
+         
         <fieldset>
           <button class="boton primario delineado" (click)="limpiarFiltros()">Limpiar</button>
         </fieldset>

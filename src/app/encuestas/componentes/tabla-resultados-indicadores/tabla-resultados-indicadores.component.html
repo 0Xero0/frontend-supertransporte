@@ -3,6 +3,11 @@
 <h3 class="texto-primario fw-semibold" *ngIf="encuesta">
     Resultado de los indicadores 
   </h3>
+  <div class="align-right-boton">
+    <button class="boton primario delineado" [routerLink]="['/administrar', 'resultado-indicadores']">
+      Volver
+    </button>
+  </div>
   <h6 class="texto-primario fw-semibold">Reporte número {{idReporte}}</h6>
 
   <form class="col-sm-100 col-md-12 mb-4" *ngIf="encuesta">
@@ -32,10 +37,17 @@
             <input type="text" class="form-control" disabled [value]="clasificacionResolucion">
           </div>
         </div>
-        <div class="row mb-2">
-          <div class="col">Modalidad</div>
-          <div class="">
-            <textarea class="form-control text-area" disabled>{{ encuesta.modalidad }}</textarea>
+        <div class="row mb-3" *ngIf="encuesta">
+          <div class="col">
+            <label for="modalidadTextarea" class="">Modalidad</label>
+            <textarea 
+              #modalidadTextarea
+              class="form-control text-area" 
+              [value]="encuesta.modalidad"
+              disabled
+              rows="1"  
+              style="resize: none; overflow-y: auto; height: auto;" 
+              [ngStyle]="{'height': modalidadTextarea.scrollHeight + 'px'}"></textarea>
           </div>
         </div>
       </div>
@@ -48,7 +60,7 @@
           </div>
         </div>
         <div class="row mb-2">
-          <div class="col">Total de Vehículos</div>
+          <div class="col">Total de vehículos</div>
           <div class="">
             <input type="text" class="form-control" disabled [value]="encuesta.totalVehiculos">
           </div>
@@ -69,19 +81,12 @@
     </div>
   </form>
   
-  <div class="align-right-boton">
-    <button class="boton primario delineado" [routerLink]="['/administrar', 'resultado-indicadores']">
-      Volver
-    </button>
-  </div>
-  
 <div class="table-responsive">
 <table class="tabla-resultados-indicadores" *ngIf="resultadosIndicadores">
     <thead>
         <tr>
             <th>Nro</th>
             <th>Indicador</th>
-            <th>Fórmula</th>
             <th>Ene</th>
             <th>Feb</th>
             <th>Mar</th>
@@ -101,7 +106,6 @@
             <tr *ngFor="let fila of indicador.filas ; let i = index">
                 <td *ngIf="i === 0" [attr.rowspan]="indicador.filas.length" class="fw-semibold">{{ indicador.id }}</td>
                 <td *ngIf="i === 0" [attr.rowspan]="indicador.filas.length">{{ indicador.nombre }}</td>
-                <td *ngIf="i === 0" [attr.rowspan]="indicador.filas.length">{{ "" }}</td>
                 <td *ngFor="let columna of fila.columnas" [attr.colspan]="columna.span">
                     {{ columna.valor }}
                 </td>
