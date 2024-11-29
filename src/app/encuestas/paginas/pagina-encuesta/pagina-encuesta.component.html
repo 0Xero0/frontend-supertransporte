@@ -1,168 +1,135 @@
-<div class="px-sm-2 px-md-3 px-lg-4 my-4" *ngIf="encuesta || encuestaCuantitativa">
-    <h2 class="fw-semibold texto-primario mb-3" *ngIf="encuesta">Resumen - ficha cuestionario - {{encuesta.nombreEncuesta}}</h2>
-    <h2 class="fw-semibold texto-primario mb-3" *ngIf="encuestaCuantitativa">Resumen - ficha cuestionario - subindicadores</h2>
-    <h3 class="fw-semibold texto-primario" *ngIf="encuesta">Clasificación: {{encuesta.clasificaion}}</h3>
-    <p *ngIf="encuesta">{{encuesta.descripcionClasificacion}}</p>
-    <p *ngIf="encuestaCuantitativa">{{encuestaCuantitativa.mensaje}}</p>
+<div id="contenido" class="px-sm-2 px-md-3 px-lg-4 my-4" *ngIf="encuesta || encuestaCuantitativa">
+  <h2 class="fw-semibold texto-primario mb-3" *ngIf="encuesta">Resumen - ficha cuestionario -
+    {{encuesta.nombreEncuesta}}</h2>
+  <h2 class="fw-semibold texto-primario mb-3" *ngIf="encuestaCuantitativa">Resumen - ficha cuestionario - subindicadores
+  </h2>
+  <h3 class="fw-semibold texto-primario" *ngIf="encuesta">Clasificación: {{encuesta.clasificaion}}</h3>
+  <p *ngIf="encuesta">{{encuesta.descripcionClasificacion}}</p>
+  <p *ngIf="encuestaCuantitativa">{{encuestaCuantitativa.mensaje}}</p>
 
-    <div class="p-md-3 p-lg-5 margen">
-      
-        <form class="col-sm-100 col-md-12 mb-4">
-          <div class="row mb-3" *ngIf="usuario">
-            <div class="col">
-              <label class="texto-azul-004884 fs-20px fw-semibold">Identificación de quien realiza la encuesta:</label>
-              <input type="text" class="form-control" disabled [value]="usuario.usuario">
-            </div>
-          </div>
-      
-          <div class="row mb-3" *ngIf="idVigilado && (usuario!.usuario!== idVigilado)">
-            <div class="col">
-              <label class="texto-azul-004884 fs-20px fw-semibold">A quien se le realiza la encuesta:</label>
-              <input type="text" class="form-control" disabled [value]="idVigilado">
-            </div>
-          </div>
-      
-          <div class="row mb-3" *ngIf="vigencia">
-            <div class="col">
-              <label class="texto-azul-004884 fs-20px fw-semibold">Vigencia requerida:</label>
-              <input type="text" class="form-control" disabled [value]="vigencia">
-            </div>
-          </div>
-      
-          <div class="row mb-3" *ngIf="encuesta">
-            <div class="col">
-              <label for="modalidadTextarea" class="texto-azul-004884 fs-20px fw-semibold">Modalidad:</label>
-              <textarea 
-                #modalidadTextarea
-                class="form-control text-area" 
-                [value]="encuesta.modalidad"
-                disabled
-                rows="1"  
-                style="resize: none; overflow-y: auto; height: auto;" 
-                [ngStyle]="{'height': modalidadTextarea.scrollHeight + 'px'}"></textarea>
-            </div>
-          </div>
-          
-          <div class="row mb-3" *ngIf="encuesta">
-            <div class="col">
-              <label class="texto-azul-004884 fs-20px fw-semibold">Total de conductores:</label>
-              <input type="text" class="form-control" disabled [value]="encuesta.totalConductores">
-            </div>
-          </div>
-      
-          <div class="row mb-3" *ngIf="encuesta">
-            <div class="col">
-              <label class="texto-azul-004884 fs-20px fw-semibold">Total de vehículos:</label>
-              <input type="text" class="form-control" disabled [value]="encuesta.totalVehiculos">
-            </div>
-          </div>
-      
-          <div class="row mb-3" *ngIf="reporte">
-            <div class="col">
-              <label class="texto-azul-004884 fs-20px fw-semibold">Obligado:</label>
-              <input type="text" class="form-control" disabled [value]="reporte.noObligado ? 'No' : 'Sí'">
-            </div>
-          </div>
-        </form>
+  <div class="p-md-3 p-lg-5 margen">
+
+    <form class="col-sm-100 col-md-12 mb-4">
+      <div class="row mb-3" *ngIf="usuario">
+        <div class="col">
+          <label class="texto-azul-004884 fs-20px fw-semibold">Identificación de quien realiza la encuesta:</label>
+          <input type="text" class="form-control" disabled [value]="usuario.usuario">
+        </div>
       </div>
-      
+
+      <div class="row mb-3" *ngIf="idVigilado && (usuario!.usuario!== idVigilado)">
+        <div class="col">
+          <label class="texto-azul-004884 fs-20px fw-semibold">A quien se le realiza la encuesta:</label>
+          <input type="text" class="form-control" disabled [value]="idVigilado">
+        </div>
+      </div>
+
+      <div class="row mb-3" *ngIf="vigencia">
+        <div class="col">
+          <label class="texto-azul-004884 fs-20px fw-semibold">Vigencia requerida:</label>
+          <input type="text" class="form-control" disabled [value]="vigencia">
+        </div>
+      </div>
+
+      <div class="row mb-3" *ngIf="encuesta">
+        <div class="col">
+          <label for="modalidadTextarea" class="texto-azul-004884 fs-20px fw-semibold">Modalidad:</label>
+          <textarea #modalidadTextarea class="form-control text-area" [value]="encuesta.modalidad" disabled rows="1"
+            style="resize: none; overflow-y: auto; height: auto;"
+            [ngStyle]="{'height': modalidadTextarea.scrollHeight + 'px'}"></textarea>
+        </div>
+      </div>
+
+      <div class="row mb-3" *ngIf="encuesta">
+        <div class="col">
+          <label class="texto-azul-004884 fs-20px fw-semibold">Total de conductores:</label>
+          <input type="text" class="form-control" disabled [value]="encuesta.totalConductores">
+        </div>
+      </div>
+
+      <div class="row mb-3" *ngIf="encuesta">
+        <div class="col">
+          <label class="texto-azul-004884 fs-20px fw-semibold">Total de vehículos:</label>
+          <input type="text" class="form-control" disabled [value]="encuesta.totalVehiculos">
+        </div>
+      </div>
+
+      <div class="row mb-3" *ngIf="reporte">
+        <div class="col">
+          <label class="texto-azul-004884 fs-20px fw-semibold">Obligado:</label>
+          <input type="text" class="form-control" disabled [value]="reporte.noObligado ? 'No' : 'Sí'">
+        </div>
+      </div>
+    </form>
+  </div>
 
 
-    
-    <div class="d-block w-100 mb-3" *ngIf="esUsuarioAdministrador">
-        <div class="row mb-3">
-            <div class="col-5">
-                <textarea id="textArea" class="form-control"
-                style="height: 130px; resize: none;"
-                [readOnly]="aprobado">
+
+
+  <div class="d-block w-100 mb-3" *ngIf="esUsuarioAdministrador">
+    <div class="row mb-3">
+      <div class="col-5">
+        <textarea id="textArea" class="form-control" style="height: 130px; resize: none;" [readOnly]="aprobado">
                     {{observacionAdmin}}
                 </textarea>
-            </div>
-            <div class="col-2" style="text-align: justify;">
-                <br><br>
-                <div class="row mb-3">
-                    <button id="aprobar" class="boton primario relleno" [disabled]="aprobado"
-                    (click)="abrirModalAprobarObservacion(true)">
-                        Aprobar
-                    </button>
-                </div>
-                <div class="row mb-3">
-                    <button id="devolver" type="button" class="boton primario relleno" [disabled]="aprobado"
-                    (click)="abrirModalAprobarObservacion(false)">
-                        Devolver
-                    </button>
-                </div>
-            </div>
+      </div>
+      <div class="col-2" style="text-align: justify;">
+        <br><br>
+        <div class="row mb-3">
+          <button id="aprobar" class="boton primario relleno" [disabled]="aprobado"
+            (click)="abrirModalAprobarObservacion(true)">
+            Aprobar
+          </button>
         </div>
-    </div>
-    <div class="d-block w-100 mb-3" *ngIf="idEncuesta == 2">
-        <button
-        *ngIf="historico && !esUsuarioAdministrador"
-        type="button"
-        class="boton primario relleno"
-        [routerLink]="['/administrar', 'encuesta', idEncuesta]"
-        [queryParams]="{ vigilado: idVigilado, reporte: idReporte, historico: false, vigencia }">Salir de históricos</button>
-
-        <button
-        *ngIf="!historico && !esUsuarioAdministrador"
-        type="button"
-        class="boton primario relleno"
-        [routerLink]="['/administrar', 'encuesta', idEncuesta]"
-        [queryParams]="{ vigilado: idVigilado, reporte: idReporte, historico: true, vigencia }">Ir a históricos</button>
-    </div>
-    <div class="d-flex justify-content-left align-items-center" *ngIf="!soloLectura">
-        <div ngbDropdown *ngIf="idEncuesta != 2">
-            <button
-            ngbDropdownToggle
-            type="button"
-            class="boton primario relleno"
-            id="dropdownBasic1">Exportar</button>
-            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button ngbDropdownItem (click)="this.exportarExcel()">Excel</button>
-                <button ngbDropdownItem (click)="this.exportarPDF()">PDF</button>
-            </div>
+        <div class="row mb-3">
+          <button id="devolver" type="button" class="boton primario relleno" [disabled]="aprobado"
+            (click)="abrirModalAprobarObservacion(false)">
+            Devolver
+          </button>
         </div>
-
-        <button
-        type="button"
-        class="boton primario delineado"
-        (click)="enviarEncuesta()"
-        [disabled]="hayCambios || soloLectura">Enviar</button>
-
-        <button
-        type="button"
-        class="boton primario relleno"
-        (click)="guardarEncuesta()"
-        [disabled]="!hayCambios || soloLectura">Guardar</button>
-        <button type="button" class="boton primario delineado" [routerLink]="['/administrar', 'encuestas', idEncuesta]">Volver</button>
+      </div>
     </div>
-    <div class="d-flex w-100 mt-4">
-        <app-encuesta
-        #componenteEncuesta
-        class="w-100"
-        *ngIf="encuesta && idReporte && idEncuesta && idVigilado && idEncuesta != 2"
-        [soloLectura]="soloLectura"
-        [camposDeVerificacion]="camposDeVerificacion"
-        [camposDeVerificacionVisibles]="camposDeVerificacionVisibles"
-        [idVigilado]="idVigilado"
-        [idReporte]="idReporte"
-        [encuesta]="encuesta"
-        [idEncuesta]="idEncuesta"
-        [justificable]="encuesta.observacion"
-        (hanHabidoCambios)="setHayCambios($event)"/>
+  </div>
+  <div class="d-block w-100 mb-3" *ngIf="idEncuesta == 2">
+    <button *ngIf="historico && !esUsuarioAdministrador" type="button" class="boton primario relleno"
+      [routerLink]="['/administrar', 'encuesta', idEncuesta]"
+      [queryParams]="{ vigilado: idVigilado, reporte: idReporte, historico: false, vigencia }">Salir de
+      históricos</button>
 
-        <app-encuesta-cuantitativa
-        #componenteEncuestaCuantitativa
-        *ngIf="idEncuesta == 2 && encuestaCuantitativa"
-        [encuesta]="encuestaCuantitativa"
-        [habilitarCamposVerificador]="camposDeVerificacion"
-        [historico]="historico"
-        (cambioDeMes)="obtenerEncuestaCuantitativa($event)"
-        (hanHabidoCambios)="setHayCambios($event)"
-        (formularioGuardado)="manejarFormularioGuardado($event)"
-        />
+    <button *ngIf="!historico && !esUsuarioAdministrador" type="button" class="boton primario relleno"
+      [routerLink]="['/administrar', 'encuesta', idEncuesta]"
+      [queryParams]="{ vigilado: idVigilado, reporte: idReporte, historico: true, vigencia }">Ir a históricos</button>
+  </div>
+  <div class="d-flex justify-content-left align-items-center" *ngIf="!soloLectura">
+    <div ngbDropdown *ngIf="idEncuesta != 2">
+      <button ngbDropdownToggle type="button" class="boton primario relleno" id="dropdownBasic1">Exportar</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem (click)="this.exportarExcel()">Excel</button>
+        <button ngbDropdownItem (click)="this.generarPDF()">PDF</button>
+      </div>
     </div>
+
+    <button type="button" class="boton primario delineado" (click)="enviarEncuesta()"
+      [disabled]="hayCambios || soloLectura">Enviar</button>
+
+    <button type="button" class="boton primario relleno" (click)="guardarEncuesta()"
+      [disabled]="!hayCambios || soloLectura">Guardar</button>
+    <button type="button" class="boton primario delineado"
+      [routerLink]="['/administrar', 'encuestas', idEncuesta]">Volver</button>
+  </div>
+  <div class="d-flex w-100 mt-4">
+    <app-encuesta #componenteEncuesta class="w-100"
+      *ngIf="encuesta && idReporte && idEncuesta && idVigilado && idEncuesta != 2" [soloLectura]="soloLectura"
+      [camposDeVerificacion]="camposDeVerificacion" [camposDeVerificacionVisibles]="camposDeVerificacionVisibles"
+      [idVigilado]="idVigilado" [idReporte]="idReporte" [encuesta]="encuesta" [idEncuesta]="idEncuesta"
+      [justificable]="encuesta.observacion" (hanHabidoCambios)="setHayCambios($event)" />
+
+    <app-encuesta-cuantitativa #componenteEncuestaCuantitativa *ngIf="idEncuesta == 2 && encuestaCuantitativa"
+      [encuesta]="encuestaCuantitativa" [habilitarCamposVerificador]="camposDeVerificacion" [historico]="historico"
+      (cambioDeMes)="obtenerEncuestaCuantitativa($event)" (hanHabidoCambios)="setHayCambios($event)"
+      (formularioGuardado)="manejarFormularioGuardado($event)" />
+  </div>
 </div>
-<app-popup #popup/>
+<app-popup #popup />
 <app-modal-confirmar-enviar #modalConfirmar />
 <app-modal-aprobar-observacion #modalAprobarObservacion></app-modal-aprobar-observacion>

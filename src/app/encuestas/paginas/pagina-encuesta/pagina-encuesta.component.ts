@@ -20,6 +20,7 @@ import { Rol } from 'src/app/autenticacion/modelos/Rol';
 import { PaginaReporteVerificarComponent } from 'src/app/verificaciones/paginas/pagina-reporte-verificar/pagina-reporte-verificar.component';
 import { ServicioVerificaciones } from 'src/app/verificaciones/servicios/verificaciones.service';
 import { ModalAprobarObservacion } from '../../componentes/modal-aprobar-observacion/modal-aprobar-observacion.component';
+import { generarPDF } from 'src/app/compartido/GenerarPDF';
 
 @Component({
   selector: 'app-pagina-encuesta',
@@ -144,6 +145,10 @@ export class PaginaEncuestaComponent implements OnInit {
     this.componenteEncuesta.exportarPDF()
   }
 
+  generarPDF() {
+    generarPDF('contenido')
+  }
+
   exportarExcel(){
     if(!this.idReporte){
       this.popup.abrirPopupFallido('No se pudo exportar el reporte.', 'No se ha asignado un reporte para exportar.')
@@ -255,7 +260,7 @@ export class PaginaEncuestaComponent implements OnInit {
     this.hayCambios = hayCambios
   }
 
-  
+
 
 }
 
