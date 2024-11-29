@@ -146,7 +146,9 @@ export class PaginaEncuestaComponent implements OnInit {
   }
 
   generarPDF() {
-    generarPDF('contenido')
+    // 'contenido' es el id del div que contiene todo lo que se visualizará en el PDF generado
+    // 'PESV' es el nombre asignado al documento sin incluir el formato de archivo (.pdf)
+    generarPDF('contenido','PESV')
   }
 
   exportarExcel(){

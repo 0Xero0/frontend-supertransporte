@@ -1,7 +1,7 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
-export function generarPDF( contenido: string) {
+export function generarPDF(contenido: string, nombreDoc?: string) {
   const elemento = document.getElementById(contenido); // Selecciona el elemento a capturar
 
   if (elemento) {
@@ -30,7 +30,12 @@ export function generarPDF( contenido: string) {
       }
 
       // Descarga el PDF
-      pdf.save('documento.pdf');
+      if (nombreDoc) {
+        pdf.save(nombreDoc + '.pdf');
+      } else {
+        pdf.save('documento.pdf');
+      }
+
     });
   } else {
     console.error('Elemento no encontrado');
